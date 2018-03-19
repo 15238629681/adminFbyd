@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+	<title>手机号登陆-杭州牛啦网络科技有限公司</title>
+	<!-- ZUI 标准版压缩后的 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+	<link rel="stylesheet" href="../css/public/reset.css" />
+	<!-- ZUI Javascript 依赖 jQuery -->
+	<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+	<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+	<link rel="stylesheet" href="../css/reg/jquery.idcode.css" />
+	<link rel="stylesheet" href="../css/login/index.css" />
+	<style>
+		#ehong-code-tip-ck{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+<div class="login-container">
+	<!--手机号登陆  包含图形验证码-->
+	<div class="login-wrap clean phoneNumLogin">
+		<div class="left-container"></div>
+		<div class="right-container">
+			<div class="title">
+				供应商管理后台
+				<span>
+							<a href="../reg/reg.html">新供应商入驻</a>
+						</span>
+			</div>
+			<div style="margin-bottom: 15px;">
+				<input class="phone" type="number" placeholder="请输入手机号" />
+			</div>
+
+			<!--图形验证码-->
+			<div class="inputWapper imgVerifyWapper" style="color:#666;">
+				<input type="text" id="Txtidcode" class="txtVerification img-verify code" placeholder="图形验证码" />
+				<span id="idcode" class="verifycode-wrap"></span>
+			</div>
+			<div class="messagevertrify">
+				<span class="getverifycode">获取短信验证码</span>
+				<span class="alertMessage"></span>
+			</div>
+			<div>
+				<input class="verifycode messageNum" type="number " placeholder="短信验证码" />
+			</div>
+			<div class="foot"><span class="username-login">使用用户名密码登录</span><span class="forget-password">忘记密码</span></div>
+			<div class="login">登录</div>
+		</div>
+	</div>
+
+	<div class="footerBlock">
+		杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+	</div>
+</div>
+
+<script src="../js/reg/jquery.idcode.js"></script>
+<script>
+    $.idcode.setCode(); //加载生成验证码方法
+    //手机号登陆      获取短信验证码
+    var nextGetFlag = false;
+    $(".getverifycode").on("click", function() {
+        $(".alertMessage").css("display", "none");
+        if(!$(".phone").val()) {
+            //					$(".alertMessage").css("display", "inline-block");
+            //					$(".alertMessage").html("请输入手机号！");
+            alert("请输入手机号");
+            return;
+        } else if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test($(".phone").val()))) {
+            //					$(".alertMessage").css("display", "inline-block");
+            //					$(".alertMessage").html("请输入正确的手机号！");
+            alert("请输入正确的手机号");
+            return;
+        } else if(!$("#Txtidcode").val()) {
+            //					$(".alertMessage").css("display", "inline-block");
+            //					console.log("----")
+            //					$(".alertMessage").html("请输入验证码！");
+            alert("请输入验证码");
+            return;
+        }
+        //				不变验证码的情况下,开始倒计时
+        if(!nextGetFlag) {
+            var IsBy = $.idcode.validateCode(); //调用返回值，返回值结果为true或者false
+            if(!IsBy) {
+                $("#Txtidcode").val("");
+                //						$(".alertMessage").css("display", "inline-block");
+                //						$(".alertMessage").html("请重新输入验证码！");
+                alert("请重新输入验证码");
+            } else {
+                //发短信   开始倒计时
+                var lastTime = 60;
+                if(!nextGetFlag) {
+                    $(".getverifycode").html("重新获取60s");
+                    nextGetFlag = true;
+                    //			获取短信验证码
+                    $.ajax({
+                        type: "post",
+                        url: "https://app.fanbaoyundian.com/h5api/verifycode.app.php",
+                        data:{
+                            phonenumber:$('.phone').val(),
+                            action:"login"
+                        },
+                        success: function(data) {
+                            console.log(JSON.stringify(data));
+                            if(data.state=="0"){
+                                clearInterval(interval);
+                                nextGetFlag = false;
+                                $(".getverifycode").html("获取短信验证码");
+                                alert("手机号未注册，请绑定手机号后再登陆！");
+                            }
+                        },
+                        error: function(msg) {
+                            console.log(msg);
+                        }
+                    });
+                    var interval = setInterval(function() {
+                        lastTime--;
+                        $(".getverifycode").html("重新获取" + lastTime + "s");
+                        if(lastTime == 0) {
+                            $(".getverifycode").html("获取短信验证码");
+                            clearInterval(interval);
+                            nextGetFlag = false;
+                        }
+                    }, 1000);
+                }
+            }
+        }
+
+    })
+
+    //			切换到账号登陆
+    $(".phoneNumLogin .username-login").on("click", function() {
+        window.location.href = "../index.html";
+    });
+
+    //登陆
+    document.querySelector(".login").addEventListener("click", function() {
+        var phone = document.querySelector(".phone").value.trim();
+
+        var Txtidcode = document.querySelector("#Txtidcode").value.trim();
+        var messageNum = document.querySelector(".messageNum").value.trim();
+
+        if(!phone) {
+            alert("请填写手机号!");
+            return;
+        }
+        if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(phone))) {
+            alert("请输入正确的手机号");
+            return;
+        }
+        if(!Txtidcode) {
+            alert("请填写图形验证码！");
+            return;
+        }
+        var IsBy = $.idcode.validateCode();
+        if(!IsBy) {
+            alert("您的图形验证码填写不正确！");
+            return;
+        }
+        if(!messageNum) {
+            alert("短信验证码为空！");
+            return;
+        }
+        var timestamp = new Date().getTime() / 1000;
+        $.ajax({
+            type: "post",
+            url: "https://app.fanbaoyundian.com/apiapiextend/apia/Backlanding/phoneLogin",
+            data: {
+                phone: phone,
+                code: messageNum,
+            },
+            success: function(data) {
+                if(data.state == 0) {
+                    alert("您还没有注册！");
+                }
+                if(data.state == 2) {
+                    alert("您输入的手机验证码有误！");
+                }
+                if(data.state == 3) {
+                    alert("此验证码已失效，请重新获取验证码！");
+                }
+                if(data.state == 1) {
+                    localStorage.setItem("userinfo",JSON.stringify(data.data));
+                    localStorage.setItem("headerinfo",JSON.stringify(data.datas[0]));
+
+                    console.log("------" + JSON.parse(localStorage.getItem("userinfo")).uid);
+                    window.location.href="../index/myjob.html";
+                }
+            },
+            error: function(msg) {
+                console.log(msg);
+            }
+        });
+        //	}
+    })
+</script>
+</body>
+</html>

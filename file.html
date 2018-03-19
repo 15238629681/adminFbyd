@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name = "format-detection" content = "telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+<title></title>
+<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+<link rel="stylesheet" href="css/public/zui.uploader.min.css" />
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+<script src="js/public/zui.uploader.min.js"></script>
+<style>
+#version{padding-left: 40px;}
+.icon-plus {position:absolute;top: 5px;left: 10px;}
+.recode{display: none;}
+.recode .label-primary{margin-left: 10px;}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row" style="margin: 20px 0;">
+			<div class="col-md-12 col-lg-12">
+				<h2>翻宝云店管理系统</h2>
+			</div>
+		</div>
+		<div class="row" style="margin: 20px 0;min-height: 80px;border: 1px solid #ddd;">
+			<div class="col-md-12 col-lg-12" id="version">
+				<i class="icon icon-plus icon-2x"></i>
+			</div>
+		</div>
+		<div class="row" style="margin: 20px 0;border: 1px solid #ddd;padding-bottom: 10px;">
+			<div class="col-md-6 col-lg-6" data-version="2.0.16">
+				<h3>版本文件修改目录</h3>
+				<div class="container" style="border-right: 1px solid #ddd;">
+					<ul class="tree tree-lines tree-folders" data-ride="tree" style="display: none;">
+						<li>
+					    	<a href="#">文件名</a>
+						    <ul>
+						    	<li >
+						    		<a href="#" download="该文件名">根目录文件内容</a>
+						    		<button class="btn btn-primary" type="button">查看问题</button>
+						    		<button class="btn btn-info" type="button">查看记录</button>
+						    		<button class="btn btn-success uploader-btn-browse" data-custom="此内容是自定义的" data-toggle="modal" type="button">更新</button>
+						    		<div class="recode">
+						    			<div><a href="#">更新记录1</a><span class="label label-primary">2017-10-14 中元</span></div>
+						    		</div>
+						    	</li>
+						    	<li>
+						        	<a href="#">根目录文件夹</a>
+						      		<ul>
+						      			<li>
+						      				<a href="#" download="该文件名">2级目录文件内容</a>
+						      				<button class="btn btn-primary" type="button">查看问题</button>
+								    		<button class="btn btn-info" type="button">查看记录</button>
+								    		<button class="btn btn-success uploader-btn-browse" data-custom="此内容是自定义的" data-toggle="modal" type="button">更新</button>
+								    		<div class="recode">
+								    			<div><a href="#">更新记录1</a><span class="label label-primary">2017-10-14 中元</span></div>
+								    			<div><a href="#">更新记录2</a><span class="label label-primary">2017-10-14 大姚</span></div>
+								    		</div>
+						      			</li>
+						      			<li>
+						      				<a href="#">2级目录文件</a>
+						      				<ul>
+						      					<li>
+								      				<a href="#" download="该文件名">3级目录文件内容</a>
+								      				<button class="btn btn-primary" type="button">查看问题</button>
+										    		<button class="btn btn-info" type="button">查看记录</button>
+										    		<button class="btn btn-success uploader-btn-browse" data-toggle="modal" type="button">更新</button>
+										    		<div class="recode">
+										    			<div><a href="#">更新记录1</a><span class="label label-primary">2017-10-14 中元</span></div>
+										    			<div><a href="#">更新记录2</a><span class="label label-primary">2017-10-14 大姚</span></div>
+										    			<div><a href="#">更新记录3</a><span class="label label-primary">2017-10-14 中元</span></div>
+										    		</div>
+								      			</li>
+								      			<li>
+								      				<a href="#">3级目录文件夹</a>
+								      				<ul>
+								      				</ul>
+								      			</li>
+								      			
+						      				</ul>							    		
+								    	</li>
+						        	</ul>
+						      	</li>
+						    </ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-6">
+				<h3>版本解决bug及新增功能</h3>
+				<div class="container">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+<script>
+$(".icon-plus").on("click",function(){
+	var versionBtn = $("<button style='margin:5px;' class='btn btn-primary' type='button'></button>");
+	versionBtn.attr("data-version","2.0.16");
+	versionBtn.html("2.0.16")
+	$("#version").append(versionBtn);
+	$("#version .btn").on("click",function(){
+		$(".tree").hide();
+		var version = $(this).attr("data-version");
+		$(".tree").show("2000");
+	})
+})
+$(".tree .btn-info").on("click",function(){
+	$(this).parent().find(".recode").show();
+})
+var uploadFile = "<div id='uploaderExample' class='uploader'><div class='file-list' data-drag-placeholder='请拖拽文件到此处'></div><button type='button' class='btn btn-primary uploader-btn-browse'><i class='icon icon-cloud-upload'></i> 选择文件</button></div>";
+$('.btn-success').modalTrigger({custom: uploadFile,shown:function(){
+	$('#uploaderExample').uploader({
+	    autoUpload: true,            // 当选择文件后立即自动进行上传操作
+	    url: 'your/file/upload/url'  // 文件上传提交地址
+	});
+}});
+</script>
+</html>

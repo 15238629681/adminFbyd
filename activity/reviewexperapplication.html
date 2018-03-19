@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>审核体验申请-活动管理-翻宝云店供应商管理后台</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+
+		<script src="../js/plug/YouXin.js"></script>
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link rel="stylesheet" href="../css/activity/reviewexperapplication.css" />
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<link rel="stylesheet" href="../css/public/pager.css" />
+	</head>
+	<body>
+		<div class="maskDiv affirmCheckOrder" style="z-index:9999999999;display: none;">
+			<div class="maskContent">
+				<img class="closeImg" src="../img/activity/close.png" data-for="affirmCheckOrder" alt="" />
+				<div class="maskText">
+					若订单号核对无误，请点击"正确"，并及时发货,体验者收货完成体验后将填写并提交体验报告!<br/>
+					若订单号有误，请点击"报错"，系统将提示体验者修改订单号，否则无法完成返款!
+				</div>
+				<div>
+					<span class="reportRight">正确</span>
+					<span class="reportError">报错</span>
+				</div>
+			</div>
+		</div>
+		<div class="maskDiv userInfoWindow" style="z-index:9999999999;display: none;">
+			<div class="maskContent">
+				<img class="closeImg" src="../img/activity/close.png" data-for="userInfoWindow" alt="" />
+				<div class="userInfoWindowTitle">用户信息</div>
+				<div class="userInfoContent">
+					<div class="userInfoContentTop">
+						<div class="userHeadImage" style="background: url('http://fanbaoyundian.com/upload/activityimg/20180104/15150478637618962.png') no-repeat;background-size: 100% 100%;border-radius: 50%;">
+							<!--<img src="../img/activity/tb.gif">-->
+						</div>
+						<span class="userName">111</span>
+					</div>
+					<div class="userInfoContentBody">
+						<div class="userInfoLine">
+							<div class="userInfoLineLeft">申请体验次数：<span class="totalTime">123</span>次</div>
+							<div class="userInfoLineRight">申请成功次数：<span class="successTime">23</span>次</div>
+						</div>
+						<div class="userInfoLine">
+							<div class="userInfoLineLeft">体验活动下单次数：<span class="placeOrderNum">1223</span>次</div>
+							<div class="userInfoLineRight">下单率：<span class="placeOrderScale">100</span>%</div>
+						</div>
+						<div class="userInfoLine">
+							<div class="userInfoLineLeft">体验报告提交次数：<span class="reportTime">23</span>次</div>
+							<div class="userInfoLineRight">报告提交率：<span class="reportScale">100</span>%</div>
+						</div>
+						<div class="userInfoLine">
+							<div class="userInfoLineLeft">本次体验申请时间：<span class="createtime">2017-07-14</span></div>
+							<div class="userInfoLineRight">30日内在本店体验活动下单数：<span class="monthToPlaceTime">0</span>次</div>
+						</div>
+						<div class="userInfoLine isTheEndLine">
+							<span>申请理由：</span>
+							<span class="applyForCause">一大堆理由</span>
+						</div>
+					</div>
+					<span class="userInfoWindowBtn" data-for="userInfoWindow">确定</span>
+				</div>
+			</div>
+		</div>
+		<div class="maskDiv lookExperienceReport" style="z-index:9999999999;display:none;">
+			<div class="maskContent">
+				<div class="lookReportWindowTitle">查看体验报告</div>
+				<img class="closeImg" src="../img/activity/close.png" data-for="lookExperienceReport" alt="" />
+				<div class="mobileContainer">
+					<div class="experienceReportTop">
+						<div class="time">11:27</div>
+						<div class="title">体验报告详情</div>
+					</div>
+					<div class="experienceReportContent">
+						<div style="padding: 5px; text-indent: 15px; position: relative;"><p>体验报告详情</p ><div style="top:0" class="delete1"></div></div><div style="width: 100%; border-radius: 10px; margin-bottom: 10px; position: relative; padding: 10px;"><img data-index="0" src="http://fanbaoyundian.com/upload/activityimg/20171122/15113475101013885.png" style="width: 100%; border-radius: 10px;"><div class="delete" style="top: 10px;"></div></div><div style="width: calc(100% - 20px); margin-left: 10px; border-radius: 8px; margin-bottom: 10px; position: relative; border: 1px solid rgb(221, 221, 221); padding: 5px; background: rgb(221, 221, 221);"><video data-index="0" preload="auto" controls="controls" src="http://fanbaoyundian.com/upload/video/20171122/2017112218535221795.mp4" style="width: 60%; margin-left: 20%;"></video><div class="delete" style="right: calc(10% - 10px);"></div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/public/head.js"></script>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />活动管理</div>
+			<div class="list">
+				<a href="releaseexperienceactivity.html">发布体验活动</a>
+			</div>
+			<div class="list">
+				<a href="experienceactivitylist.html">体验活动列表</a>
+			</div>
+			<div class="list active">
+				<a href="#">审核体验申请</a>
+			</div>
+			<div class="list">
+				<a href="#">发布翻宝活动</a>
+			</div>
+			<div class="list">
+				<a href="SpecialActiveApply.html">特价活动报名</a>
+			</div>
+		</div>
+		<div id="part-right">
+			<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+				<img class="loadingImg" src="../img/public/downrefesh.gif">
+				<span class="loadingFont">加载中...</span>
+			</div>
+			<div class="contentBlock">
+				<div id="loaction">当前位置:管理后台>活动管理>审核体验申请</div>
+				<div class="right-container">
+					<!-- 搜索条件面板 -->
+					<div class="search-form-panel">
+						<div class="form-group activityGoods">
+							<span class="fillTitle form-group-item">活动商品：</span>
+							<div class="dropdown form-group-item">
+								<input class="down activity" type="text" id="activityGoodID" placeholder="请选择活动进度" readonly="readonly" data-toggle="dropdown">
+								<ul class="dropdown-menu">
+									<!--<li>
+										<a href="#">有心_发布测试</a>
+									</li>-->
+								</ul>
+							</div>
+						</div>
+						<div class="form-group fill-order-number">
+							<span class="fillTitle form-group-item">搜索项：</span>
+							<div class="dropdown form-group-item">
+								<input class="down searchItemInput select-order-type" type="text" id="searchOrderTypeID" placeholder="订单号" readonly="readonly" data-toggle="dropdown">
+								<ul class="dropdown-menu">
+									<li data-id="1">
+										<a>用户名</a>
+									</li>
+									<li data-id="2">
+										<a>手机号</a>
+									</li>
+									<li data-id="4">
+										<a>淘宝账号</a>
+									</li>
+									<li data-id="3">
+										<a>订单号</a>
+									</li>
+								</ul>
+							</div>
+							<input type="text" class="searchItemDetail form-group-item order-content" id="searchOrderContent">
+						</div>
+						<div class="form-group fill-excuse">
+							<span class="fillTitle form-group-item">是否填写申请理由：</span>
+							<div class="dropdown form-group-item">
+								<input class="down " type="text" id="isFillExcuse" placeholder="所有" readonly="readonly" data-toggle="dropdown">
+								<ul class="dropdown-menu">
+									<li data-id="0">
+										<a>所有</a>
+									</li>
+									<li data-id="1">
+										<a>已填申请理由</a>
+									</li>
+									<li data-id="2">
+										<a>未填申请理由</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-group-item formSearchButton">查询</div>
+						</div>
+					</div>
+					<!-- 搜索状态按钮 -->
+					<div class="search-status-button-panel">
+						<ul>
+							<li class="activeLi SearchButton sy" data-id="0">所有申请<span>(0)</span></li>
+							<li class="SearchButton sq" data-id="1">申请中，待审核<span>(0)</span></li>
+							<li class="SearchButton tg" data-id="2">已通过，待下单<span>(0)</span></li>
+							<li class="SearchButton tj" data-id="3">待审核订单号<span>(0)</span></li>
+							<li class="SearchButton xg" data-id="8">待修改<span>(0)</span></li>
+							<li class="SearchButton fk" data-id="4">待提交报告<span>(0)</span></li>
+							<li class="SearchButton wc" data-id="5">已提交，待返款<span>(0)</span></li>
+							<li class="SearchButton ywc" data-id="6">体验完成<span>(0)</span></li>
+							<li class="SearchButton wtg" data-id="-2">已释放<span>(0)</span></li>
+						</ul>
+						<span class="exportExcelBtn">导出为Excel</span>
+					</div>
+					<!-- 显示的表格区域 -->
+					<table class="detailTable table-hover">
+						<thead>
+							<tr>
+								<td>体验者</td>
+								<td>网店账号/手机号</td>
+								<td>申请时间</td>
+								<td>体验状态</td>
+								<td>订单号</td>
+								<td>用户操作</td>
+							</tr>
+						</thead>
+						<tbody>
+							<!--
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									申请中，待审核
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tb.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+									<span class="agreeExperienceBtn">同意体验资格</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tm.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									申请未通过
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									已通过,待下单
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									已通过,待下单
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+									<span class="releaseExperienceBtn">释放</span>
+									<span class="releaseExperiencePrompt">!</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									体验资格已释放
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									已下单，待审核订单号
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+									<span class="checkOrderNumBtn">审核订单号</span>
+									<span class="checkOrderNumPrompt">!</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									待修改
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									已修改，待审核订单号
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+									<span class="checkOrderNumBtn">审核订单号</span>
+									<span class="checkOrderNumPrompt">!</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									待提交体验报告
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									已提交，待返款
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+									<span class="verifyOrderCompleteBtn">确认体验报告</span>
+									<span class="verifyOrderCompletePrompt">!</span>
+									<span class="checkExperienceReportBtn">查看体验报告</span>
+									<span class="evaluateExperiencerBtn">评价体验者</span>
+								</td>
+							</tr>
+							<tr>
+								<td class="userInfoTd applyForUser">
+									<div class="userInfo">
+										<img class="headImg" src="../img/activity/tb.gif" alt="">
+										<div class="detailInfo">
+											<div class="userNameBlock">
+												<span class="userName">荷塘月色</span>
+												<span class="searchUserInfoBtn">用户信息</span>
+											</div>
+											<div class="orderAppraise">
+												<span>下单3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+											<div class="placeOrder">
+												<span>报告3.5：</span>
+												<div class="startList">
+													<div class="appraiseScore"></div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</td>
+								&lt;!&ndash;网店账号  手机号&ndash;&gt;
+								<td class="accountInfo applyForPhone">
+									<div class="accountNum">
+										淘宝账号：<span>taobao123</span>
+									</div>
+									<div class="phoneNum">
+										手机号: <span>123456789100</span>
+									</div>
+								</td>
+								&lt;!&ndash;申请时间&ndash;&gt;
+								<td class="applyForTime">
+									2017-07-14 10:00:00
+								</td>
+								&lt;!&ndash;体验状态&ndash;&gt;
+								<td class="applyForStatus">
+									体验完成
+								</td>
+								&lt;!&ndash;订单号&ndash;&gt;
+								<td class="orderInfoTd applyForOrderNum">
+									<img src="../img/activity/tm.gif" alt="">
+									<div class="orderInfoBlock">
+										<span class="lastOrderNumber">1234567891023</span>
+										<span class="currentOrderNumber">1234567891023</span>
+									</div>
+								</td>
+								&lt;!&ndash;用户操作&ndash;&gt;
+								<td class="userOperateTd applyForOption">
+									<span class="checkExperienceReportBtn">查看体验报告</span>
+									<span class="evaluateExperiencerBtn">评价体验者</span>
+								</td>
+							</tr>-->
+						</tbody>
+					</table>
+					<div class="pageWapper">
+						<div style="margin:0 auto;text-align:center;">
+							<ul class="pagination" id="page2">
+							</ul>
+							<div class="pageJump">
+								<span>跳转到</span>
+								<input type="number" class="pageInput" style="width:50px;" />
+								<span>页</span>
+								<span type="button" class="page-search-btn" id="searchPageBtnID">确定</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="evaluateUserID" class="evaluateUser" style="display: none;">
+					<table class="evaluateUserTable table-hover">
+						<thead>
+							<tr>
+								<td>活动商品名称</td>
+								<td>体验者用户名</td>
+								<td>淘宝账号</td>
+								<td>订单号</td>
+								<td>评价状态</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="activeGoodsName">
+										<img src="../img/activity/goodsimg_03.png">
+										<span class="activeGoodsNameFont">测试</span>
+									</div>
+								</td>
+								<td class="username">有心</td>
+								<td class="TBaccount">淘宝账号</td>
+								<td class="orderNumber">240436193999441</td>
+								<td>未评价</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="placeOrderScore">
+						<div class="title">评价体验者>评价下单购买过程</div>
+						<div class="body">
+							<div class="explain">下单评价：体验者是否按规则要求完成下单过程</div>
+							<div class="placeOrderInput">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+							</div>
+						</div>
+					</div>
+					<div class="placeReportScore">
+						<div class="title">评价体验者>评价体验报告</div>
+						<div class="body">
+							<div class="explain">报告评价：体验者是否认真填写有质量的体验报告</div>
+							<div class="placeOrderInput">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+								<img src="../img/activity/onestart2x.png">
+							</div>
+							<div class="lookReportBtn">查看体验报告</div>
+						</div>
+					</div>
+					<div class="submitBtnBar">
+						<div class="submitBtn">提交</div>
+					</div>
+				</div>
+			</div>
+			<!--<div class="footer">杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3</div>-->
+		</div>
+	</body>
+	<script>
+        var activeLi = document.querySelectorAll("#head ul li");
+        activeLi[3].style.background = "#f6ecd1";
+        activeLi[3].getElementsByTagName("a")[0].style.color = "#FBBD00";
+	</script>
+	<script src="../js/activity/reviewexperapplication.js"></script>
+	<script src="../js/public/pager.js"></script>
+</html>

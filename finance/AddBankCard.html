@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+    <title>添加银行卡---》财务管理-杭州牛啦网络科技有限公司</title>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+    <link rel="stylesheet" href="../css/public/reset.css" />
+    <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+    <link rel="stylesheet" href="../css/finance/AddBankCard.css" />
+    <script src="../js/plug/YouXin.js"></script>
+</head>
+<body>
+<script src="../js/public/head.js"></script>
+<div class="part-left">
+    <div id="page-titie"><img src="../img/finance/finance_03.png" />财务管理</div>
+    <div class="list active">
+        <a href="accountbalance.html" style="color:#fff;">账户余额</a>
+    </div>
+    <div class="list">
+        <a href="ExtractCashDetail.html">提现明细</a>
+    </div>
+    <div class="list">
+        <a href="rechargedetail.html">充值明细</a>
+    </div>
+    <div class="list">
+        <a href="frozennumdetail.html">冻结明细</a>
+    </div>
+</div>
+<div id="part-right">
+    <div id="loaction">当前位置：管理后台>财务管理>账户余额>账户提现>添加提现账户</div>
+    <div class="contentBlock">
+        <div class="contentBlockBody">
+            <div class="rowline accountPlatgorm">
+                <div class="rowlineLeft">账户类型：</div>
+                <div class="rowlineRight">
+                    <label><input type="radio" name="accountPlatgorm" value="1" checked="checked">银行卡</label>
+                    <label><input type="radio" name="accountPlatgorm" value="2">支付宝</label>
+                    <label><input type="radio" name="accountPlatgorm" value="3">微信</label>
+                </div>
+            </div>
+            <div class="contentPanel BankCard">
+                <div class="rowline bankAccount">
+                    <div class="rowlineLeft">银行卡账户名：</div>
+                    <div class="rowlineRight">
+                        <input type="text" class="addCardInfoInput">
+                    </div>
+                </div>
+                <div class="rowline bankCard">
+                    <div class="rowlineLeft">银行卡号：</div>
+                    <div class="rowlineRight">
+                        <input type="number" class="bankCardInput">
+                        <span class="promptLogo">!</span>
+                        <span>为了账户资金安全，只能添加银行卡账户名与企业名称或法人姓名一致的银行卡</span>
+                    </div>
+                </div>
+                <div class="rowline openAccountBank">
+                    <div class="rowlineLeft">开户银行：</div>
+                    <div class="rowlineRight dropdown form-group-item">
+                        <input class="down openAccountBankInput" type="text" placeholder="请选择开户银行" readonly="readonly" data-toggle="dropdown">
+                        <ul class="dropdown-menu">
+                            <li data-id="3"><a>工商银行</a></li>
+                            <li data-id="4"><a>建设银行</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="rowline openAccountBranch">
+                    <div class="rowlineLeft">开户支行：</div>
+                    <div class="rowlineRight">
+                        <input type="text" class="openAccountBranchInput">
+                    </div>
+                </div>
+            </div>
+            <div class="contentPanel alipayPanel">
+                <div class="rowline alipayAcount">
+                    <div class="rowlineLeft">支付宝账号：</div>
+                    <div class="rowlineRight">
+                        <input type="text" class="alipayAcountInput">
+                    </div>
+                </div>
+                <div class="rowline alipayAcountName">
+                    <div class="rowlineLeft">支付宝认证姓名：</div>
+                    <div class="rowlineRight">
+                        <input type="text" class="alipayAcountNameInput">
+                        <span class="promptLogo">!</span>
+                        <span>为了账户资金安全，只能添加银行卡账户名与企业名称或法人姓名一致的银行卡</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contentPanel WXPanel">
+                <div class="rowline alipayAcountName">
+                    <div class="rowlineLeft">微信号：</div>
+                    <div class="rowlineRight">
+                        <input type="text" class="WXAcountNameInput">
+                        <span class="yellowAlert"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="addOperation">
+            <span class="addSubmit">提交</span>
+            <span class="doCancel">取消</span>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+    document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+</script>
+<script src="../js/finance/AddBankCard.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+body{overflow: hidden;}
+
+	.topBlock{width:100%;height:20px;
+	background:#F6F6F6 no-repeat center bottom;}
+	.stepBlock{width:100%;height:68px;
+	background:url(../../img/reg/reg1_03.png) #fff no-repeat center center ;
+	}
+	.grayBlock{width:100%;height:4px;
+	background:#F6F6F6 no-repeat center bottom;margin-bottom:178px;}
+	
+	.login-wrap{
+	width: 400px;margin: 0 auto;
+	}
+	.right-container{height: 100%;}
+	
+	
+	.right-container div{margin-bottom: 20px;}
+	.right-container input{border: 1px solid #e0e0e0;border-radius: 4px;height: 40px;padding-left: 50px;color: #666;font-size: 14px;}
+	.phone{width: 100%;background:url(../../img/login/phone.png) no-repeat 10px center;}
+	
+	.verifycode-wrap{border: 1px solid #e0e0e0;border-radius: 4px;
+	height: 40px;color: #e0e0e0;font-size: 14px;
+	width: 90px;float: right;}
+	#ehong-code{
+		height: 40px;color: #e0e0e0;font-size: 14px;width: 90px;
+	}
+	.ehong-idcode-val{
+		height: 40px;color: #e0e0e0;font-size: 14px;width: 90px;
+		display:block;font-size:14px;
+	}
+	#ehong-code font{font-size:19px;height:40px;
+	line-height:40px;}
+	.ehong-code-val-tip{display:none;}
+	#verifycode{width: 124px;height: 30px;line-height: 30px;background: #e0e0e0;text-align: center;color:#666;font-size: 14px;border-radius: 4px;margin: 10px 0;}
+	.verifycode{width: 100%;background:url(../../img/reg/password.png) no-repeat 10px center;}
+	.sureverifycode{width: 100%;background:url(../../img/reg/surepassword.png) no-repeat 10px center;}
+	.img-verify{width: calc(100% - 100px);background: url(../../img/reg/code.png) no-repeat 10px center;}
+	.foot{font-size: 14px;margin: 16px 0 24px;color: #666;}
+	#forget-password{float: right;}
+	#register{height: 40px;line-height: 40px;text-align: center;font-size: 16px;color: #fff;background: #FF3A46;border-radius: 4px;cursor: pointer;}
+
+
+	.inputWapper{position:relative;}
+	.inputWapper .passImg{position:absolute;right:-44px;top:8px;
+		display:none;
+	}
+	.inputWapper .alertSpan{
+		display:inline-block;width:370px;
+		background:url(../../img/reg/alert.png) no-repeat 0px center;
+		position:absolute;right:-390px;top:8px;height:26px;
+		color:#999;
+		display:none;
+	}
+	.inputWapper .alertSpan span{margin-left:32px;display:inline-block;
+	line-height:26px;}
+	
+	.inputWapper .safeSpan{
+		display:inline-block;width:310px;
+		background:url(../../img/reg/leval1.png) no-repeat left center;
+		position:absolute;right:-323px;top:-22px;height:100px;
+		color:#FF3A46;
+		display:none;
+	}
+	.userProtocol{color:#666;font-size:12px;}
+	.userProtocol a{color:#FBBD00;}
+	.gotoLogin{width:100%;font-size:12px;
+	color:#999;text-align:center;}
+	.gotoLogin a{color:#FBBD00;}
+	
+	.bottomFoot{    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    background: #f6f6f6;
+    color: #999;
+    font-size: 12px;
+    margin-top: 226px;}
+
+.dealMaskWin {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	z-index: 100;
+	display: none;
+}
+.maskContent {
+	width: calc( 100% - 100px);
+	height: calc(100% - 100px);
+	top: 50px;
+	left: 50px;
+	background: #fff;
+	/*padding: 25px 20px;*/
+	position: relative;
+}
+/****协议头部标题****/
+.maskDivContentTop {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 600;
+	border-bottom: 3px solid #AEAEAE;
+}
+.maskDivContentCenter {
+	width: 100%;
+	height: calc(100% - 50px - 50px);
+	overflow-y: auto;
+	padding: 5px;
+}
+.maskDivContentCenter h3 {
+	font-size: 14px;
+	margin-top: 25px;
+	margin-bottom: 10px;
+}
+.maskDivContentCenter .firstH3 {
+	margin-top: 0px;
+}
+/*关闭按钮*/
+.dealMaskWin .btn-bar {
+	text-align: center;
+}
+.dealMaskWin .btn-bar span{
+	display:inline-block;
+	width:100px;
+	height:30px;
+	line-height: 30px;
+	text-align:center;
+	background:#FF3A46;
+	border-radius: 4px;
+	color:#fff;
+	font-size:12px;
+	margin-left:14px;
+	cursor: pointer;
+}
+/* 关闭 */
+.maskContent .closeImg {
+	position:absolute;right:-24px;
+	top:-24px;cursor: pointer;
+}
+
+
+/*用户协议*/
+.openDealMaskWin {
+	color: #FBBD00;
+	cursor: pointer;
+}
+
+
+

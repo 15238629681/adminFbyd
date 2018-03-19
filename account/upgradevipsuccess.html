@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title> 升级VIP成功（账户管理）-杭州牛啦网络科技有限公司</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<script src="../js/product/zui.datatable.min.js"></script>
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+
+		<!--<link rel="stylesheet" href="../../css/public/reset.css" />-->
+
+		<!--<link rel="stylesheet" href="../css/activity/releaseexperienceactivity.css" />-->
+
+		<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+		<link rel="stylesheet" href="../css/account/upgradevipsuccess.css" />
+	</head>
+
+	<body>
+
+		<script src="../js/public/head.js"></script>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />账户管理</div>
+			<div class="list ">
+				<a href="shopmanage.html">网店管理</a>
+			</div>
+			<div class="list">
+				<a href="#">账号安全</a>
+			</div>
+			<div class="list ">
+				<a href="#">信息管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">资质管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">品牌管理</a>
+			</div>
+			<div class="list active">
+				<a href="#" style="color:#fff;">升级VIP</a>
+			</div>
+			<div class="list ">
+				<a href="#">升级记录</a>
+			</div>
+		</div>
+
+		<div id="part-right">
+			<div id="loaction">当前位置：管理后台>账号管理>升级VIP</div>
+			<!--支付信息-->
+			<div class="shopBlockWapper">
+				<!--充值成功-->
+				<div class="successRecharge mainBlock">
+					<h1>您已成功升级为<span class="levelText">黄金</span>VIP供应商</h1>
+					<img id="successImg" src="" alt="" />
+				</div>
+				
+				<div class="inputWapper">您现在可以：
+					<span>
+						<a href="">查看账户信息</a>
+					</span>|
+					<span>
+						<a href="../activity/releaseexperienceactivity.html">发布体验活动</a>
+					</span>
+				</div>
+				
+				<!--<div class="inputWapper operateBlock">
+					<div class="contentBlock">
+						<span class="bindShop">查看已绑定的网店</span>
+						<span class="relase">
+									发布体验活动
+							</span>
+					</div>
+				</div>
+			</div>
+
+			<!--底部版权-->
+			<!--<div class="footer">
+
+			</div>-->
+		</div>
+		<div class="footerBlock">
+			杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+		</div>
+		<script>
+			document.querySelectorAll("#tap-wrap li")[7].style.background = "#f6ecd1";
+			document.querySelectorAll("#tap-wrap li")[7].querySelector("a").style.color = "#FBBD00";
+			
+			//获取路径中的id
+			function getUrlAttribute(parameName)
+			{
+				//location.search是从当前URL的?号开始的字符串，即查询字符串
+				var query = (location.search.length > 0 ? location.search.substring(1) : null);
+				if(null!=query)
+				{
+					var args = new Object( );
+					var pairs = query.split("&");
+					for(var i = 0; i < pairs.length; i++)
+					{
+						var pos = pairs[i].indexOf("=");
+						if (pos == -1)
+							continue;
+						var argname = pairs[i].substring(0,pos);
+						var value = pairs[i].substring(pos+1);
+						value = decodeURIComponent(value);
+						args[argname] = value;
+					}
+					//根据键名获取值
+					return args[parameName];
+				}
+				return null;
+			}
+
+
+			var paylevel=getUrlAttribute("paylevel");
+			if(paylevel==1){
+				document.querySelector(".levelText").innerHTML="黄金";
+                $('.successRecharge h1').css({'color': '#FFD800'});
+				document.getElementById('successImg').src = '../img/account/successgold.png';
+			}
+			if(paylevel==2){
+				document.querySelector(".levelText").innerHTML="钻石";
+                $('.successRecharge h1').css({'color': '#006CFF'});
+				document.getElementById('successImg').src = '../img/account/successdiamond.png';
+			}
+			if(paylevel==3){
+				document.querySelector(".levelText").innerHTML="KA";
+                $('.successRecharge h1').css({'color': '#FF3A46'});
+				document.getElementById('successImg').src = '../img/account/successka.png';
+			}
+		</script>
+		
+		
+
+	</body>
+
+</html>
+<!--查看远程分支：git branch -r
+拉取远程分支并创建本地分支：git checkout -b 本地分支名x origin/远程分支名y 例如：git checkout -b admin origin/admin
+查看当前分支：git branch
+创建分支：git branch <name> 例如 git branch admin
+切换到某分支：git checkout <name> 例如 git checkout admin
+提交代码到指定分支：git push origin <name> 例如 git push origin <admin>
+分支管理策略：
+	1、切换到指定分支
+	2、拉取该分支最新代码
+	3、把本地代码提交到指定分支
+	
+注：分支代码不影响主支(master)，可以单独删除分支：git branch - d <name>，也可以将分支代码合并到当前分支：git merge <name>-->

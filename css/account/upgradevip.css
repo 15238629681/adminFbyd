@@ -1,0 +1,145 @@
+/* scroll */
+::-webkit-scrollbar{width:0px!important;height:6px;}
+
+
+#part-right {
+	position: relative;
+	/*width: calc(100% - 165px);*/
+}
+.mainBlock{
+	margin:0 30px;
+	/*width:100%;*/
+	background:#fff;
+	height:776px;
+	/*overflow: hidden;*/
+}
+.mainTitle{font-size:14px;padding-left:10px;
+	height:40px;line-height:40px;}
+
+.mainContent{
+	width:1186px;
+	height:533px;
+	margin:30px auto;
+	position: relative;
+}
+.commontBlock {
+	background-color: #FFFFFF;
+	/*margin-bottom: 100px;*/
+	border: 1px solid #E8E8E8;
+}
+/*黄金 - VIP*/
+.goldBlock {
+	width: 392px;
+	/*height: 552px;*/
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+/**卡片标题**/
+.commontTitle{
+	height:134px;
+	line-height:134px;
+	text-align: center;
+	border-bottom:1px solid #F6F6F6;
+	font-size:24px;
+	color:#FBBD00;
+}
+/**卡片原价**/
+.commontPrice{
+	height:134px;
+	text-align: center;
+	border-bottom:1px solid #F6F6F6;
+	font-size:24px;
+}
+.noboder {
+	border: none;
+}
+/**当前价格**/
+.originalPrice{
+	height:84px;
+	padding-top:28px;
+	line-height:56px;
+	text-decoration: line-through;
+}
+.originalText{
+	font-size:12px;
+}
+.realPrice{
+	height:73px;padding-top:10px;line-height:63px;
+}
+.knowMore{
+	width: 100%;
+	height:82px;
+	cursor: pointer;
+	line-height:82px;
+	font-size:12px;
+	background:#FFF8E5;
+	text-align:center;
+}
+.knowMoreDetail{
+	height:224px;
+	background:#FFF8E5;
+	display: none;
+}
+.knowMoreDetail .moreDetail {
+	margin:0 68px;
+	padding-top: 30px;
+}
+/*隐藏更多*/
+.knowMoreDetail .hideMore {
+	width: 100%;
+	margin-top: 21px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+	border-top: 1px solid #F6F6F6;
+}
+.gotoUpdata{
+	height:67px;
+	line-height:67px;
+	background:#FF3A46;
+	color:#fff;
+	cursor:pointer;
+	font-size:20px;
+	text-align:center;
+}
+.chooseProtocol {
+	width:110%;
+	cursor: pointer;
+	display: none;
+}
+.chooseProtocol input{cursor: pointer;}
+.chooseProtocol label{cursor: pointer;}
+
+
+/*钻石 - VIP*/
+.diamondBlock {
+	width: 392px;
+	position: absolute;
+	top: 0;
+	left: 397px;
+}
+/*KA - VIP*/
+.kaBlock {
+	width: 392px;
+	position: absolute;
+	top: 0;
+	left: 794px;
+}
+
+/***卡片遮罩***/
+.commontBlockWapper {
+	width: 100%;
+	/*opacity: 0.5;*/
+	/*border: 1px solid #E8E8E8;*/
+}
+
+
+
+
+
+
+
+
+

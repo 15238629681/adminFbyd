@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+    <title>升级记录-财务管理-翻宝云店供应商管理后台</title>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+    <link rel="stylesheet" href="../css/public/reset.css" />
+    <link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+    <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+    <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>-->
+    <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+    <!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+    <link rel="stylesheet" href="../css/finance/UpgradeRecord.css" />
+    <script src="../js/public/datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="../css/public/pager.css" />
+    <script src="../js/plug/YouXin.js"></script>
+</head>
+<body>
+<script src="../js/public/head.js"></script>
+<div class="part-left">
+    <div class="part-left">
+        <div id="page-titie"><img src="../img/activity/activitylogo.png" />账户管理</div>
+        <div class="list">
+            <a href="shopmanage.html">网店管理</a>
+        </div>
+        <div class="list">
+            <a href="#">账号安全</a>
+        </div>
+        <div class="list ">
+            <a href="#">信息管理</a>
+        </div>
+        <div class="list ">
+            <a href="#">资质管理</a>
+        </div>
+        <div class="list ">
+            <a href="#">品牌管理</a>
+        </div>
+        <div class="list ">
+            <a href="upgradevip.html">升级VIP</a>
+        </div>
+        <div class="list active">
+            <a href="UpgradeRecord.html" style="color:#fff;">升级记录</a>
+        </div>
+    </div>
+</div>
+<div id="part-right">
+    <div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+        <img class="loadingImg" src="../img/public/downrefesh.gif">
+        <span class="loadingFont">加载中...</span>
+    </div>
+    <div class="contentBlock">
+        <div id="loaction">当前位置：管理后台>财务管理>升级记录</div>
+        <div class="right-container">
+            <div class="detailTitle">升级记录</div>
+            <div class="searchPanel">
+                <!-- 等级变更时间 -->
+                <div class="form-group gradechangetime">
+                    <span class="fillTitle form-group-item changeTime">等级变更时间：</span>
+                    <div class="form-group-item beginTimePicker">
+                        <div class="beginRange input-group date form-datetime">
+                            <span class="input-group-addon">
+                                <span class="icon-calendar"></span>
+                            </span>
+                            <input class="form-control starttime" size="16" type="text" value="" readonly="readonly">
+                        </div>
+                        <span class="sepflag">-</span>
+                        <div class="endRange input-group date form-datetime">
+                            <span class="input-group-addon">
+                                <span class="icon-calendar"></span>
+                            </span>
+                            <input class="form-control endtime" size="16" type="text" value="" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <!--变更前等级-->
+                <div class="form-group gradechangebefore">
+                    <span class="fillTitle form-group-item">变更前等级：</span>
+                    <div class="dropdown form-group-item">
+                        <input class="down rechargeTypeItemInput" type="text" id="rechargeTypeID" placeholder="请选择变更前等级" readonly="readonly" data-toggle="dropdown">
+                        <ul class="dropdown-menu">
+                            <li data-id="1"><a>普通供应商</a></li>
+                            <li data-id="2"><a>黄金VIP</a></li>
+                            <li data-id="3"><a>钻石VIP</a></li>
+                            <li data-id="4"><a>KA供应商</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--变更后等级-->
+                <div class="form-group gradechangeafter">
+                    <span class="fillTitle form-group-item">变更后等级：</span>
+                    <div class="dropdown form-group-item">
+                        <input class="down rechargeChannelInput" type="text" id="rechargeChannelID" placeholder="请选择变更后等级" readonly="readonly" data-toggle="dropdown">
+                        <ul class="dropdown-menu">
+                            <li data-id="1"><a>普通供应商</a></li>
+                            <li data-id="2"><a>黄金VIP</a></li>
+                            <li data-id="3"><a>钻石VIP</a></li>
+                            <li data-id="4"><a>KA供应商</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group rechargeChannel">
+                    <span class="fillTitle form-group-item">充值渠道：</span>
+                    <div class="dropdown form-group-item">
+                        <input class="down transferStatusInput" type="text" id="transferStatusID" placeholder="请选择充值渠道" readonly="readonly" data-toggle="dropdown">
+                        <ul class="dropdown-menu">
+                            <li data-id="1"><a>支付宝</a></li>
+                            <li data-id="2"><a>微信支付</a></li>
+                            <li data-id="3"><a>网银支付</a></li>
+                            <li data-id="0"><a>全部</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group changeStatus">
+                    <span class="fillTitle form-group-item">变更状态：</span>
+                    <div class="dropdown form-group-item">
+                        <input class="down transferStatusInput" type="text" id="changeStatusInputID" placeholder="请选择变更状态" readonly="readonly" data-toggle="dropdown">
+                        <ul class="dropdown-menu">
+                            <li data-id="1"><a>变更成功</a></li>
+                            <li data-id="2"><a>待到账</a></li>
+                            <li data-id="0"><a>全部</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group searchBtn">
+                    <span class="searchButton">查询</span>
+                </div>
+            </div>
+            <div class="exportExcelBar">
+                <span class="exportExcelBtn">导出为Excel</span>
+            </div>
+            <table class="detailTable table-hover">
+                <thead>
+                    <tr>
+                        <td>流水号</td>
+                        <td>支付时间</td>
+                        <td>支付金额(元)</td>
+                        <td>原等级</td>
+                        <td>变更后等级</td>
+                        <td>充值渠道</td>
+                        <td>变更说明</td>
+                        <td>有效期</td>
+                        <td>变更状态</td>
+                        <td>等级变更时间</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--<tr>
+                        <td>1111</td>
+                        <td>2222</td>
+                        <td>3333</td>
+                        <td>4444</td>
+                        <td>5555</td>
+                        <td>6666</td>
+                        <td>7777</td>
+                        <td>8888</td>
+                        <td>9999</td>
+                        <td>0000</td>
+                    </tr>-->
+                    <!--<tr>
+                        <td>170513262562301220101</td>
+                        <td>2017-10-31 13:21</td>
+                        <td>2998.00</td>
+                        <td>普通供应商</td>
+                        <td>黄金VIP</td>
+                        <td>支付宝</td>
+                        <td>付费升级</td>
+                        <td>2017-01-31至2018-10-31</td>
+                        <td>变更成功</td>
+                        <td>2017-10-21 12:21</td>
+                    </tr>-->
+                </tbody>
+            </table>
+            <div class="pageWapper" style="display: none;">
+                <div style="margin:0 auto;text-align:center;">
+                    <ul class="pagination" id="page2">
+                    </ul>
+                    <div class="pageJump">
+                        <span>跳转到</span>
+                        <input type="number" class="pageInput" style="width:50px;" />
+                        <span>页</span>
+                        <span type="button" class="page-search-btn" id="searchPageBtnID">确定</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+    document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+</script>
+<script src="../js/account/UpgradeRecord.js"></script>
+<script src="../js/public/pager.js"></script>
+</body>
+</html>

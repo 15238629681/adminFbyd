@@ -1,0 +1,179 @@
+.part-right{background:#f6f6f6;}
+.shopBlockWapper{margin:0 30px;}
+.successImg{
+	height:68px;
+	background:url(../../img/account/bind2_03.png) #fff center center no-repeat;
+	margin-bottom:6px;
+}
+
+
+/*支付方式*/
+.payWayWapper {background:#fff;}
+.commonStyle {
+    margin-bottom: 2px;
+    padding: 15px;
+    background: #fff;
+}
+.payWayWapper div{display:inline-block;}
+.payWayWapper .payText{
+	display:inline-block;
+	width:90px;height:56px;
+	padding-left:15px;vertical-align: top;
+	/*text-align: right;*/
+}
+.payWayRadio{margin-right:98px;}
+.payWayRadio input{margin-right:20px;}
+
+
+/*支付输入信息*/
+.mainBlock{padding:7px 30px;
+height:590px;background:#fff;}
+/*.inputWapper{margin-top:24px;}*/
+.inputWapper .inputName{
+	display:inline-block;
+	width:75px;height:30px;line-height:30px;
+	margin-right:15px;
+	/*text-align:right;*/
+}
+.inputWapper input{
+	width:166px;height:30px;border:1px solid #C0C0C0;
+	text-indent: 1em;margin-right:6px;
+}
+.handChange{background:#eee;}
+.alertWrong{
+width:205px;display:inline-block;
+	padding-left:22px;
+	background:url(../../img/finance/wrong_03.png) left center no-repeat;
+	margin-left:50px;color:#FF3A46;
+	display:none;	
+}
+.realPayNumText{
+	margin-left:50px;margin-right:15px;
+}
+
+.nextBtn{
+	margin-top:60px;margin-left:230px;
+	width:160px;height:40px;line-height:40px;background:#FF3A46;
+	color:#fff;text-align: center;cursor:pointer;border-radius: 4px;;
+}
+.mainBlock .moneyNum{
+	color:#FF3A46;
+}
+.inputWapper h1{
+	font-weight:normal;
+}
+
+.getMessageCode .getCodeSpan{
+	display:inline-block;
+	width:100px;height:30px;line-height:30px;
+	background:#FBBD00;text-align: center;
+	color:#fff;margin-left:-10px;cursor: pointer;
+}
+.getMessageCode input{width:128px;height:30px;border:1px solid #FBBD00;}
+.getMessageCode span:first-child{
+	margin-right:390px;
+	cursor: pointer;
+}
+
+/*上一步*/
+.menuWapper span{
+	display:inline-block;
+	width:130px;height:30px;line-height:30px;
+	/*border:1px solid #C0C0C0;*/
+	cursor:pointer;
+	text-align: center;
+}
+
+.balanceRecharge{
+	display:block;
+}
+
+/*支付宝支付*/
+.zfbRecharge{display:none;}
+.zfbContent{margin-bottom:9px;height:442px;
+display:none;
+}
+.zfbContent .showText{
+	height:218px;line-height:218px ;padding-left:28px;
+	margin-bottom:116px;font-size:20px;color:#333;
+}
+.zfbContent p{margin-left:18px;
+color:#FF3A46;line-height: 24px;height:24px;}
+
+.operateBlock{
+	height:108px;
+	background:#fff;
+	display:none;
+}
+.operateBlock .contentBlock{
+	width:424px;height:100%;
+	padding-top:34px;
+	margin:0 auto;
+}
+.operateBlock span{
+	display:inline-block;width:166px;height:40px;line-height:40px;
+	color:#fff;background:#FF3A46;border-radius: 4px;
+	text-align:center;cursor:pointer;
+}
+.operateBlock span:first-child{
+	margin-right:88px;
+}
+.operateBlock span a{
+	display:inline-block;
+	width:166px;height:40px;
+	color:#fff !important;
+}
+
+
+/*余额支付*/
+.shopBlockWapper .balanceRecharge{
+	height:440px;
+	margin-bottom:9px;
+}
+.balanceRecharge .alertWrong{
+	display:none;
+	width:250px;
+	background:url(../../img/account/wrong_03.png) left center no-repeat;
+}
+.balanceRecharge .balanceContent{
+	height:172px;padding-top:60px;
+}
+.balanceRecharge h1{font-size:16px;color:#333;
+font-weight:normal;margin-bottom:20px;}
+.balanceRecharge h1 span{
+	color:#999;
+	font-size:12px;
+}
+
+.menuWapper{
+	height:108px;
+	background:#fff;
+}
+.menuWapper .contentBlock{
+	width:424px;height:100%;
+	padding-top:34px;
+	margin:0 auto;
+}
+.menuWapper span{
+	display:inline-block;width:166px;height:40px;line-height:40px;
+	color:#fff;background:#FF3A46;border-radius: 4px;
+	text-align:center;cursor:pointer;
+}
+.menuWapper span:first-child{
+	margin-right:88px;
+}
+
+
+
+
+
+.messageCodeInput .alertWrong{
+	display:none;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+body{background:#F6F6F6;}
+#part-right{position:relative;}
+
+.container{padding:0 30px;}
+
+
+.searchBlock{padding:0px 12px;background:#fff;
+position:relative;height:54px;}
+.searchBlock div{display:inline-block;}
+
+.fillTitle{display:inline-block;width:70px;height:30px;line-height:30px;font-size:12px;
+text-align:center;border:1px solid #C0C0C0;
+border-right:none;background:#F6F6F6;float:left;}
+.searchBlock input{width:230px;border:1px solid #C0C0C0;height:30px;line-height:30px;
+float:left;
+}
+.form-group{display:inline-block;}
+
+
+ .postOrderTimeWapper{
+		display:inline-block;margin-top:10px;
+		width:371px;height:30px;border:1px solid #C0C0C0;
+		/*border-left:none;*/
+	}
+	 .postOrderTimeWapper .input-group{
+		text-align:center;width:48%;float:left;
+		height:30px;line-height:30px;border:none;
+		/*background:red;*/
+	}
+	.postOrderTimeWapper .sepflag{
+		float:left;display:inline-block;
+		height:26px;line-height:26px;
+	}
+	 .postOrderTimeWapper .input-group-addon{
+		/*margin-top:-5px;*/
+		
+	}
+	 .postOrderTimeWapper .input-group-addon{
+		padding-top:0;
+		float:left;height:26px;line-height:26px;border:none;
+		/*border-bottom:1px solid #C0C0C0;*/
+		background:#fff;color:#999;
+		display:inline-block;width:26px;height:26px;
+	}
+	 .postOrderTimeWapper .input-group input{
+		width:80%;float:left;height:26px;line-height:26px;
+		border:none;background:#fff;margin-left:6px;
+	}
+	
+	.beginTimeSpan{margin-top:10px;}
+	
+	.gooodsNameBlock,.goodsIdChooseList,.beginTime{
+		margin-right:11px;
+	}
+	.searchDiv{display:inline-block;
+		height:30px;width:100px;
+	line-height:30px;font-size:12px;text-align:center;border-radius: 4px;
+	background:#FF3A46;color:#fff;margin-top:-10px;
+	position:absolute;right:436px;bottom:14px;
+	}
+	
+
+#List{margin-top:50px;}
+#List .table thead th{background:#eee;
+border:1px solid #c0c0c0;
+text-align:center;font-weight: normal;height:48px;
+line-height:48px;padding:0;}
+tbody{font-size:14px;}
+tbody td{height:72px;text-align: center;
+border:1px solid #c0c0c0;
+	/*padding:8px 10px;*/
+	}
+tbody .goodsNameTd{max-width:400px;
+position:relative;}
+tbody .goodsNameTd img{position:absolute;top:8px;
+left:10px;}
+tbody .goodsNameTd span{position:absolute;
+left:76px;}
+
+
+tbody .timeTd{width:168px;text-align:center;}
+
+
+.footer{height:98px;line-height:98px;
+width:100%;text-align:center;font-size:12px;color:#999;
+position:absolute;bottom:0;
+}

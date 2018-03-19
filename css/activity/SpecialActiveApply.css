@@ -1,0 +1,133 @@
+/* 不允许选择文字 */
+.noSelectFont {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+#part-right {
+    background: #f6f6f6;
+    overflow: auto;
+}
+.stepImg {
+    margin:0 30px 10px 30px;
+    height: 68px;
+    background: url(../../img/activity/specialactive/SpecialActive01.png) #fff center center no-repeat;
+}
+/* 选择活动分类 */
+.activityBlock {
+    background-color: #FFFFFF;
+    margin: 0 30px 4px 30px;
+}
+.fillTypeClassifyTitle {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 30px;
+    background-color: #EEEEEE;
+}
+/* 标题 - 选择活动列表 */
+.fillTypeClassifyTitle .selectActiveType {
+    font-size: 16px;
+    font-weight: 600;
+}
+/* 标题 - 解释说明 */
+.fillTypeClassifyTitle .selectActiveExplain {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+}
+/* 选择活动主体内容区域 */
+.fillTypeClassifyContent {
+    height: 400px;
+    padding: 10px 0px 0px 30px;
+}
+.fillTypeClassifyContent .listItem {
+    width: 600px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    outline: 1px solid #EEEEEE;
+    margin-bottom: 7px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.fillTypeClassifyContent .listItem:hover {
+    background-color: #EDEDED;
+}
+.fillTypeClassifyContent .listItem:active {
+    background-color: #DEDEDE;
+}
+.fillTypeClassifyContent .listItem .radioType {
+    margin-right: 12px;
+}
+.fillTypeClassifyContent .avtive {
+    outline: 1px solid #FBBD00;
+}
+/*提交栏*/
+.submitBlock {
+    background: #fff;
+    height: 68px;
+    position: relative;
+    padding-top: 18px;
+    margin-bottom: 0;
+}
+.submitBlock span {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #FF3A46;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+}
+.submitBlock span:hover {
+    background-color: #D8343B;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>订单详情-杭州牛啦网络科技有限公司</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<link rel="stylesheet" href="../css/order/orderdetail.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<script src="../js/public/head.js"></script>
+
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />订单管理</div>
+			<div class="list  active">
+				<a href="allorder.html">全部订单</a>
+			</div>
+			<div class="list" >
+				<a href="nodeliveryorder.html">未发货订单</a>
+			</div>
+			<div class="list">
+				<a href="waitingreturngoods.html">待处理退货订单</a>
+			</div>
+			<div class="list">
+				<a href="returngoods.html">已处理退货订单</a>
+			</div>
+		</div>
+		<div class="part-right">
+			<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index: 100;">
+				<img class="loadingImg" src="../img/public/downrefesh.gif">
+				<span class="loadingFont">加载中...</span>
+			</div>
+			<div id="loaction">当前位置:管理后台>订单管理>全部订单>订单详情</div>
+			<div class="contentBlock">
+					<!--订单信息-->
+					<div class="tableBlockWapper">
+						<div class="tableBlock">
+							<h3>订单信息</h3>
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<!-- 以下两列左侧固定 -->
+										<th>订单号</th>
+										<th>订单类型</th>
+										<!-- 以下三列中间可滚动 -->
+										<th class="flex-col" data-width="100">下单时间</th>
+										<th class="flex-col" data-width="200">付款时间</th>
+										<th class="flex-col" data-width="300">买家ID</th>
+										<th>订单状态</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>132456789123456</td>
+										<td>普通订单</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>12345678912</td>
+										<td>带供应商发货</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+					<!--商品信息-->
+					<div class="tableBlockWapper">
+						<div class="tableBlock">
+							<h3>商品信息</h3>
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<!-- 以下两列左侧固定 -->
+										<th>商品名称</th>
+										<th>SKU</th>
+										<!-- 以下三列中间可滚动 -->
+										<th class="flex-col" data-width="100">商品编码</th>
+										<th class="flex-col" data-width="200">商品数量</th>
+										<th class="flex-col" data-width="300">商品单价</th>
+										<!-- 以下列右侧固定 -->
+										<th>商品金额</th>
+										<th>支付方式</th>
+										<th>结算单价</th>
+										<th>结算金额</th>
+										<th>是否开发票</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>132456789123456</td>
+										<td>普通订单</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>12345678912</td>
+										<td>带供应商发货</td>
+										<td>132456789123456</td>
+										<td>普通订单</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>2017-10-31 12:01:12</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+					<!--优惠信息-->
+					<div class="tableBlockWapper">
+						<div class="tableBlock">
+							<h3>优惠信息</h3>
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<!-- 以下两列左侧固定 -->
+										<th>优惠活动</th>
+										<th>供应商优惠金额</th>
+										<!-- 以下三列中间可滚动 -->
+										<th>平台优惠金额</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>132456789123456</td>
+										<td>普通订单</td>
+										<td>2017-10-31 12:01:12</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+					<!--支付信息-->
+					<div class="tableBlockWapper">
+						<div class="tableBlock">
+							<h3>支付信息</h3>
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<th>交易流水号</th>
+										<th>商品金额</th>
+										<th>运费</th>
+										<th>订单支付金额</th>
+										<th>付款状态</th>
+										<th>结算金额</th>
+										<th>结算状态</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>132456789123456</td>
+										<td>普通订单</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>12345678912</td>
+										<td>带供应商发货</td>
+										<td>带供应商发货</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+					<!--物流信息-->
+					<div class="tableBlockWapper">
+						<div class="tableBlock">
+							<h3>物流信息</h3>
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<!-- 以下两列左侧固定 -->
+										<th>物流公司</th>
+										<th>物流单号</th>
+										<!-- 以下三列中间可滚动 -->
+										<th>发货时间</th>
+										<th>收件人姓名</th>
+										<th>联系电话</th>
+										<!-- 以下列右侧固定 -->
+										<th>手机</th>
+										<th>收货地址</th>
+										<th>邮编</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>132456789123456</td>
+										<td>普通订单</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>12345678912</td>
+										<td>带供应商发货</td>
+										<td>12345678912</td>
+										<td>带供应商发货</td>
+									</tr>
+								</tbody>
+							</table>
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<th>时间</th>
+										<th>内容</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>132456789123456</td>
+										<td>普通订单</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+					
+					<!--订单日志-->
+					<div class="tableBlockWapper">
+						<div class="tableBlock">
+							<h3>订单日志</h3>
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<th>时间</th>
+										<th>操作人</th>
+										<th>行为</th>
+										<th>备注</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>132456789123456</td>
+										<td>系统</td>
+										<td>2017-10-31 12:01:12</td>
+										<td>2017-10-31 12:01:12</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			
+		</div>
+
+
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.js"></script>
+		<script>
+			var activeLi=document.querySelectorAll("#head ul li");
+			activeLi[2].style.background="#f6ecd1";
+			activeLi[2].getElementsByTagName("a")[0].style.color="#FBBD00";
+			
+//			顶部导航  默认选中块
+			var liActiveItem=document.getElementById("head").getElementsByTagName("li");
+			liActiveItem[2].classList.add("active");
+//			侧边导航  默认选中块
+			var leftDivActiveItem=document.getElementsByClassName("leftWapper")[0].getElementsByClassName("itemList")[0];
+			leftDivActiveItem.getElementsByTagName("div")[0].classList.add("activeDivItem");
+			
+		</script>
+	
+	</body>
+
+</html>

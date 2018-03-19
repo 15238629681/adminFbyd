@@ -1,0 +1,601 @@
+/*******公共样式*******/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+html,body{font:12px "Microsoft YaHei","Arial","Helvetica";color:#333;width:100%;height: 100%;overflow: auto;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img,iframe{border:none;}
+ul,li,ol{list-style:none;}
+input, textarea, select,button{*font-size:100%;outline: none;border:none;}
+a{color:#FFF;text-decoration:none;}
+a:hover{text-decoration: none;color: #fff;}
+a:focus{outline: none;text-decoration:none;}
+i{font-style: normal;}
+b{font-weight: normal;}
+span{display: inline-block;}
+div,input,span,a,li,ul,form,button,i,b,table,tb,th,tr{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+body{background:#fff;color:#333;}
+
+/******业务样式******/
+/*顶部留灰*/
+.topBlock {
+	width:100%;
+	height:20px;
+	background:#F6F6F6;
+}
+/*流程示意图*/
+.stepBlock {
+	width: 100%;
+	height: 88px;
+	background: url(../../img/reg/enter1_03.png) #fff no-repeat center center ;
+}
+.contentWapper {
+	width: 1280px;
+	margin:0 auto 100px;
+}
+/*选择入驻类型*/
+.selectEnterType {
+	width: 100%;
+	height: 40px;
+}
+.selectEnterType div {
+	width: 50%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	float: left;
+	font-size: 14px;
+	color: #999;
+	background: #eee;
+	cursor: pointer;
+}
+.selectEnterType .active {
+	background-color: #FF3A46;
+	color: #FFFFFF;
+}
+/********************************* 个人入驻 ****************************************/
+.alertSpan{
+	display:inline-block;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	background:url(../../img/reg/alert.png) 2px center no-repeat;
+	padding-left: 25px;
+	background-size: 20px 20px;
+	color: #999999;
+}
+/********* 入驻人基本信息 **********/
+/*蓝色提示信息*/
+.enterBaseInfo .infoTitle {
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	color: #FBBD00;
+	text-align: left;
+	border-bottom: 1px solid #E0E0E0;
+}
+.enterBaseInfo .inputBlock{
+	margin-top:10px;
+}
+/*入驻人姓名*/
+.enterBaseInfo .inputBlock .inputName{
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 12px;
+	color: #333;
+	width: 110px;
+	text-align: right;
+}
+.inputBlock input[type=text]{
+	width: 268px;
+	height: 22px;
+	border: 1px solid #C0C0C0;
+	text-indent: 1em;
+	font-size: 12px;
+	/*color: #999;*/
+}
+/*主营类目 - 下拉列表*/
+.inputBlock .fillGroup {
+	height: 30px;
+}
+.inputBlock .fillGroupItem {
+	float: left;
+}
+.inputBlock .dropdown input{
+	width: 268px;
+	height: 22px;
+	border: 1px solid #C0C0C0;
+	text-indent: 1em;
+	font-size: 12px;
+	/*color:#999;*/
+	background: url(../../img/reg/downarrow_03.png) no-repeat right center;
+}
+/*是否存在第三方平台*/
+.enterBaseInfo .thirdPlaygroundWapperChoose .inputName {
+	width: 155px;
+}
+.inputBlock input {
+	margin: 0;
+}
+.inputBlock input[type="radio"] {
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.inputBlock label {
+	margin-right: 13px;
+}
+/*第三方店铺链接*/
+.thirdPlaygroundWapper {
+	padding-left: 40px;
+}
+.thirdPlaygroundWapper .inputName {
+	vertical-align: top;
+}
+.thirdPlaygroundWapperRight {
+	display: inline-block;
+}
+/*第三方基础*/
+.thirdPlaygroundWapperRight .thirdPlayElement {
+	margin-bottom: 8px;
+}
+/*增删操作*/
+.thirdPlaygroundWapperRight .thirdPlayElement .deletShopLink,.thirdPlaygroundWapperRight .thirdPlayElement .addShopLink {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+	margin-left: 8px;
+}
+.thirdPlaygroundWapperRight .thirdPlayElement .deletShopLink {
+	background: url(../../img/reg/deletlink.png) center center no-repeat;
+}
+.thirdPlaygroundWapperRight .thirdPlayElement .addShopLink {
+	background:url(../../img/reg/addlink.png) center center no-repeat;
+}
+
+/************ 供应商资质信息 *************/
+.supplierInfo .infoTitle {
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	color: #FBBD00;
+	text-align: left;
+	border-bottom: 1px solid #E0E0E0;
+}
+.supplierInfo .infoTitle span {
+	color: #999;
+	font-size: 12px;
+}
+/* 图片标题 */
+.supplierInfo .inputBlock {
+	margin-top: 10px;
+}
+.supplierInfo .inputBlock .inputName{
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 12px;
+	color: #333;
+	width: 150px;
+	text-align: right;
+	vertical-align: top;
+}
+/*右侧*/
+.supplierInfo .inputBlock .inputBlockRight {
+	width: calc( 100% - 165px);
+	display: inline-block;
+}
+.inputBlockRight .inputBlockRightItem {
+	display: inline-block;
+}
+/*添加图片*/
+.inputBlockRight .addUploadImage {
+	width: 140px;
+	height: 140px;
+	margin-right: 20px;
+	cursor: pointer;
+}
+/*中间提示 - 请选择文件*/
+.inputBlockRight .uploadPrompt {
+	width: 100px;
+	height: 30px;
+	font-size: 14px;
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 8px;
+	background-color: #FBBD00;
+	cursor: pointer;
+	margin-right: 20px;
+}
+.inputBlockRight .uploadPrompt:hover {
+	background-color: #EDB200;
+}
+/*身份证有效期*/
+.beginTimePicker {
+	width: 600px;
+	height: 30px;
+	display: inline-block;
+}
+.beginTimePicker .form-datetime {
+	text-align: center;
+	width: 46%;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	border: none;
+}
+.beginTimePicker .sepflag {
+	float: left;
+	display: inline-block;
+	height: 26px;
+	line-height: 26px;
+	margin: 0 5px;
+}
+.beginTimePicker .form-datetime input {
+	width: 100%;
+	float: left;
+	height: 26px;
+	line-height: 26px;
+	background: #fff;
+	border: 1px solid #CBCBCB;
+}
+/*供应商资质信息(个人入驻) - 时间样式*/
+.idValidityPeriod .beginTimePicker .beginRange,.idValidityPeriod .beginTimePicker .sepflag,.idValidityPeriod .beginTimePicker .endRange {
+	float: left;
+}
+.idValidityPeriod .beginTimePicker input {
+	text-align: left;
+	width: 200px;
+	padding-left: 10px;
+	background-color: #FFFFFF;
+}
+/********* 供应商商标信息 **********/
+.brandMarkInfo {
+}
+.brandMarkInfo .infoTitle {
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	color: #FBBD00;
+	text-align: left;
+	border-bottom: 1px solid #E0E0E0;
+}
+.brandMarkInfo .infoTitle span {
+	color: #999;
+	font-size: 12px;
+}
+/*主体内容*/
+.brandMarkInfoContainer {
+	position: relative;
+	/*display: -webkit-box;*/
+}
+.brandMarkInfoElement {
+	width: 550px;
+	height: 750px;
+	margin-top: 15px;
+	border: 1px solid #C2C2C2;
+	padding-bottom: 15px;
+	margin-right: 10px;
+	display: inline-block;
+	vertical-align: top;
+}
+.brandMarkInfoContainer .addBrandCard {
+	width: 100px;
+	height: 750px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 5px;
+	top: 50%;
+	margin-top: 15px;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+}
+.brandMarkInfoContainer .addBrandCard span {
+	width: 100px;
+	height: 36px;
+	line-height: 36px;
+	color: #FFFFFF;
+	background-color: #FBBD00;
+	border-radius: 5px;
+	position: absolute;
+	top: 50%;
+	margin-top: -18px;
+}
+.brandMarkInfoContainer .addBrandCard span:hover {
+	background-color: #EDB200;
+}
+.brandMarkInfo .selectBrandType {
+	padding-left: 10px;
+}
+.brandMarkInfo .selectBrandType label {
+	margin-right: 10px;
+	font-weight: 500;
+}
+.brandMarkInfo .selectBrandType label input {
+	margin-right: 5px;
+}
+/*名称*/
+.brandMarkInfo .inputBlock {
+	margin-top: 10px;
+}
+/*标题*/
+.brandMarkInfo .inputBlock .inputName{
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 12px;
+	color: #333;
+	width: 110px;
+	text-align: right;
+	vertical-align: top;
+}
+/* 上传图片右侧区域 */
+.brandMarkInfo .inputBlock .inputBlockRight {
+	width: calc( 100% - 165px);
+	display: inline-block;
+}
+/*代理品牌 - 平拍授权有效期*/
+.brandMarkInfo .brandAccreditDate .inputBlockRight {
+	width: 420px;
+}
+
+/**************************** 企业入驻 ****************************/
+/***** 供应商管理人信息 *****/
+.companySupplierInfo .infoTitle {
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	color: #FBBD00;
+	text-align: left;
+	border-bottom: 1px solid #E0E0E0;
+}
+.companySupplierInfo .inputBlock {
+	margin-top:10px;
+}
+.companySupplierInfo .inputBlock .inputName {
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 12px;
+	color: #333;
+	width: 110px;
+	text-align: right;
+}
+/*是否存在第三方平台店铺*/
+.companySupplierInfo .thirdPlaygroundWapperChoose .inputName {
+	width: 155px;
+}
+/****** 供应商企业信息 ******/
+.companyBaseInfo .infoTitle {
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	color: #FBBD00;
+	text-align: left;
+	border-bottom: 1px solid #E0E0E0;
+}
+.companyBaseInfo .inputBlock {
+	margin-top:10px;
+}
+/**选择地址**/
+.enterCompanyAddress .regionSelect {
+	width: 100px;
+	border: 1px solid #C5C5C5;
+}
+.enterCompanyAddress .homeRegionCls {
+	display: block;
+	margin: 5px 0px 0px 96px;
+}
+/**示例**/
+.enterCompanyCodeExample {
+	width: 40px;
+	height: 22px;
+	text-align: center;
+	background-color: #FBBD00;
+	line-height: 22px;
+	color: #FFFFFF;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.questionTooltip {
+	/*top: 310px!important;*/
+	left: 630px!important;
+}
+.questionTooltip .tooltip-arrow {
+	border: none;
+}
+.questionTooltip .tooltip-inner {
+	max-width: 319px;
+	background-color: transparent;
+}
+/***** 供应商资质信息 *****/
+.companyQualificat .infoTitle {
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	color: #FBBD00;
+	text-align: left;
+	border-bottom: 1px solid #E0E0E0;
+}
+.companyQualificat .infoTitle span {
+	color: #999;
+	font-size: 12px;
+}
+.companyQualificat .inputBlock {
+	margin-top: 10px;
+}
+.companyQualificat .inputBlock .inputName {
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 12px;
+	color: #333;
+	width: 150px;
+	text-align: right;
+	vertical-align: top;
+}
+.companyQualificat .inputBlock .inputBlockRight {
+	width: calc( 100% - 165px);
+	display: inline-block;
+}
+/***************提交栏***************/
+.submitBar {
+	border-top: 1px solid #E0E0E0;
+	height: 60px;
+	margin-top: 20px;
+	position: relative;
+}
+.submitBar .submitBtn {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #FFFFFF;
+	background-color: #FF3A46;
+	border-radius: 5px;
+	cursor: pointer;
+	position: absolute;
+	left: 50%;
+	margin-left: -50px;
+	top: 15px;
+}
+.submitBar .prompt {
+	width: 140px;
+	height: 30px;
+	line-height: 30px;
+	color: #FF3A46;
+	position: absolute;
+	left: 50%;
+	margin-left: 60px;
+	top: 15px;
+	display: none;
+}
+/********* 企业入驻商标信息 **********/
+.companyBrandMarkInfo {
+}
+.companyBrandMarkInfo .infoTitle {
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 14px;
+	color: #FBBD00;
+	text-align: left;
+	border-bottom: 1px solid #E0E0E0;
+}
+.companyBrandMarkInfo .infoTitle span {
+	color: #999;
+	font-size: 12px;
+}
+/*主体内容*/
+.companyBrandMarkInfoContainer {
+	position: relative;
+}
+/* 商标信息单个元素 */
+.companyBrandMarkInfoElement {
+	width: 550px;
+	height: 750px;
+	margin-top: 15px;
+	border: 1px solid #C2C2C2;
+	padding-bottom: 15px;
+	margin-right: 10px;
+	display: inline-block;
+	vertical-align: top;
+}
+.companyBrandMarkInfoContainer .addBrandCard {
+	width: 100px;
+	height: 750px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 5px;
+	top: 50%;
+	margin-top: 15px;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+}
+.companyBrandMarkInfoContainer .addBrandCard span {
+	width: 100px;
+	height: 36px;
+	line-height: 36px;
+	color: #FFFFFF;
+	background-color: #FBBD00;
+	border-radius: 5px;
+	position: absolute;
+	top: 50%;
+	margin-top: -18px;
+}
+.companyBrandMarkInfoContainer .addBrandCard span:hover {
+	background-color: #EDB200;
+}
+.companyBrandMarkInfo .selectBrandType {
+	padding-left: 10px;
+}
+.companyBrandMarkInfo .selectBrandType label {
+	margin-right: 10px;
+	font-weight: 500;
+}
+.companyBrandMarkInfo .selectBrandType label input {
+	margin-right: 5px;
+}
+/*名称*/
+.companyBrandMarkInfo .inputBlock {
+	margin-top: 10px;
+}
+/*标题*/
+.companyBrandMarkInfo .inputBlock .inputName{
+	display: inline-block;
+	margin-right: 8px;
+	font-size: 12px;
+	color: #333;
+	width: 110px;
+	text-align: right;
+	vertical-align: top;
+}
+/* 上传图片右侧区域 */
+.companyBrandMarkInfo .inputBlock .inputBlockRight {
+	width: calc( 100% - 165px);
+	display: inline-block;
+}
+/*代理品牌 - 平拍授权有效期*/
+.companyBrandMarkInfo .brandAccreditDate .inputBlockRight {
+	width: 420px;
+}
+/****时间样式***/
+.brandMarkInfoElement .agencyBrandPanel .beginTimePicker input,.companyBrandMarkInfoElement .agencyBrandPanel .beginTimePicker input{
+	text-align: left;
+	width: 130px;
+	padding-left: 10px;
+	background-color: #FFFFFF;
+}
+.brandMarkInfoElement .beginTimePicker .beginRange,.brandMarkInfoElement .beginTimePicker .sepflag,.brandMarkInfoElement .beginTimePicker .endRange {
+	float: left;
+}
+.companyBrandMarkInfoElement .beginTimePicker .beginRange,.companyBrandMarkInfoElement .beginTimePicker .sepflag,.companyBrandMarkInfoElement .beginTimePicker .endRange {
+	float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

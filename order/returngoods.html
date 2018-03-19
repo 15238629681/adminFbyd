@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+	<title>已处理退货订单-订单管理-翻宝云店供应商管理后台</title>
+	<!-- ZUI 标准版压缩后的 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+	<link rel="stylesheet" href="../css/public/reset.css" />
+	<!-- ZUI Javascript 依赖 jQuery -->
+	<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+	<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+	<!--<link rel="stylesheet" href="../../css/order/publicorder.css" />-->
+
+	<link href="https://cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.min.css" rel="stylesheet">
+	<!--<link rel="stylesheet" href="../css/public/datetimepicker/datetimepicker.css" />-->
+	<!--<link rel="stylesheet" href="../../css/order/allorder.css" />-->
+	<script src="../js/public/datetimepicker/datetimepicker.js"></script>
+	<link rel="stylesheet" href="../css/order/nodeliveryorder.css" />
+</head>
+
+<body>
+	<script src="../js/public/head.js"></script>
+	<div class="part-left">
+		<div id="page-titie"><img src="../img/activity/activitylogo.png" />订单管理</div>
+		<div class="list">
+			<a href="allorder.html">全部订单</a>
+		</div>
+		<div class="list" >
+			<a href="nodeliveryorder.html">未发货订单</a>
+		</div>
+		<div class="list">
+			<a href="waitingreturngoods.html">待处理退货订单</a>
+		</div>
+		<div class="list active">
+			<a href="returngoods.html">已处理退货订单</a>
+		</div>
+	</div>
+	<div class="part-right" id="part-right">
+		<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+			<img class="loadingImg" src="../img/public/downrefesh.gif">
+			<span class="loadingFont">加载中...</span>
+		</div>
+		<div id="loaction">当前位置:管理后台>订单管理>已处理退货订单</div>
+		<div class="contentBlock">
+		</div>
+	</div>
+	<script>
+		var activeLi=document.querySelectorAll("#head ul li");
+		activeLi[2].style.background="#f6ecd1";
+		activeLi[2].getElementsByTagName("a")[0].style.color="#FBBD00";
+		$(".dropdown-menu li a").on('click',function(){
+			$(this).parent().parent().prev().val("    "+$(this).html());
+		});
+		//顶部导航  默认选中块
+		var liActiveItem = document.getElementById("head").getElementsByTagName("li");
+		liActiveItem[2].classList.add("active");
+	</script>
+</body>
+</html>

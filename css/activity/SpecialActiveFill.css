@@ -1,0 +1,199 @@
+/* 不允许选择文字 */
+.noSelectFont {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+#part-right {
+    background: #f6f6f6;
+    overflow: auto;
+}
+.stepImg {
+    margin:0 30px 10px 30px;
+    height: 68px;
+    background: url(../../img/activity/specialactive/SpecialActive02.png) #fff center center no-repeat;
+}
+.activityBlock {
+    background-color: #FFFFFF;
+    margin: 0 30px 4px 30px;
+}
+/* 填写活动产品信息 */
+/* 头部标题 */
+.fillActiveInfo .infoTitle {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 30px;
+    background-color: #EEEEEE;
+}
+.fillActiveInfo .selectActiveType {
+    font-size: 16px;
+    font-weight: 600;
+}
+.fillActiveInfo .selectActiveExplain {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+}
+/* 表单行元素 */
+.inputLineBlock {
+    height: 30px;
+}
+.inputLineBlock .lineLeftTitle {
+    width: 110px;
+    text-align: right;
+}
+.inputLineBlock .lineRightInput {
+    border: 1px solid #CBCBCB;
+    width: 400px;
+    padding-left: 15px;
+}
+/**选择活动分类**/
+.activeLinks {
+    padding: 15px 0;
+}
+.getGoodsInfoBtn {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #FFFFFF;
+    background-color: #FF0000;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-left: 110px;
+}
+.getGoodsInfoBtn:hover {
+    background-color: #D8343B;
+}
+/*******推广长图********/
+.goodsInfoShowPic {
+    padding: 15px 0 10px;
+    margin-bottom: 0px;
+}
+.spreadLongPictureTitle .title1 {
+    color: #333333;
+    font-weight: 600;
+    padding-left: 30px;
+}
+.spreadLongPictureTitle .title2 {
+    color: #A9A9A9;
+}
+/*推广长图图片*/
+.goodsInfoShowPic .spreadLongPicture .uploadSpreadPicture {
+    margin: 15px 0px 15px 30px;
+}
+/*商品主图*/
+.uploadGoodsMainPicList {
+    margin: 15px 0px 0px 30px;
+}
+.uploadGoodsMainPicList .addUoloadItem {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+/*******商品标题******/
+/*小编说*/
+.goodsInfoFont {
+    margin-bottom: 0px;
+}
+.goodsInfoFont .xiaoBianShuo {
+    height: 45px;
+}
+.goodsInfoFont .xiaoBianShuo textarea {
+    height: 35px;
+    padding-left: 5px;
+    padding-top: 3px;
+}
+.discountCouponJE {
+    padding-bottom: 15px;
+}
+/**优惠券数量/已领取数量**/
+.discountCouponNum .lineRightInput {
+    width: 150px;
+}
+.discountCouponTime .lineRightInput {
+    width: 150px;
+}
+/*计划类型*/
+.planType {
+    margin-bottom: 8px;
+}
+.goodsInfoFont .planTypeSelectBtn {
+    width: 110px;
+    height: 30px;
+    background-color: #CCCCCC;
+    text-align: center;
+    line-height: 30px;
+    color: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.goodsInfoFont .selected {
+    background-color: #FF3A46;
+}
+.goodsInfoFont .planTypeSelectBtn:hover {
+    background-color: #FF3A46;
+}
+.goodsInfoFont .planTypeSelectBtn:active {
+    background-color: #FF626C;
+}
+
+/**活动时间与相关描述**/
+.activeDescTextarea {
+    height: 45px;
+}
+.activeDescTextarea textarea {
+    height: 30px;
+    padding-top: 3px;
+    padding-left: 5px;
+}
+.activeTimeDesc {
+    background-color: #FFFFFF;
+    margin: 0 30px 4px 30px;
+}
+.activeTimeDesc .activeTimeLine .lineRightInput {
+    width: 150px;
+}
+
+/*提交栏*/
+.submitBlock {
+    background: #fff;
+    height: 68px;
+    position: relative;
+    padding-top: 18px;
+    margin-bottom: 0;
+}
+.submitBlock span {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+
+    background-color: #FF3A46;
+    color: #fff;
+}
+.submitBlock .lastStep {
+    margin-left: -120px;
+    /*background-color: #FFFFFF;*/
+    /*border: 1px solid #C0C0C0;*/
+    /*color: #000000;*/
+}
+.submitBlock .nextStep {
+    /*color: #fff;*/
+    margin-left: 20px;
+    /*background-color: #FF3A46;*/
+}
+.submitBlock span:hover {
+    background-color: #D8343B;
+}
+/*.submitBlock .lastStep:hover {
+    background-color: #EAEAEA;
+}
+.submitBlock .nextStep:hover {
+    background-color: #D8343B;
+}*/
+

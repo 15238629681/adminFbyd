@@ -1,0 +1,22 @@
+/* 不允许选择文字 */
+.noSelectFont {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+/**** 右侧 ****/
+#part-right {
+    background: #f6f6f6;
+    overflow: auto;
+}
+.stepImg {
+    margin:0 30px 10px 30px;
+    height: 68px;
+    background: url(../../img/activity/specialactive/SpecialActive04.png) #fff center center no-repeat;
+}
+
+
+
+
+
+

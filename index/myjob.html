@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name = "format-detection" content = "telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>我的工作台-首页-翻宝云店供应商管理后台</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<script src="../js/product/zui.datatable.min.js"></script>
+		<style>
+			body{overflow: hidden;}
+			@media screen and (max-width: 1440px)  {
+
+				#product-list{width: calc(100% - 60px);margin: 0 auto;min-width: 850px;}
+				#List-title{height: 50px;background: #eee;font-size: 16px;line-height: 50px;border: 1px #ddd solid;padding-left: 50px;}
+				#product-list ul{width: 100%;border-left: 1px #ddd solid;}
+				#product-list ul li{width: 50%;border-right: 1px #ddd solid;border-bottom: 1px #ddd solid;float: left;height: 232px;background: #fff;padding: 30px;}
+				#product-list ul li div{font-size: 14px;line-height: 50px;color:#666;}
+				#product-list ul li .tips1{color:#FF3A46;}
+			}
+			@media screen and (min-width: 1440px)  {
+
+				#product-list{width: calc(100% - 120px);margin: 0 auto;min-width: 850px;}
+				#List-title{height: 50px;background: #eee;font-size: 16px;line-height: 50px;border: 1px #ddd solid;padding-left: 36px;}
+				#product-list ul{width: 100%;border-left: 1px #ddd solid;}
+				#product-list ul li{width: 50%;border-right: 1px #ddd solid;border-bottom: 1px #ddd solid;float: left;height: 232px;background: #fff;padding: 30px;}
+				#product-list ul li div{font-size: 14px;line-height: 50px;color:#666;}
+				#product-list ul li .tips1{color:#FF3A46;}
+			}
+		</style>
+	</head>
+	<body>
+		<script src="../js/public/head.js"></script>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/index/index-icon.png" />首页</div>
+			<div class="list active">我的工作台</div>
+			<div class="list"><a href="notice.html?type=0">平台公告</a></div>
+			<div class="list"><a href="active.html?type=0">活动广场</a></div>
+			<div class="list"><a href="supplierdata.html?type=0">供应商数据统计</a></div>
+		</div>
+		<div id="part-right">
+			<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+				<img class="loadingImg" src="../img/public/downrefesh.gif">
+				<span class="loadingFont">加载中...</span>
+			</div>
+			<div id="loaction">当前位置：管理后台>首页>我的工作台</div>
+			<div id="product-list">
+				<div id="List-title">我的工作台</div>
+				<ul class="clean">
+				</ul>
+			</div>
+		</div>
+		<script>
+			function CreateLi(){
+				var Li = document.createElement("li");
+				Li.innerHTML = "<div class='tips1'>我的订单</div><div class='tips2'>待发货</div><div class='tips3'>发货即将超时</div>";
+				return Li;
+			}
+			for(var i=0;i<4;i++){
+				$("#product-list ul").append(CreateLi());
+			}
+		</script>
+	</body>
+</html>

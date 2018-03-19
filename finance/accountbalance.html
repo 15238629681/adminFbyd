@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+    <title>账户余额-财务管理-翻宝云店供应商管理后台</title>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+    <link rel="stylesheet" href="../css/public/reset.css"/>
+    <link rel="stylesheet" href="../css/product/zui.datatable.min.css"/>
+    <link rel="stylesheet" href="../css/public/datetimepicker.css"/>
+    <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+    <link rel="stylesheet" href="../css/public/datetimepicker.css"/>
+    <link rel="stylesheet" href="../css/finance/accountbalance.css"/>
+    <script src="../js/public/datetimepicker.min.js"></script>
+</head>
+<body>
+<script src="../js/public/head.js"></script>
+<div class="part-left">
+    <div id="page-titie"><img src="../img/finance/finance_03.png"/>财务管理</div>
+    <div class="list active">
+        <a href="" style="color:#fff;">账户余额</a>
+    </div>
+    <div class="list">
+        <a href="ExtractCashDetail.html">提现明细</a>
+    </div>
+    <div class="list">
+        <a href="rechargedetail.html">充值明细</a>
+    </div>
+    <div class="list">
+        <a href="frozennumdetail.html">冻结明细</a>
+    </div>
+</div>
+<div id="part-right">
+    <div id="loaction">当前位置：管理后台>财务管理>账户余额</div>
+    <div class="contentBlock">
+        <div class="mainBlock">
+            <!--可提现余额-->
+            <div class="withDrawBlock">
+                <div class="title">
+                    可提现余额
+                </div>
+                <div class="infoBlock">
+                    <div class="withDrawNum">
+                        ******
+                    </div>
+                    <div class="operateBlock">
+                        <div class="block">
+									<span class="colorSpan reChargeSpan">
+										<a href="personalaccountrecharge.html">充值</a>
+									</span>
+                            <span class="detailSpan">
+										<a href="rechargedetail.html">充值明细</a>
+									</span>
+                        </div>
+                        <div class="block ">
+									<span class="colorSpan withDrawSpan">
+										<a href="DrawDeposit.html">提现</a>
+									</span>
+                            <span class="detailSpan">
+										<a href="ExtractCashDetail.html">提现明细</a>
+									</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--冻结金额-->
+            <div class="frozenBlock">
+                <div class="title">
+                    冻结金额
+                </div>
+                <div class="infoBlock">
+                    <div class="withDrawNum">
+                        ******
+                    </div>
+                    <div class="detailText">
+                        <a href="frozennumdetail.html">详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部版权-->
+    <!--<div class="footerBlock">
+        杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+    </div>-->
+    <!--<div class="footer">
+    </div>-->
+</div>
+<script>
+    document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+    document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+</script>
+<script src="../js/finance/accountbalance.js"></script>
+</body>
+</html>

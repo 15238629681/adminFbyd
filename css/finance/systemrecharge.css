@@ -1,0 +1,173 @@
+.contentBlock {
+	width: 100%;
+	padding: 30px;
+}
+/**** TabPanel头部选项卡 ****/
+.tabPanelTitle {
+	width: 100%;
+	height: 35px;
+	display: block;
+	border-left: 1px solid #D3D3D3;
+}
+.tabPanelTitle li {
+	float: left;
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	border: 1px solid #D3D3D3;
+	border-left: none;
+	cursor: pointer;
+}
+/*空白填充*/
+.tabPanelTitle .spaceFillCell {
+	width: calc(100% - 202px);
+	height: 35px;
+	border: none;
+	border-bottom: 1px solid #D3D3D3;
+	cursor: default;
+}
+.tabPanelTitle .titleActive {
+	border-bottom: none;
+	background-color: #FFFFFF;
+}
+/*TabPanel选项卡内容部分*/
+.tabPanelBody {
+	width: 100%;
+	display: block;
+}
+.tabPanelBody li {
+	width: 100%;
+	height: 400px;
+	background-color: #FFFFFF;
+	border: 1px solid #D3D3D3;
+	border-top: none;
+}
+/***** 支付宝转账方式 *****/
+.applyTransfer {
+	padding: 30px 0px 30px 20px;
+}
+.applyMethod {
+	width: 164px;
+	height: 50px;
+	margin-bottom: 30px;
+}
+/*充值金额*/
+.inputWapper {
+	padding-left: 8px;
+	height: 60px;
+	line-height: 60px;
+	border-top: 1px solid #F1F1F1;
+	border-bottom: 1px solid #F1F1F1;
+}
+.noBottomLine {
+	border-bottom: none;
+}
+.inputWapper:hover {
+	background-color: #F7F7F7;
+}
+.inputWapper .inputName{
+	width: 75px;
+	height: 60px;
+	line-height: 60px;
+	text-align:left;
+	float: left;
+}
+.inputWapper .floatRight {
+	float: right;
+	margin-right: 10px;
+}
+.inputWapper .floatRight input {
+	width: 166px;
+	height: 30px;
+	border: 1px solid #C0C0C0;
+	text-indent: 1em;
+	margin-right: 6px;
+}
+/*手续费*/
+.serviceCharge {
+	color: #FF3A46;
+	font-weight: 700;
+}
+/*实际需要付费*/
+.actualApplyForDiv {
+	clear: both;
+	text-align: right;
+	padding-right: 10px;
+	height: 40px;
+	line-height:40px;
+	font-size: 16px;
+}
+.actualApplyForDiv .actualApplyFor {
+	font-size: 20px;
+	font-weight: 600;
+	color: #FF3A46;
+}
+/* 转账提示 */
+.transferPrompt {
+	padding: 20px 0px 20px 30px;
+	line-height: 22px;
+	color: #FF3A46;
+}
+/*****下一步*****/
+.nextBar {
+	width: 100%;
+	height: 60px;
+	margin-top: 15px;
+	background-color: #FFFFFF;
+	position: relative;
+}
+.nextBar .nextButton {
+	width: 150px;
+	height: 36px;
+	background-color: #FF3A46;
+	text-align: center;
+	line-height: 36px;
+	color: #FFFFFF;
+	border-radius: 5px;
+	position: absolute;
+	cursor: pointer;
+	left: 50%;
+	margin-left: -75px;
+	top: 12px;
+}
+.nextBar .nextButton:hover {
+	background-color: #EA3B43;
+}
+/**********充值成功提示*********/
+.successPrompt1 {
+	width: 90px;
+	height: 90px;
+	margin: 0 auto;
+	background-color: #09BB07;
+	font-size: 50px;
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 90px;
+	border-radius: 45px;
+	margin-top: 190px;
+}
+.successPrompt2 {
+	font-size: 40px;
+	color: #09BB07;
+	text-align: center;
+	margin-top: 20px;
+}
+.applyForSuccess .bottom {
+	position: absolute;
+	bottom: 110px;
+	width: 570px;
+	left: 50%;
+	margin-left: -285px;
+}
+.applyForSuccess .bottom li {
+	float: left;
+	font-size: 16px;
+	margin-right: 12px;
+	color: #AEAEAE;
+}
+.applyForSuccess .bottom li a {
+	color: #FBBD00;
+	cursor: pointer;
+}
+

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>充值明细---》财务管理-杭州牛啦网络科技有限公司</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>-->
+
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+		<link rel="stylesheet" href="../css/finance/rechargedetail.css" />
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<link rel="stylesheet" href="../css/public/pager.css" />
+	</head>
+
+	<body>
+
+		<script src="../js/public/head.js"></script>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/finance/finance_03.png" />财务管理</div>
+			<div class="list  ">
+				<a href="" >账户余额</a>
+			</div>
+			<div class="list">
+				<a href="#">提现明细</a>
+			</div>
+			<div class="list active">
+				<a href="#" style="color:#fff;">充值明细</a>
+			</div>
+		</div>
+
+		<div id="part-right">
+			<div id="loaction">当前位置：管理后台>财务管理>充值明细</div>
+
+			<div class="contentBlock">
+
+				<div class="frozenRecord">
+					<div class="recordTitle">充值明细</div>
+
+					<div class="recordTable">
+						<!--发布时间-->
+						<div class="form-group clean tableWapper">
+							<div style="display:inline-block;">
+								<span class="fillTitle" style="vertical-align: top;">搜索:</span>
+								<!--时间范围选择-->
+								<div class="fillWapper timeChooseList clean ">
+									<div class="form-group clean">
+										<div class="dropdown">
+											<input type="text" class="down latelyReleasetime" id="product-state" placeholder="全部" readonly="readonly" data-toggle="dropdown">
+											<ul class="dropdown-menu">
+												<li>
+													<a href="#">全部</a>
+												</li>
+												<li data-id="">
+													<a href="#">最近24小时</a>
+												</li>
+												<li>
+													<a href="#">最近48小时</a>
+												</li>
+												<li>
+													<a href="#">最近7天</a>
+												</li>
+												<li>
+													<a href="#">最近30天</a>
+												</li>
+												<li>
+													<a href="#">自定义</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--具体时间   两个时间-->
+							<div style="display:inline-block;position:absolute;left:173px;">
+								<div class="form-group clean postOrderTime postOrderTimeRelease">
+									<div class="postOrderTimeWapper">
+										<div class="beginRage input-group date form-date" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2" data-link-format="dd MM yyyy - HH:ii p">
+											<span class="input-group-addon">
+										    <span class="icon-calendar"></span>
+											</span>
+											<input class="form-control time_start releasetime_start" size="16" type="text" value="" readonly="">
+										</div>
+										<span class="sepflag">-</span>
+										<div class="endRage input-group date form-date" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2" data-link-format="dd MM yyyy - HH:ii p">
+											<span class="input-group-addon">
+										<span class="icon-calendar"></span>
+											</span>
+											<input class="form-control time_end releasetime_end" size="16" type="text" value="" readonly="">
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div style="position:absolute;left:560px;top:13px;width:300px;">
+								<span class="fillTitle frozenStatus">充值类型:</span>
+								<!--冻结状态选择-->
+								<div class="fillWapper clean statusChooseList">
+									<div class="form-group clean">
+										<div class="dropdown">
+											<input type="text" class="down rechargetype latelyReleasetime" id="product-state" placeholder="全部" readonly="readonly" data-toggle="dropdown">
+											<ul class="dropdown-menu">
+												<li data-id="">
+													<a href="#">全部</a>
+												</li>
+												<li>
+													<a href="#">系统转账</a>
+												</li>
+												<li>
+													<a href="#">自助转账</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div style="position:absolute;left:863px;top:13px;width:300px;">
+								<span class="fillTitle frozenStatus">充值渠道:</span>
+								<!--充值渠道-->
+								<div class="fillWapper clean statusChooseList">
+									<div class="form-group clean">
+										<div class="dropdown">
+											<input type="text" class="down dealtype " id="product-state" placeholder="全部" readonly="readonly" data-toggle="dropdown">
+											<ul class="dropdown-menu">
+												<li data-id="">
+													<a href="#">全部</a>
+												</li>
+												<li>
+													<a href="#">支付宝</a>
+												</li>
+												<li>
+													<a href="#">微信支付</a>
+												</li>
+												<li>
+													<a href="#">网银支付</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div style="position:absolute;left:1166px;top:13px;width:300px;">
+								<span class="fillTitle frozenStatus">到账状态:</span>
+								<!--冻结状态选择-->
+								<div class="fillWapper clean statusChooseList">
+									<div class="form-group clean">
+										<div class="dropdown">
+											<input type="text" class="down state " id="product-state" placeholder="全部" readonly="readonly" data-toggle="dropdown">
+											<ul class="dropdown-menu">
+												<li data-id="">
+													<a href="#">全部</a>
+												</li>
+												<li>
+													<a href="#">待审核</a>
+												</li>
+												<li>
+													<a href="#">已到账</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<span class="searchSpan">查询</span>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="exportToExcelWapper">
+					<span>
+						<a href="">导出为Excel</a>
+					</span>
+				</div>
+
+				<table class="detailTable">
+					<thead>
+						<tr>
+							<td>流水号</td>
+							<td>创建时间</td>
+							<td>充值金额（元）</td>
+							<td>手续费（元）</td>
+							<td>支付金额（元）</td>
+							<td>充值类型</td>
+							<td>充值渠道</td>
+							<td>充值状态</td>
+							<td>到账时间</td>
+						</tr>
+					</thead>
+					<tbody>
+						<!--<tr>
+							<td>流水号</td>
+							<td>创建时间</td>
+							<td>充值金额（元）</td>
+							<td>手续费（元）</td>
+							<td>支付金额（元）</td>
+							<td>充值类型</td>
+							<td>充值渠道</td>
+							<td>充值失败
+								<button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="您的支付宝订单号/微信支付交易单号/转账银行信息未填写正确，请查证后在“财务管理”->“账户余额”->“充值”->“自助转账”中重新提交充值信息 ">失败原因</button>
+							</td>
+							<td>到账时间</td>
+						</tr>-->
+					</tbody>
+				</table>
+
+				<div class="pageWapper">
+					<div style="margin:0 auto;text-align:center;">
+						<ul class="pagination" id="page2">
+						</ul>
+						<div class="pageJump">
+							<span>跳转到</span>
+							<input type="text" style="width:50px;" />
+							<span>页</span>
+							<button type="button" class="button">确定</button>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			<!--底部版权-->
+			<!--<div class="footerBlock">
+        杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+    </div>-->
+			<!--<div class="footer">
+
+    </div>-->
+		</div>
+		<script>
+			document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+			document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+			
+			
+			// 或者在初始化时指定
+$('[data-toggle="tooltip"]').tooltip({
+    placement: 'bottom',
+    tipClass: 'tooltip-warning'
+});
+			
+		</script>
+		<script src="../js/finance/rechargedetail.js"></script>
+		<script src="../js/public/pager.js"></script>
+		<!--<script>
+    var activeLi=document.querySelectorAll("#head ul li");
+    activeLi[3].style.background="#f6ecd1";
+    activeLi[3].getElementsByTagName("a")[0].style.color="#FBBD00";
+</script>
+<script src="../js/activity/editor.js"></script>
+-->
+
+	</body>
+
+</html>

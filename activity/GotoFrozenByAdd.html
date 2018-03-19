@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>发布体验活动（冻结商品贷款）----活动管理-----供应商管理后台</title>
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link rel="stylesheet" href="../css/public/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<!--<link rel="stylesheet" href="../../css/order/allorder.css" />-->
+
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+		<link rel="stylesheet" href="../css/activity/gotofrozen.css" />
+
+		<script src="../js/plug/YouXin.js"></script>
+	</head>
+
+	<body>
+		<script src="../js/public/head.js"></script>
+		<div class="maskDiv noMoneyPrompt" style="z-index:99999;display:none;">
+			<div class="maskContent">
+				<div class="contentText">
+					您的账户余额不足，无法冻结活动商品贷款
+				</div>
+				<span class="accountRecharge">账户充值</span>
+				<span class="close closeMask" data-for="noMoneyPrompt"></span>
+			</div>
+		</div>
+		<!--提示  vip-->
+		<div class="maskDiv supplyType" style="z-index:99999;display:none;">
+			<div class="maskContent">
+				<img class="closeImg closeMask" src="../img/activity/close.png" data-for="supplyType" alt="" />
+				<div class="maskText">
+					您当前为普通供应商，仅可发布<span style="color: #D84C29;">1次</span>体验活动，且体验商品数量<span style="color: #D84C29;">仅限5份</span>。升级VIP后，发布次数和商品数量无限制。
+				</div>
+				<div class="btn-bar">
+				<span>
+					<a href="../account/upgradevip.html">立即升级</a>
+				</span>
+					<span class="closeSpan closeMask" data-for="supplyType">
+					稍后再说
+				</span>
+				</div>
+			</div>
+		</div>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />活动管理</div>
+			<div class="list active ">
+				<a href="releaseexperienceactivity.html">发布体验活动</a>
+			</div>
+			<div class="list">
+				<a href="experienceactivitylist.html">体验活动列表</a>
+			</div>
+			<div class="list">
+				<a href="reviewexperapplication.html">审核体验申请</a>
+			</div>
+			<div class="list">
+				<a href="#">发布翻宝活动</a>
+			</div>
+			<div class="list">
+				<a href="SpecialActiveApply.html">特价活动报名</a>
+			</div>
+		</div>
+		<div id="part-right">
+			<div id="loaction">当前位置:管理后台>活动管理>发布体验活动</div>
+			<div class="contentBlock container">
+				<div class="addsuccessImg"></div>
+				<div class="mainBlock">
+					<div class="tableWapper">
+						<table>
+							<thead>
+								<tr>
+									<td>商品销售价（元）</td>
+									<td>体验商品数量（份）</td>
+									<td>需要冻结活动商品贷款（元）</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="price"></td>
+									<td class="number"></td>
+									<td class="shopmoney"></td>
+								</tr>
+							</tbody>
+						</table>
+						<span class="alertBlue">您总共需要冻结的总金额（商品单价*体验商品数量）为<span class="num">0.00</span>元。</span>
+						<span class="gotoFrozen">马上冻结</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/activity/GotoFrozenByAdd.js"></script>
+	<script>
+		var activeLi = document.querySelectorAll("#head ul li");
+		activeLi[3].style.background = "#f6ecd1";
+		activeLi[3].getElementsByTagName("a")[0].style.color = "#FBBD00";
+	</script>
+
+</html>

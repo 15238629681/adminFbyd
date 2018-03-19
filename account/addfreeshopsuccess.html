@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>绑定店铺成功-网店管理-账户管理-翻宝云店供应商管理后台</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<script src="../js/product/zui.datatable.min.js"></script>
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+
+		<!--<link rel="stylesheet" href="../../css/public/reset.css" />-->
+
+		<!--<link rel="stylesheet" href="../css/activity/releaseexperienceactivity.css" />-->
+
+		<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+		<link rel="stylesheet" href="../css/account/addshoprechargesuccess.css" />
+	</head>
+
+	<body>
+
+		<script src="../js/public/head.js"></script>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />账户管理</div>
+			<div class="list active">
+				<a href="#" style="color:#fff;">网店管理</a>
+			</div>
+			<div class="list">
+				<a href="#">账号安全</a>
+			</div>
+			<div class="list ">
+				<a href="#">信息管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">资质管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">品牌管理</a>
+			</div>
+			<div class="list ">
+				<a href="upgradevip.html">升级VIP</a>
+			</div>
+			<div class="list ">
+				<a href="#">升级记录</a>
+			</div>
+		</div>
+
+		<div id="part-right">
+			<div id="loaction">当前位置：管理后台>账号管理>网店管理>绑定店铺成功</div>
+			<!--支付信息-->
+			<div class="shopBlockWapper">
+				<div class="freesuccessImg"></div>
+				<!--充值成功-->
+				<div class="successRecharge mainBlock">
+					<div class="contentWapper">
+						您已成功绑定1家网店。
+								<!--<span class="successRechargeNum">1000.00</span>-->
+								<!--元。-->
+						
+						<!--<div class="linkList">
+							您现在可以：
+							<a href="">查看已绑定的网店|</a>
+							<a href="">发布体验活动</a>
+						</div>-->
+					</div>
+				</div>
+				
+				<div class="inputWapper operateBlock">
+					<div class="contentBlock">
+						<span class="bindShop">查看已绑定的网店</span>
+						<span class="relase">
+									发布体验活动
+							</span>
+					</div>
+				</div>
+			</div>
+
+			<!--底部版权-->
+			<!--<div class="footerBlock">
+				杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+			</div>-->
+			<div class="footer">
+
+			</div>
+		</div>
+		<script>
+			document.querySelectorAll("#tap-wrap li")[7].style.background = "#f6ecd1";
+			document.querySelectorAll("#tap-wrap li")[7].querySelector("a").style.color = "#FBBD00";
+			
+			document.querySelector(".bindShop").addEventListener("click",function(){
+				window.location.href="shopmanage.html";
+			})
+			document.querySelector(".relase").addEventListener("click",function(){
+				window.location.href="../activity/releaseexperienceactivity.html";
+			})
+		</script>
+		
+		
+
+	</body>
+
+</html>
+<!--查看远程分支：git branch -r
+拉取远程分支并创建本地分支：git checkout -b 本地分支名x origin/远程分支名y 例如：git checkout -b admin origin/admin
+查看当前分支：git branch
+创建分支：git branch <name> 例如 git branch admin
+切换到某分支：git checkout <name> 例如 git checkout admin
+提交代码到指定分支：git push origin <name> 例如 git push origin <admin>
+分支管理策略：
+	1、切换到指定分支
+	2、拉取该分支最新代码
+	3、把本地代码提交到指定分支
+	
+注：分支代码不影响主支(master)，可以单独删除分支：git branch - d <name>，也可以将分支代码合并到当前分支：git merge <name>-->

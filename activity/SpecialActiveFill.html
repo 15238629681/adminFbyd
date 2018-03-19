@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Access-Control-Allow-Origin" content="Anonymous" />
+    <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+    <title>填写活动产品信息-特价活动报名-活动管理-翻宝云店供应商管理后台</title>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+    <link rel="stylesheet" href="../css/public/reset.css" />
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+    <link rel="stylesheet" href="../css/activity/SpecialActiveFill.css" />
+    <script src="../js/plug/YouXin.js"></script>
+</head>
+<body>
+    <script src="../js/public/head.js"></script>
+    <div class="part-left">
+        <div id="page-titie"><img src="../img/activity/activitylogo.png" />活动管理</div>
+        <div class="list">
+            <a href="releaseexperienceactivity.html">发布体验活动</a>
+        </div>
+        <div class="list ">
+            <a href="experienceactivitylist.html">体验活动列表</a>
+        </div>
+        <div class="list">
+            <a href="reviewexperapplication.html">审核体验申请</a>
+        </div>
+        <div class="list">
+            <a href="#">发布翻宝活动</a>
+        </div>
+        <div class="list active">
+            <a href="SpecialActiveApply.html">特价活动报名</a>
+        </div>
+    </div>
+    <div id="part-right">
+        <div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:999;">
+            <img class="loadingImg" src="../img/public/downrefesh.gif">
+            <span class="loadingFont">加载中...</span>
+        </div>
+        <div id="loaction">当前位置：管理后台>活动管理>特价活动报名>填写活动产品信息</div>
+        <div class="stepImg"></div>
+        <!-- 填写活动产品信息 -->
+        <div class="activityBlock fillActiveInfo">
+            <div class="infoTitle">
+                <span class="selectActiveType">选择活动分类</span>
+                <span class="selectActiveExplain">活动产品优惠力度越大、性价比越高，将推送更多翻宝云店资源位及更多社群，进而影响活动效果</span>
+            </div>
+            <form id="activeLinksID" class="activeLinks">
+                <div class="inputLineBlock goodsLink">
+                    <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>商品链接：</span>
+                    <input class="lineRightInput managername" name="managername" type="text" placeholder="请输入商品链接">
+                </div>
+                <div class="inputLineBlock discountLink">
+                    <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>优惠券链接：</span>
+                    <input class="lineRightInput managername" name="managername" type="text" placeholder="请输入优惠券链接">
+                </div>
+                <div class="getGoodsInfoBtn">获取商品信息</div>
+            </form>
+        </div>
+        <form id="goodsInfoShowID" class="activityBlock goodsInfoShowPic">
+            <!-- 推广长图 -->
+            <div class="spreadLongPicture">
+                <div class="spreadLongPictureTitle">
+                    <span class="title1">推广长图</span><span class="title2">(上传精美推广长图能再社群中获得更多曝光率，长图规格限制750*1000px)</span>
+                </div>
+                <div class="uploadSpreadPicture">
+                    <img class="addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+                    <input type="file" class="uploadSpreadPictureInput" name="spreadLongPicture" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+                </div>
+            </div>
+            <!-- 商品主图 -->
+            <div class="goodsMainPic">
+                <div class="spreadLongPictureTitle">
+                    <span class="title1">商品主图</span><span class="title2">(图片要求：尺寸为800px*800px，大小小于5M)：</span>
+                </div>
+                <div class="uploadGoodsMainPicList">
+                    <div class="addUoloadItem">
+                        <img class="addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+                        <input type="file" class="uploadSpreadPictureInput" name="spreadLongPicture" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+                    </div>
+                    <div class="addUoloadItem">
+                        <img class="addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+                        <input type="file" class="uploadSpreadPictureInput" name="spreadLongPicture" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+                    </div>
+                    <div class="addUoloadItem">
+                        <img class="addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+                        <input type="file" class="uploadSpreadPictureInput" name="spreadLongPicture" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+                    </div>
+                    <div class="addUoloadItem">
+                        <img class="addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+                        <input type="file" class="uploadSpreadPictureInput" name="spreadLongPicture" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+                    </div>
+                    <div class="addUoloadItem">
+                        <img class="addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+                        <input type="file" class="uploadSpreadPictureInput" name="spreadLongPicture" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form id="goodsInfoFontID" class="activityBlock goodsInfoFont">
+            <div class="inputLineBlock goodsTitle">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>商品标题：</span>
+                <input class="lineRightInput goodsTitleInput" name="goodsTitle" type="text" placeholder="请输入商品标题">
+            </div>
+            <div class="inputLineBlock goodsShortTitle">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>商品短标题：</span>
+                <input class="lineRightInput goodsShortTitleInput" name="goodsTitle" type="text" placeholder="请输入商品短标题">
+            </div>
+            <div class="inputLineBlock xiaoBianShuo">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>商品短标题：</span>
+                <textarea class="lineRightInput xiaoBianShuoText" placeholder="简要描述商品卖点增加活动转化率"></textarea>
+            </div>
+            <div class="inputLineBlock originalPrice">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>原价：</span>
+                <input class="lineRightInput originalPriceInput" name="goodsTitle" type="text" placeholder="请输入原价">
+            </div>
+            <div class="inputLineBlock fbActivePrice">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>翻宝活动价：</span>
+                <input class="lineRightInput fbActivePriceInput" name="goodsTitle" type="text" placeholder="请输入翻宝活动价">
+            </div>
+            <div class="inputLineBlock discountCouponJE">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>优惠券金额：</span>
+                <input class="lineRightInput discountCouponJEInput" name="goodsTitle" type="text" placeholder="请输入优惠券金额">
+            </div>
+            <div class="inputLineBlock discountCouponNum">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>优惠券数量：</span>
+                <input class="lineRightInput discountCouponNumInput" name="goodsTitle" type="text" placeholder="请输入优惠券数量">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>已领取数量：</span>
+                <input class="lineRightInput discountCouponNumInput" name="goodsTitle" type="text" placeholder="请输入已领取数量">
+            </div>
+            <div class="inputLineBlock discountCouponTime">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>优惠券开始时间：</span>
+                <input class="lineRightInput discountCouponNumInput" name="goodsTitle" type="text" placeholder="请输入优惠券开始时间">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>优惠券结束时间：</span>
+                <input class="lineRightInput discountCouponNumInput" name="goodsTitle" type="text" placeholder="请输入优惠券结束时间">
+            </div>
+            <div class="inputLineBlock planType noSelectFont">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>计划类型：</span>
+                <span class="planTypeSelectBtn selected">通用计划</span>
+                <span class="planTypeSelectBtn">定向计划</span>
+                <span class="planTypeSelectBtn">鹊桥计划</span>
+                <span class="planTypeSelectBtn">营销计划</span>
+            </div>
+            <div class="inputLineBlock employRate">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>佣金比例：</span>
+                <input class="lineRightInput employRateInput" name="goodsTitle" type="text" placeholder="请输入佣金比例">
+            </div>
+        </form>
+        <form id="activeTimeDescID" class="activeTimeDesc">
+            <div class="inputLineBlock activeTimeLine">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>活动开始时间：</span>
+                <input class="lineRightInput discountCouponNumInput" name="goodsTitle" type="text" placeholder="请输入活动开始时间">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>活动结束时间：</span>
+                <input class="lineRightInput discountCouponNumInput" name="goodsTitle" type="text" placeholder="请输入活动结束时间">
+            </div>
+            <div class="inputLineBlock activeDescTextarea">
+                <span class="lineLeftTitle inputName"><span style="color:red;">*&nbsp;</span>活动留言：</span>
+                <textarea class="lineRightInput activeDescInput" name="goodsTitle" type="text" placeholder="请输入活动留言"></textarea>
+            </div>
+        </form>
+        <div class="activityBlock submitBlock">
+            <span class="submitSpan lastStep">上一步</span>
+            <span class="submitSpan nextStep">下一步</span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var activeLi = document.querySelectorAll("#head ul li");
+    activeLi[3].style.background = "#f6ecd1";
+    activeLi[3].getElementsByTagName("a")[0].style.color = "#FBBD00";
+</script>
+<script src="../js/activity/SpecialActiveFill.js"></script>
+<!--查看远程分支：git branch -r
+拉取远程分支并创建本地分支：git checkout -b 本地分支名x origin/远程分支名y 例如：git checkout -b admin origin/admin
+查看当前分支：git branch
+创建分支：git branch <name> 例如 git branch admin
+切换到某分支：git checkout <name> 例如 git checkout admin
+提交代码到指定分支：git push origin <name> 例如 git push origin <admin>
+分支管理策略：
+	1、切换到指定分支
+	2、拉取该分支最新代码
+	3、把本地代码提交到指定分支
+
+注：分支代码不影响主支(master)，可以单独删除分支：git branch - d <name>，也可以将分支代码合并到当前分支：git merge <name>-->

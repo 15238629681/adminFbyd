@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+        <title>体验活动列表-活动管理-翻宝云店供应商管理后台</title>
+        <!-- ZUI 标准版压缩后的 CSS 文件 -->
+        <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+        <link rel="stylesheet" href="../css/public/reset.css" />
+        <link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+        <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+        <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+        <!-- ZUI Javascript 依赖 jQuery -->
+        <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+        <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+        <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+
+        <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+        <link rel="stylesheet" href="../css/activity/experienceactivitylist.css" />
+        <script src="../js/public/datetimepicker.min.js"></script>
+        <link rel="stylesheet" href="../css/public/pager.css" />
+        <script src="../js/plug/YouXin.js"></script>
+    </head>
+
+    <body>
+        <div class="maskDiv addGoodsMask" style="z-index:9999;display:none;">
+            <div class="maskContent">
+                <img class="closeImg closeMask" src="../img/activity/close.png" data-for="addGoodsMask" alt="" />
+                <div class="addGoodsPromptCls">请输入追加的商品份数</div>
+                <input class="addGoodsInput" type="number" placeholder="">
+                <div class="oprationBtnBar">
+                    <span class="addGoodsRight">添加</span>
+                    <span class="addGoodsCancel closeMask" data-for="addGoodsMask">取消</span>
+                </div>
+            </div>
+        </div>
+        <script src="../js/public/head.js"></script>
+        <div class="part-left">
+            <div id="page-titie"><img src="../img/activity/activitylogo.png" />活动管理</div>
+            <div class="list">
+                <a href="releaseexperienceactivity.html">发布体验活动</a>
+            </div>
+            <div class="list active">
+                <a href="#">体验活动列表</a>
+            </div>
+            <div class="list">
+                <a href="reviewexperapplication.html">审核体验申请</a>
+            </div>
+            <div class="list">
+                <a href="#">发布翻宝活动</a>
+            </div>
+            <div class="list">
+                <a href="SpecialActiveApply.html">特价活动报名</a>
+            </div>
+        </div>
+        <div id="part-right">
+            <div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:999;">
+                <img class="loadingImg" src="../img/public/downrefesh.gif">
+                <span class="loadingFont">加载中...</span>
+            </div>
+            <div class="contentBlock">
+                <div id="loaction">当前位置:管理后台>活动管理>活动体验列表</div>
+                <div class="right-container">
+                    <div class="search-form-panel">
+                        <div class="form-group gooodsNameInput">
+                            <span class="fillTitle form-group-item">商品名称：</span>
+                            <input class="title form-group-item" type="text" />
+                        </div>
+                        <div class="form-group activitySchedule">
+                            <span class="fillTitle form-group-item">活动进度：</span>
+                            <div class="dropdown form-group-item">
+                                <input class="down activity" type="text" id="productStateID" placeholder="   请选择活动进度" readonly="readonly" data-toggle="dropdown">
+                                <ul class="dropdown-menu">
+                                    <li data-id="">
+                                        <a>所有</a>
+                                    </li>
+                                    <li data-id="1">
+                                        <a>待支付</a>
+                                    </li>
+                                    <li data-id="2">
+                                        <a>待审核</a>
+                                    </li>
+                                    <li data-id="6">
+                                        <a>预热中</a>
+                                    </li>
+                                    <li data-id="3">
+                                        <a>进行中</a>
+                                    </li>
+                                    <li data-id="4">
+                                        <a>已结束</a>
+                                    </li>
+                                    <li data-id="7">
+                                        <a>已结算</a>
+                                    </li>
+                                    <li data-id="5">
+                                        <a>未通过</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group beginTimeGroup">
+                            <span class="fillTitle form-group-item">开始时间:</span>
+                            <div class="beginTimePicker form-group-item">
+                                <div class="beginRange input-group date form-datetime">
+                                    <span class="input-group-addon">
+										<span class="icon-calendar"></span>
+									</span>
+                                    <input class="form-control starttime" size="16" type="text" value="" readonly="">
+                                </div>
+                                <span class="sepflag">-</span>
+                                <div class="endRange input-group date form-datetime">
+                                    <span class="input-group-addon">
+										<span class="icon-calendar"></span>
+									</span>
+                                    <input class="form-control endtime" size="16" type="text" value="" readonly="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group blank">
+                            <span class="searchButton">查询</span>
+                        </div>
+                    </div>
+                    <div class="exportExcelBar">
+                        <span class="exportExcelBtn">导出为Excel</span>
+                    </div>
+                    <table class="detailTable table-hover">
+                        <thead>
+                            <tr>
+                                <td>商品名称</td>
+                                <td>开始时间/结束时间</td>
+                                <td>活动进度</td>
+                                <td>申请人数</td>
+                                <td>审核通过人/商品份数</td>
+                                <td>已冻结货款</td>
+                                <td>用户操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">待支付</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">0</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">0/10</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥0.00</span><br/>
+                                    <span class="promptMark">!</span><span>待冻结<span class="needFreezeMoney">990.00</span>元</span>
+                                </td>
+                                <td class="userOperateTd">
+                                    <span class="userOptionCls freezeMoneyOperation">立即冻结保证金</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">待审核</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">0</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">0/10</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥900.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">预热中</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">0</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">0/10</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥900.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                    <span class="userOptionCls addExperienceGoods">追加份数</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">进行中</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">256</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">0/10</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥900.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                    <span class="userOptionCls addExperienceGoods">追加份数</span>
+                                    <span class="userOptionCls auditUser">审核用户</span>
+                                    <span class="userOptionCls checkExperienceReport">查看体验报告</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">进行中</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">256</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">8/15</span><span class="alreadyAddPrompt">(其中已追加<span class="alreadyAddNum">5</span>份)</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥1350.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                    <span class="userOptionCls addExperienceGoods">追加份数</span>
+                                    <span class="userOptionCls auditUser">审核用户</span>
+                                    <span class="userOptionCls checkExperienceReport">查看体验报告</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">已结束</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">332</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">15/15</span><span class="alreadyAddPrompt">(其中已追加<span class="alreadyAddNum">5</span>份)</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥1350.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                    <span class="userOptionCls lookUser">查看用户</span>
+                                    <span class="userOptionCls checkExperienceReport">查看体验报告</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">已结束</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">332</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">15/15</span><span class="alreadyAddPrompt">(其中已追加<span class="alreadyAddNum">5</span>份)</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥1350.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                    <span class="userOptionCls lookUser">查看用户</span>
+                                    <span class="userOptionCls checkExperienceReport">查看体验报告</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">已结算</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">0</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">15/15</span><span class="alreadyAddPrompt">(其中已追加<span class="alreadyAddNum">5</span>份)</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥1350.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="commodityNameTd">
+                                    <img class="commodityImage" src="../img/activity/tb.gif">
+                                    <span class="commodityName">Apple MacBook Air 13.3英寸笔记本电脑I5 8G 128G MQD32CH/A银色</span>
+                                </td>
+                                <td>
+                                    <span class="beginTimeOne">2017-07-14 10:00:00</span><br/>
+                                    - <br/>
+                                    <span class="beginTimeTwo">2017-07-19 10:00:00</span>
+                                </td>
+                                <td>
+                                    <span class="activeSchedule">未通过</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNums">0</span>
+                                </td>
+                                <td>
+                                    <span class="applyForNumsDetail">0/10</span>
+                                </td>
+                                <td>
+                                    <span class="freezeMoney">￥0.00</span>
+                                </td>
+                                <td class="userOperateTd">
+                                </td>
+                            </tr>
+                            -->
+                        </tbody>
+                    </table>
+                    <div class="pageWapper">
+                        <div style="margin:0 auto;text-align:center;">
+                            <ul class="pagination" id="page2">
+                            </ul>
+                            <div class="pageJump">
+                                <span>跳转到</span>
+                                <input type="number" class="pageInput" style="width:50px;" />
+                                <span>页</span>
+                                <span type="button" class="page-search-btn" id="searchPageBtnID">确定</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var activeLi=document.querySelectorAll("#head ul li");
+            activeLi[3].style.background="#f6ecd1";
+            activeLi[3].getElementsByTagName("a")[0].style.color="#FBBD00";
+        </script>
+        <script src="../js/activity/experienceactivitylist.js"></script>
+        <script src="../js/public/pager.js"></script>
+    </body>
+</html>

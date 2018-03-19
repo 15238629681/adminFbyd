@@ -1,0 +1,208 @@
+.contentBlock {
+    width: 100%;
+    padding: 30px;
+}
+/**** TabPanel头部选项卡 ****/
+.tabPanelTitle {
+    width: 100%;
+    height: 35px;
+    display: block;
+    border-left: 1px solid #D3D3D3;
+}
+.tabPanelTitle li {
+    float: left;
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border: 1px solid #D3D3D3;
+    border-left: none;
+    cursor: pointer;
+}
+/*空白填充*/
+.tabPanelTitle .spaceFillCell {
+    width: calc(100% - 300px);
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #D3D3D3;
+    cursor: default;
+}
+.tabPanelTitle .titleActive {
+    border-bottom: none;
+    background-color: #FFFFFF;
+}
+/*TabPanel选项卡内容部分*/
+.tabPanelBody {
+    width: 100%;
+    display: block;
+}
+.tabPanelBody li {
+    width: 100%;
+    height: 470px;
+    background-color: #FFFFFF;
+    border: 1px solid #D3D3D3;
+    border-top: none;
+}
+/*****确认提交*****/
+.nextBar {
+    width: 100%;
+    height: 60px;
+    margin-top: 15px;
+    background-color: #FFFFFF;
+    position: relative;
+}
+.nextBar .nextButton {
+    width: 150px;
+    height: 36px;
+    background-color: #FF3A46;
+    text-align: center;
+    line-height: 36px;
+    color: #FFFFFF;
+    border-radius: 5px;
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    margin-left: -75px;
+    top: 12px;
+}
+.nextBar .nextButton:hover {
+    background-color: #EA3B43;
+}
+
+/********** 支付宝支付 **********/
+.applyTransfer,.WXTransfer,.bankTransfer {
+    padding: 30px 0px 30px 25px;
+}
+/* 第一步 */
+.firstStep {
+    width: 100%;
+    height: 185px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.firstStep .firstStepLeft,.firstStep .firstStepRight {
+    float: left;
+}
+/* 左侧 */
+.firstStep .firstStepLeft .promptTop {
+    padding-top: 20px;
+    line-height: 35px;
+    font-size: 14px;
+}
+.firstStep .firstStepLeft .promptTop .firstTitle {
+    font-weight: 600;
+}
+.firstStep .firstStepLeft .promptBottom {
+    margin-top: 15px;
+    color: #FF3A46;
+}
+.firstStep .firstStepLeft .promptBottom .prompt {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    background-color: #389BFF;
+    border-radius: 8px;
+    color: #FFFFFF;
+    margin: 0 5px;
+    cursor: default;
+}
+/* 右侧 */
+.firstStepRight {
+    width: 152px;
+    height: 158px;
+    margin-left: 45px;
+}
+/* 第二步 */
+/**头**/
+.secondStep dt {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 30px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+/**分体**/
+.secondStep dd {
+    width: 100%;
+    height: 35px;
+    display: block;
+}
+.secondStep .inputPart {
+    line-height: 35px;
+    font-size: 14px;
+}
+.secondStep .inputPart input {
+    width: 150px;
+    height: 30px;
+    text-indent: 1em;
+    border: 1px solid #C0C0C0;
+    margin-right: 8px;
+}
+.bankAccountType .rowlineRight input {
+    background: url(../../img/order/arrowicon.png) right center no-repeat;
+}
+.secondStep .inputPart .orderNumberInput {
+    width: 300px;
+}
+.secondStep .inputPart .bankAccountInput {
+    width: 190px;
+}
+.secondStep .inputPart .errorPrompt {
+    display: none;
+}
+.secondStep .inputPart .errorPrompt .font {
+    color: #FF3B47;
+}
+.secondStep .inputPart .errorPromptSign {
+    width: 23px;
+    height: 23px;
+    background-color: #FF3B47;
+    text-align: center;
+    line-height: 23px;
+    color: #FFFFFF;
+    font-size: 23px;
+    vertical-align: top;
+    border-radius: 12px;
+    margin: 6px 12px;
+}
+/*?号提示*/
+.yellowAlert {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: url(../../img/finance/yellowalert.png) center center no-repeat;
+    vertical-align: top;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.questionTooltip {
+    top: 238px!important;
+    left: 469.141px!important;
+}
+.questionTooltip .tooltip-arrow {
+    border: none;
+}
+.questionTooltip .tooltip-inner {
+    max-width: 319px;
+    background-color: transparent;
+}
+/*******微信转账*******/
+
+.testMessageCls {
+}
+
+
+/********* 银行转账 **********/
+/*开户银行*/
+.bankAccountType .dropdown-menu {
+}
+.bankAccountType .dropdown-menu li {
+    height: 26px;
+    border: none;
+}
+
+
+
+
+
+

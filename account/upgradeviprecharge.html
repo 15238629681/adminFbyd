@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>升级VIP（账户管理）-杭州牛啦网络科技有限公司</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<script src="../js/product/zui.datatable.min.js"></script>
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+
+		<!--<link rel="stylesheet" href="../../css/public/reset.css" />-->
+
+		<!--<link rel="stylesheet" href="../css/activity/releaseexperienceactivity.css" />-->
+
+		<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+		<link rel="stylesheet" href="../css/account/upgradeviprecharge.css" />
+	</head>
+
+	<body>
+
+		<script src="../js/public/head.js"></script>
+		<!--<div class="maskDiv">
+			<div class="maskContent">
+				<div class="contentText">
+					您的账户余额不足，请通过第三方支付平台支付（支付宝、微信支付）
+				</div>
+				<span class="sureBtn">确认</span>
+				<span class="cancelBtn">取消</span>
+			</div>
+		</div>-->
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />账户管理</div>
+			<div class="list ">
+				<a href="shopmanage.html">网店管理</a>
+			</div>
+			<div class="list">
+				<a href="#">账号安全</a>
+			</div>
+			<div class="list ">
+				<a href="#">信息管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">资质管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">品牌管理</a>
+			</div>
+			<div class="list active">
+				<a href="upgradevip.html" style="color:#fff;">升级VIP</a>
+			</div>
+			<div class="list ">
+				<a href="UpgradeRecord.html">升级记录</a>
+			</div>
+		</div>
+
+		<div id="part-right">
+			<div id="loaction">当前位置：管理后台>账号管理>网店管理</div>
+			<!--支付信息-->
+			<div class="shopBlockWapper">
+				<!--<div class="successImg"></div>-->
+				<!--支付方式  选择-->
+				<div class="payWayWapper commonStyle">
+					<div class="payText">付款方式:</div>
+					<div class="payWayRadio balanceDiv">
+						<input type="radio" name="radioway" id="inlinepay" checked="checked" />
+						<label for="inlinepay" data-id="2">
+							<img src="../img/account/accountbalance.png" alt="" />
+						</label>
+					</div>
+					<div class="payWayRadio zhbDiv">
+						<input type="radio" name="radioway" id="zhb" />
+						<label for="zhb" data-id="0">
+							<img src="../img/finance/zhb.png" alt="" />
+						</label>
+					</div>
+					<div class="payWayRadio weiChartDiv">
+						<input type="radio" name="radioway" id="wechart" />
+						<label for="wechart" data-id="1">
+							<img src="../img/finance/wechart.png" alt="" />
+						</label>
+					</div>
+				</div>
+
+				<!--余额支付   支付信息填写-->
+				<div class="mainBlock balanceRecharge">
+					<div class="inputWapper balanceContent">
+						<span class="inputName">可提现金额：</span>
+						<span class="withDrawNum moneyNum">***</span>元
+						<br />
+						<span class="inputName">支付金额：</span>
+						<span class="payNum moneyNum">798.00</span>元
+						<!--<input type="number" class="payNumInput" />元-->
+						<!--<span class="alertWrong">请填写金额！</span>-->
+					</div>
+					<div class="inputWapper">
+						<h1>请使用登陆手机验证
+							<span class="userPhoneNum">158***1452</span></h1>
+					</div>
+					<div class="inputWapper getMessageCode">
+						<input type="text" placeholder="" />
+						<span class="getCodeSpan">获取短信验证码</span>
+						<span class="alertWrong">请输入验证码！</span>
+						<!--<span>重新获取（59s）</span>-->
+					</div>
+				</div>
+				<!--余额支付-->
+				<div class="inputWapper menuWapper">
+					<!--<span class="lastStap">上一步</span>-->
+					<!--<span class="sureToRecharge">确认支付</span>-->
+					<div class="contentBlock">
+						<span class="lastStap">上一步</span>
+						<span class="sureToRecharge">
+									确认支付
+							</span>
+					</div>
+				</div>
+
+				<!--支付宝支付-->
+				<div class="mainBlock zfbContent">
+					<div class="showText">通过支付宝支付798.00元</div>
+					<p>系统转账为实时到账</p>
+					<p>请勿在转账备注中填写任何文字，切勿出现敏感词，否则视为违规，平台将不提供任何服务。</p>
+				</div>
+				<!--支付宝-->
+				<div class="operateBlock">
+					<div class="contentBlock">
+						<span class="lastStap">上一步</span>
+						<span class="nextStap">
+						<a href="https://app.fanbaoyundian.com/apiapiextend/apib/Nativenotify/code?uid=21668&token=OWYxNzFmNDM5MTFlMGUwNjkyMjEyNzk5&money=798.00&body=2" style="color:#333;" target="_blank">去支付</a>
+					</span>
+					</div>
+
+				</div>
+
+
+			</div>
+
+			<!--底部版权-->
+			<!--<div class="footerBlock">
+				杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+			</div>-->
+			<div class="footer">
+
+			</div>
+		</div>
+		<script>
+			document.querySelectorAll("#tap-wrap li")[7].style.background = "#f6ecd1";
+			document.querySelectorAll("#tap-wrap li")[7].querySelector("a").style.color = "#FBBD00";
+		</script>
+		<script src="../js/account/upgradeviprecharge.js"></script>
+		<!--<script>
+			var activeLi=document.querySelectorAll("#head ul li");
+			activeLi[3].style.background="#f6ecd1";
+			activeLi[3].getElementsByTagName("a")[0].style.color="#FBBD00";
+		</script>
+		<script src="../js/activity/editor.js"></script>
+		-->
+
+	</body>
+
+</html>
+<!--查看远程分支：git branch -r
+拉取远程分支并创建本地分支：git checkout -b 本地分支名x origin/远程分支名y 例如：git checkout -b admin origin/admin
+查看当前分支：git branch
+创建分支：git branch <name> 例如 git branch admin
+切换到某分支：git checkout <name> 例如 git checkout admin
+提交代码到指定分支：git push origin <name> 例如 git push origin <admin>
+分支管理策略：
+	1、切换到指定分支
+	2、拉取该分支最新代码
+	3、把本地代码提交到指定分支
+	
+注：分支代码不影响主支(master)，可以单独删除分支：git branch - d <name>，也可以将分支代码合并到当前分支：git merge <name>-->

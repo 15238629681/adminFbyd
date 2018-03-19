@@ -1,0 +1,261 @@
+/****** 遮罩层 *****/
+.maskDiv {
+    position:absolute;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index:100;
+    display: none;
+}
+.maskContent {
+    width:300px;
+    height:160px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-top:-80px;
+    margin-left:-150px;
+    background:#fff;
+    border-radius: 8px;
+    padding:25px;
+    position: relative;
+}
+.addGoodsMask .maskContent .closeImg {
+    position:absolute;
+    right:-24px;
+    top:-24px;
+    cursor: pointer;
+}
+.addGoodsPromptCls {
+    font-size: 16px;
+    font-weight: 500;
+    color: #4A4A4A;
+    margin-bottom: 5px;
+}
+.addGoodsMask .maskContent .addGoodsInput {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #D1D1D1;
+    margin: 10px 0px;
+    padding-left: 7px;
+}
+.oprationBtnBar .addGoodsRight,.oprationBtnBar .addGoodsCancel {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #FF3A46;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12px;
+    margin-left: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.oprationBtnBar .addGoodsRight {
+    float: left;
+    margin-left: 12px;
+}
+.oprationBtnBar .addGoodsCancel {
+    float: right;
+    margin-right: 12px;
+}
+/****** 主体内容 ******/
+.contentBlock {
+    width: 100%;
+    height: calc( 100% - 100px );
+}
+.right-container {
+    width: 100%;
+    padding: 0 30px;
+}
+/**** 搜索栏 ****/
+.search-form-panel {
+    width: 100%;
+    background-color: #FFFFFF;
+}
+.search-form-panel .form-group {
+    display: inline-block;
+    padding: 12px;
+    margin: 0;
+}
+.form-group .form-group-item {
+    float: left;
+}
+.form-group .fillTitle {
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #C0C0C0;
+    border-right: none;
+    background: #F6F6F6;
+}
+.form-group input {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #C0C0C0;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.activitySchedule .activity {
+    background: url(../../img/order/arrowicon.png) right center no-repeat;
+}
+/******时间区间选择器******/
+.search-form-panel .beginTimeGroup {
+    margin-right: 170px;
+}
+.beginTimePicker {
+    width: 371px;
+    height: 30px;
+    border: 1px solid #C0C0C0;
+}
+.beginTimePicker .form-datetime {
+    text-align: center;
+    width: 48%;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    border: none;
+}
+.beginTimePicker .input-group-addon {
+    padding-top: 0;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    border: none;
+    background: #fff;
+    color: #999;
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+}
+.beginTimePicker .sepflag {
+    float: left;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+}
+.beginTimePicker .form-datetime input {
+    width: 80%;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    border: none;
+    background: #fff;
+    margin-left: 6px;
+}
+.form-group .searchButton {
+    width: 90px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+    background-color: #FF3A46;
+    color: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.form-group .searchButton:hover {
+    background-color: #D8343B;
+}
+/********导出Excel栏*******/
+.exportExcelBar {
+    width: 100%;
+    height: 36px;
+    position: relative;
+}
+.exportExcelBar .exportExcelBtn {
+    display: inline-block;
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #f9d462;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+/********表格区域********/
+.detailTable {
+    border: 1px solid #C0C0C0;
+    width: 100%;
+}
+/*头部*/
+.detailTable thead {
+    background-color: #eee;
+}
+.detailTable thead td {
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #C0C0C0;
+    text-align: center;
+}
+/*表格主体区*/
+.detailTable tbody {
+    background-color: #FFFFFF;
+}
+.detailTable tbody td {
+    border: 1px solid #C0C0C0;
+    height: 40px;
+    text-align: center;
+    padding: 5px 0px;
+}
+/*商品名称*/
+.detailTable tbody .commodityNameTd {
+    width: 550px;
+    padding-left: 7px;
+    text-align: left;
+}
+.detailTable .commodityNameTd .commodityImage {
+    width: 60px;
+    margin-right: 5px;
+}
+/******提示标志******/
+.promptMark {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    background-color: #389BFF;
+    border-radius: 8px;
+    color: #FFFFFF;
+    margin: 0 5px;
+    cursor: default;
+}
+/*用户操作的颜色样式*/
+.userOptionCls {
+    color: #FCC82B;
+    cursor: pointer;
+    margin-right: 5px;
+}
+/*追加提示*/
+.alreadyAddPrompt {
+    color: #FF3F4B;
+}
+/******分页工具栏*******/
+.pageWapper {
+    display: none;
+}
+.pageWapper .page-search-btn {
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 30px;
+    background-color: #FBBD00;
+    color: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.pageWapper .page-search-btn:hover {
+    background-color: #F0B400;
+}
+

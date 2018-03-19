@@ -1,0 +1,48 @@
+body {
+    background:#F6F6F6;
+    min-width:1300px;
+}
+.part-left {
+    height:calc(100% - 68px);
+    background:#fff;
+}
+.contentBlock {
+    margin:0 30px;
+    height:600px;
+    background:#fff;
+}
+
+/*选择支付方式*/
+.contentDetail{
+    width:100%;
+    padding-top:110px;
+}
+.rechargeWapper{
+    width: 767px;
+    margin:0 auto;
+}
+.rechargeWapper img:last-child{
+    float:right;
+}
+.rechargeWapper img{
+    width:300px;
+    height:160px;
+}
+.sureBtn{
+    width:200px;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    color:#fff;
+    border-radius: 4px;
+    background:#FF3A46;
+    margin:190px auto;
+    cursor: pointer;
+    font-size:16px;
+}
+
+.commonStyle{
+    margin-bottom:2px;
+    padding:30px;
+    background:#fff;
+}

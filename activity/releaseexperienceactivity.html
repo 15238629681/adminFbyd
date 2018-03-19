@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Access-Control-Allow-Origin" content="Anonymous" />
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>发布体验活动-活动管理-翻宝云店供应商管理后台</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<script src="../js/product/zui.datatable.min.js"></script>
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+
+		<!--<link rel="stylesheet" href="../../css/public/reset.css" />-->
+		<link rel="stylesheet" href="../css/activity/releaseexperienceactivity.css" />
+
+		<link href="../css/activity/editor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+		<!--<script type="text/javascript" src="../../js/activity/editor/third-party/jquery.min.js"></script>-->
+		<script type="text/javascript" src="../js/activity/editor/third-party/template.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../js/activity/editor/umeditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../js/activity/editor/umeditor.min.js"></script>
+		<script type="text/javascript" src="../js/activity/editor/lang/zh-cn/zh-cn.js"></script>
+
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>
+		<script src="../js/plug/YouXin.js"></script>
+	</head>
+
+	<body>
+	<!--没有店铺提示-->
+	<div class="maskDiv noAddShopMask" style="display:block;z-index:9999;display: none;">
+		<div class="maskContent">
+			<img class="closeImg" src="../img/activity/close.png" alt="" />
+			<div class="maskText">
+				您当前还没有绑定店铺，<br/>请绑定店铺后再发布活动！
+			</div>
+			<div class="btn-bar">
+				<span>
+					<a href="../account/shopmanage.html">绑定店铺</a>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<!--提示  vip-->
+	<div class="maskDiv supplyType" style="display:block;z-index:9999;display: none;">
+		<div class="maskContent">
+			<img class="closeImg" src="../img/activity/close.png" data-for="supplyType" alt="" />
+			<div class="maskText">
+				<span>您当前为普通供应商，仅可发布<span style="color: #D84C29;">1次</span>体验活动，且体验商品数量<span style="color: #D84C29;">仅限5份</span>。升级VIP后，发布次数和商品数量无限制。</span>
+			</div>
+			<div class="btn-bar">
+				<span>
+					<a href="../account/upgradevip.html">立即升级</a>
+				</span>
+				<span class="closeSpan" data-for="supplyType">
+					稍后再说
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/public/head.js"></script>
+	<div class="part-left">
+		<div id="page-titie"><img src="../img/activity/activitylogo.png" />活动管理</div>
+		<div class="list active">
+			<a href="#">发布体验活动</a>
+		</div>
+		<div class="list ">
+			<a href="experienceactivitylist.html">体验活动列表</a>
+		</div>
+		<div class="list">
+			<a href="reviewexperapplication.html">审核体验申请</a>
+		</div>
+		<div class="list">
+			<a href="#">发布翻宝活动</a>
+		</div>
+		<div class="list">
+			<a href="SpecialActiveApply.html">特价活动报名</a>
+		</div>
+	</div>
+	<div id="part-right">
+		<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:999;">
+			<img class="loadingImg" src="../img/public/downrefesh.gif">
+			<span class="loadingFont">加载中...</span>
+		</div>
+		<div id="loaction">当前位置：管理后台>活动管理>发布体验活动</div>
+		<div class="steshouyepImg"></div>
+		<!--填写活动信息-->
+		<div class="activityBlock fillActivityInfo">
+			<div class="fillTypeName">填写活动信息</div>
+			<div class="fillBlock">
+				<!--网店名称-->
+				<div class="fillWapper shopName">
+					<div class=" goodsSource" style="display:inline-block;">
+						<div class="form-group clean">
+							<span class="fillTitle" style="float:left;"><span style="color:red;">*&nbsp;</span>网店名：</span>
+							<div class="dropdown">
+								<input type="text" id="shopPlatform" placeholder="请选择网店平台" readonly="readonly" data-toggle="dropdown" class="down experienceform-froms" name="froms">
+								<ul class="dropdown-menu dropdown-menu-shop">
+									<li>
+										<a href="#" class="shopType" data-value="1">淘宝</a>
+									</li>
+									<li>
+										<a href="#" class="shopType" data-value="3">天猫</a>
+									</li>
+								</ul>
+							</div>
+							<!--请选择网店名称-->
+							<div class="dropdown shopNameDeatil">
+								<input type="text" placeholder="请选择网店名称" readonly="readonly" data-toggle="dropdown" class="down shopid experienceform-shopid" name="shopid">
+								<ul class="dropdown-menu">
+								</ul>
+							</div>
+							<a href="../account/shopmanage.html" style="color:#FCCB39;margin-left: 5px;">绑定网店</a>
+							<span class="warningText shopNameText experienceform-froms experienceform-shopid">请选择网店名</span>
+						</div>
+					</div>
+				</div>
+				<!--体验活动邮费-->
+				<div class="fillWapper activityPostage">
+					<div class="form-group clean">
+						<!--<label>商品类型：</label>-->
+						<span class="fillTitle" style="float:left;"><span style="color: red;">*&nbsp;</span>邮费：</span>
+						<div class="dropdown">
+							<input type="text" placeholder="请选择商品邮费" readonly="readonly" data-toggle="dropdown" class="down postage experienceform-postage" name='postage'>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#" data-value="0">全国包邮</a>
+								</li>
+								<li>
+									<a href="#" data-value="7">7元</a>
+								</li>
+							</ul>
+						</div>
+						<span class="warningText postageText experienceform-postage">请输入体验活动邮费！</span>
+					</div>
+				</div>
+				<!--体验活动时间-->
+				<div class="fillWapper activityBeginTime">
+					<div class="form-group clean activityTimeWapper">
+						<span class="fillTitle" style="float:left;"><span style="color: red;">*&nbsp;</span>开始时间：</span>
+						<div class="input-group date form-datetime" data-date-format="dd MM yyyy - HH:ii p">
+							<span class="input-group-addon"><span class="icon-calendar"></span></span>
+							<input class="form-control starttime experienceform-starttime" size="16" type="text" value="" readonly="" name="starttime">
+						</div>
+						<span class="warningText starttimeText experienceform-starttime">请输入体验活动时间！</span>
+					</div>
+				</div>
+
+				<!--体验活动时长-->
+				<div class="fillWapper activityTime">
+					<div class="form-group clean">
+						<!--<label>商品类型：</label>-->
+						<span class="fillTitle" style="float:left;"><span style="color: red;">*&nbsp;</span>活动时长：</span>
+						<div class="dropdown">
+							<input class="down longtime experienceform-longtime" type="text" placeholder="请选择活动时长" readonly="readonly" data-toggle="dropdown" name="longtime">
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#" data-value="3">3天</a>
+								</li>
+								<li>
+									<a href="#" data-value="4">4天</a>
+								</li>
+								<li>
+									<a href="#" data-value="5">5天</a>
+								</li>
+								<li>
+									<a href="#" data-value="6">6天</a>
+								</li>
+								<li>
+									<a href="#" data-value="7">7天</a>
+								</li>
+								<li>
+									<a href="#" data-value="8">8天</a>
+								</li>
+								<li>
+									<a href="#" data-value="9">9天</a>
+								</li>
+								<li>
+									<a href="#" data-value="10">10天</a>
+								</li>
+								<li>
+									<a href="#" data-value="11">11天</a>
+								</li>
+								<li>
+									<a href="#" data-value="12">12天</a>
+								</li>
+								<li>
+									<a href="#" data-value="13">13天</a>
+								</li>
+								<li>
+									<a href="#" data-value="14">14天</a>
+								</li>
+								<li>
+									<a href="#" data-value="15">15天</a>
+								</li>
+								<li>
+									<a href="#" data-value="16">16天</a>
+								</li>
+								<li>
+									<a href="#" data-value="17">17天</a>
+								</li>
+								<li>
+									<a href="#" data-value="18">18天</a>
+								</li>
+								<li>
+									<a href="#" data-value="19">19天</a>
+								</li>
+								<li>
+									<a href="#" data-value="20">20天</a>
+								</li>
+								<li>
+									<a href="#" data-value="21">21天</a>
+								</li>
+								<li>
+									<a href="#" data-value="22">22天</a>
+								</li>
+								<li>
+									<a href="#" data-value="23">23天</a>
+								</li>
+								<li>
+									<a href="#" data-value="24">24天</a>
+								</li>
+								<li>
+									<a href="#" data-value="25">25天</a>
+								</li>
+								<li>
+									<a href="#" data-value="26">26天</a>
+								</li>
+								<li>
+									<a href="#" data-value="27">27天</a>
+								</li>
+								<li>
+									<a href="#" data-value="28">28天</a>
+								</li>
+								<li>
+									<a href="#" data-value="29">29天</a>
+								</li>
+								<li>
+									<a href="#" data-value="30">30天</a>
+								</li>
+							</ul>
+						</div>
+						<span class="warningText longtimeText experienceform-longtime">请输入体验活动时长！</span>
+					</div>
+
+				</div>
+
+				<!--用户获得体验资格后下单时长-->
+				<div class="fillWapper placeOrderTime">
+					<div class="form-group clean">
+						<!--<label>商品类型：</label>-->
+						<span class="fillTitleLong" style="float:left;"><span style="color:red;">*&nbsp;</span>用户下单时长：</span>
+						<div class="dropdown">
+							<input type="text" class="down beforeordertime experienceform-beforeordertime" placeholder="请选择下单时长" readonly="readonly" data-toggle="dropdown" name="beforeordertime">
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#" data-value="12">12小时</a>
+								</li>
+								<li>
+									<a href="#" data-value="24">24小时</a>
+								</li>
+								<li>
+									<a href="#" data-value="48">48小时</a>
+								</li>
+								<li>
+									<a href="#" data-value="72">72小时</a>
+								</li>
+							</ul>
+						</div>
+						<span style="color:#CBCBCB;"><span style="display: inline-block;width:16px;height:16px;text-align: center;background-color:#389BFF;border-radius:8px;color: #FFFFFF;margin:0 5px;">!</span>体验者在获得体验资格后,需要此时长内下单,否则供应商可将该体验者的体验资格释放。</span>
+						<span class="warningText beforeordertimeText experienceform-beforeordertime">请输入体验活动时长！</span>
+					</div>
+				</div>
+				<div class="fillWapper">
+					<div class="form-group clean">
+						<span class="fillTitleLong" style="float:left;"><span style="color:red;">*&nbsp;</span>店长QQ：</span>
+						<input type="text" class="qq experienceform-qq" name="qq" />
+						<span style="color:#CBCBCB;"><span style="display: inline-block;width:16px;height:16px;text-align: center;background-color:#389BFF;border-radius:8px;color: #FFFFFF;margin:0 5px;">!</span>用于平台联系沟通：及供体验者做活动咨询,将展示给获得体验资格的用户。</span>
+						<span class="warningText shopNameText experienceform-qq">请填写店长QQ!</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--活动商品信息-->
+		<div class="activityBlock fillActivityInfo">
+			<div class="fillTypeName">活动商品信息</div>
+			<div class="fillBlock">
+				<!--商品体验标题-->
+				<div class="fillWapper">
+					<span class="fillTitle "><span style="color:red;">*&nbsp;</span>商品体验标题：</span>
+					<input type="text" class="inputBlockLong wordRangePrompt title experienceform-title" maxlength="30" name="title" />
+					<!--<input onkeyup="wordStatic(this ,60);" type="text" class="inputBlockLong title" maxlength="60" />-->
+
+					<span class="limitNumFlag titleLimit">0/30字符</span>
+					<span class="warningText titleText experienceform-title">请输入商品体验标题！</span>
+				</div>
+				<!--商品体验短标题-->
+				<div class="fillWapper">
+					<span class="fillTitle"><span style="color:red;">*&nbsp;</span>商品体验短标题：</span>
+					<input type="text" class="inputBlockLong wordRangePrompt shorttitle experienceform-shorttitle" name="shorttitle" maxlength="12" />
+					<span class="limitNumFlag shorttitleLimit">0/12字符</span>
+					<span class="warningText shorttitleText experienceform-shorttitle">请输入商品体验短标题！</span>
+				</div>
+				<!--卖点描述-->
+				<div class="fillWapper goodsdescription">
+					<span class="fillTitle"><span style="color:red;">*&nbsp;</span>卖点描述：</span>
+					<textarea type="text " class="inputBlockLong wordRangePrompt saleintroduce experienceform-saleintroduce" maxlength="70" name="saleintroduce"></textarea>
+					<span class="limitNumFlag saleintroduceLimit">0/70字符</span>
+					<span class="warningText saleintroduceText experienceform-saleintroduce">请输入卖点描述！</span>
+				</div>
+				<!--商品售价-->
+				<div class="fillWapper goodsPrice">
+					<span class="fillTitle"><span style="color:red;">*&nbsp;</span>商品销售价：</span>
+					<input type="number" class="price experienceform-price" name="price" style="" min=0>
+					<span class="limitNumFlag ">元</span>
+					<span class="warningText priceText experienceform-price">请输入商品售价！</span>
+				</div>
+				<!--体验商品分类-->
+				<div class="fillWapper goodsCategory">
+					<!--<span class="fillTitle">体验商品分类：</span>-->
+					<div class="form-group clean">
+						<!--<label>商品类型：</label>-->
+						<span class="fillTitle" style="float:left;"><span style="color:red;">*&nbsp;</span>体验商品分类：</span>
+						<div class="dropdown">
+							<input type="text" class="down category experienceform-category" placeholder="请选择分类" readonly="readonly" name="category" data-toggle="dropdown">
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#" data-value="1">女装</a>
+								</li>
+								<li>
+									<a href="#" data-value="2">男装</a>
+								</li>
+								<li>
+									<a href="#" data-value="3">内衣</a>
+								</li>
+								<li>
+									<a href="#" data-value="4">母婴</a>
+								</li>
+								<li>
+									<a href="#" data-value="5">包包</a>
+								</li>
+								<li>
+									<a href="#" data-value="7">居家</a>
+								</li>
+								<li>
+									<a href="#" data-value="8">鞋品</a>
+								</li>
+								<li>
+									<a href="#" data-value="9">美食</a>
+								</li>
+								<li>
+									<a href="#" data-value="10">文体</a>
+								</li>
+								<li>
+									<a href="#" data-value="11">家电</a>
+								</li>
+								<li>
+									<a href="#" data-value="12">其他</a>
+								</li>
+								<li>
+									<a href="#" data-value="13">配饰</a>
+								</li>
+								<li>
+									<a href="#" data-value="14">数码</a>
+								</li>
+								<li>
+									<a href="#" data-value="341">美妆</a>
+								</li>
+							</ul>
+						</div>
+						<span class="warningText categoryText experienceform-category">请输入体验商品分类！</span>
+					</div>
+
+				</div>
+				<!--体验商品数量-->
+				<div class="fillWapper normalInput">
+					<span class="fillTitle"><span style="color:red;">*&nbsp;</span>体验商品数量：</span>
+					<input type="number" class="numbers experienceform-numbers" name="numbers" />
+					<span class="warningText numbersText experienceform-numbers">请输入体验商品数量！</span>
+					<span class="alertTextNormalSupply">普通供应商数量仅限5份，<a href="../account/upgradevip.html">立即升级VIP</a></span>
+				</div>
+				<!--下单地址-->
+				<div class="fillWapper">
+					<span class="fillTitle"><span style="color:red;">*&nbsp;</span>下单地址：</span>
+					<!--<span class="fillTitle">商品体验标题：</span>-->
+					<input type="url" class="inputBlockLong goodsUrl experienceform-goodsurl" name="goodsurl" />
+					<span class="warningText goodsUrlText experienceform-goodsurl">请输入下单地址！</span>
+				</div>
+				<!--商品规格-->
+				<div class="fillWapper">
+					<span class="fillTitle"><span style="color:red;">*&nbsp;</span>商品规格：</span>
+					<input type="url" class="inputSku experienceform-sku" name="sku" />
+					<span style="color:#CBCBCB;"><span style="display: inline-block;width:16px;height:16px;text-align: center;background-color:#389BFF;border-radius:8px;color: #FFFFFF;margin:0 5px;">!</span>请简要描述参加体验活动的商品SKU，所填内容将展示给所有用户。</span>
+					<span class="warningText goodsUrlText experienceform-sku">请输入商品规格！</span>
+				</div>
+				<div class="fillWapper normalInput">
+					<span class="fillTitle"><span style="color:red;">*&nbsp;</span>体验暗号：</span>
+					<input type="text" class="code experienceform-code" readonly="readonly" id="cipherCode" name="code" />
+					<span class="copyBtn">复制验证码</span>
+					<span style="color:#CBCBCB;"><span style="display: inline-block;width:16px;height:16px;text-align: center;background-color:#389BFF;border-radius:8px;color: #FFFFFF;margin:0 5px;">!</span>请将此串暗号加入到体验商品的详情页底部，用于体验者下单购买商品时的确认标识.</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="allSerivice">
+			<!-- 活动提示 -->
+			<div class="activityBlock activityInstruction freeService">
+				<div class="fillTypeName">活动提示<span style="color: #B6B6B6">（勾选项将在APP前台展示，所有获得体验资格的用户可见。）</span></div>
+				<div class="activityInstructionWapper">
+					<!--<div class="radio"><label><input type="checkbox" name="service" data-id="7" value="1,4,8,11">系统排除同旺旺名或同ip的用户(0元)</label></div>-->
+				</div>
+				<span class="warningText serviceText">请选择活动提示！</span>
+			</div>
+			<div class="activityBlock activityInstruction payService">
+				<div class="fillTypeName">增值服务<span style="color: #B6B6B6">（目前以下服务免费使用，具体执行细节需您在活动中自行于体验者沟通完成操作。）</span></div>
+				<div class="activityInstructionWapper">
+					<!--<div class="radio"><label><input type="checkbox" name="service" data-id="7" value="1,4,8,11">系统排除同旺旺名或同ip的用户(0元)</label></div>-->
+				</div>
+				<span class="warningText serviceText">请选择增值服务！</span>
+			</div>
+		</div>
+
+		<!--用户下单提示-->
+		<div class="activityBlock userPlaceOrder">
+			<div class="fillTypeName">用户下单提示</div>
+			<div class="userPlaceOrderWapper">
+				<div class="userPlaceOrderWapperLeft">选择下单商品入口：</div>
+				<div class="userPlaceOrderWapperRight">
+					<div class="radioSelectTop">
+						<div class="searchPlaceOrder">
+							<label>
+								<input type="radio" class="searchOrderType" checked="checked" name="ordertype" value="2">搜索下单
+							</label>
+						</div>
+						<div class="tklPlaceOrder">
+							<label>
+								<input type="radio" class="tklOrderType" name="ordertype" value="1">淘口令下单
+							</label>
+						</div>
+						<div class="emptyElement "><span class="warningText">请添加下单方式!</span></div>
+					</div>
+					<div class="radioSelectBody">
+						<div id="searchOrderBodyID">
+							<div class="searchOrderPanelTop">
+								<div class="searchWay isFirst" data-index="searchWay1">
+									<span>搜索方式一</span>
+									<span class="rightTopClose"></span>
+									<span class="rightBottomSelect"></span>
+								</div>
+								<div  class="addSearchWay">+添加</div>
+							</div>
+							<div class="searchOrderPanelBody">
+								<div id="searchWay1" class="searchWaySubPanel">
+									<lable><span style="color:red;">*&nbsp;</span>搜索关键词：</lable>
+									<input type="text" class="keywords" name="keywords" />
+									<label><span style="color:red;">*&nbsp;</span>排序方式：</label>
+									<div class="form-group clean inline-block">
+										<div class="dropdown">
+											<input class="ordertype" type="text" id="product-state" placeholder="请选择排序方式" name="orderway" readonly="readonly" data-toggle="dropdown">
+											<ul class="dropdown-menu">
+												<li>
+													<a href="#" data-value="销量优先">销量优先(推荐)</a>
+												</li>
+												<li>
+													<a href="#" data-value="综合排序">综合排序</a>
+												</li>
+												<li>
+													<a href="#" data-value="信用">信用</a>
+												</li>
+												<li>
+													<a href="#" data-value="价格由高到低">价格由高到低</a>
+												</li>
+												<li>
+													<a href="#" data-value="价格由低到高">价格由低到高</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="setChooseCondition">
+										<label>
+											<input type="checkbox" name="filtercondition" >设置筛选条件
+										</label>
+									</div>
+									<div class="filterConditionPanel">
+										<div class="priceRage">
+											<label>价格区间：</label>
+											<input class="firstprice" type="number" placeholder="最低价" name="firstprice" />
+											<span class="sepFlag">-</span>
+											<input class="secondprice" type="number" placeholder="最高价" name="secondprice" />
+										</div>
+										<div class="sendGoodsArea">
+											<label>发货地：</label>
+											<input class="address" type="text" name="address" />
+										</div>
+										<div class="categroy" style="display: none">
+											<label>类目：</label>
+											<input type="text" name="categroy" />
+										</div>
+									</div>
+									<div class="rankNum">
+										<span style="color:red;">*&nbsp;</span>大约在排序第
+										<input class="page" type="number" name="page" /> 屏左右找到本商品
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="tklOrderBodyID" style="display: none">
+							<div class="tklOrderPanelLeft"><span style="color:red;">*&nbsp;</span>淘口令：</div>
+							<textarea name="tbcode" rows="5" class="tklOrderPanelTextarea" cols="10"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--商品图片信息-->
+		<div class="activityBlock goodsPhotoInfo">
+			<div class="fillTypeName">商品图片信息</div>
+			<div class="homePagePicture">
+				<div class="homePagePictureTitle">首页推荐图<span>(图片要求：尺寸为710px*400px，大小小于500K)：</span></div>
+
+
+				<div class="homePagePictureGroup">
+					<div class="clean">
+						<img src="../img/activity/uploadMainPic.png" class="img" border="0">
+					</div>
+					<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+				</div>
+
+
+				<div class="homePagePicturePrompt">
+					<span style="display: inline-block;width:16px;height:16px;text-align: center;background-color:#389BFF;border-radius:8px;color: #FFFFFF;margin:0 5px;">!</span>
+					<span>上传首页推荐图，将有机会推荐到云店首页</span>
+				</div>
+			</div>
+
+			<div class="fillTypeContainer">
+				<!-- 商品来源 -->
+				<div class="lineRowCls goodsSource">
+					<div class="fillTypeContainerLeft">选择体验商品页图片来源：</div>
+					<div class="fillTypeContainerRight">
+						<label>
+							<input type="radio" name="goodsImg" value="1" class="chooseTbDetail">选用淘宝详情页
+						</label>
+						<label>
+							<input type="radio" name="goodsImg" value="2" checked="checked" class="upDetailImg">上传详情页图片
+						</label>
+						<span class="warningText">请添加详情页图片!</span>
+					</div>
+					<div></div>
+				</div>
+				<!-- 上传详情页 -->
+				<div class="uploadDetailImage">
+					<!-- 商品主图 -->
+					<div class="lineRowCls goodsMainPic">
+						<div class="goodsMainPicTitle"><span style="color:red;">*&nbsp;</span>商品主图<span style="color: #A8A8A8;">（图片要求：单个图建议尺寸为800px*800px，尺寸比例为1:1，大小不超过500K，图片类型支持png、jpg、jpeg）</span>：</div>
+						<div class="goodsMainPicUpload">
+							<div class="rightPhotoList list-group" id="uploadMainImageList">
+								<!-- 商品主图上传1 -->
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="lineRowCls goodsDetailPic">
+						<div class="goodsMainPicTitle"><span style="color:red;">*&nbsp;</span>商品详情图<span style="color: #A8A8A8;">(图片要求：单个图建议尺寸为750px*1200px，建议高度小于2500px，大小不超过500K，图片类型支持png、jpg、jpeg)</span>：</div>
+						<div class="goodsMainPicUpload">
+							<div class="rightPhotoList">
+								<!-- 商品主图上传1 -->
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+								<div class="addmainimg">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 选用淘宝详情页 -->
+				<div class="selectTBaoImage">
+					<div class="lineRowCls goodsMainPic">
+						<div class="goodsMainPicTitle"><span style="color:red;">*&nbsp;</span>商品主图<span style="color: #A8A8A8;">（图片要求：单个图建议尺寸为800px*800px，尺寸比例为1:1，大小不超过500K，图片类型支持png、jpg、jpeg）</span>：</div>
+						<div class="goodsMainPicUpload">
+							<div class="rightPhotoList list-group" id="selectTBaoMainList">
+								<!-- 商品主图上传1 -->
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;" class="uploadimg mainPhotoInput">
+								</div>
+								<div class="addmainimg list-group-item">
+									<div class="clean">
+										<img src="../img/activity/uploadImg.png" class="img" border="0">
+									</div>
+									<input type="file" accept="image/jpeg,image/jpg,image/png" style="display: none;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="lineRowCls goodsDetailPic">
+						<!--<span style="color: #A8A8A8;">(图片要求：单个图建议尺寸为800px*800px，大小小于5M)</span>-->
+						<div class="goodsMainPicTitle"><span style="color:red;">*&nbsp;</span>商品详情图：</div>
+						<div class="goodsMainPicUpload">
+							<!--<script id="myEditor" style="width:1000px;height:240px;overflow-y: auto;" type="text/plain"></script>-->
+							<div id="myEditor" style="width:1000px;height:500px;overflow-y: auto;" src=""></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--提交  存为草稿-->
+		<div class="activityBlock submitBlock">
+			<div class="submitBlockWapper">
+				<span class="submitSpan clickSpan">提交</span>
+				<span class="saveAsDraftSpan noClickSpan">保存草稿 </span>
+			</div>
+		</div>
+
+		<!--底部版权-->
+		<div class="footerBlock">
+			杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+		</div>
+	</div>
+	<script src="../js/activity/editor.js"></script>
+	<script>
+		var activeLi = document.querySelectorAll("#head ul li");
+		activeLi[3].style.background = "#f6ecd1";
+		activeLi[3].getElementsByTagName("a")[0].style.color = "#FBBD00";
+	</script>
+	<script src="../js/activity/releaseexperienceactivity.js"></script>
+	</body>
+</html>
+<!--查看远程分支：git branch -r
+拉取远程分支并创建本地分支：git checkout -b 本地分支名x origin/远程分支名y 例如：git checkout -b admin origin/admin
+查看当前分支：git branch
+创建分支：git branch <name> 例如 git branch admin
+切换到某分支：git checkout <name> 例如 git checkout admin
+提交代码到指定分支：git push origin <name> 例如 git push origin <admin>
+分支管理策略：
+	1、切换到指定分支
+	2、拉取该分支最新代码
+	3、把本地代码提交到指定分支
+	
+注：分支代码不影响主支(master)，可以单独删除分支：git branch - d <name>，也可以将分支代码合并到当前分支：git merge <name>-->

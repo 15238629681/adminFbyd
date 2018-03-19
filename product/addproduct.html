@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name = "format-detection" content = "telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+<title>新增商品-商品管理-翻宝云店供应商管理后台</title>
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+<link rel="stylesheet" href="../css/public/reset.css" />
+<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+<!--<link rel="stylesheet" href="../../css/public/zui.uploader.min.css" />-->
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+<style>
+body{overflow: hidden;}
+h2{color:#FBBD00;margin: 10px 0 20px 0;}
+img[src=""]{opacity: 0;}
+@media screen and (max-width: 1440px)  {
+	
+	.config-wrap{width: 100%;padding: 10px 0 20px 50px;background: #fff;margin-bottom: 10px;}
+	.brand{padding-left: 32px;}
+	.ID{padding-left: 15px;}
+	.config-wrap .form-group{margin-bottom: 0;margin-top: 11px;padding-left: 60px;}
+	.config-wrap label{font-size: 16px;font-weight: normal;color: #666;}
+	.config-wrap input{height: 32px;border:1px solid #f3f3f3;margin-left: 10px;width: 300px;margin-right: 10px;font-size: 14px;padding-left: 10px;padding-right: 40px;}
+	.config-wrap textarea{width: 516px;height: 104px;border:1px solid #f3f3f3;margin-left: 10px;padding: 10px;margin-right: 10px;}
+	.config-wrap .down{background: url(../img/product/down.png) no-repeat #fff calc(100% - 10px) center;}
+	.config-wrap .up{background: url(../img/product/down.png) no-repeat #fff calc(100% - 10px) center;}
+	.config-wrap .dropdown{display: inline-block;}
+	.dropdown-menu{width: 300px;left: 10px;}
+	.config-wrap span{color: #999;}
+	
+	.skuinfo{width: 730px;height: 370px;background: #f5f5f5;padding: 10px;margin-left: 140px;}
+	.skuinfo .form-group{padding-left: 0;}
+	.skuinfo span{height: 40px;line-height:40px;border:1px solid #f3f3f3;margin-left: 10px;margin-right: 10px;font-size: 14px;text-align: center;background: #fff;cursor: pointer;}
+	.skuinfo p{color: #999;margin: 10px 0 10px 10px;}
+	.skuinfo .dropdown{display: block;margin: 10px 0;}
+	.SKUlist{width: 730px;margin:10px 0;margin-left: 140px;}
+	.SKUlist .table{border:1px #ddd solid;}
+	.SKUlist .table>thead>tr>th{height: 50px !important;line-height: 50px;text-align: center;padding: 0;}
+	.SKUlist .table>tbody>tr>td{height: 70px !important;line-height: 70px;text-align: center;padding: 0;}
+	.SKUlist .table>tbody>tr>td input{width: 60px;height: 30px;line-height: 30px;border:1px solid #f3f3f3;border-radius: 2px;text-align: center;padding: 0;margin: 0;}
+	.SKUlist2{width: 730px;margin:10px 0;margin-left: 140px;}
+	.SKUlist2 .table{border:1px #ddd solid;}
+	.SKUlist2 .table>thead>tr>th{height: 50px !important;line-height: 50px;text-align: center;padding: 0;}
+	.SKUlist2 .table>tbody>tr>td{height: 50px !important;line-height: 50px;text-align: center;padding: 0;}
+	.SKUlist2 .table>tbody>tr>td input{width: 330px;height: 30px;line-height: 30px;border:1px solid #f3f3f3;border-radius: 2px;text-align: center;padding: 0;margin: 0;}
+
+	#addmainimg1{padding-left: 110px;}
+	.addimg1{width: 140px;height: 140px;background: url(../img/product/addimg.png) #eee no-repeat center;cursor: pointer;}
+	.addimg1 div,.addimg2 div{width: 100%;height: 100%;}
+	.addimg1 .img,.addimg2 .img{width: 100%;height: 100%;}
+	#addmainimg2{padding-left: 110px;}
+	.addimg2{width: 140px;height: 234px;background: url(../img/product/addimg.png) #eee no-repeat center;cursor: pointer;}
+
+	.btn-wrap{width: 400px;height: 50px;margin: 10px auto;}
+	.btn-wrap div{width: 150px;height: 50px;text-align: center;line-height: 50px;font-size: 18px;}
+	.btn-wrap .send{background: #FF3A46;color: #fff;float: left;}
+	.btn-wrap .save{color: #999;border: 2px #ddd solid;float: right;}
+}
+@media screen and (min-width: 1440px)  {
+	
+	.config-wrap{width: 100%;padding: 10px 0 20px 70px;background: #fff;margin-bottom: 10px;}
+	.brand{padding-left: 36px;}
+	.ID{padding-left: 18px;}
+	.config-wrap .form-group{margin-bottom: 0;margin-top: 15px;padding-left: 90px;}
+	.config-wrap label{font-size: 18px;font-weight: normal;color: #666;}
+	.config-wrap input{height: 40px;border:1px solid #f3f3f3;margin-left: 10px;width: 300px;margin-right: 10px;font-size: 14px;padding-left: 10px;padding-right: 40px;}
+	.config-wrap textarea{width: 516px;height: 104px;border:1px solid #f3f3f3;margin-left: 10px;padding: 10px;margin-right: 10px;}
+	.config-wrap .down{background: url(../img/product/down.png) no-repeat #fff calc(100% - 10px) center;}
+	.config-wrap .up{background: url(../img/product/down.png) no-repeat #fff calc(100% - 10px) center;}
+	.config-wrap .dropdown{display: inline-block;}
+	.dropdown-menu{width: 300px;left: 10px;}
+	.config-wrap span{color: #999;}
+	
+	.config-wrap .skuinfo .form-group{margin-left: 0;}
+	.skuinfo{width: 730px;height: 370px;background: #f5f5f5;padding: 10px;margin-left: 160px;}
+	.skuinfo .form-group{padding-left: 0;}
+	.skuinfo span{height: 40px;line-height:40px;border:1px solid #f3f3f3;margin-left: 10px;margin-right: 10px;font-size: 14px;text-align: center;background: #fff;cursor: pointer;}
+	.skuinfo p{color: #999;margin: 10px 0 10px 10px;}
+	.skuinfo .dropdown{display: block;margin: 10px 0;}
+	.SKUlist{width: 730px;margin:10px 0;margin-left: 160px;}
+	.SKUlist .table{border:1px #ddd solid;}
+	.SKUlist .table>thead>tr>th{height: 50px !important;line-height: 50px;text-align: center;padding: 0;}
+	.SKUlist .table>tbody>tr>td{height: 70px !important;line-height: 70px;text-align: center;padding: 0;}
+	.SKUlist .table>tbody>tr>td input{width: 60px;height: 30px;line-height: 30px;border:1px solid #f3f3f3;border-radius: 2px;text-align: center;padding: 0;margin: 0;}
+	.SKUlist2{width: 730px;margin:10px 0;margin-left: 160px;}
+	.SKUlist2 .table{border:1px #ddd solid;}
+	.SKUlist2 .table>thead>tr>th{height: 50px !important;line-height: 50px;text-align: center;padding: 0;}
+	.SKUlist2 .table>tbody>tr>td{height: 50px !important;line-height: 50px;text-align: center;padding: 0;}
+	.SKUlist2 .table>tbody>tr>td input{width: 330px;height: 30px;line-height: 30px;border:1px solid #f3f3f3;border-radius: 2px;text-align: center;padding: 0;margin: 0;}
+	
+	#addmainimg1{padding-left: 110px;}
+	.addimg1{width: 170px;height: 170px;background: url(../img/product/addimg.png) #eee no-repeat center;cursor: pointer;}
+	.addimg1 div,.addimg2 div{width: 100%;height: 100%;}
+	.addimg1 .img,.addimg2 .img{width: 100%;height: 100%;}
+	#addmainimg2{padding-left: 110px;}
+	.addimg2{width: 170px;height: 284px;background: url(../img/product/addimg.png) #eee no-repeat center;cursor: pointer;}
+
+	.btn-wrap{width: 550px;height: 70px;margin: 10px auto;}
+	.btn-wrap div{width: 200px;height: 70px;text-align: center;line-height: 70px;font-size: 18px;}
+	.btn-wrap .send{background: #FF3A46;color: #fff;float: left;}
+	.btn-wrap .save{color: #999;border: 2px #ddd solid;float: right;}
+}
+</style>
+</head>
+<body>
+<script src="../js/public/head.js"></script>
+<div class="part-left">
+	<div id="page-titie"><img src="../img/product/shopcar.png" />商品管理</div>
+	<div class="list"><a href="productlist.html?type=1">商品列表</a></div>
+	<div class="list active">新增商品</div>
+</div>
+<div id="part-right">
+	<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+		<img class="loadingImg" src="../img/public/downrefesh.gif">
+		<span class="loadingFont">加载中...</span>
+	</div>
+	<div id="loaction">当前位置：管理后台>商品管理>新增商品</div>
+	<div class="config-wrap">
+		<h2>商品分类信息</h2>
+	  	<div class="form-group">
+	    	<label>商品分类：</label>
+	    	<div class="dropdown">
+	    		<input type="text" id="categroy" placeholder="请选择商品分类" readonly="readonly" data-toggle="dropdown" class="down">
+				<ul class="dropdown-menu">
+					<li><a href="#">分类1</a></li>
+					<li><a href="#">分类2</a></li>
+					<li><a href="#">分类3</a></li>
+				</ul>
+			</div>
+	  	</div>
+	  	<div class="form-group">
+	    	<label>商品类型：</label>
+	    	<div class="dropdown">
+	    		<input type="text" id="product-state" placeholder="请选择商品状类型" readonly="readonly" data-toggle="dropdown" class="down">
+				<ul class="dropdown-menu">
+					<li><a href="#">类型1</a></li>
+					<li><a href="#">类型2</a></li>
+					<li><a href="#">类型3</a></li>
+				</ul>
+			</div>
+	  	</div>
+	  	<div class="form-group">
+	    	<label>销售类型：</label>
+	    	<div class="dropdown">
+	    		<input type="text" id="sale-type" placeholder="请选择销售类型" readonly="readonly" data-toggle="dropdown" class="down">
+				<ul class="dropdown-menu">
+					<li><a href="#">类型1</a></li>
+					<li><a href="#">类型2</a></li>
+					<li><a href="#">类型3</a></li>
+				</ul>
+			</div>
+	  	</div>
+	</div>
+	<div class="config-wrap">
+		<h2>商品基本信息</h2>
+	  	<div class="form-group ID">
+	    	<label for="ID">商品ID：</label>
+	    	<input type="text" id="ID">
+	  	</div>
+	  	<div class="form-group ID">
+	    	<label for="supplier">供应商：</label>
+	    	<input type="text" id="supplier">
+	  	</div>
+		<div class="form-group brand">
+	    	<label for="brand">品&nbsp;&nbsp;&nbsp;牌：</label>
+	    	<div class="dropdown">
+	    		<input type="text" id="brand" placeholder="请选择品牌" readonly="readonly" data-toggle="dropdown" class="down">
+				<ul class="dropdown-menu">
+					<li><a href="#">品牌1</a></li>
+					<li><a href="#">品牌2</a></li>
+					<li><a href="#">品牌3</a></li>
+				</ul>
+			</div>
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="code">商品货号：</label>
+	    	<input type="text" id="code"> 
+	  	</div>
+		<div class="form-group">
+	    	<label for="name">商品标题：</label>
+	    	<input maxlength="60" type="text" id="name" style="width: 516px;"><span><b>0</b>/60字符</span>
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="description">卖点描述：</label>
+	    	<textarea maxlength="140" id="description"></textarea><span style="position: relative;top: 80px;"><b>0</b>/140字符</span>
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="ghprice">商品供货价：</label>
+	    	<input type="text" id="ghprice" style="width: 168px;"><span>元</span>
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="saleprice">商品销售价：</label>
+	    	<input type="text" id="saleprice" style="width: 168px;"><span>元</span>
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="freight">运费模板：</label>
+	    	<div class="dropdown">
+	    		<input type="text" id="freight" placeholder="默认全国包邮" readonly="readonly" data-toggle="dropdown" class="down">
+				<ul class="dropdown-menu">
+					<li><a href="#">模板1</a></li>
+					<li><a href="#">模板2</a></li>
+					<li><a href="#">模板3</a></li>
+				</ul>
+			</div>
+	  	</div>
+	  	<div class="form-group">
+	    	<label for="weight">物流重量（含包装）：</label>
+	    	<input type="text" id="weight" style="width: 168px;"><span>KG</span>
+	  	</div>
+	</div>
+	<div class="config-wrap">
+		<h2>商品SKU信息</h2>
+		<div class="form-group" style="position: relative;">
+	    	<label style="position: absolute;">选择SKU商品类型</label>
+	    	<div class="skuinfo">
+	    		<div class="form-group">
+			    	<span style="width: 120px;text-align: center;">单SKU</span>
+			    	<span style="width: 120px;text-align: center;">一种类型</span>
+			    	<span style="width: 120px;text-align: center;">两种类型</span>
+			    	<p>如果没有找到您需要的类型名称，请联系我们</p>
+			    	<div class="dropdown">
+			    		<input type="text" id="size" placeholder="尺码" readonly="readonly" data-toggle="dropdown" class="down">
+						<ul class="dropdown-menu">
+							<li><a href="#">S</a></li>
+							<li><a href="#">M</a></li>
+							<li><a href="#">L</a></li>
+						</ul>
+					</div>
+					<div class="dropdown">
+			    		<input type="text" id="type" placeholder="请选择类型" readonly="readonly" data-toggle="dropdown" class="down">
+						<ul class="dropdown-menu">
+							<li><a href="#">类型1</a></li>
+							<li><a href="#">类型2</a></li>
+							<li><a href="#">类型3</a></li>
+						</ul>
+					</div>
+					<div class="form-group" style="margin-left: 10px;">
+						<label>批量设置</label>
+						<input type="text" placeholder="库存" style="width: 100px;padding: 10px;height: 30px;line-height: 30px;">
+						<input type="text" placeholder="库存" style="width: 100px;padding: 10px;height: 30px;line-height: 30px;">
+						<input type="text" placeholder="库存" style="width: 100px;padding: 10px;height: 30px;line-height: 30px;">
+						<span style="width: 80px;text-align: center;background: #ff3a46;color: #fff;border-radius: 6px;height: 30px;line-height: 30px;">确定</span>
+					</div>
+			  	</div>
+	    	</div>
+	    	<div class="SKUlist">
+	    		<table class="table datatable" border="1px">
+					<thead>
+						<tr>
+							<th>尺码</th>
+							<th>颜色</th>
+							<th>库存</th>
+							<th>供货价</th>
+							<th>销售价</th>
+							<th>利润</th>
+							<th>商品编码</th>
+							<th>SKU预览图</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>S</td>
+							<td>原谅色</td>
+							<td><input type="text" /></td>
+							<td><input type="text" /></td>
+							<td><input type="text" /></td>
+							<td>0</td>
+							<td><input type="text" /></td>
+							<td><img src="../../img/public/usericon.png" /></td>
+							<td>已下架</td>
+							<td>上架</td>
+						</tr>
+						<tr>
+							<td>S</td>
+							<td>原谅色</td>
+							<td><input type="text" /></td>
+							<td><input type="text" /></td>
+							<td><input type="text" /></td>
+							<td>0</td>
+							<td><input type="text" /></td>
+							<td><img src="../../img/public/usericon.png" /></td>
+							<td>已下架</td>
+							<td>上架</td>
+						</tr>
+					</tbody>
+				</table>
+	    	</div>
+	    	<div class="SKUlist2">
+	    		<table class="table datatable" border="1px">
+					<thead>
+						<tr>
+							<th>总库存</th>
+							<th>商家编码</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="text" /></td>
+							<td><input type="text" /></td>
+						</tr>
+					</tbody>
+				</table>
+	    	</div>
+	  	</div>
+	</div>
+	<div class="config-wrap">
+		<h2>商品图片信息</h2>
+		<div class="form-group" style="position: relative;">
+			<label style="position: absolute;padding-left: 15px;">商品主图</label>
+			
+			<div id="addmainimg1">
+				<div class="addimg1">
+					<div>
+						<img class="img" border="0" onclick="$(this).parent().next().click();">        
+					</div>        
+                    <input type="file" onchange="previewImage(this,170,170)" style="display: none;" class="uploadimg">
+				</div>
+			</div>
+			
+		</div>
+		<div class="form-group" style="position: relative;">
+			<label style="position: absolute;">商品详情图</label>
+			<div id="addmainimg2">
+				<div class="addimg2">
+					<div>
+						<img class="img" border="0" onclick="$(this).parent().next().click();">        
+					</div>
+                    <input type="file" onchange="previewImage(this,170,284)" style="display: none;">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="config-wrap" style="padding-left: 0;">
+		<div class="btn-wrap">
+			<div class="send">提交</div>
+			<div class="save">保存草稿</div>
+		</div>
+	</div>
+</div>
+<script src="../js/product/zui.datatable.min.js"></script>
+<!--<script src="../../js/public/zui.uploader.min.js"></script>-->
+<script type="text/javascript" src="../js/product/uploadImg.js" ></script>
+<script>
+$(".dropdown-menu li a").on('click',function(){
+	$(this).parent().parent().prev().val($(this).html());
+});
+$("#name,#description").on("input",function(){
+	$(this).next().find("b").html($(this).val().length);
+})
+
+$(".skuinfo span").on('click',function(){
+	
+})
+</script>
+</body>
+</html>

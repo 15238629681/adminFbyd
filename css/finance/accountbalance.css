@@ -1,0 +1,79 @@
+body{background:#F6F6F6;}
+.part-left{
+	height:calc( 100% - 68px );
+	background:#fff !important;
+}
+.contentBlock{
+	margin:0 30px;
+	background:#fff;
+	/*height:185px;*/
+	padding:18px 30px;
+	/*min-width: 1400px;;*/
+}
+.mainBlock{
+	min-width: 1190px;;
+}
+.withDrawBlock{
+	width:460px;display:inline-block;
+	margin-right:262px;
+}
+.frozenBlock{
+	border-left:1px solid #e0e0e0;
+	padding-left:28px;
+	width:338px;display:inline-block;
+}
+.title{
+	height:48px;vertical-align: top;
+}
+.infoBlock{
+	width: 100%;
+}
+.infoBlock .withDrawNum{
+	width:258px;
+	padding-top:20px;
+	padding-left:18px;
+	font-size:36px;color:#FF3A46;
+	display:inline-block;
+}
+.operateBlock{
+	width:200px;float:right;
+}
+.operateBlock .colorSpan{
+	display:inline-block;
+	width:100px;height:30px;line-height:30px;
+	border-radius: 4px;cursor: pointer;
+	color:#fff;text-align: center;
+}
+.operateBlock .colorSpan a {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+.reChargeSpan{background:#FF3A46;}
+.reChargeSpan:hover {
+	background-color: #D8343B;
+}
+.withDrawSpan{background:#FBBD00;}
+.withDrawSpan:hover {
+	background-color: #E8AF00;
+}
+.operateBlock .block{
+	margin-bottom:24px;
+}
+.operateBlock .detailSpan{
+	display:inline-block;width:96px;
+	height:30px;line-height: 30px;
+	text-align:center;
+}
+.operateBlock .detailSpan a{ 
+	color:#FBBD00;
+}
+.frozenBlock .detailText{
+	display:inline-block;
+	vertical-align: top;
+	height:120px;
+	padding-top:35px;
+}
+.frozenBlock .detailText a{
+	color:#FBBD00;
+}

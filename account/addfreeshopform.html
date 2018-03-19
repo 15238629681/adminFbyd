@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+    <title>填写网店信息-网店管理-账户管理-翻宝云店供应商管理后台</title>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+    <link rel="stylesheet" href="../css/public/reset.css" />
+    <link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+    <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+    <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+    <script src="../js/product/zui.datatable.min.js"></script>
+    <script src="../js/public/datetimepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+
+    <!--<link rel="stylesheet" href="../../css/public/reset.css" />-->
+
+    <!--<link rel="stylesheet" href="../css/activity/releaseexperienceactivity.css" />-->
+
+    <!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+
+
+    <link rel="stylesheet" href="../css/account/addshopinputinfo.css" />
+</head>
+
+<body>
+
+<script src="../js/public/head.js"></script>
+<div class="maskDiv">
+    <div class="maskContent">
+        <div class="maskText">
+            免费店铺绑定成功
+        </div>
+        <span class="freesureBtn">确认</span>
+    </div>
+</div>
+
+<div class="part-left">
+    <div id="page-titie"><img src="../img/activity/activitylogo.png" />账户管理</div>
+    <div class="list active">
+        <a href="#" style="color:#fff;">网店管理</a>
+    </div>
+    <div class="list">
+        <a href="#">账号安全</a>
+    </div>
+    <div class="list ">
+        <a href="#">信息管理</a>
+    </div>
+    <div class="list ">
+        <a href="#">资质管理</a>
+    </div>
+    <div class="list ">
+        <a href="#">品牌管理</a>
+    </div>
+    <div class="list ">
+        <a href="upgradevip.html">升级VIP</a>
+    </div>
+    <div class="list ">
+        <a href="#">升级记录</a>
+    </div>
+</div>
+
+<div id="part-right">
+    <div id="loaction">当前位置：管理后台>账号管理>网店管理>填写网店信息</div>
+    <!--网店信息-->
+    <div class="shopBlockWapper">
+        <div class="mainTitle">网店管理</div>
+        <div class="freesuccessImg"></div>
+
+        <!--绑定新网店-->
+        <div class="shopBlock">
+            <!--<div class="shopTitle">
+                <span>网店管理</span>
+            </div>-->
+            <div class="shopInfo">
+                <div class="shopContent">
+                    <div class="infoTitle">
+                        绑定新网店
+                    </div>
+
+                    <div class="inputBlock firstInputBlock playgroundBlock">
+                        <span class="inputName">平台：</span>
+                        <div class="dropdown" style="display:inline-block;">
+                            <input class="playgroundInput down froms" style="background:url(../img/order/arrowicon.png) right center no-repeat;" type="text" id="product-state" placeholder="请选择" readonly="readonly" data-toggle="dropdown">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">淘宝</a>
+                                </li>
+                                <li>
+                                    <a href="#">天猫</a>
+                                </li>
+                                <!--<li>
+                                    <a href="#">京东</a>
+                                </li>-->
+                            </ul>
+                        </div>
+                        <span class="alertPlayground alertText">请输入商品来源！</span>
+                    </div>
+                    <div class="inputBlock">
+                        <span class="inputName">网店店名：</span>
+                        <input class="shopNameInput" type="text" />
+                        <span class="alertShopName">请输入网店店名！</span>
+                    </div>
+                    <div class="inputBlock">
+                        <span class="inputName">网店首页链接：</span>
+                        <input type="text" class="firstPageLink" />
+                        <span class="alertWrongLink">请输入正确的网址！</span>
+                    </div>
+                    <div class="inputBlock">
+                        <span class="inputName testInputName">验证码：</span>
+                        <span class="testCode"></span>
+                        <span class="copyBtn">复制验证码</span>
+                        <!--<span class="alertWrong">未检测到您的验证码，请将该验证码复制到您所提供的商品标题上!</span>-->
+                        <span class="alertWrong">验证码尚未添加或添加错误，请重新添加正确后再确认后绑定。</span>
+                    </div>
+
+                    <div class="shopInfoExample">
+                        <div class="exampleTitle">
+                            1、将验证码添加到您的网店里某个商品的标题上，如下所示：
+                        </div>
+                        <div class="exampleImg">
+                            <img src="../img/account/shopinfoexample_03.png" alt="" />
+                            <span class="codeSpan"></span>
+                        </div>
+                        <div class="exampleTitle">
+                            2、将这个商品的链接,复制到一下输入框。
+                        </div>
+                        <div class="shopUrl">
+                            <span class="shopUrlText">商品链接(URL):</span>
+                            <input type="text" class="shopLink" />
+                            <span class="alertWrongLink2">请输入正确的网址！</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="addShopTr onlyAddBtn">
+            <div class="contentBlock">
+                <span class="freebindShop">确认绑定</span>
+                <span class="blurAlert">店铺绑定后无法修改也无法解除绑定</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!--底部版权-->
+    <!--<div class="footerBlock">
+        杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+    </div>-->
+    <div class="footer">
+
+    </div>
+</div>
+<script>
+    document.querySelectorAll("#tap-wrap li")[7].style.background = "#f6ecd1";
+    document.querySelectorAll("#tap-wrap li")[7].querySelector("a").style.color = "#FBBD00";
+</script>
+<script src="../js/account/addshopinputinfo.js"></script>
+</body>
+</html>

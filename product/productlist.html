@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name = "format-detection" content = "telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+<title>商品列表-商品管理-翻宝云店供应商管理后台</title>
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+<link rel="stylesheet" href="../css/public/reset.css" />
+<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+<script src="../js/product/zui.datatable.min.js"></script>
+<style>
+body{overflow: hidden;}
+input[type=checkbox], input[type=radio]{position: relative;left: -5px;top: 2px;}
+@media screen and (max-width: 1440px)  {
+	
+	#choose-config{width: 100%;padding-left: 70px;background: #fff;}
+	.config-wrap{display: inline-block;}
+	.brand,.categroy{padding-left: 32px;}
+	.ID{padding-left: 15px;}
+	.config-wrap .form-group{float: left;margin-bottom: 0;margin-top: 11px;}
+	.config-wrap label{font-size: 16px;font-weight: normal;}
+	.config-wrap input{height: 32px;border:1px solid #f3f3f3;margin-left: 10px;width: 240px;margin-right: 45px;font-size: 16px;padding-left: 10px;}
+	.config-wrap .dropdown{display: inline-block;}
+	.dropdown-menu{width: 300px;left: 10px;}
+	#search{width: 100px;height: 40px;background: #ff3a46;color:#fff;border-radius: 4px;text-align: center;line-height: 40px;margin-top: -6px;font-size: 16px;}
+	
+	#product-list{margin-top: 10px;background: #fff;}
+	#btn-wrap{width: 100%;height: 50px;padding-left: 65px;padding-top: 7px;min-width: 990px;}
+	.Btn{width: 120px;height: 36px;background: #FBBD00;color: #fff;text-align: center;line-height: 36px;border-radius: 4px;font-size: 16px;margin-left: 5px;cursor: pointer;}
+	
+	#List .table{border:1px #ddd solid;}
+	#List .table>thead>tr>th{height: 50px;line-height: 50px;text-align: center;padding: 0;}
+	#List .table>tbody>tr>td{height: 50px;line-height: 20px;text-align: center;padding: 0;background: #fff;vertical-align: middle;}
+	#List .table>tbody>tr>td span{color: #FBBD00;margin-left: 8px;}
+}
+@media screen and (min-width: 1440px)  {
+	
+	#choose-config{width: 100%;padding-left: 70px;background: #fff;}
+	.config-wrap{display: inline-block;}
+	.brand,.categroy{padding-left: 36px;}
+	.ID{padding-left: 18px;}
+	.config-wrap .form-group{float: left;margin-bottom: 0;margin-top: 15px;}
+	.config-wrap label{font-size: 18px;font-weight: normal;}
+	.config-wrap input{height: 40px;border:1px solid #f3f3f3;margin-left: 10px;width: 300px;margin-right: 45px;font-size: 16px;padding-left: 10px;}
+	.config-wrap .dropdown{display: inline-block;}
+	.dropdown-menu{width: 300px;left: 10px;}
+	#search{width: 120px;height: 50px;background: #ff3a46;color:#fff;border-radius: 4px;text-align: center;line-height: 50px;margin-top: -6px;font-size: 16px;}
+	
+	#product-list{margin-top: 10px;background: #fff;}
+	#btn-wrap{width: 100%;height: 70px;padding-left: 65px;padding-top: 10px;min-width: 1280px;}
+	.Btn{width: 150px;height: 50px;background: #FBBD00;color: #fff;text-align: center;line-height: 50px;border-radius: 4px;font-size: 16px;margin-left: 5px;cursor: pointer;}
+	
+	#List .table{border:1px #ddd solid;}
+	#List .table>thead>tr>th{height: 50px;line-height: 50px;text-align: center;padding: 0;}
+	#List .table>tbody>tr>td{height: 50px;line-height: 20px;text-align: center;padding: 0;background: #fff;vertical-align: middle;}
+	#List .table>tbody>tr>td span{color: #FBBD00;margin-left: 8px;}
+	
+}
+td{border-left: 1px solid #ddd;border-right: 1px solid #ddd;}
+</style>
+</head>
+<body>
+<script src="../js/public/head.js"></script>
+<div class="part-left">
+	<div id="page-titie"><img src="../img/product/shopcar.png" />商品管理</div>
+	<div class="list active">商品列表</div>
+	<div class="list"><a href="addproduct.html?type=1">新增商品</a></div>
+</div>
+<div id="part-right">
+	<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+		<img class="loadingImg" src="../img/public/downrefesh.gif">
+		<span class="loadingFont">加载中...</span>
+	</div>
+	<div id="loaction">当前位置：管理后台>商品管理>商品列表</div>
+	<div id="choose-config">
+		<div class="config-wrap brand">
+			<div class="form-group">
+		    	<label for="brand">品牌：</label>
+		    	<input type="text" id="brand">
+		  	</div>
+		  	<div class="form-group categroy">
+		    	<label>分类：</label>
+		    	<div class="dropdown">
+		    		<input type="text" id="categroy" placeholder="请选择商品分类" readonly="readonly" data-toggle="dropdown">
+					<ul class="dropdown-menu">
+						<li><a href="#">分类1</a></li>
+						<li><a href="#">分类2</a></li>
+						<li><a href="#">分类3</a></li>
+					</ul>
+				</div>
+		  	</div>
+		</div>
+		<div class="config-wrap">
+			<div class="form-group">
+		    	<label for="name">商品名称：</label>
+		    	<input type="text" id="name">
+		  	</div>
+		  	<div class="form-group ID">
+		    	<label for="ID">商品ID：</label>
+		    	<input type="text" id="ID">
+		  	</div>
+		  	<div class="form-group">
+		    	<label for="code">商品编码：</label>
+		    	<input type="text" id="code">
+		  	</div>
+		</div>
+		<div class="config-wrap">
+			<div class="form-group">
+		    	<label>销售状态：</label>
+		    	<div class="dropdown">
+		    		<input type="text" id="sale-state" placeholder="请选择销售状态" readonly="readonly" data-toggle="dropdown">
+					<ul class="dropdown-menu">
+						<li><a href="#">状态1</a></li>
+						<li><a href="#">状态2</a></li>
+						<li><a href="#">状态3</a></li>
+					</ul>
+				</div>
+		  	</div>
+		  	<div class="form-group">
+		    	<label>商品状态：</label>
+		    	<div class="dropdown">
+		    		<input type="text" id="product-state" placeholder="请选择商品状态" readonly="readonly" data-toggle="dropdown">
+					<ul class="dropdown-menu">
+						<li><a href="#">状态1</a></li>
+						<li><a href="#">状态2</a></li>
+						<li><a href="#">状态3</a></li>
+					</ul>
+				</div>
+		  	</div>
+		  	<div class="form-group">
+		    	<label>销售类型：</label>
+		    	<div class="dropdown">
+		    		<input type="text" id="sale-type" placeholder="请选择销售类型" readonly="readonly" data-toggle="dropdown">
+					<ul class="dropdown-menu">
+						<li><a href="#">类型1</a></li>
+						<li><a href="#">类型2</a></li>
+						<li><a href="#">类型3</a></li>
+					</ul>
+				</div>
+		  	</div>
+		  	<div class="form-group">
+		    	<span id="search">查询</span>
+		  	</div>
+		</div>
+	</div>
+	<div id="product-list">
+		<div id="btn-wrap">
+			<span class="Btn">新增商品</span>
+			<span class="Btn">批量删除</span>
+			<span class="Btn">批量上架</span>
+			<span class="Btn">批量下架</span>
+			<span class="Btn">批量全年可售</span>
+			<span class="Btn">批量活动可售</span>
+			<span class="Btn">导出为Excel</span>
+		</div>
+		<div id="List">
+			<table class="table datatable">
+				<thead>
+					<tr>
+						<th><input id="chooseAll" type="checkbox" />全选</th>
+						<th>商品ID</th>						
+						<th>商品编码</th> 
+						<th>品牌</th>
+						<th width="120">商品名称</th>
+						<th>商品分类</th>
+						<th>SKU</th>
+						<th>供货价</th>
+						<th>销售价</th>
+						<th>库存</th>
+						<th>累计销量</th>
+						<th>销售状态</th>
+						<th>商品状态</th>
+						<th>销售类型</th>
+						<th>条形码</th>						
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div id="page-wrap">
+				<div style="margin: 0 auto;width: 420px;" class="clean">
+					<ul class="clean">
+						<li class="page"><a href="#">&lt;</a></li>
+						<li class="page active"><a href="#">1</a></li>
+						<li class="page"><a href="#">2</a></li>
+						<li><a href="#">...</a></li>
+						<li class="page"><a href="#">4</a></li>
+						<li class="page"><a href="#">5</a></li>
+						<li class="page"><a href="#">&gt;</a></li>
+					</ul>
+					<div id="to-page">跳转至<input type="number" min="1" name="" id="" value="" />页</div>
+				</div>
+			</div>
+		</div>
+	
+	
+	</div>
+</div>
+<script>
+var chooseAll = 0
+$("#chooseAll").on("click",function(){
+	if(chooseAll){
+		$(this).prop("checked",false);
+		$(".check").prop("checked",false);
+		chooseAll = 0;
+	}else{
+		$(this).prop("checked",true);
+		$(".check").prop("checked",true);
+		chooseAll = 1;
+	}
+});
+$(".dropdown-menu li a").on('click',function(){
+	$(this).parent().parent().prev().val($(this).html());
+})
+function CreateTd(){
+	var tr = document.createElement("tr");
+	for(var i=0;i<16;i++){
+		var td = document.createElement("td");
+		var infoArry= ['../img/public/usericon.png','1234567','XYZ123456','翻宝云','翻宝云店全新清无码激情四射强劲动力阿姆斯特朗回旋阿姆斯特朗加速炮APP',
+		'数码','蓝色','￥299.00','￥299.00','999','999','销售中','发布成功','全年可销售','56498746514654'];
+		if(i == 0){
+			td.innerHTML = "<input class='check' type='checkbox' /><img src='"+infoArry[0]+"' />";
+		}else if(i == 15){
+			td.innerHTML = "<span>下架</span><span>编辑</span><span>删除</span>";
+		}else{
+			td.innerHTML = infoArry[i];
+		}
+		tr.appendChild(td);
+	}
+	$("#List tbody").append(tr);
+}
+CreateTd();
+</script>
+</body>
+</html>

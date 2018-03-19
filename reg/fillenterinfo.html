@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>(个人入驻)填写注册信息-翻宝云店供应商管理后台</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<link rel="stylesheet" href="../css/reg/fillenterinfo.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<script src="../js/public/datetimepicker.js"></script>
+		<script src="../js/plug/YouXin.js"></script>
+	</head>
+	<body>
+		<div class="topBlock"></div>
+		<div class="stepBlock"></div>
+		<div class="contentWapper">
+			<div class="selectEnterType">
+				<div class="personEnter active" data-type="1">个人入驻</div>
+				<div class="companyEnter" data-type="2">企业入驻</div>
+			</div>
+			<!-- 个人入驻面板 -->
+			<div class="personEnterPanel">
+				<!-- 入驻人基本信息 -->
+				<form id="enterBaseInfoID" class="enterBaseInfo">
+					<div class="infoTitle">
+						<span>入驻人基本信息</span>
+					</div>
+					<div class="inputBlock enterUserName">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人姓名：</span>
+						<input class="managername" name="managername" type="text" placeholder="请填写真实姓名" />
+						<span class="alertSpan">入驻人姓名将会绑定供应商提供账户名，且不能修改，后期体现只能提现到该入驻人的银行卡内，请您确认入驻人姓名是否填写正确。</span>
+					</div>
+					<div class="inputBlock">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人邮箱：</span>
+						<input class="managermail" name="managermail" type="text" placeholder="请填写常用邮箱" />
+					</div>
+					<div class="inputBlock">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人手机：</span>
+						<input class="managerphone" name="managerphone" type="text" placeholder="请填写常用手机" />
+					</div>
+					<div class="inputBlock">
+						<span class="inputName">入驻人微信：</span>
+						<input class="managerwechat" name="managerwechat" type="text" placeholder="请填写常用微信号或微信手机号" />
+					</div>
+					<div class="inputBlock">
+						<span class="inputName">入驻人QQ：</span>
+						<input class="managerqq" name="managerqq" type="text" placeholder="请填写常用QQ" />
+					</div>
+					<div class="inputBlock">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人身份证号：</span>
+						<input class="managerpcode" name="managerpcode" type="text" placeholder="请填写证件号码" />
+						<span class="alertSpan">请确认您的身份证号码填写无误，该身份证号必须与您上传的身份证照片一致。</span>
+					</div>
+					<div class="inputBlock goodsSource">
+						<div class="fillGroup">
+							<span class="fillGroupItem inputName"><span style="color:red;">*&nbsp;</span>主营类目：</span>
+							<div class="fillGroupItem dropdown">
+								<input class="categoryid" name="categoryid" type="text" id="product-stateID" placeholder="请选择" readonly="readonly" data-toggle="dropdown" class="down froms">
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" data-value="1">女装</a>
+									</li>
+									<li>
+										<a href="#" data-value="2">男装</a>
+									</li>
+									<li>
+										<a href="#" data-value="3">内衣</a>
+									</li>
+									<li>
+										<a href="#" data-value="4">母婴</a>
+									</li>
+									<li>
+										<a href="#" data-value="5">包包</a>
+									</li>
+									<li>
+										<a href="#" data-value="7">居家</a>
+									</li>
+									<li>
+										<a href="#" data-value="8">鞋品</a>
+									</li>
+									<li>
+										<a href="#" data-value="9">美食</a>
+									</li>
+									<li>
+										<a href="#" data-value="10">文体</a>
+									</li>
+									<li>
+										<a href="#" data-value="11">家电</a>
+									</li>
+									<li>
+										<a href="#" data-value="12">其他</a>
+									</li>
+									<li>
+										<a href="#" data-value="13">配饰</a>
+									</li>
+									<li>
+										<a href="#" data-value="14">数码</a>
+									</li>
+									<li>
+										<a href="#" data-value="341">美妆</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="inputBlock thirdPlaygroundWapperChoose">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>是否存在第三方平台店铺：</span>
+						<label>
+							<input type="radio" value="1" name="isothershop" checked="checked" />是
+						</label>
+						<label>
+							<input type="radio" value="0" name="isothershop" />否
+						</label>
+					</div>
+					<div class="inputBlock thirdPlaygroundWapper">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>第三方店铺链接：</span>
+						<div class="thirdPlaygroundWapperRight">
+							<div class="thirdPlayElement">
+								<div class="dropdown" style="display: inline-block;">
+									<input class="appsId" name="ids" type="text"  placeholder="请选择" readonly="readonly" data-toggle="dropdown" class="down froms">
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#" data-value="1">淘宝</a>
+										</li>
+										<li>
+											<a href="#" data-value="2">天猫</a>
+										</li>
+									</ul>
+								</div>
+								<input type="text" name="links" class="longInput appsLink" placeholder="请输入第三方店铺链接" />
+								<span class="deletShopLink" style="display: none;"></span>
+								<span class="addShopLink"></span>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!-- 供应商资质信息 -->
+				<form id="supplierInfoID" class="supplierInfo">
+					<div class="infoTitle">
+						供应商资质信息<span>(注：上传的图片长宽像素最大为1000*1000，大小在5M以内，仅支持JPG、PNG格式)</span>
+					</div>
+					<div class="inputBlock identityCardFront">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人身份证正面照：</span>
+						<div class="inputBlockRight uploadIdentityCardFront">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" name="managecodejpgfront" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+							<img class="inputBlockRightItem" src="../img/reg/imgexample1_03.png" />
+						</div>
+					</div>
+					<div class="inputBlock identityCardBack">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人身份证反面照：</span>
+						<div class="inputBlockRight uploadIdentityCardFront">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" name="managecodejpgback" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+							<img class="inputBlockRightItem" src="../img/reg/imgexample2_03.png" />
+						</div>
+					</div>
+					<div class="inputBlock idValidityPeriod">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人身份证有效期：</span>
+						<div class="form-group-item beginTimePicker">
+							<div class="beginRange input-group date">
+								<input class="form-control starttime form-datetime" name="sfstart" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+							</div>
+							<span class="sepflag">至</span>
+							<div class="endRange input-group date">
+								<input class="form-control endtime form-datetime" name="sfend" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+							</div>
+						</div>
+					</div>
+					<div class="inputBlock identityCardBody">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>入驻人手持身份证半身照：</span>
+						<div class="inputBlockRight uploadIdentityCardBody">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" name="managecodejpg" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+							<img class="inputBlockRightItem" src="../img/reg/handid.png" />
+							<div class="inputBlockRightItem">
+								<p>1、请手持本人身份证</p>
+								<p>2、照片需免冠，建议素颜</p>
+								<p>3、必须看清证件号码且证件号码不能遮挡</p>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!-- 供应商商标信息 -->
+				<div id="tradeMarkInfoID" class="brandMarkInfo">
+					<div class="infoTitle">
+						供应商商标信息<span>(注：上传的图片长宽像素最大为1000*1000，大小在5M以内，仅支持JPG、PNG格式)</span>
+					</div>
+					<div class="brandMarkInfoContainer">
+						<form class="brandMarkInfoElement">
+							<div class="selectBrandType">
+								<label>
+									<input type="radio" name="selfbrand" value="1" checked="checked">自有品牌
+								</label>
+								<label>
+									<input type="radio" name="selfbrand" value="2">代理品牌
+								</label>
+							</div>
+							<div class="ownBrandPanel">
+							<div class="inputBlock">
+								<div class="inputName"><span style="color:red;">*&nbsp;</span>商品名称：</div>
+								<input class="managerphone" name="name" type="text" placeholder="请填写商标名称" />
+							</div>
+							<div class="inputBlock">
+								<div class="inputName"><span style="color:red;">*&nbsp;</span>商标注册号：</div>
+								<input class="managerphone" name="code" type="text" placeholder="请填写商标注册号" />
+							</div>
+							<div class="inputBlock registerCredential">
+								<span class="inputName"><span style="color:red;">*&nbsp;</span>商标注册证：</span>
+								<div class="inputBlockRight uploadRegisterCredential">
+									<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+									<input type="file" name="tradepaper" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+									<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+								</div>
+							</div>
+							<div class="inputBlock qualityReport">
+								<span class="inputName"><span style="color:red;">*&nbsp;</span>质量报告：</span>
+								<div class="inputBlockRight uploadQualityReport">
+									<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+									<input type="file" name="report" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+									<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+								</div>
+							</div>
+							<div class="inputBlock entranceGoodsReport">
+								<span class="inputName"><span style="color:red;">*&nbsp;</span>进口货物报关单：</span>
+								<div class="inputBlockRight uploadQualityReport">
+									<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+									<input type="file" name="importedgoods" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+									<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+								</div>
+							</div>
+						</div>
+							<div class="agencyBrandPanel" style="display: none;">
+								<div class="inputBlock">
+									<div class="inputName"><span style="color:red;">*&nbsp;</span>商品名称：</div>
+									<input class="managerphone" type="text" placeholder="请填写商标名称" />
+								</div>
+								<div class="inputBlock">
+									<div class="inputName"><span style="color:red;">*&nbsp;</span>商标注册号：</div>
+									<input class="managerphone" type="text" placeholder="请填写商标注册号" />
+								</div>
+								<div class="inputBlock registerCredential">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>商标注册证：</span>
+									<div class="inputBlockRight uploadRegisterCredential">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock brandAccredit">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>品牌授权证明：</span>
+									<div class="inputBlockRight uploadBrandAccredit">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock brandAccreditDate">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>品牌授权有效期：</span>
+									<div class="inputBlockRight form-group-item beginTimePicker">
+										<div class="beginRange input-group date">
+											<input class="form-control starttime form-datetime" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+										</div>
+										<span class="sepflag">至</span>
+										<div class="endRange input-group date">
+											<input class="form-control endtime form-datetime" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+										</div>
+									</div>
+								</div>
+								<div class="inputBlock qualityReport">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>质量报告：</span>
+									<div class="inputBlockRight uploadQualityReport">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock entranceOrder">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>进口货物报关单：</span>
+									<div class="inputBlockRight uploadEntranceOrder">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="addBrandCard">
+							<span>添加商标信息</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 企业入驻面板 -->
+			<div class="companyEnterPanel" style="display:none;">
+				<!-- 供应商管理人信息 -->
+				<form id="companySupplierInfoID" class="companySupplierInfo">
+					<div class="infoTitle">
+						<span>供应商管理人信息</span>
+					</div>
+					<div class="inputBlock enterUserName">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>管理人姓名：</span>
+						<input class="managername" name="managername" type="text" placeholder="请填写真实姓名" />
+						<span class="alertSpan">入驻人姓名将会绑定供应商提供账户名，且不能修改，后期体现只能提现到该入驻人的银行卡内，请您确认入驻人姓名是否填写正确。</span>
+					</div>
+					<div class="inputBlock">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>管理人邮箱：</span>
+						<input class="managermail" name="managermail" type="text" placeholder="请填写常用邮箱" />
+					</div>
+					<div class="inputBlock">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>管理人手机：</span>
+						<input class="managerphone" name="managerphone" type="text" placeholder="请填写常用手机" />
+					</div>
+					<div class="inputBlock">
+						<span class="inputName">管理人微信：</span>
+						<input class="managerwechat" name="managerwechat" type="text" placeholder="请填写常用微信号或微信手机号" />
+					</div>
+					<div class="inputBlock">
+						<span class="inputName">管理人QQ：</span>
+						<input class="managerqq" name="managerqq" type="text" placeholder="请填写常用QQ" />
+					</div>
+					<div class="inputBlock goodsSource">
+						<div class="fillGroup">
+							<span class="fillGroupItem inputName"><span style="color:red;">*&nbsp;</span>主营类目：</span>
+							<div class="fillGroupItem dropdown">
+								<input class="categoryid" name="categoryid" type="text" placeholder="请选择" readonly="readonly" data-toggle="dropdown" class="down froms">
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" data-value="1">女装</a>
+									</li>
+									<li>
+										<a href="#" data-value="2">男装</a>
+									</li>
+									<li>
+										<a href="#" data-value="3">内衣</a>
+									</li>
+									<li>
+										<a href="#" data-value="4">母婴</a>
+									</li>
+									<li>
+										<a href="#" data-value="5">包包</a>
+									</li>
+									<li>
+										<a href="#" data-value="7">居家</a>
+									</li>
+									<li>
+										<a href="#" data-value="8">鞋品</a>
+									</li>
+									<li>
+										<a href="#" data-value="9">美食</a>
+									</li>
+									<li>
+										<a href="#" data-value="10">文体</a>
+									</li>
+									<li>
+										<a href="#" data-value="11">家电</a>
+									</li>
+									<li>
+										<a href="#" data-value="12">其他</a>
+									</li>
+									<li>
+										<a href="#" data-value="13">配饰</a>
+									</li>
+									<li>
+										<a href="#" data-value="14">数码</a>
+									</li>
+									<li>
+										<a href="#" data-value="341">美妆</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="inputBlock thirdPlaygroundWapperChoose">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>是否存在第三方平台店铺：</span>
+						<label>
+							<input type="radio" value="1" name="isothershop" checked="checked" />是
+						</label>
+						<label>
+							<input type="radio" value="0" name="isothershop" />否
+						</label>
+					</div>
+					<div class="inputBlock thirdPlaygroundWapper">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>第三方店铺链接：</span>
+						<div class="thirdPlaygroundWapperRight">
+							<div class="thirdPlayElement">
+								<div class="dropdown" style="display: inline-block;">
+									<input class="appsId" name="ids" type="text"  placeholder="请选择" readonly="readonly" data-toggle="dropdown" class="down froms">
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#" data-value="1">淘宝</a>
+										</li>
+										<li>
+											<a href="#" data-value="2">天猫</a>
+										</li>
+										<!--<li>
+											<a href="#">京东</a>
+										</li>-->
+									</ul>
+								</div>
+								<input type="text" name="links" class="longInput appsLink" placeholder="请输入第三方店铺链接" />
+								<span class="deletShopLink" style="display: none;"></span>
+								<span class="addShopLink"></span>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!-- 供应商企业信息 -->
+				<form id="companyBaseInfoID" class="companyBaseInfo">
+					<div class="infoTitle">
+						<span>供应商企业信息</span>
+					</div>
+					<div class="inputBlock companynames">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>公司名称：</span>
+						<input class="managername" name="companynames" type="text" placeholder="请填写法人姓名" />
+					</div>
+					<div class="inputBlock enterUserName">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>企业法人姓名：</span>
+						<input class="managername" name="ownername" type="text" placeholder="请填写法人姓名" />
+						<span class="alertSpan">入驻人姓名将会绑定供应商提供账户名，且不能修改，后期体现只能提现到该入驻人的银行卡内，请您确认入驻人姓名是否填写正确。</span>
+					</div>
+					<div class="inputBlock enterUserMail">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>企业法人邮箱：</span>
+						<input class="managername" name="ownermail" type="text" placeholder="请填写常用邮件" />
+					</div>
+					<div class="inputBlock enterUserPhone">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>企业法人手机：</span>
+						<input class="managername" name="ownerphone" type="text" placeholder="请填写法人手机" />
+					</div>
+					<div class="inputBlock enterUserIdentity">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>企业法人身份证号：</span>
+						<input class="managername" name="owneridcode" type="text" placeholder="请填写证件号码" />
+					</div>
+					<div class="inputBlock enterCompanyAddress">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>企业经营地址：</span>
+						<!--<input class="managername" type="text" placeholder="请填写经营地址" />-->
+						<select id="provinceID" class="regionSelect"></select>
+						<select id="cityID" class="regionSelect"></select>
+						<select id="xianID" class="regionSelect"></select>
+						<input type="text" name="home" class="homeRegionCls" placeholder="请填写公司具体地址">
+					</div>
+					<div class="inputBlock enterCompanyCode">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>统一社会信用代码：</span>
+						<input class="managername" name="unifiedcredicode" type="text" placeholder="请填写18位统一社会信用代码" />
+						<span class="enterCompanyCodeExample">示例</span>
+					</div>
+				</form>
+				<!-- 供应商资质信息 -->
+				<form id="companyQualificatID" class="companyQualificat">
+					<div class="infoTitle">
+						供应商资质信息<span>(注：上传的图片长宽像素最大为1000*1000，大小在5M以内，仅支持JPG、PNG格式)</span>
+					</div>
+					<div class="inputBlock identityCardFront">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>法人身份证正面照：</span>
+						<div class="inputBlockRight uploadIdentityCardFront">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+							<img class="inputBlockRightItem" src="../img/reg/imgexample1_03.png" />
+						</div>
+					</div>
+					<div class="inputBlock identityCardBack">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>法人身份证反面照：</span>
+						<div class="inputBlockRight uploadIdentityCardFront">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+							<img class="inputBlockRightItem" src="../img/reg/imgexample2_03.png" />
+						</div>
+					</div>
+					<div class="inputBlock idValidityPeriod">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>法人身份证有效期：</span>
+						<div class="form-group-item beginTimePicker">
+							<div class="beginRange input-group date">
+								<input class="form-control starttime form-datetime" name="sfstart" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+							</div>
+							<span class="sepflag">至</span>
+							<div class="endRange input-group date">
+								<input class="form-control endtime form-datetime" name="sfend" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+							</div>
+						</div>
+					</div>
+					<div class="inputBlock businessLicense">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>营业执照：</span>
+						<div class="inputBlockRight uploadIdentityCardBody">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+						</div>
+					</div>
+					<div class="inputBlock banklicensejpg">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>开户许可证：</span>
+						<div class="inputBlockRight uploadIdentityCardBody">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+						</div>
+					</div>
+					<div class="inputBlock normaltaxjpg">
+						<span class="inputName"><span style="color:red;">*&nbsp;</span>一般纳税人资格证书：</span>
+						<div class="inputBlockRight uploadIdentityCardBody">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+						</div>
+					</div>
+					<div class="inputBlock foodlicense">
+						<span class="inputName">食品经营许可证(食品流通许可证)/酒类流通许可证：</span>
+						<div class="inputBlockRight uploadIdentityCardBody">
+							<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+							<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+							<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+							<br/>
+							<span>注：</span>
+							<span>经营食品类需在此处上传食品经营许可证(食品流通许可证);经营酒类需另行上传酒类流通许可证或酒类流通备案登记表，因当地主管部门规定无需办理前述证照的，应上传申请书，详询商家支持。</span>
+						</div>
+					</div>
+				</form>
+				<!-- 供应商商标信息 -->
+				<form id="companyBrandMarkInfoID" class="companyBrandMarkInfo">
+					<div class="infoTitle">
+						供应商商标信息<span>(注：上传的图片长宽像素最大为1000*1000，大小在5M以内，仅支持JPG、PNG格式)</span>
+					</div>
+					<div class="companyBrandMarkInfoContainer">
+						<div class="companyBrandMarkInfoElement">
+							<div class="selectBrandType">
+								<label>
+									<input type="radio" name="selfbrand" value="1" checked="checked">自有品牌
+								</label>
+								<label>
+									<input type="radio" name="selfbrand" value="2">代理品牌
+								</label>
+							</div>
+							<div class="ownBrandPanel">
+								<div class="inputBlock">
+									<div class="inputName"><span style="color:red;">*&nbsp;</span>商品名称：</div>
+									<input class="managerphone" name="name" type="text" placeholder="请填写商标名称" />
+								</div>
+								<div class="inputBlock">
+									<div class="inputName"><span style="color:red;">*&nbsp;</span>商标注册号：</div>
+									<input class="managerphone" name="code" type="text" placeholder="请填写商标注册号" />
+								</div>
+								<div class="inputBlock registerCredential">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>商标注册证：</span>
+									<div class="inputBlockRight uploadRegisterCredential">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock qualityReport">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>质量报告：</span>
+									<div class="inputBlockRight uploadQualityReport">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock entranceGoodsReport">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>进口货物报关单：</span>
+									<div class="inputBlockRight uploadQualityReport">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+							</div>
+							<div class="agencyBrandPanel" style="display: none;">
+								<div class="inputBlock">
+									<div class="inputName"><span style="color:red;">*&nbsp;</span>商品名称：</div>
+									<input class="managerphone" type="text" placeholder="请填写商标名称" />
+								</div>
+								<div class="inputBlock">
+									<div class="inputName"><span style="color:red;">*&nbsp;</span>商标注册号：</div>
+									<input class="managerphone" type="text" placeholder="请填写商标注册号" />
+								</div>
+								<div class="inputBlock registerCredential">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>商标注册证：</span>
+									<div class="inputBlockRight uploadRegisterCredential">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock brandAccredit">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>品牌授权证明：</span>
+									<div class="inputBlockRight uploadBrandAccredit">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock brandAccreditDate">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>品牌授权有效期：</span>
+									<div class="inputBlockRight form-group-item beginTimePicker">
+										<div class="beginRange input-group date">
+											<input class="form-control starttime form-datetime" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+										</div>
+										<span class="sepflag">至</span>
+										<div class="endRange input-group date">
+											<input class="form-control endtime form-datetime" placeholder="请选择时间" size="16" type="text" value="" readonly="readonly">
+										</div>
+									</div>
+								</div>
+								<div class="inputBlock qualityReport">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>质量报告：</span>
+									<div class="inputBlockRight uploadQualityReport">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+								<div class="inputBlock entranceOrder">
+									<span class="inputName"><span style="color:red;">*&nbsp;</span>进口货物报关单：</span>
+									<div class="inputBlockRight uploadEntranceOrder">
+										<img class="inputBlockRightItem addUploadImage clickUpload" src="../img/reg/addimg_03.png">
+										<input type="file" class="inputBlockRightItem mainPhotoInput" style="display: none;" accept="image/jpeg,image/jpg,image/png">
+										<span class="inputBlockRightItem uploadPrompt clickUpload">请选择文件</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="addBrandCard">
+							<span>添加商标信息</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="submitBar">
+				<span class="submitBtn">立即提交</span>
+				<span class="prompt">请完善填写所有必填信息</span>
+			</div>
+		</div>
+	</body>
+	<script src="../js/reg/region_init.js"></script>
+	<script src="../js/reg/fillenterinfo.js"></script>
+</html>

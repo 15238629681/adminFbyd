@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+
+	<style>
+		.block1{
+			width:100px;height:100px;
+			background:red;margin-top:10px;
+		}
+		.block2{
+			width:200px;height:200px;
+			background:gray;
+		}
+
+
+		/*flex布局*/
+		.divWapper{display:flex;
+			flex-direction : row;flex-wrap:nowrap;
+			flex-flow: flex-direction || flex-wrap;
+			justify-content:flex-starrt;
+			background:lightgrey;}
+		.divWapper div{border:1px solid red;}
+	</style>
+</head>
+<body>
+	<div class="divWapper">
+		<div class="div1">div1</div>
+		<div class="div2">div2最美的期待</div>
+		<div class="div3">div3</div>
+	</div>
+
+
+
+
+
+<input type="number" id="Score" />
+<ul>
+	<li>1</li>
+	<li style="display:none;">2</li>
+	<li>3</li>
+</ul>
+
+	<div>
+		<input type="text" class="title" maxlength="10">
+		<span class="numFlag"></span>
+	</div>
+
+	<div>
+		<input type="text" class="title" maxlength="20">
+		<span class="numFlag"></span>
+	</div>
+
+
+
+<script type="text/javascript">
+
+	// 文字输入
+	$('.title').keyup(function(){
+		var content = $(this).val();
+		$(this).parent().find(".numFlag").html(content.length + "/" + $(this).attr('maxlength'))
+	})
+
+
+	$("li").each(function(inde ,ele){
+	    console.log($(this).html());
+	})
+
+	// return;
+	var oneObj={
+        name:null,
+	    nameFn:function(nameStr){
+	        if(this.name){
+	            this.name=null;
+			}
+			this.name=nameStr;
+		},
+		getNameFn:function(name){
+            var my=this;
+            this.nameFn();
+	        console.log("我就是想输出一下name:"+name);
+		}
+	}
+
+
+	$(document).ready(function() {
+		//敲击按键时触发
+		$("#Score").bind("keypress", function(event) {
+			var event= event || window.event;
+			var getValue = $(this).val();
+			//控制第一个不能输入小数点"."
+			if (getValue.length == 0 && event.which == 46) {
+//				alert(1)
+				event.preventDefault();
+				return;
+			}
+			//控制只能输入一个小数点"."
+			if (getValue.indexOf('.') != -1 && event.which == 46) {
+				event.preventDefault();
+//				alert(1)
+				return;
+			}
+			//控制只能输入的值
+			if (event.which && (event.which < 48 || event.which > 57) && event.which != 8 && event.which != 46) {
+				event.preventDefault();
+				return;
+			}
+		})
+		//失去焦点是触发
+		$("#Score").bind("blur", function(event) {
+			var value = $(this).val(), reg = /\.$/;
+			if (reg.test(value)) {
+				value = value.replace(reg, "");
+				$(this).val(value);
+			}
+		})
+	});
+</script>
+
+
+<!--无效代码-->
+<script>
+
+	//输入框
+	$(".commonStyle .rechargeNumInput").each(function(){
+		$(this).on("input",function(event){
+			console.log(1)
+			var event= event || window.event;
+			var getValue = $(this).val();
+			//控制第一个不能输入小数点"."
+			if (getValue.length == 0 && event.which == 46) {
+//				alert(1)
+				event.preventDefault();
+				return;
+			}
+			//控制只能输入一个小数点"."
+			if (getValue.indexOf('.') != -1 && event.which == 46) {
+				event.preventDefault();
+//				alert(1)
+				return;
+			}
+			//控制只能输入的值
+			if (event.which && (event.which < 48 || event.which > 57) && event.which != 8 && event.which != 46) {
+				event.preventDefault();
+				return;
+			}
+			//只能输入小数点后两位
+			if(getValue.indexOf(".")!=-1){
+				if(getValue.substring(getValue.indexOf(".")).length==3){
+					event.preventDefault();
+					return;
+				}
+			}
+		})
+	})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+        <title>提现明细-财务管理-翻宝云店供应商管理后台</title>
+        <!-- ZUI 标准版压缩后的 CSS 文件 -->
+        <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+        <link rel="stylesheet" href="../css/public/reset.css" />
+        <link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+        <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+        <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+        <!-- ZUI Javascript 依赖 jQuery -->
+        <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+        <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+        <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+        <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+        <link rel="stylesheet" href="../css/finance/ExtractCashDetail.css" />
+        <script src="../js/public/datetimepicker.min.js"></script>
+        <link rel="stylesheet" href="../css/public/pager.css" />
+        <script src="../js/plug/YouXin.js"></script>
+    </head>
+    <body>
+        <script src="../js/public/head.js"></script>
+        <div class="part-left">
+            <div id="page-titie"><img src="../img/finance/finance_03.png" />财务管理</div>
+            <div class="list">
+                <a href="accountbalance.html">账户余额</a>
+            </div>
+            <div class="list active">
+                <a href="#" style="color:#fff;">提现明细</a>
+            </div>
+            <div class="list">
+                <a href="rechargedetail.html">充值明细</a>
+            </div>
+            <div class="list">
+                <a href="frozennumdetail.html">冻结明细</a>
+            </div>
+        </div>
+        <div id="part-right">
+            <div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+                <img class="loadingImg" src="../img/public/downrefesh.gif">
+                <span class="loadingFont">加载中...</span>
+            </div>
+            <div class="contentBlock">
+                <div id="loaction">当前位置：管理后台>财务管理>提现明细</div>
+                <div class="right-container">
+                    <div class="detailTitle">提取明细</div>
+                    <div class="searchPanel">
+                        <div class="form-group dateSelectItem">
+                            <span class="fillTitle form-group-item">搜索：</span>
+                            <div class="dropdown form-group-item">
+                                <input class="down searchItemInput" type="text" id="dateSelectInputID" placeholder="全部" readonly="readonly" data-toggle="dropdown">
+                                <ul class="dropdown-menu">
+                                    <li data-id="0"><a>全部</a></li>
+                                    <li data-id="1"><a>最近24小时</a></li>
+                                    <li data-id="2"><a>最近48小时</a></li>
+                                    <li data-id="3"><a>最近7天</a></li>
+                                    <li data-id="4"><a>最近30天</a></li>
+                                    <li data-id="5"><a>自定义</a></li>
+                                </ul>
+                            </div>
+                            <div class="form-group-item beginTimePicker">
+                                <div class="beginRange input-group date form-datetime">
+                                    <span class="input-group-addon">
+                                        <span class="icon-calendar"></span>
+                                    </span>
+                                    <input class="form-control starttime" size="16" type="text" value="" readonly="readonly">
+                                </div>
+                                <span class="sepflag">-</span>
+                                <div class="endRange input-group date form-datetime">
+                                    <span class="input-group-addon">
+                                        <span class="icon-calendar"></span>
+                                    </span>
+                                    <input class="form-control endtime" size="16" type="text" value="" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group extractCashStateItem">
+                            <span class="fillTitle form-group-item">提现状态：</span>
+                            <div class="dropdown form-group-item">
+                                <input class="down extractCashStateItemInput" type="text" id="extractCashStateID" placeholder="全部" readonly="readonly" data-toggle="dropdown">
+                                <ul class="dropdown-menu">
+                                    <li data-id="0"><a>全部</a></li>
+                                    <li data-id="1"><a>申请中</a></li>
+                                    <li data-id="2"><a>已提现</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group extractCashTypeItem">
+                        <span class="fillTitle form-group-item">提现账户类型：</span>
+                        <div class="dropdown form-group-item">
+                            <input class="down extractCashTypeItemInput" type="text" id="extractCashTypeID" placeholder="全部" readonly="readonly" data-toggle="dropdown">
+                            <ul class="dropdown-menu">
+                                <li data-id="0"><a>全部</a></li>
+                                <li data-id="3"><a>支付宝</a></li>
+                                <li data-id="4"><a>微信</a></li>
+                                <li data-id="5"><a>网银</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                        <div class="form-group searchBtn">
+                            <span class="searchButton">查询</span>
+                        </div>
+                    </div>
+                    <div class="exportExcelBar">
+                        <span class="exportExcelBtn">导出为Excel</span>
+                    </div>
+                    <table class="detailTable table-hover">
+                        <thead>
+                        <tr>
+                            <td>流水号</td>
+                            <td>创建时间</td>
+                            <td>提现金额(元)</td>
+                            <!--<td>手续费(元)</td>-->
+                            <td>提现账户类型</td>
+                            <td>账号</td>
+                            <td>户名</td>
+                            <td>银行</td>
+                            <td>开户行</td>
+                            <td>提现状态</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <!--
+                            <tr>
+                                <td>17071412565005719052</td>
+                                <td>2017-07-14 10:10:00</td>
+                                <td>1000.00</td>
+                                <td>
+                                    <span>杭州瞄眼网络科技有限公司</span><br/>
+                                    <span>杭州银行蒋村支行</span> <span>3301040160004701234</span>
+                                </td>
+                                <td>2017-07-14 10:00:00</td>
+                            </tr>
+                            <tr>
+                                <td>17071412565005719053</td>
+                                <td>2017-07-14 10:10:00</td>
+                                <td>5000.00</td>
+                                <td>
+                                    <span>杭州瞄眼网络科技有限公司</span><br/>
+                                    <span>杭州银行蒋村支行</span> <span>3301040160004701234</span>
+                                </td>
+                                <td>2017-07-14 10:00:00</td>
+                            </tr>
+                            -->
+                        </tbody>
+                    </table>
+                    <div class="pageWapper" style="display: none;">
+                        <div style="margin:0 auto;text-align:center;">
+                            <ul class="pagination" id="page2">
+                            </ul>
+                            <div class="pageJump">
+                                <span>跳转到</span>
+                                <input type="number" class="pageInput" style="width:50px;" />
+                                <span>页</span>
+                                <span type="button" class="page-search-btn" id="searchPageBtnID">确定</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+            document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+        </script>
+        <script src="../js/finance/ExtractCashDetail.js"></script>
+        <script src="../js/public/pager.js"></script>
+    </body>
+</html>

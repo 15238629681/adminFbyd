@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+	<title>账户充值(系统转账)-账户余额-财务管理-翻宝云店供应商管理后台</title>
+	<!-- ZUI 标准版压缩后的 CSS 文件 -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+	<link rel="stylesheet" href="../css/public/reset.css" />
+	<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+	<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+	<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+	<!-- ZUI Javascript 依赖 jQuery -->
+	<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+	<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+	<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+	<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>-->
+	<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+	<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+	<link rel="stylesheet" href="../css/finance/systemrecharge.css" />
+	<script src="../js/public/datetimepicker.min.js"></script>
+	<script src="../js/plug/YouXin.js"></script>
+</head>
+<body>
+	<script src="../js/public/head.js"></script>
+	<div class="part-left">
+		<div id="page-titie"><img src="../img/finance/finance_03.png" />财务管理</div>
+		<div class="list active">
+			<a href="accountbalance.html" style="color:#fff;">账户余额</a>
+		</div>
+		<div class="list">
+			<a href="ExtractCashDetail.html">提现明细</a>
+		</div>
+		<div class="list">
+			<a href="rechargedetail.html">充值明细</a>
+		</div>
+		<div class="list">
+			<a href="frozennumdetail.html">冻结明细</a>
+		</div>
+	</div>
+	<div id="part-right">
+		<div id="loaction">当前位置：管理后台>财务管理>账户余额>账户充值(系统转账)</div>
+		<div class="contentBlock" style="display:block;">
+			<ul class="tabPanelTitle">
+				<li class="titleActive">支付宝转账</li>
+				<li>微信转账</li>
+				<li class="spaceFillCell"></li>
+			</ul>
+			<ul class="tabPanelBody">
+				<li class="applyTransfer">
+					<!-- 支付宝转账 -->
+					<div class="applyMethod">
+						<img src="../img/finance/zhb.png">
+					</div>
+					<div class="inputWapper noBottomLine">
+						<div class="inputName">充值金额</div>
+						<!--onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"-->
+						<div class="floatRight"><input type="text" class="payNumInput" />元</div>
+					</div>
+					<div class="inputWapper">
+						<div class="inputName">手续费</div>
+						<div class="floatRight"><span class="serviceCharge">￥<span>0.00</span></span></div>
+					</div>
+					<div class="actualApplyForDiv">
+						实际需支付金额：<span class="actualApplyFor">￥<span>0.00</span></span>
+					</div>
+					<div class="transferPrompt">
+						系统转账时到账，需要支付0.55%手续费，实际到账<span class="inputValue">0.00</span>元。<br/>
+						请勿在转账备注中填写任何文字，切勿出现敏感词，否则视为违规，平台将不提供任何服务。
+					</div>
+				</li>
+				<li style="display:none;">
+					<div style="width:100%;height:100%;text-align:center;padding: 160px;">暂未开通</div>
+				</li>
+			</ul>
+			<div class="nextBar"><span class="nextButton">下一步</span></div>
+		</div>
+		<div class="applyForSuccess" style="display:none;">
+			<div class="successPrompt1">√</div>
+			<div class="successPrompt2">您已成功充值<span>0.00</span>元。</div>
+			<ul class="bottom">
+				<li>您现在可以：</li>
+				<li><a href="systemrecharge.html">继续充值</a> |</li>
+				<li><a href="accountbalance.html">查看账户余额</a> |</li>
+				<li><a href="accountbalance.html">查看账户明细</a> |</li>
+				<li><a href="../activity/experienceactivitylist.html">查看体验活动列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+		document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+	</script>
+<script src="../js/finance/systemrecharge.js"></script>
+</body>
+</html>

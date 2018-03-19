@@ -1,0 +1,172 @@
+.contentBlock {
+    height: calc( 100% - 100px );
+    margin-left: 30px;
+    background-color: #fff;
+    padding: 18px 0px;
+}
+.rowline {
+    margin-bottom: 5px;
+    height: 30px;
+}
+.rowline .rowlineLeft {
+    width: 100px;
+    height: 30px;
+    text-align: right;
+    line-height: 30px;
+    color: #333;
+    float: left;
+}
+.rowlineRight {
+    width: calc( 100% - 100px );
+    height: 30px;
+    line-height: 30px;
+    float: left;
+}
+/*提现银行卡*/
+.rowBankCard {
+    height: 91px;
+    -moz-user-select:none;/*火狐*/
+    -webkit-user-select:none;/*webkit浏览器*/
+    -ms-user-select:none;/*IE10*/
+    -khtml-user-select:none;/*早期浏览器*/
+    user-select:none;
+}
+.rowBankCard .rowlineRight {
+    height: 91px;
+}
+.rowBankCard .rowlineRight .rowlineRightItem {
+    float: left;
+    height: 91px;
+}
+/*提现银行卡-卡*/
+.rowBankCard .rowlineRight .rowlineRightItem .bankCard {
+    width: 161px;
+    height: 91px;
+    border: 1px solid #C0C0C0;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    cursor: pointer;
+}
+.rowBankCard .rowlineRight .rowlineRightItem .activeCard {
+    border: 1px solid #FF3A46;
+    background: url(../../img/activity/searchOrderSelect.png) no-repeat;
+    background-position: right bottom;
+}
+/*卡种类的说明*/
+.rowBankCard .bankCard .bankCardType {
+}
+/*.rowBankCard .bankCard .bankTypeImage {
+    margin-right: 5px;
+}*/
+.bankCard .bankCardType .bankLogo {
+    margin-right: 20px;
+}
+.bankCard .bankCardType .editCard {
+    margin-right: 9px;
+    display: none;
+}
+.bankCard .bankCardType .deleteCard {
+    display: none;
+}
+.doubleSelect .bankCardType .editCard,.doubleSelect .bankCardType .deleteCard {
+    display: inline-block;
+}
+/*卡号*/
+.rowBankCard .bankCard .bankCardNumber {
+    line-height: 25px;
+    height: 20px;
+}
+.rowBankCard .rowlineRight .addCashCard {
+    cursor: pointer;
+}
+/*提现余额*/
+.balance input,.verifyCode input {
+    width: 190px;
+    border: 1px solid #D3D3D3;
+    padding-left: 8px;
+    margin-right: 5px;
+}
+/*绑定手机号码*/
+.bindingPhobeNum .phoneNum {
+    width: 190px;
+    padding-left: 8px;
+    border: 1px solid #C0C0C0;
+}
+.changePhoneNum {
+    width: 100px;
+    text-align: center;
+    line-height: 30px;
+    color: #FFFFFF;
+    background-color: #FBBD00;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.changePhoneNum:hover {
+    background-color: #E8AF00;
+}
+/*短信验证码*/
+.SMSVerify input {
+    padding-left: 10px;
+    width: 190px;
+    border: 1px solid #C0C0C0;
+}
+.SMSVerify .getSMSCode {
+    width: 100px;
+    text-align: center;
+    line-height: 30px;
+    color: #666666;
+    background-color: #E0E0E0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.SMSVerify .getSMSCode:hover {
+    background-color: #CECECE;
+}
+/*提示*/
+.rowlineRight .promptLogo {
+    margin-top: 7px;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    background-color: #389BFF;
+    border-radius: 8px;
+    color: #FFFFFF;
+    vertical-align: top;
+    text-align: center;
+    line-height: 16px;
+}
+.SMSVerify .rowlineRight span {
+    color: #666666;
+}
+/*确认提现和取消提现按钮操作栏*/
+.affirmDeposit {
+    width: 115px;
+    height: 35px;
+    background-color: #FF3A46;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 100px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.affirmDeposit:hover {
+    background-color: #ED3940;
+}
+/*取消提现*/
+.cancelDeposit {
+    width: 115px;
+    height: 35px;
+    border: 1px solid #C0C0C0;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 35px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.cancelDeposit:hover {
+    background-color: #EAEAEA;
+}
+

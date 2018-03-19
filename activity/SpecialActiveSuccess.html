@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Access-Control-Allow-Origin" content="Anonymous" />
+    <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+    <title>特价活动报名-活动管理-翻宝云店供应商管理后台</title>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+    <link rel="stylesheet" href="../css/public/reset.css" />
+    <link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+    <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+    <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+    <script src="../js/product/zui.datatable.min.js"></script>
+    <script src="../js/public/datetimepicker.min.js"></script>
+    <script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+
+    <link rel="stylesheet" href="../css/activity/SpecialActiveSuccess.css" />
+
+    <link href="../css/activity/editor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="../js/activity/editor/third-party/template.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/activity/editor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/activity/editor/umeditor.min.js"></script>
+    <script type="text/javascript" src="../js/activity/editor/lang/zh-cn/zh-cn.js"></script>
+
+    <script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>
+    <script src="../js/plug/YouXin.js"></script>
+</head>
+<body>
+    <script src="../js/public/head.js"></script>
+    <div class="part-left">
+        <div id="page-titie"><img src="../img/activity/activitylogo.png" />活动管理</div>
+        <div class="list">
+            <a href="releaseexperienceactivity.html">发布体验活动</a>
+        </div>
+        <div class="list ">
+            <a href="experienceactivitylist.html">体验活动列表</a>
+        </div>
+        <div class="list">
+            <a href="reviewexperapplication.html">审核体验申请</a>
+        </div>
+        <div class="list">
+            <a href="#">发布翻宝活动</a>
+        </div>
+        <div class="list active">
+            <a href="SpecialActiveApply.html">特价活动报名</a>
+        </div>
+    </div>
+    <div id="part-right">
+        <div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:999;">
+            <img class="loadingImg" src="../img/public/downrefesh.gif">
+            <span class="loadingFont">加载中...</span>
+        </div>
+        <div id="loaction">当前位置：管理后台>活动管理>特价活动报名</div>
+        <div class="stepImg"></div>
+        <!-- 填写活动产品信息 -->
+        <div class="activityBlock fillActiveNums">
+            <div class="infoTitle">
+                <span class="selectActiveType">冻结保证金</span>
+                <span class="selectActiveExplain">单笔平台服务费用根据您提供活动产品的活动售价区间计算</span>
+            </div>
+            <form class="activeFormItem">
+                <div class="inputWapper fillActivesNums">
+                    <div class="inputWapperLeft inputName">预估活动数量：</div>
+                    <div class="inputWapperRight"><input type="text" class="payNumInput"></div>
+                </div>
+                <div class="inputWapper fillActivesNums">
+                    <div class="inputWapperLeft inputName">平台活动服务费：</div>
+                    <div class="inputWapperRight"><span type="text" class="unitPrice">3.60</span>元/笔</div>
+                </div>
+                <div class="platformServiceRule">
+                    <span class="prompt serviceRule">!</span><span class="serviceRule">查看平台服务费规则：</span>
+                </div>
+                <div class="activeTotalCost">
+                    总费用<span class="totalCost">￥5688.00</span>
+                </div>
+            </form>
+        </div>
+        <!--选择活动分类-->
+        <div class="activityBlock submitBlock">
+            <span class="submitSpan lastStep">上一步</span>
+            <span class="submitSpan nextStep">下一步</span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var activeLi = document.querySelectorAll("#head ul li");
+    activeLi[3].style.background = "#f6ecd1";
+    activeLi[3].getElementsByTagName("a")[0].style.color = "#FBBD00";
+</script>
+<script src="../js/activity/SpecialActiveSuccess.js"></script>
+<!--查看远程分支：git branch -r
+拉取远程分支并创建本地分支：git checkout -b 本地分支名x origin/远程分支名y 例如：git checkout -b admin origin/admin
+查看当前分支：git branch
+创建分支：git branch <name> 例如 git branch admin
+切换到某分支：git checkout <name> 例如 git checkout admin
+提交代码到指定分支：git push origin <name> 例如 git push origin <admin>
+分支管理策略：
+	1、切换到指定分支
+	2、拉取该分支最新代码
+	3、把本地代码提交到指定分支
+
+注：分支代码不影响主支(master)，可以单独删除分支：git branch - d <name>，也可以将分支代码合并到当前分支：git merge <name>-->
+
+
+
+
+
+
+
+
+
+
+
+
+

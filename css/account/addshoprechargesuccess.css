@@ -1,0 +1,78 @@
+.part-right{background:#f6f6f6;}
+.shopBlockWapper{margin:0 30px;}
+.successImg{
+	height:68px;
+	background:url(../../img/account/bind3_03.png) #fff center center no-repeat;
+	margin-bottom:6px;
+}
+.freesuccessImg{
+	height:68px;
+	background:url(../../img/account/free_02.png) #fff center center no-repeat;
+	margin-bottom:6px;
+}
+
+/*支付方式*/
+.payWayWapper {background:#fff;}
+.commonStyle {
+    margin-bottom: 2px;
+    padding: 30px;
+    background: #fff;
+}
+.payWayWapper div{display:inline-block;}
+.payWayWapper .payText{
+	display:inline-block;
+	width:90px;height:56px;
+	padding-left:15px;margin-top:5px;
+	/*text-align: right;*/
+}
+.payWayRadio{margin-right:98px;}
+.payWayRadio input{margin-right:20px;}
+
+/*.充值成功*/
+.successRecharge{
+	margin-bottom:4px;
+}
+.successRecharge .contentWapper{
+	height:460px;line-height: 460px;
+	text-align:center;color:#FBBD00;font-weight:normal;
+	font-size:20px;
+	
+}
+.successRecharge h1{
+	height:89px;line-height:89px;
+	margin-bottom:34px;
+}
+.successRecharge .linkList{
+	font-size:16px;
+}
+.successRecharge .linkList a{
+	color:#333;
+}
+
+
+
+/*上一步*/
+.operateBlock{
+	height:108px;
+	background:#fff;
+}
+.operateBlock .contentBlock{
+	width:424px;height:100%;
+	padding-top:34px;
+	margin:0 auto;
+}
+.operateBlock span{
+	display:inline-block;width:166px;height:40px;line-height:40px;
+	color:#fff;background:#FF3A46;border-radius: 4px;
+	text-align:center;cursor:pointer;
+}
+.operateBlock span:first-child{
+	margin-right:88px;
+}
+s
+
+
+
+
+
+

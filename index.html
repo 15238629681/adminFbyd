@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>账号登陆-杭州牛啦网络科技有限公司</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="css/public/reset.css" />
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<link rel="stylesheet" href="css/reg/jquery.idcode.css" />
+		<link rel="stylesheet" href="css/login/index.css" />
+		<style>
+			#ehong-code-tip-ck{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="login-container">
+			<!--账号密码登陆-->
+			<div class="login-wrap clean accountNumLogin">
+				<div class="left-container"></div>
+				<div class="right-container">
+					<div class="title">
+						供应商管理后台
+						<span>
+							<a href="reg/reg.html">新供应商入驻</a>
+						</span>
+					</div>
+					<div style="margin-bottom: 15px;">
+						<input class="phone username" type="text" placeholder="供应商用户名" value="youxin" />
+					</div>
+					<div style="margin-bottom: 15px;">
+						<input class="verifycode password" type="password" placeholder="密码" value="1" />
+					</div>
+					<!--图像验证码-->
+					<div class="inputWapper imgVerifyWapper" style="color:#666;">
+						<input type="text" id="Txtidcode" class="txtVerification img-verify code" placeholder="图形验证码"/>
+						<span id="idcode" class="verifycode-wrap"></span>
+					</div>
+					<div class="foot"><span class="username-login">使用手机短信验证登录</span><span class="forget-password">忘记密码</span></div>
+					<div class="login">登录</div>
+				</div>
+			</div>
+			<div class="footerBlock">
+				杭州牛啦网络科技有限公司Copyright@翻宝云店2017 &nbsp;浙CP备16047970号-3
+			</div>
+		</div>
+		<script src="js/reg/jquery.idcode.js"></script>
+		<script>
+			$.idcode.setCode(); //加载生成验证码方法
+			//手机号登陆      获取短信验证码
+			$(".accountNumLogin .username-login").on("click", function() {
+				window.location.href = "login/phonelogin.html"
+			});
+			//			登陆
+			document.querySelector(".login").addEventListener("click", function(){
+				var username = document.querySelector(".username").value.trim();
+				var password = document.querySelector(".password").value.trim();
+				var txtVerification = document.querySelector(".txtVerification").value.trim();
+
+				if(!username){
+					alert("请输入账号！");
+					return;
+				}
+				if(!password){
+					alert("请输入密码！");
+					return;
+				}
+				if(!txtVerification){
+					alert("请输入图形验证码！");
+					return;
+				}
+				var IsBy = $.idcode.validateCode(); //调用返回值，返回值结果为true或者false
+				if(!IsBy){
+					alert("图形验证码错误！");
+					return;
+				}
+				$.ajax({
+					type: "post",
+					url: "https://app.fanbaoyundian.com/apiapiextend/apia/Backlanding/shopBacklogin",
+					data: {
+						username:username,
+						password:password
+					},
+					success: function(data) {
+						if(data.message=="登陆成功"){
+							localStorage.setItem("userinfo",JSON.stringify(data.data));
+							localStorage.setItem("headerinfo",JSON.stringify(data.datas[0]));
+
+							if(data.info=="没有绑定手机号"){
+								window.location.href="reg/testaccountinfo.html";
+							}
+							if(data.info=="已绑定手机号"){
+                                toUserVIPGrade();
+
+							}
+						}
+						if(data.message=="账号或密码错误"){
+							alert("账号或密码错误");
+						}
+
+					},
+					error: function(msg) {
+						console.log(msg);
+					}
+				});
+			});
+            function toUserVIPGrade() {
+                var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+                var token = userinfo.token;
+                var uid = userinfo.uid;
+                $.ajax({
+                    type: "post",
+                    url: "https://app.fanbaoyundian.com/apiapiextend/apia/Backlanding/updatelevel",
+                    data: {
+                        token:token,
+                        uid:uid,
+                        timestamp: parseInt(new Date().getTime()/1000)
+                    },
+                    success: function(data) {
+                        if(data.state==1){
+                            window.location.href="index/myjob.html";
+                        }
+                    },
+                    error: function(msg) {
+                        console.log(msg);
+                    }
+                });
+            }
+            //发布时需注释
+            $('#Txtidcode').val($.idcode.getCode());
+		</script>
+	</body>
+
+</html>

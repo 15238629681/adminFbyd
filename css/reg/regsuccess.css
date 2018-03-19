@@ -1,0 +1,43 @@
+/*body{overflow: hidden;}*/
+
+
+	.topBlock{width:100%;height:20px;
+	background:#F6F6F6 no-repeat center bottom;}
+	.stepBlock{width:100%;height:68px;
+	background:url(../../img/reg/reg3_03.png) #fff no-repeat center center ;
+	}
+	.grayBlock{width:100%;height:4px;
+	background:#F6F6F6 no-repeat center bottom;margin-bottom:148px;}
+	
+	
+	.bottomFoot{    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    background: #f6f6f6;
+    color: #999;
+    font-size: 12px;
+    margin-top: 412px;}
+	
+	.successWapper{
+		width:342px;height:110px;
+		margin:0 auto;
+	}
+	.successText{
+		height:80px;
+		line-height:80px;
+		color:#000;
+		font-size:20px;
+		text-align: center;
+		
+	}
+	.btnList span{width:100px;height:30px;
+	line-height:30px;border-radius: 4px;;
+	background:#FF3A46;color:#fff;
+	cursor: pointer;text-align:center;
+	font-size:14px;margin-right:16px;}
+.btnList span:last-child{
+	margin-right:0;
+}
+
+	

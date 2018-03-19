@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name = "format-detection" content = "telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+<title>活动广场-首页-翻宝云店供应商管理后台</title>
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+<link rel="stylesheet" href="../css/public/reset.css" />
+<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+<script src="../js/product/zui.datatable.min.js"></script>
+<style>
+body{overflow: hidden;}
+@media screen and (max-width: 1440px)  {
+	
+	.btn-wrap{padding-left: 30px;}
+	.btn-wrap span{width: 160px;height: 50px;line-height: 50px;text-align: center;font-size: 16px;background: #fff;margin-right: 10px;cursor: pointer;}
+	.btn-wrap span:hover{color: #fff;background: #FF3A46;}
+	.btn-wrap .active{color: #fff;background: #FF3A46;}
+	#product-list{width: calc(100% - 60px);margin: 20px auto;min-width: 850px;}
+	#product-list .table{border:1px #ddd solid;}
+	#product-list .table>thead>tr>th{height: 50px;line-height: 50px;text-align: center;padding: 0;}
+	#product-list .table>tbody>tr>td{height: 50px;line-height: 50px;text-align: center;padding: 0;background: #fff;}
+	#product-list .table>tbody>tr>td span{color: #FBBD00;margin-left: 10px;}
+}
+@media screen and (min-width: 1440px)  {
+	
+	.btn-wrap{padding-left: 60px;}
+	.btn-wrap span{width: 160px;height: 50px;line-height: 50px;text-align: center;font-size: 16px;background: #fff;margin-right: 10px;cursor: pointer;}
+	.btn-wrap span:hover{color: #fff;background: #FF3A46;}
+	.btn-wrap .active{color: #fff;background: #FF3A46;}
+	#product-list{width: calc(100% - 120px);margin: 20px auto;min-width: 850px;}
+	#product-list .table{border:1px #ddd solid;}
+	#product-list .table>thead>tr>th{height: 50px;line-height: 50px;text-align: center;padding: 0;}
+	#product-list .table>tbody>tr>td{height: 50px;line-height: 50px;text-align: center;padding: 0;background: #fff;}
+	#product-list .table>tbody>tr>td span{color: #FBBD00;margin-left: 10px;}
+}
+</style>
+</head>
+<body>
+<script src="../js/public/head.js"></script>
+<div class="part-left">
+	<div id="page-titie"><img src="../img/index/index-icon.png" />首页</div>
+	<div class="list"><a href="myjob.html?type=0">我的工作台</a></div>
+	<div class="list"><a href="notice.html?type=0">平台公告</a></div>
+	<div class="list active">活动广场</div>
+	<div class="list"><a href="supplierdata.html?type=0">供应商数据统计</a></div>
+</div>
+<div id="part-right">
+	<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+		<img class="loadingImg" src="../img/public/downrefesh.gif">
+		<span class="loadingFont">加载中...</span>
+	</div>
+	<div id="loaction">当前位置：管理后台>首页>活动广场</div>
+	<div class="btn-wrap">
+		<span class="active" data-type="1">所有活动</span><span data-type="2">可报名活动</span><span data-type="3">已报名活动</span>
+	</div>
+	<div id="product-list">
+		<table class="table datatable" border="1px">
+			<thead>
+				<tr>
+					<th>活动名称</th>
+					<th>活动类型</th>
+					<th>开始报名时间</th>
+					<th>结束报名时间</th>
+					<th>活动开始时间</th>
+					<th>活动结束时间</th>
+					<th>报名状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script>
+function CreateTd(type){
+	var tr = document.createElement("tr");
+	for(var i=0;i<8;i++){
+		var td = document.createElement("td");
+		if(type == 1){
+			var infoArry1 = ['翻宝APP上市活动','全部活动','2017/10/19','2017/10/19','2017/10/19','2017/10/19','未报名'];
+			td.innerHTML = infoArry1[i];
+		}else if(type == 2){
+			var infoArry2 = ['翻宝APP上市活动','可报名活动','2017/10/19','2017/10/19','2017/10/19','2017/10/19','未报名'];
+			td.innerHTML = infoArry2[i];
+		}else{
+			var infoArry3 = ['翻宝APP上市活动','已报名活动','2017/10/19','2017/10/19','2017/10/19','2017/10/19','未报名'];
+			td.innerHTML = infoArry3[i];
+		}
+		
+		if(i == 7){
+			td.innerHTML = "<span>取消报名</span><span>提交商品</span>";
+		}
+		tr.appendChild(td);
+	}
+	$("#product-list tbody").append(tr);
+}
+CreateTd("1");
+$(".btn-wrap span").on("click",function(){
+	$("#product-list tbody").html("");
+	$(".btn-wrap span").removeClass("active");
+	$(this).addClass("active");
+	var type = $(this).attr("data-type");
+	if(type == "1"){
+		CreateTd("1");
+	}else if(type == "2"){
+		CreateTd("2");
+	}else{
+		CreateTd("3");
+	}
+})
+</script>
+</body>
+</html>

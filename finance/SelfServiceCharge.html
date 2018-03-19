@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+    <title>账户充值(自助转账)-账户余额-财务管理-翻宝云店供应商管理后台</title>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+    <link rel="stylesheet" href="../css/public/reset.css" />
+    <link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+    <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+    <link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+    <!-- ZUI Javascript 依赖 jQuery -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+    <!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>-->
+    <link rel="stylesheet" href="../css/public/datetimepicker.css" />
+    <!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/sortable/zui.sortable.min.js"></script>-->
+    <link rel="stylesheet" href="../css/finance/SelfServiceCharge.css" />
+    <script src="../js/public/datetimepicker.min.js"></script>
+    <script src="../js/plug/YouXin.js"></script>
+</head>
+<body>
+<script src="../js/public/head.js"></script>
+<div class="part-left">
+    <div id="page-titie"><img src="../img/finance/finance_03.png" />财务管理</div>
+    <div class="list active">
+        <a href="accountbalance.html" style="color:#fff;">账户余额</a>
+    </div>
+    <div class="list">
+        <a href="ExtractCashDetail.html">提现明细</a>
+    </div>
+    <div class="list">
+        <a href="rechargedetail.html">充值明细</a>
+    </div>
+    <div class="list">
+        <a href="frozennumdetail.html">冻结明细</a>
+    </div>
+</div>
+<div id="part-right">
+    <div id="loaction">当前位置：管理后台>财务管理>账户余额>账户充值(自助转账)</div>
+    <div class="contentBlock">
+        <ul class="tabPanelTitle">
+            <li class="titleActive">支付宝转账</li>
+            <li>微信转账</li>
+            <li>银行转账</li>
+            <li class="spaceFillCell"></li>
+        </ul>
+        <ul class="tabPanelBody">
+            <li class="applyTransfer">
+                <!-- 支付宝转账 -->
+                <div class="applyMethod">
+                    <img src="../img/finance/zhb.png">
+                </div>
+                <div class="firstStep">
+                    <div class="firstStepLeft">
+                        <div class="promptTop">
+                            <span class="firstTitle">一、请通过您的支付宝转账到以下账户，或直接手机支付扫描二维码转账。</span><br/>
+                            <span>收款支付宝名：杭州牛啦网络科技有限公司</span><br/>
+                            <span>收款支付宝账号：yizhongguandian@qq.com</span><br/>
+                        </div>
+                        <div class="promptBottom">
+                            <span class="prompt">!</span>请勿在转账备注中填写任何文字，切勿出现敏感词，否则视为违规，平台将不提供任何服务。
+                        </div>
+                    </div>
+                    <div class="firstStepRight">
+                        <img src="../img/finance/quickpayzhb.png">
+                    </div>
+                </div>
+                <div class="secondStep">
+                    <dl>
+                        <dt>二、转账后，请填写该笔转账的订单号和转账金额。</dt>
+                        <dd class="inputPart rechargeAmount">
+                            <label><span style="width:75px;text-align:right;font-weight:500;">充值金额：</span><input class="rechargeInput" type="text" /></label><span>元</span>
+                            <span class="errorPrompt moneyError1"><span class="errorPromptSign">&times;</span><span class="font">请填写金额！</span></span>
+                            <span class="errorPrompt moneyError2"><span class="errorPromptSign">&times;</span><span class="font">金额格式不正确！</span></span>
+                        </dd>
+                        <dd class="inputPart orderNumber">
+                            <label><span style="width:75px;text-align:right;font-weight:500;">订单号：</span><input class="orderNumberInput" type="text" maxlength="32" /></label>
+                            <span class="yellowAlert"></span>
+                            <span class="errorPrompt orderError1"><span class="errorPromptSign">&times;</span><span class="font">订单号为32为纯数字！</span></span>
+                            <span class="errorPrompt orderError2"><span class="errorPromptSign">&times;</span><span class="font">请输入订单号！</span></span>
+                        </dd>
+                    </dl>
+                </div>
+            </li>
+            <li class="WXTransfer" style="display:none;">
+                <!-- 微信转账 -->
+                <div class="applyMethod">
+                    <img src="../img/finance/wechart.png">
+                </div>
+                <div class="firstStep">
+                    <div class="firstStepLeft">
+                        <div class="promptTop">
+                            <span class="firstTitle">一、请通过您的微信钱包扫描二维码支付到以下商户。</span><br/>
+                            <span>收款商户简称：翻宝云店</span><br/>
+                            <span>收款商户全称：杭州牛啦网络科技有限公司</span><br/>
+                        </div>
+                        <div class="promptBottom">
+                            <span class="prompt">!</span>请勿在转账备注中填写任何文字，切勿出现敏感词，否则视为违规，平台将不提供任何服务。
+                        </div>
+                    </div>
+                    <div class="firstStepRight">
+                        <img src="../img/finance/quickpaywechart.png">
+                    </div>
+                </div>
+                <div class="secondStep">
+                    <dl>
+                        <dt>二、转账后，请填写该笔转账的订单号和转账金额。</dt>
+                        <dd class="inputPart rechargeAmount">
+                            <label><span style="width:75px;text-align:right;font-weight:500;">充值金额：</span><input class="rechargeInput" type="text" /></label><span>元</span>
+                            <span class="errorPrompt moneyError1"><span class="errorPromptSign">&times;</span><span class="font">请填写金额！</span></span>
+                            <span class="errorPrompt moneyError2"><span class="errorPromptSign">&times;</span><span class="font">金额格式不正确！</span></span>
+                        </dd>
+                        <dd class="inputPart orderNumber">
+                            <label><span style="width:75px;text-align:right;font-weight:500;">订单号：</span><input class="orderNumberInput" type="text" maxlength="32" /></label>
+                            <span class="yellowAlert"></span>
+                            <span class="errorPrompt orderError1"><span class="errorPromptSign">&times;</span><span class="font">订单号为32为纯数字！</span></span>
+                            <span class="errorPrompt orderError2"><span class="errorPromptSign">&times;</span><span class="font">请输入订单号！</span></span>
+                        </dd>
+                    </dl>
+                </div>
+            </li>
+            <li class="bankTransfer" style="display:none;">
+                <!-- 银行转账 -->
+                <div class="applyMethod">
+                    <img src="../img/finance/onlinepay.png">
+                </div>
+                <div class="firstStep">
+                    <div class="firstStepLeft">
+                        <div class="promptTop">
+                            <span class="firstTitle">一、请通过银行转账到已下商户。</span><br/>
+                            <span>账户名：杭州牛啦网络科技有限公司</span><br/>
+                            <span>开户行：浙江银行股份有限公司杭州城西支行</span><br/>
+                            <span>银行账号：3310010301200200209305</span><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="secondStep">
+                    <dl>
+                        <dt>二、转账后，请填写该笔转账的银行信息和转账金额。</dt>
+                        <dd class="inputPart rechargeAmount">
+                            <label><span style="width:115px;text-align:right;font-weight:500;">充值金额：</span><input class="rechargeInput" type="text" /></label><span>元</span>
+                            <span class="errorPrompt moneyError1"><span class="errorPromptSign">&times;</span><span class="font">请填写金额！</span></span>
+                            <span class="errorPrompt moneyError2"><span class="errorPromptSign">&times;</span><span class="font">金额格式不正确！</span></span>
+                        </dd>
+                        <dd class="inputPart bankAccountName">
+                            <label><span style="width:115px;text-align:right;font-weight:500;">付款银行账户名：</span><input class="bankAccountNameInput" type="text" maxlength="32" /></label>
+                            <span class="errorPrompt error1"><span class="errorPromptSign">&times;</span><span class="font">请输入付款银行账户名！</span></span>
+                        </dd>
+                        <dd class="inputPart bankAccount">
+                            <label>
+                                <span style="width:115px;text-align:right;font-weight:500;">付款银行账号：</span>
+                                <input class="bankAccountInput" type="number" maxlength="32" />
+                            </label>
+                            <span class="errorPrompt error1"><span class="errorPromptSign">&times;</span><span class="font">付款银行账号只支持数字！</span></span>
+                            <span class="errorPrompt error2"><span class="errorPromptSign">&times;</span><span class="font">请输入付款银行账号！</span></span>
+                        </dd>
+                        <dd class="inputPart bankAccountType">
+                            <span style="width:115px;text-align:right;font-weight:500;">开户银行：</span>
+                            <span class="rowlineRight dropdown form-group-item">
+                                <input class="down backnames" name="backnames" type="text" placeholder="请选择开户银行" readonly="readonly" data-toggle="dropdown">
+                                <ul class="dropdown-menu">
+                                    <li data-id="3"><a>工商银行</a></li>
+                                    <li data-id="4"><a>建设银行</a></li>
+                                </ul>
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </li>
+        </ul>
+        <div class="nextBar"><span class="nextButton">确认提交</span></div>
+    </div>
+</div>
+<script>
+    document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+    document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+</script>
+<script src="../js/finance/SelfServiceCharge.js"></script>
+</body>
+</html>

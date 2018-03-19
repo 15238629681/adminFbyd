@@ -1,0 +1,88 @@
+/******* 公共样式 *******/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+html,body{font:12px "Microsoft YaHei","Arial","Helvetica";color:#333;width:100%;height: 100%;overflow: auto;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img,iframe{border:none;}
+ul,li,ol{list-style:none;}
+input, textarea, select,button{*font-size:100%;outline: none;border:none;}
+a{color:#FFF;text-decoration:none;}
+a:hover{text-decoration: none;color: #fff;}
+a:focus{outline: none;text-decoration:none;}
+i{font-style: normal;}
+b{font-weight: normal;}
+span{display: inline-block;}
+div,input,span,a,li,ul,form,button,i,b,table,tb,th,tr{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+body{background:#fff;color:#333;}
+
+/****** 业务样式 ******/
+body {
+    background-color: #F6F6F6;
+}
+/*顶部留灰*/
+.topBlock {
+    width:100%;
+    height:20px;
+    background:#F6F6F6;
+}
+/*流程示意图*/
+.stepBlock {
+    width: 100%;
+    height: 88px;
+    background: url(../../img/reg/enter2_03.png) #fff no-repeat center center;
+    margin-bottom: 5px;
+}
+/*提示内容区域*/
+.contentWapper {
+    width: 100%;
+    height: calc(100% - 108px - 100px);
+    background-color: #FFFFFF;
+}
+.promptContainer .promptFont {
+    display: block;
+    height: 30px;
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 170px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.promptContainer .promptBtn {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #FF3A46;
+    color: #FFFFFF;
+    border-radius: 7px;
+    margin: 70px auto 0px;
+    cursor: pointer;
+}
+.promptContainer .promptBtn:hover {
+    background-color: #D8343B;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

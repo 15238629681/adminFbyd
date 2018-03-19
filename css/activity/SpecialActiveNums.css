@@ -1,0 +1,135 @@
+/* 不允许选择文字 */
+.noSelectFont {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+/**** 右侧 ****/
+#part-right {
+    background: #f6f6f6;
+    overflow: auto;
+}
+.stepImg {
+    margin:0 30px 10px 30px;
+    height: 68px;
+    background: url(../../img/activity/specialactive/SpecialActive03.png) #fff center center no-repeat;
+}
+.activityBlock {
+    background-color: #FFFFFF;
+    margin: 0 30px 4px 30px;
+}
+.activesNumsForm {
+    background-color: #FFFFFF;
+}
+.fillActiveNums .infoTitle {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 30px;
+    background-color: #EEEEEE;
+}
+.fillActiveNums .selectActiveType {
+    font-size: 16px;
+    font-weight: 500;
+}
+.fillActiveNums .selectActiveExplain {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666666;
+}
+/******* 预估活动数量/平台活动服务费 ********/
+.activeFormItem {
+    padding-left: 30px;
+}
+.activeFormItem .inputWapper {
+    padding-left: 8px;
+    padding-right: 20px;
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #F1F1F1;
+}
+.activeFormItem .inputWapper:hover {
+    background-color: #F7F7F7;
+}
+.inputWapper .inputWapperLeft {
+    float: left;
+}
+.inputWapper .inputWapperRight {
+    float: right;
+}
+/*** 输入 ***/
+.fillActivesNums .inputWapperRight input {
+    height: 24px;
+    padding-left: 8px;
+    border:1px solid #F1F1F1;
+}
+.fillActivesNums .unitPrice {
+    color: #FF3A46;
+}
+.platformServiceRule {
+    height: 30px;
+    line-height: 30px;
+}
+.platformServiceRule .prompt {
+    width: 16px;
+    height: 16px;
+    background-color: #389BFF;
+    text-align: center;
+    line-height: 16px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    margin-right: 5px;
+}
+.platformServiceRule .serviceRule {
+    cursor: pointer;
+}
+/*总费用*/
+.activeTotalCost {
+    height: 50px;
+    text-align: right;
+    line-height: 50px;
+}
+.activeTotalCost .totalCost {
+    color: #FF3A46;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+/*提交栏*/
+.submitBlock {
+    background: #fff;
+    height: 68px;
+    position: relative;
+    padding-top: 18px;
+    margin-bottom: 0;
+}
+.submitBlock span {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+
+    background-color: #FF3A46;
+    color: #fff;
+}
+.submitBlock .lastStep {
+    margin-left: -120px;
+}
+.submitBlock .nextStep {
+    margin-left: 20px;
+}
+.submitBlock span:hover {
+    background-color: #D8343B;
+}
+
+
+
+
+
+
+
+

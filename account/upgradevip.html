@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>升级VIP-账户管理-翻宝云店供应商管理后台</title>
+		<!-- ZUI 标准版压缩后的 CSS 文件 -->
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/product/zui.datatable.min.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link href="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.css" rel="stylesheet">
+
+		<!-- ZUI Javascript 依赖 jQuery -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+		<script src="../js/product/zui.datatable.min.js"></script>
+		<script src="../js/public/datetimepicker.min.js"></script>
+		<script src="https://cdn.bootcss.com/zui/1.7.0/lib/uploader/zui.uploader.js"></script>
+		<link rel="stylesheet" href="../css/account/upgradevip.css" />
+	</head>
+	<body>
+		<script src="../js/public/head.js"></script>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />账户管理</div>
+			<div class="list">
+				<a href="shopmanage.html">网店管理</a>
+			</div>
+			<div class="list">
+				<a href="#">账号安全</a>
+			</div>
+			<div class="list ">
+				<a href="#">信息管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">资质管理</a>
+			</div>
+			<div class="list ">
+				<a href="#">品牌管理</a>
+			</div>
+			<div class="list active">
+				<a href="#" style="color:#fff;">升级VIP</a>
+			</div>
+			<div class="list ">
+				<a href="UpgradeRecord.html">升级记录</a>
+			</div>
+		</div>
+
+		<div id="part-right">
+			<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+				<img class="loadingImg" src="../img/public/downrefesh.gif">
+				<span class="loadingFont">加载中...</span>
+			</div>
+			<div id="loaction">当前位置：管理后台>账号管理>升级VIP</div>
+			<div class="mainBlock">
+				<div class="mainTitle">供应商等级</div>
+				<div class="mainContent">
+					<!--黄金-->
+					<div id="goldBlock" class="commontBlock goldBlock">
+						<div class="commontBlockWapper">
+							<div class="commontTitle">
+								<img src="../img/account/upgradevip/vip1.png" alt="" /> 黄金VIP
+							</div>
+							<div class="commontPrice">
+								<div class="originalPrice">￥3588.00</div>
+								<div class="originalText">原价需要</div>
+							</div>
+							<div class="commontPrice noboder">
+								<div class="realPrice">￥2988.00</div>
+								<div class="originalText">现在马上开通黄金VIP</div>
+								<div class="originalText">节省了￥600.00</div>
+							</div>
+							<div class="knowMore">
+								了解更多
+							</div>
+							<div class="knowMoreDetail">
+								<div class="moreDetail">
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+								</div>
+								<span class="hideMore">隐藏更多</span>
+							</div>
+							<div class="gotoUpdata">立即升级</div>
+						</div>
+						<div class="chooseProtocol">
+							<img src="../img/account/radio_07.png" alt="" />
+							<label for="userProtocol">我已阅读协议，知悉并认可协议条款《翻宝云店VIP供应商服务协议》</label>
+						</div>
+					</div>
+					<!--钻石-->
+					<div id="diamondBlock" class="commontBlock diamondBlock" style="border: 1px solid #FF3A46">
+						<div class="commontBlockWapper">
+							<div class="commontTitle">
+								<img src="../img/account/upgradevip/vip1.png" alt="" /> 钻石VIP
+							</div>
+							<div class="commontPrice">
+								<div class="originalPrice">￥6688.00</div>
+								<div class="originalText">原价需要</div>
+							</div>
+							<div class="commontPrice">
+								<div class="realPrice">￥5688.00</div>
+								<div class="originalText">现在马上开通黄金VIP</div>
+								<div class="originalText">节省了￥1000.00</div>
+							</div>
+
+							<div class="knowMore">
+								了解更多
+							</div>
+							<div class="knowMoreDetail">
+								<div class="moreDetail">
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+								</div>
+								<span class="hideMore">隐藏更多</span>
+							</div>
+
+							<div class="gotoUpdata">立即升级</div>
+						</div>
+						<div class="chooseProtocol">
+							<!--<input type="radio" id="userProtocol" />-->
+							<img src="../img/account/radio_07.png" alt="" />
+							<label for="userProtocol">我已阅读协议，知悉并认可协议条款《翻宝云店VIP供应商服务协议》</label>
+						</div>
+					</div>
+					<!--ka-->
+					<div id="kaBlock" class="commontBlock kaBlock">
+						<div class="commontBlockWapper">
+							<div class="commontTitle">
+								<img src="../img/account/upgradevip/vip1.png" alt="" />KA供应商
+							</div>
+							<div class="commontPrice">
+								<div class="originalPrice">￥56888.00</div>
+								<div class="originalText">原价需要</div>
+							</div>
+							<div class="commontPrice">
+								<div class="realPrice">￥36888.00</div>
+								<div class="originalText">现在马上开通黄金VIP</div>
+								<div class="originalText">节省了￥20000.00</div>
+							</div>
+
+							<div class="knowMore">
+								了解更多
+							</div>
+							<div class="knowMoreDetail">
+								<div class="moreDetail">
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+									点击了解更多后，下拉显示全部介绍的内容。
+								</div>
+								<span class="hideMore">隐藏更多</span>
+							</div>
+
+							<div class="gotoUpdata">立即升级</div>
+						</div>
+						<div class="chooseProtocol">
+							<img src="../img/account/radio_07.png" alt="" />
+							<label for="userProtocol">我已阅读协议，知悉并认可协议条款《翻宝云店VIP供应商服务协议》</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer"></div>
+		</div>
+		<script>
+			document.querySelectorAll("#tap-wrap li")[7].style.background = "#f6ecd1";
+			document.querySelectorAll("#tap-wrap li")[7].querySelector("a").style.color = "#FBBD00";
+		</script>
+		<script src="../js/account/upgradevip.js"></script>
+	</body>
+</html>

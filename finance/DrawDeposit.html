@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+        <title>账户提现---》财务管理-杭州牛啦网络科技有限公司</title>
+        <!-- ZUI 标准版压缩后的 CSS 文件 -->
+        <link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+        <link rel="stylesheet" href="../css/public/reset.css" />
+        <script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+        <script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+        <link rel="stylesheet" href="../css/finance/DrawDeposit.css" />
+        <link rel="stylesheet" href="../css/reg/jquery.idcode.css" />
+        <script src="../js/reg/jquery.idcode.js"></script>
+        <script src="../js/plug/YouXin.js"></script>
+    </head>
+    <body>
+    <script src="../js/public/head.js"></script>
+    <div class="part-left">
+        <div id="page-titie"><img src="../img/finance/finance_03.png" />财务管理</div>
+        <div class="list active">
+            <a href="accountbalance.html" style="color:#fff;">账户余额</a>
+        </div>
+        <div class="list">
+            <a href="ExtractCashDetail.html">提现明细</a>
+        </div>
+        <div class="list">
+            <a href="rechargedetail.html">充值明细</a>
+        </div>
+        <div class="list">
+            <a href="frozennumdetail.html">冻结明细</a>
+        </div>
+    </div>
+    <div id="part-right">
+        <div id="loaction">当前位置：管理后台>财务管理>账户余额>账户提现</div>
+        <div class="contentBlock">
+            <div class="rowline rowBankCard">
+                <div class="rowlineLeft">提现账户：</div>
+                <div class="rowlineRight">
+                    <div class="rowlineRightItem cardList">
+                        <!--<div class="bankCard activeCard">
+                            <div class="bankCardType">
+                                <span class="bankTypeImage"><img src="../img/finance/drawdeposit/bank1.png"></span>
+                                <span class="bankTypeName">工商银行</span>
+                            </div>
+                            <div class="bankCardNumber">6212 **** **** 9752</div>
+                            <div class="bankCardAccount">杭州牛啦网络科技有限公司</div>
+                        </div>
+                        <div class="bankCard">
+                            <div class="bankCardType">
+                                <span class="bankTypeImage"><img src="../img/finance/drawdeposit/bank2.png"></span>
+                                <span class="bankTypeName">建设银行</span>
+                            </div>
+                            <div class="bankCardNumber">6212 **** **** 9752</div>
+                            <div class="bankCardAccount">有心</div>
+                        </div>-->
+                    </div>
+                    <img class="addCashCard rowlineRightItem" src="../img/finance/drawdeposit/addCard.png"/>
+                </div>
+            </div>
+            <div class="rowline allowbalance">
+                <div class="rowlineLeft">可提现余额：</div>
+                <div class="rowlineRight">
+                    <span>******</span>元
+                </div>
+            </div>
+            <div class="rowline balance">
+                <div class="rowlineLeft">提现金额：</div>
+                <div class="rowlineRight">
+                    <span><input type="text" name="balance" /></span>元
+                </div>
+            </div>
+            <div class="rowline verifyCode">
+                <div class="rowlineLeft">图形验证码：</div>
+                <div class="rowlineRight">
+                    <span><input type="text" id="Txtidcode" name="imageVerify"/></span>
+                    <span id="idcode"></span>
+                </div>
+            </div>
+            <div class="rowline bindingPhobeNum">
+                <div class="rowlineLeft">绑定手机号：</div>
+                <div class="rowlineRight">
+                    <input class="phoneNum" disabled />
+                    <span class="changePhoneNum">更改手机号</span>
+                </div>
+            </div>
+            <div class="rowline SMSVerify">
+                <div class="rowlineLeft">短信验证码：</div>
+                <div class="rowlineRight">
+                    <input type="text" name="SMSVerify" />
+                    <span class="getSMSCode">获取短信验证码</span>
+                </div>
+            </div>
+            <div class="rowline prompt">
+                <div class="rowlineLeft"></div>
+                <div class="rowlineRight">
+                    <span class="promptLogo">!</span><span>预计到账时间1-2个工作日，周末节假日可能有延迟，以实际到账时间为准。</span>
+                </div>
+            </div>
+            <div class="rowline opration">
+                <span class="affirmDeposit">确认提现</span>
+                <span class="cancelDeposit">取消提现</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll("#tap-wrap li")[6].style.background = "#f6ecd1";
+        document.querySelectorAll("#tap-wrap li")[6].querySelector("a").style.color = "#FBBD00";
+    </script>
+    <script src="../js/finance/DrawDeposit.js"></script>
+    </body>
+</html>

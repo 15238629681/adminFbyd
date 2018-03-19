@@ -1,0 +1,164 @@
+
+/*左边块*/
+.leftWapper{
+	width:301px;
+	float:left;
+}
+.rightWapper{
+	width:calc(100% - 301px);
+	float:left;
+	border-left:0.5px solid #E0E0E0;
+}
+
+
+.leftWapper .pageLogo{
+	height:92px;line-height:92px;
+	padding-left:72px;
+	background:#fff;
+	font-size:20px;
+	
+}
+.leftWapper .pageLogo img{
+	margin-right:10px;
+}
+
+.leftWapper .itemList{
+	padding:0 36px;
+	
+}
+.leftWapper .itemList div {
+	width:240px;
+	height:48px;
+	font-size:18px;
+	text-align:center;
+	line-height:48px;
+	color:#666;
+	border-radius:10px;
+	border:1px solid #fbbd00;
+	background:#fff;
+	margin-bottom:36px;
+}
+.leftWapper .itemList a{
+	display:inline-block;
+	width:240px;
+	height:48px;
+	color:#666;
+}
+.leftWapper .itemList div:hover{
+	color:#fff;
+	background:#FBBD00;
+}
+.leftWapper .itemList  div:hover a{
+	color:#fff;
+}
+.leftWapper .itemList div.activeDivItem{
+	color:#fff;
+	background:#FBBD00;
+}
+.leftWapper .itemList div.activeDivItem a{
+	color:#fff;
+}
+
+/*右边*/
+.rightWapper{
+	padding: 0 60px;
+	background:#f6f6f6;
+}
+.rightWapper .pageDirectory{
+	height:90px;
+	line-height:90px;
+	font-size:16px;
+	color:#666;
+	/*/*padding:0 60px;*/
+}
+.rightWapper .contentBlock{
+	/*width:1500px;*/
+	/*width:calc( 100% - 60px );*/
+}
+
+.contentBlock .tableBlockWapper{
+	width:100%;
+	background:#fff;margin-bottom:12px;
+	padding-bottom:11px;
+}
+.contentBlock .tableBlock{
+	/*padding:0 60px;*/
+	font-size:16px;
+}
+.contentBlock .tableBlock h3{
+	font-size:18px;
+	color:#fbbd00;padding:12px 0;
+	border-bottom:1px solid #E0E0E0;
+	margin-bottom:12px;
+}
+.contentBlock .tableBlock thead{
+	font-family: "microsoft yahei";
+	color:#666;font-size:16px;
+	font-weight:normal;
+	
+}
+.contentBlock .tableBlock thead tr th{
+	border-right:1px solid #c0c0c0;
+	text-align:center;
+	height:50px;font-weight:normal;
+}
+.contentBlock .tableBlock thead tr th:last-child{
+	border-right:none;
+}
+td{
+	text-align:center;
+	height:50px;border:1px solid #cfcfcf;
+	border-top:none;
+}
+.table>thead>tr>th{
+	border-top:none;
+	border-bottom:none;
+}
+/*.table td, .table th{
+	border-bottom:none;
+	border-top:none;
+}*/
+
+@media screen and (max-width: 1440px){	
+	
+	table,h3{
+		width:calc(1440px - 300px - 120px )!important;
+		}
+	.pageDirectory{
+		width:1440px;
+	}
+	.contentBlock{
+		width:1020px;
+		/*width:calc(1440px - 300px) !important;*/
+		/*width:1010px;*/
+	}
+}
+
+/*大于1440*/
+@media screen and (min-width: 1440px){
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

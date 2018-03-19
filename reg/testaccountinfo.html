@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name = "format-detection" content = "telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+<title>验证账号信息---杭州牛啦网络科技有限公司</title>
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+<link rel="stylesheet" href="../css/public/reset.css" />
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+<link rel="stylesheet" href="../css/reg/jquery.idcode.css" />
+<link rel="stylesheet" href="../css/reg/testaccountinfo.css" />
+</head>
+<body>
+	<div class="topBlock"></div>
+<!--<div class="login-container">-->
+	<div class="stepBlock"></div>
+	<div class="grayBlock"></div>
+	<div class="login-wrap clean" >
+		<div class="right-container">
+			<!--手机号-->
+			<div class="inputWapper phoneWapper">
+				<input class="phone" type="text" placeholder="请输入手机号"/>
+				<img class="passImg" src="../img/reg/pass.png" alt="" />
+				<span class="alertSpan">
+					<span>此手机号可作为登录手机号，并作为提现时接收验证码的初始手机号。</span>
+				</span>
+			</div>
+			
+			<!--图形验证码-->
+			<div class="inputWapper imgVerifyWapper">
+				<input type="text" id="Txtidcode" class="txtVerification img-verify code" placeholder="图形验证码" />
+				<span id="idcode" class="verifycode-wrap"></span>
+				
+				
+				<img class="passImg" src="../img/reg/pass.png" alt="" />
+				<span class="alertSpan">
+					<span>请输入图形验证码，不区分大小写。</span>
+				</span>
+			</div>
+			
+			<div class="inputWapper getMessageCode">
+				获取短信验证码
+			</div>
+			<!--短信验证码-->
+			<div class="inputWapper messageTextWapper">
+				<input class="messageNum" type="text" placeholder="短信验证码"/>
+				<img class="passImg" src="../img/reg/pass.png" alt="" />
+				<span class="alertSpan">
+					<span>请输入手机验证码，不区分大小写。</span>
+				</span>
+			</div>
+			<!--<div class="userProtocol">我已阅读协议，知悉并认可协议条款<a href="#">《用户使用协议》</a></div>-->
+			<div id="submit">提交</div>
+			<!--<div class="gotoLogin">我已入驻供应商<a href="#">马上登录</a></div>-->
+		</div>
+	</div>
+	<div class="bottomFoot">
+		杭州牛啦网络科技有限公司  Copyright@翻宝云店2017  浙ICP备16047970号-3
+	</div>
+<!--</div>-->
+<!--<script src="../js/jquery.js" type="text/javascript"></script>-->
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="../js/reg/jquery.idcode.js"></script>
+<script src="../js/reg/testaccountinfo.js"></script>
+<script>
+	var userinfo=JSON.parse(localStorage.getItem("userinfo"));
+	console.info(userinfo);
+	if(!userinfo){
+		window.location.href="../index.html";
+	}else{
+        var page = getPageName();
+		$.ajax({
+			type: "post",
+			url: "https://app.fanbaoyundian.com/apiapiextend/apia/Backlanding/VerificationC",
+			data: {
+				token: userinfo.token,
+				uid: userinfo.uid,
+				timestamp: parseInt(new Date().getTime() / 1000),
+                page: page
+			},
+			success: function(data) {
+				if(data.state == "3") {
+					window.location.href="../index.html";
+				}
+			},
+			error: function(msg) {
+				console.log(msg);
+			}
+		})
+	}
+    function getPageName() {
+        var pathname = window.location.pathname;
+        var pathArr = pathname.split('/');
+        return pathArr[pathArr.length - 1];
+    }
+</script>
+</body>
+</html>

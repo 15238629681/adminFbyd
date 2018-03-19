@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<meta name="keywords" content="翻宝云店，杭州牛啦，社交电商，社交APP，共享创业">
+		<title>全部订单-订单管理-翻宝云店供应商管理后台</title>
+		<link rel="stylesheet" href="//cdn.bootcss.com/zui/1.7.0/css/zui.min.css">
+		<link rel="stylesheet" href="../css/public/reset.css" />
+		<link rel="stylesheet" href="../css/public/datetimepicker.css" />
+		<link rel="stylesheet" href="../css/order/allorder.css" />
+
+		<script src="//cdn.bootcss.com/zui/1.7.0/lib/jquery/jquery.js"></script>
+		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+		<script src="//cdn.bootcss.com/zui/1.7.0/js/zui.min.js"></script>
+
+		<script src="../js/public/datetimepicker.min.js"></script>
+	</head>
+
+	<body>
+		<script src="../js/public/head.js"></script>
+		<div class="part-left">
+			<div id="page-titie"><img src="../img/activity/activitylogo.png" />订单管理</div>
+			<div class="list  active">全部订单</div>
+			<div class="list">
+				<a href="nodeliveryorder.html">未发货订单</a>
+			</div>
+			<div class="list">
+				<a href="waitingreturngoods.html">待处理退货订单</a>
+			</div>
+			<div class="list">
+				<a href="returngoods.html">已处理退货订单</a>
+			</div>
+		</div>
+
+		<div id="part-right">
+			<div id="loading" style="width: 100%; height: 100%; position: absolute; background-color: rgb(255, 255, 255); top: 0px; left: 0px;z-index:99999;">
+				<img class="loadingImg" src="../img/public/downrefesh.gif">
+				<span class="loadingFont">加载中...</span>
+			</div>
+			<div id="loaction">当前位置:管理后台>订单管理>全部订单</div>
+			<div class="contentBlock">
+				<div class="searchBlock">
+
+					<!--搜索-->
+					<div class="fillWapper searchItem clean">
+						<div class="form-group clean">
+							<span class="fillTitle" style="float:left;">搜索：</span>
+							<div class="dropdown">
+								<input type="text" id="product-state" placeholder="    请选择搜索项" readonly="readonly" data-toggle="dropdown" class="down">
+								<ul class="dropdown-menu">
+									<li data-id="">
+										<a href="#">订单号</a>
+									</li>
+									<li>
+										<a href="#">商品名称</a>
+									</li>
+									<li>
+										<a href="#">商品编号</a>
+									</li>
+									<li>
+										<a href="#">买家ID</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!--订单类型-->
+					<div class="fillWapper orderType clean">
+						<!--订单类型-->
+						<div class="form-group clean">
+							<span class="fillTitle" style="float:left;">订单类型：</span>
+							<div class="dropdown">
+								<input type="text" id="product-state" placeholder="    请选择订单类型" readonly="readonly" data-toggle="dropdown" class="down">
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">普通订单</a>
+									</li>
+									<li>
+										<a href="#">体验订单</a>
+									</li>
+									<li>
+										<a href="#">翻宝订单</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!--订单状态-->
+						<div class="form-group clean">
+							<span class="fillTitle" style="float:left;">订单状态：</span>
+							<div class="dropdown">
+								<input type="text" id="product-state" placeholder="    请选择订单状态" readonly="readonly" data-toggle="dropdown" class="down">
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">待买家付款</a>
+									</li>
+									<li>
+										<a href="#">待供应商发货</a>
+									</li>
+									<li>
+										<a href="#">待买家发货</a>
+									</li>
+									<li>
+										<a href="#">退款中</a>
+									</li>
+									<li>
+										<a href="#">交易成功</a>
+									</li>
+									<li>
+										<a href="#">交易关闭</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!--支付方式-->
+						<div class="form-group clean">
+							<span class="fillTitle" style="float:left;">支付方式：</span>
+							<div class="dropdown">
+								<input type="text" id="product-state" placeholder="    请选择支付方式" readonly="readonly" data-toggle="dropdown" class="down">
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">支付宝</a>
+									</li>
+									<li>
+										<a href="#">微信</a>
+									</li>
+									<li>
+										<a href="#">账户余额</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!--商品金额-->
+					<div class="fillWapper goodsPrice clean">
+						<!--商品金额-->
+						<div class="form-group clean">
+							<span class="fillTitle">商品金额：</span>
+							<div class="priceWapper">
+								<input type="text" class="beginRage" />
+								<span>-</span>
+								<input type="text" class="endRage" />
+							</div>
+						</div>
+						<!--结算金额-->
+						<div class="form-group clean">
+							<span class="fillTitle">结算金额：</span>
+							<div class="priceWapper">
+								<input type="text" class="beginRage" />
+								<span>-</span>
+								<input type="text" class="endRage" />
+							</div>
+						</div>
+						<!--下单时间-->
+						<div class="form-group clean postOrderTime">
+							<span class="fillTitle">下单时间:</span>
+							<div class="postOrderTimeWapper">
+								<div class="beginRage input-group date form-date" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2" data-link-format="dd MM yyyy - HH:ii p">
+									<span class="input-group-addon">
+										<span class="icon-calendar"></span>
+									</span>
+									<input class="form-control" size="16" type="text" value="" readonly="">
+								</div>
+								<span class="sepflag">-</span>
+								<div class="endRage input-group date form-date" data-date="" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input2" data-link-format="dd MM yyyy - HH:ii p">
+									<span class="input-group-addon"><span class="icon-calendar"></span></span>
+									<input class="form-control" size="16" type="text" value="" readonly="">
+								</div>
+							</div>
+						</div>
+						
+						<div class="operateBtn clean">
+						<!--<button class="excelBtn">导出为Excel</button>-->
+							<button class="searchBtn">查询</button>
+						</div>
+
+					</div>
+
+					
+
+				</div>
+				<div class="operateBtn clean exportExcel">
+					<button class="excelBtn">导出为Excel</button>
+					<!--<button class="searchBtn">查询</button>-->
+				</div>
+				<table class="table datatable goodsInfoTable" id="goodsInfoTable">
+					<thead>
+						<tr>
+							<td>订单类型</td>
+							<td>商品名称</td>
+							<td>SKU</td>
+							<td>订单号</td>
+							<td>商品编号</td>
+							<td>下单时间</td>
+							<td>商品件数</td>
+							<td>商品金额</td>
+							<td>商品金额</td>
+							<td>操作</td>
+							<td>运费</td>
+							<td>商品金额</td>
+							<td>结算金额</td>
+							<td>供应商优惠</td>
+							<td>平台优惠</td>
+							<td>买家ID</td>
+							<td>订单状态</td>
+							<td>支付方式</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>2</td>
+							<td>￥180.00</td>
+							<td>132456789123456</td>
+							<td>普通订单</td>
+							<td>2017-10-31 12:01:12</td>
+							<td>颜色：牛仔深蓝 尺码：M</td>
+							<td>12345678912</td>
+							<td>2017-10-31 12:01:12</td>
+							<td>2</td>
+							<td>￥180.00</td>
+							<td>￥180.00</td>
+							<td>￥180.00</td>
+							<td>-</td>
+							<td>-</td>
+							<td>132456789123456</td>
+							<td>带供应商发货</td>
+							<td>支付宝</td>
+							<td>
+								<a href="orderderail.html">订单详情</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+		
+		<script src="../js/order/allorder.js"></script>
+		<!--<script src="https://cdn.bootcss.com/zui/1.7.0/lib/datatable/zui.datatable.js"></script>-->
+		<script>
+			var activeLi = document.querySelectorAll("#head ul li");
+			activeLi[2].style.background = "#f6ecd1";
+			activeLi[2].getElementsByTagName("a")[0].style.color = "#FBBD00";
+
+			//			顶部导航  默认选中块
+			//			var liActiveItem = document.getElementById("head").getElementsByTagName("li");
+			//			liActiveItem[2].classList.add("active");
+			//			侧边导航  默认选中块
+			//			var leftDivActiveItem = document.getElementsByClassName("leftWapper")[0].getElementsByClassName("itemList")[0];
+			//			leftDivActiveItem.getElementsByTagName("div")[0].classList.add("activeDivItem");
+		</script>
+
+	</body>
+
+</html>

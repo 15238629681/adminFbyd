@@ -1,0 +1,159 @@
+.contentBlock {
+    height: calc( 100% - 100px );
+    margin: 0px 30px;
+    padding: 18px 0px;
+}
+.contentBlockBody {
+    width: 100%;
+    height: 330px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+/*****行*****/
+.rowline {
+    height: 30px;
+    margin-bottom: 8px;
+}
+/*行-左侧*/
+.rowlineLeft {
+    width: 115px;
+    height: 30px;
+    float: left;
+    text-align: right;
+    line-height: 30px;
+}
+/*行-右侧*/
+.rowlineRight {
+    height: 30px;
+    float: left;
+    line-height: 30px;
+}
+/**********账户类型**********/
+.accountPlatgorm label input {
+    vertical-align: sub;
+    margin-right: 3px;
+}
+.accountPlatgorm label {
+    font-weight: 500;
+    margin-left: 7px;
+}
+/****** 内容主体面板 ******/
+.contentPanel {
+    width: 100%;
+    height: 295px;
+}
+.BankCard {
+    display: block;
+}
+.WXPanel {
+    display: none;
+}
+.alipayPanel {
+    display: none;
+}
+
+
+
+/****支付宝****/
+.alipayAcountInput,.alipayAcountNameInput {
+    width: 260px;
+    border: 1px solid #C0C0C0;
+    padding-left: 10px;
+}
+/*提示*/
+.rowlineRight .promptLogo {
+    margin-top: 7px;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    background-color: #389BFF;
+    border-radius: 8px;
+    color: #FFFFFF;
+    vertical-align: top;
+    text-align: center;
+    line-height: 16px;
+}
+/*****微信****/
+.WXPanel .WXAcountNameInput {
+    width: 260px;
+    border: 1px solid #C0C0C0;
+    padding-left: 10px;
+}
+.WXPanel .yellowAlert {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: url(../../img/finance/yellowalert.png) center center no-repeat;
+    vertical-align: top;
+    margin-top: 5px;
+    cursor: pointer;
+}
+/*****银行卡******/
+.BankCard .bankAccount .addCardInfoInput,.BankCard .bankCard .bankCardInput,.BankCard .openAccountBank .openAccountBankInput,.BankCard .openAccountBranch .openAccountBranchInput {
+    width: 260px;
+    border: 1px solid #C0C0C0;
+    padding-left: 10px;
+}
+/*提交*/
+.addOperation {
+    height: 60px;
+    background-color: #FFFFFF;
+}
+.addSubmit {
+    width: 116px;
+    height: 36px;
+    background-color: #FF3A46;
+    text-align: center;
+    line-height: 35px;
+    margin-top: 12px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    cursor: pointer;
+    left: 50%;
+    position: absolute;
+    margin-left: -200px;
+}
+.addSubmit:hover {
+    background-color: #ED3940;
+}
+.doCancel {
+    width: 116px;
+    height: 36px;
+    /*background-color: #FBBD00;*/
+    text-align: center;
+    line-height: 35px;
+    margin-top: 12px;
+    border-radius: 8px;
+    color: #333333;
+    cursor: pointer;
+    left: 50%;
+    position: absolute;
+    margin-left: -30px;
+    border: 1px solid #C0C0C0;
+}
+.doCancel:hover {
+    background-color: #EAEAEA;
+}
+/*?号提示*/
+.yellowAlert {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background: url(../../img/finance/yellowalert.png) center center no-repeat;
+    vertical-align: top;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.questionTooltip {
+    top: 10px!important;
+    left: 430px!important;
+}
+.questionTooltip .tooltip-arrow {
+    border: none;
+}
+.questionTooltip .tooltip-inner {
+    max-width: 319px;
+    background-color: transparent;
+}
+
+

@@ -1,0 +1,249 @@
+.contentBlock{margin:0 30px;}
+.stepBlock{height:50px;background:url(../../img/account/vipstep2_03.png) center top no-repeat;}
+
+/*订单详情*/
+.orderDetailBlock{height:98px;
+width:100%;position:relative;
+padding:12px 38px;border:1px solid #cecece;
+background:#fff;
+line-height:26px;}
+.orderDetailBlock .orderNum{
+	color:#999;
+}
+.orderDetailBlock .upgradeInfo{
+	color:#333;
+}
+.orderDetailBlock .serviceTime{
+	color:#666;
+}
+.upgradeInfo .upgradeType{color:#FF3A46;
+margin-right:30px;}
+.orderDetailBlock .payNumBlock{
+	height:100%;line-height:98px;
+	position:absolute;
+	right:46px;top:0;
+}
+
+/*支付*/
+.payBlock{width:100%;
+margin-top:17px;}
+.choosePayBlockTitle{
+	width:100%;
+	height:60px;line-height:60px;
+	border-left:4px solid #FBBD00;
+	background:#fff;position:relative;
+}
+.choosePayBlockTitle .titleText{
+	display:inline-block;
+	height:100%;line-height: 60px;
+	width:120px;
+	text-align:right;
+	
+}
+.choosePayBlockTitle .payNumWapper{
+	position:absolute;
+	width:148px;
+	top:0;right:28px;
+	
+}
+.choosePayBlockTitle .payNumWapper .payNum{
+	color:#FF3A46;
+	font-size:20px;
+}
+.commountBlock{margin-bottom:2px;}
+.commountBlock .chooseBlock{
+	height:80px;line-height:80px;
+	background:#fff;
+	margin-top:2px;cursor: pointer;
+}
+.commountBlock .chooseBlock img{
+	margin:-2px 18px 0 15px;
+}
+.commountBlock .chooseBlock span{
+	color:#999;
+}
+.commountBlock .chooseBlock  .withDrawNumWapper{
+	margin-left:10px;
+}
+.commountBlock .payDetailBlock{
+	/*height:190px;*/
+	padding:26px 52px;
+	background:#fff;
+	
+}
+.accountBalanceBlock .payDetailBlock{
+	display:none;
+}
+.payDetailBlock .userPhoneWapper{
+	height:36px;color:#333;
+	vertical-align: top;
+}
+.payDetailBlock .userPhoneWapper .phoneNum{
+	color:#999;margin-left:10px;
+}
+.payDetailBlock .inputWapper input{
+	width:130px;height:28px;
+	line-height:28px;
+	border:1px solid #FBBD00;
+}
+.payDetailBlock .inputWapper .getMessageCode{
+	display:inline-block;
+	width:100px;
+	height:28px;line-height:28px;
+	text-align:center;
+	background:#FBBD00;
+	color:#fff;
+	cursor: pointer;margin-left:-4px;
+}
+.payDetailBlock .inputWapper .balanceAlert{
+	color:#FF3A46;vertical-align: bottom;
+	display:none;
+}
+
+/*其他支付方式*/
+.otherPayBlock{
+	margin-bottom:10px;
+}
+.otherPayBlock .payDetailBlock{
+	display:block;
+	padding:0 52px 56px 52px;
+	display:none;
+}
+.otherPayBlock .payDetailBlock .typeBlock{
+	position:relative;
+	width:300px;height:48px;
+}
+.otherPayBlock .payDetailBlock .typeBlock span{
+	display:inline-block;
+	width:148px;height:50px;line-height:48px;
+	border:1px solid #cecece;
+	text-align:center;
+	/*position:absolute;*/
+}
+.otherPayBlock .payDetailBlock .typeBlock .weichartSpan{
+	height:48px;line-height:48px;
+	border-left:none;margin-left:-4px;
+	background:#f9f9f9;
+	border-bottom:none;
+	/*top:0;left:0;*/
+}
+.otherPayBlock .payDetailBlock .typeBlock .zfbSpan{
+	border-bottom:none;
+	background:#fff;
+}
+
+.otherPayBlock .zfbBlock{
+	width:100%;
+	margin-right:46px;height:198px;
+	border:1px solid #cecece;
+	padding-top:42px;padding-left:20px;
+}
+.otherPayBlock .zfbBlock .alertText{
+	padding-top:35px;
+}
+.otherPayBlock .zfbBlock .alertText p{
+	height:26px;line-height:26px;
+	color:#FF3A46;
+}
+
+
+
+.operateBlock{
+	height:108px;
+	background:#fff;
+}
+.operateBlock .contentBlock{
+	width:424px;height:100%;
+	padding-top:34px;
+	margin:0 auto;
+}
+.operateBlock span{
+	display:inline-block;width:166px;height:40px;line-height:40px;
+	color:#fff;background:#FF3A46;border-radius: 4px;
+	text-align:center;cursor:pointer;
+}
+.operateBlock span:first-child{
+	margin-right:88px;
+}
+.operateBlock span a{
+	display:inline-block;
+	width:166px;height:40px;
+	color:#fff !important;
+}
+.beingAlipay {
+	width: 300px;
+	position: absolute;
+	top: 37%;
+	left: 50%;
+	margin-left: -150px;
+	z-index: 100;
+	text-align: center;
+	display: none;
+}
+.beingAlipay img {
+	width: 72px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

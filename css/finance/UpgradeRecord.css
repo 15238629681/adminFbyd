@@ -1,0 +1,191 @@
+.contentBlock {
+    width: 100%;
+    margin-bottom: 50px;
+}
+.right-container {
+    width: 100%;
+    height: calc( 100% - 63px );
+    padding: 0 30px;
+}
+/**** 详情页标题 ****/
+.right-container .detailTitle {
+    height: 32px;
+    line-height: 32px;
+    padding-left: 12px;
+    font-size: 14px;
+    color: #333;
+    font-size: 14px;
+    background: #eee;
+}
+/*********搜索条件工具栏***********/
+.searchPanel {
+    width: 100%;
+    background-color: #FFFFFF;
+    margin-bottom: 15px;
+}
+.searchPanel .form-group {
+    display: inline-block;
+    padding: 12px;
+    margin: 0;
+}
+.searchPanel .form-group .form-group-item {
+    float: left;
+}
+.form-group .fillTitle {
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #C0C0C0;
+    border-right: none;
+    background: #F6F6F6;
+}
+.form-group input {
+    width: 230px;
+    height: 30px;
+    border: 1px solid #C0C0C0;
+    line-height: 30px;
+    background: url(../../img/order/arrowicon.png) right center no-repeat;
+    text-indent: 1em;
+}
+/*等级变更时间*/
+.form-group .changeTime {
+    width: 100px;
+}
+/******时间区间选择器******/
+.beginTimePicker {
+    width: 420px;
+    height: 30px;
+    border: 1px solid #C0C0C0;
+    border-left: none;
+}
+.beginTimePicker .form-datetime {
+    text-align: center;
+    width: 48%;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    border: none;
+}
+.beginTimePicker .input-group-addon {
+    padding-top: 0;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    border: none;
+    background: #fff;
+    color: #999;
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+}
+.beginTimePicker .sepflag {
+    float: left;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+}
+.beginTimePicker .form-datetime input {
+    width: 80%;
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    border: none;
+    background: #fff;
+    margin-left: 6px;
+}
+/*变更前等级*/
+.gradechangebefore .fillTitle {
+    width: 100px;
+}
+/*变更后等级*/
+.gradechangeafter .fillTitle {
+    width: 100px;
+}
+/*查询按钮*/
+.form-group .searchButton {
+    width: 90px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+    background-color: #FF3A46;
+    color: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.form-group .searchButton:hover {
+    background-color: #D8343B;
+}
+/*充值类型,充值渠道,到账状态*/
+/*.rechargeTypeItem .rechargeTypeItemInput, .rechargeChannel .rechargeChannelInput, .transferStatus .transferStatusInput {
+	width: 130px;
+}*/
+/*********导出Excel**********/
+.exportExcelBar {
+    width: 100%;
+    height: 36px;
+    position: relative;
+}
+.exportExcelBar .exportExcelBtn {
+    display: inline-block;
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #f9d462;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.exportExcelBar .exportExcelBtn:hover {
+    background-color: #EAC65D;
+}
+/**************表格区域***************/
+.detailTable{
+    border: 1px solid #C0C0C0;
+    width: 100%;
+}
+.detailTable thead{
+    background: #eee;
+}
+.detailTable thead td{
+    height: 30px;
+    line-height: 30px;
+}
+.detailTable tbody {
+    background-color: #FFFFFF;
+}
+.detailTable td{
+    border: 1px solid #C0C0C0;
+    height:40px;
+    text-align: center;
+}
+.rechargeFailure {
+    color: #FCC94A;
+    cursor: pointer;
+    margin-left: 8px;
+}
+/*********** åˆ†é¡µ **************/
+.pageWapper .page-search-btn {
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    vertical-align: top;
+    text-align: center;
+    line-height: 30px;
+    background-color: #FBBD00;
+    color: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.pageWapper .page-search-btn:hover {
+    background-color: #F0B400;
+}
+
+

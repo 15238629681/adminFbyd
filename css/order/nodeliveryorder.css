@@ -1,0 +1,285 @@
+/*重置样式*/
+div,input,span,a,li,ul,form,button,i,b,table,tb,th,tr{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+
+/*scroll*/
+.clean:before,.clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clear{zoom:1;}
+
+/*header*/
+/*大约1440px*/
+@media screen and (min-width: 1440px){
+	
+
+	/*右边*/
+	.part-right{float: left;width: calc(100% - 150px);
+	background: #f6f6f6;overflow: auto;}
+	#location{width:100%;height:90px;background:#F6F6F6;font-size:16px;
+	line-height:90px;padding-left:60px;color:#666;}
+	.contentBlock{margin:0 30px;}
+	
+	
+	.contentBlock .searchBlock{padding:30px 20px;background:#fff;}
+	
+	/*.fillWapper{margin-bottom:10px;}*/
+	.fillWapper .form-group{display:inline-block;
+	float:left;margin-right:15px;}
+	.fillWapper .form-group:last-child{
+		margin-right:0;
+	}
+	.fillWapper .fillTitle{
+	display:inline-block;width:104px;height:48px;line-height:48px;float:left;
+	border:1px solid #C0C0C0;font-size:16px;color:#333;background: #F6F6F6;
+	text-align:center;
+	}
+	.dropdown{display:inline-block;float:left;}
+	.dropdown input{height:48px;
+	line-height:48px;text-indent:2;
+	font-size:14px;color:#999;
+	border:1px solid #C0C0C0;background:url(../../img/order/arrowicon.png) no-repeat center right;border-left:none;}
+	.dropdown ul{margin-top:0px;border-top:none;}
+	.dropdown li{width:266px;height:30px;}
+	/*.fillWapper:last-child{padding-bottom:30px;}*/
+	
+	/*搜索项*/
+	.searchItem input{width:188px;}
+	.searchItem .dropdown li{width:188px;}
+	/*订单类型*/
+	
+	.orderType .form-group:last-child{
+		margin-right:0;
+	}
+	.orderType input{width:370px;}
+	.orderType .dropdown li{width:370px;}
+	/*商品金额    结算金额*/
+	.goodsPrice .priceWapper{
+		display:inline-block;float:left;
+		width:370px;height:48px;border:1px solid #C0C0C0;border-left:none;
+	}
+	.goodsPrice .priceWapper input{
+		width:48%;text-align:center;
+		height:44px;line-height:44px;
+	}
+	.goodsPrice .priceWapper span{
+		display:inline-block;height:48px;
+		line-height:48px;
+	}
+	
+	/*下单时间*/
+	.postOrderTimeWapper{
+		display:inline-block;float:left;
+		width:370px;height:48px;border:1px solid #C0C0C0;border-left:none;
+	}
+	 .postOrderTimeWapper .input-group{
+		text-align:center;width:48%;float:left;
+		height:44px;line-height:44px;border:none;
+		/*background:red;*/
+	}
+	 .postOrderTimeWapper .sepflag{
+		float:left;display:inline-block;
+		height:44px;line-height:44px;
+		border:none;
+	}
+	 .postOrderTimeWapper .input-group-addon{
+		/*margin-top:-5px;*/
+		display:inline-block;width:26px;height:26px;
+	}
+	/*时间小图标*/
+	 .postOrderTimeWapper .input-group-addon{
+		padding-top:0;
+		float:left;height:46px;line-height:46px;border:none;
+		background:#fff;
+	}
+	 .postOrderTimeWapper .input-group input{
+		float:left;height:46px;line-height:46px;
+		border:none;background:#fff;margin-left:6px;
+		/*background:red;*/
+		width:70%;
+	}
+	
+	/*导出为Excel*/
+	/*查询*/
+	.fillWapper .operateBtn{margin-top:0;}
+	.operateBtn {margin-top: 20px;padding-right: 3px;}
+	.operateBtn button {width: 200px;height: 50px;border-radius: 10px;
+		color: #fff;font-size: 18px;font-family: "微软雅黑";
+	}
+	/*导出Excel*/
+	.operateBtn .excelBtn {background: #FF3A46;float: right;margin-right:15px;}
+	/*查询*/
+	.operateBtn .searchBtn {background: #FF3A46;float: right;}
+	
+	.nodeliveryorderSearch{width:200px;height:50px;
+	border-radius:10px;color:#fff;font-size:18px;font-family: "微软雅黑";
+	float:right;background:#FF3A46;}
+.exceedOrder{
+	margin-right:50px;
+}
+.exceedOrder:last-child{margin-right:0px;}
+/*超过24小时未发货订单*/
+.noDelivOrderNumWapper{width:100%;text-align:center;}
+.noDelivOrderNum{
+	display:inline-block;font-size:18px;vertical-align: bottom;
+}
+.exceedOrderNum{
+	color:#FF3A46;
+}
+	
+	
+	/*商品信息表*/
+	/*商品信息表*/
+	.goodsInfoTable{margin-top:60px;color:#333;}
+	.goodsInfoTable thead td{border:1px solid #C0C0C0;background:#eee;text-align: center;}
+	.goodsInfoTable tbody td{border:1px solid #C0C0C0;background:#fff;text-align: center;}
+	.goodsInfoTable a{color:#FBBD00;}
+	
+}
+
+
+/*小于1440*/
+@media screen and (max-width: 1440px){
+	.contentBlock{margin:0 30px;}
+	
+	
+	.contentBlock .searchBlock{padding:30px 20px;background:#fff;}
+	
+	/*.fillWapper{margin-bottom:10px;}*/
+	.fillWapper .form-group{display:inline-block;
+	float:left;margin-right:15px;}
+	.fillWapper .form-group:last-child{
+		margin-right:0;
+	}
+	.fillWapper .fillTitle{
+	display:inline-block;width:104px;height:48px;line-height:48px;float:left;
+	border:1px solid #C0C0C0;font-size:16px;color:#333;background: #F6F6F6;
+	text-align:center;
+	}
+	.dropdown{display:inline-block;float:left;}
+	.dropdown input{height:48px;
+	line-height:48px;text-indent:2;
+	font-size:14px;color:#333;
+	border:1px solid #C0C0C0;background:url(../../img/order/arrowicon.png) no-repeat center right;border-left:none;}
+	.dropdown ul{margin-top:0px;border-top:none;}
+	.dropdown li{width:370px;height:30px;}
+	/*下拉列表  短列表*/
+	.searchItem .form-group:first-child li{width:188px;}
+	
+	/*搜索项*/
+	.searchItem input{width:188px;}
+	/*订单类型*/
+	
+	.orderType .form-group:last-child{
+		margin-right:0;
+	}
+	.orderType input{width:370px;}
+	/*商品金额    结算金额*/
+	.goodsPrice .priceWapper{
+		display:inline-block;float:left;
+		width:370px;height:48px;border:1px solid #C0C0C0;border-left:none;
+	}
+	.goodsPrice .priceWapper input{
+		width:48%;text-align:center;
+		height:44px;line-height:44px;
+	}
+	.goodsPrice .priceWapper span{
+		display:inline-block;height:48px;
+		line-height:48px;
+	}
+	
+	/*下单时间*/
+	.postOrderTimeWapper{
+		display:inline-block;float:left;
+		width:370px;height:48px;border:1px solid #C0C0C0;border-left:none;
+	}
+	 .postOrderTimeWapper .input-group{
+		text-align:center;width:48%;float:left;
+		height:44px;line-height:44px;border:none;
+		/*background:red;*/
+	}
+	 .postOrderTimeWapper .sepflag{
+		float:left;display:inline-block;
+		height:44px;line-height:44px;
+		border:none;
+	}
+	 .postOrderTimeWapper .input-group-addon{
+		/*margin-top:-5px;*/
+		display:inline-block;width:26px;height:26px;
+	}
+	/*时间小图标*/
+	 .postOrderTimeWapper .input-group-addon{
+		padding-top:0;
+		float:left;height:46px;line-height:46px;border:none;
+		background:#fff;
+	}
+	 .postOrderTimeWapper .input-group input{
+		float:left;height:46px;line-height:46px;
+		border:none;background:#fff;margin-left:6px;
+		/*background:red;*/
+		width:70%;
+	}
+	
+	/*导出为Excel*/
+	/*查询*/
+	.fillWapper .operateBtn{margin-top:0;}
+	.operateBtn {margin-top: 20px;padding-right: 3px;}
+	.operateBtn button {width: 200px;height: 50px;border-radius: 10px;
+		color: #fff;font-size: 18px;font-family: "微软雅黑";
+	}
+	/*导出Excel*/
+	.operateBtn .excelBtn {background: #FF3A46;float: right;
+	margin-right:15px;}
+	/*查询*/
+	.operateBtn .searchBtn {background: #FF3A46;float: right;}
+	
+	.nodeliveryorderSearch{width:200px;height:50px;
+	border-radius:10px;color:#fff;font-size:18px;font-family: "微软雅黑";
+	float:right;background:#FF3A46;}
+.exceedOrder{
+	margin-right:50px;
+}
+.exceedOrder:last-child{margin-right:0px;}
+/*超过24小时未发货订单*/
+.noDelivOrderNumWapper{width:100%;text-align:center;}
+.noDelivOrderNum{
+	display:inline-block;font-size:18px;vertical-align: bottom;
+}
+.exceedOrderNum{
+	color:#FF3A46;
+}
+	
+	
+	/*商品信息表*/
+	/*商品信息表*/
+	.goodsInfoTable{margin-top:60px;color:#333;}
+	.goodsInfoTable thead td{border:1px solid #C0C0C0;background:#eee;text-align: center;}
+	.goodsInfoTable tbody td{border:1px solid #C0C0C0;background:#fff;text-align: center;}
+	.goodsInfoTable a{color:#FBBD00;}
+	
+}
+
+
+.fillWapper .orderType input{
+	width:370px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

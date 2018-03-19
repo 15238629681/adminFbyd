@@ -1,0 +1,341 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+html,body{font:12px "Microsoft YaHei","Arial","Helvetica";color:#333;width:100%;height: 100%;overflow: auto;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img,iframe{border:none;}
+ul,li,ol{list-style:none;}
+input, textarea, select,button{*font-size:100%;outline: none;border:none;}
+a{color:#FFF;text-decoration:none;}
+a:hover{text-decoration: none;color: #fff;}
+a:focus{outline: none;text-decoration:none;}
+i{font-style: normal;}
+b{font-weight: normal;}
+span{display: inline-block;}
+div,input,span,a,li,ul,form,button,i,b,table,tb,th,tr{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+
+
+
+
+body{background:#fff;color:#333;}
+
+.topBlock{width:100%;height:20px;
+background:#F6F6F6;}
+.stepBlock{width:100%;height:88px;
+background:url(../../img/reg/enter11_03.png) #fff no-repeat center bottom ;
+	/*margin-bottom:120px;*/
+}
+.contentWapper{width:1280px;margin:0 auto 0 auto;
+min-width:1300px;
+}
+.headTitle div{width:50%;height:40px;line-height:40px;text-align:center;
+	float:left;font-size:14px;color:#999;background:#eee;}
+.headTitle .leftTitle{background:#FF3A46;
+color:#fff;cursor: pointer;}	
+.headTitle .rightTitle{background:#eee;
+color:#999;cursor:pointer;}
+
+.infoTitle{height:40px;line-height:40px;
+width:100%;font-size:14px;
+color:#FBBD00;text-align:left;
+border-bottom:1px solid #E0E0E0;
+}
+/*.infoTitle span{padding-top:50px;*/
+/*color:#FBBD00;text-align:left;*/
+/*font-size:18px;}*/	
+.inputBlockWapper .inputBlock{
+	margin-top:10px;
+} 	
+.inputBlockWapper .inputBlock .inputName{
+	display:inline-block;
+	margin-right:8px;
+	font-size:12px;color:#333;
+}	
+.inputBlockWapper .inputBlock input[type=text]{
+	width:268px;height:22px;
+	border:1px solid #C0C0C0;
+	text-indent: 1em;
+	font-size:12px;color:#999;
+}
+.fillWapper .inputName{
+	display:inline-block;
+	margin-right:10px;
+	font-size:12px;color:#333;
+}
+/*.fillWapper{margin-top:24px;}*/
+.fillWapper .dropdown{
+	display:inline-block;
+	width:268px;
+}
+.inputBlockWapper .fillWapper .dropdown input{
+	width:268px;height:22px;
+	border:1px solid #C0C0C0;
+	text-indent: 1em;
+	font-size:12px;color:#999;
+	background:url(../../img/reg/downarrow_03.png)  no-repeat right center;
+}
+.inputBlock label{font-size:12px;}
+.inputBlock .firstLabel{margin-right:24px;}
+
+
+
+
+/*供应商资质信息*/
+.infoblock .infoTitle .flagText{
+	color:#999;font-size:12px;
+}
+.imgUpload{
+	margin-top:13px;
+}
+.imgUpload .inputName{
+	display:inline-block;
+	width:113px;float:left;
+	
+}
+.imgUpload .addmainimg1 {
+	display:inline-block;
+	float:left;
+	width:257px;height:140px;
+	/*background:red;*/
+	cursor: pointer;position:relative;
+	/*background:url(../../img/reg/addimg_03.png) center center no-repeat;*/
+}
+.imgUpload .addmainimg1 .addimg1 {
+	width:257px;height:140px;
+	/*background:red;*/
+}
+.imgUpload .addmainimg1 .addimg1 .clean {
+	display:inline-block;
+	float:left;
+	width:140px;height:140px;
+	background:url(../../img/reg/addimg_03.png) center center no-repeat;
+}
+.imgUpload .addmainimg1 .addimg1 input{
+	position:absolute;top:60px;
+	left:168px;
+	width:68px;height:22px;
+line-height:22px;text-align:center;
+display:inline-block;background:#FBBD00 !important;
+color:#fff;font-size:12px;border-radius: 4px;
+cursor: pointer;
+}
+.imgUpload .addmainimg1 .addimg1 img{
+	width:140px;height:140px;
+}
+.chooseFileWapper{position:absolute;top:60px;left:170px;
+font-size:12px;width:68px;height:22px;line-height:22px;background:#FBBD00;
+color:#fff;text-align:center;border-radius: 4px;;}
+.imgExampleWapper{
+	display:inline-block;width:174px;height:140px;
+	background:url(../../img/reg/imgexample1_03.png) center center no-repeat;
+}
+.imgExampleWapper2{
+	display:inline-block;width:174px;height:140px;
+	background:url(../../img/reg/imgexample2_03.png) center center no-repeat;
+}
+.form-group{
+	display:inline-block;
+	/*width:140px;*/
+	margin-bottom:0;
+	height:22px;
+	/*width:140px;height:20px;*/
+	/*text-align:center;*/
+}
+.idValidityPeriod .form-group .input-group{
+	width:140px;height:22px;line-height:22px;
+}
+.idValidityPeriod{margin-top:10px;}
+.idValidityPeriod .inputName{
+	display:inline-block;
+	height: 22px;line-height:22px;
+}
+.idValidityPeriod input{text-align:center;}
+ .form-control[readonly]{
+ 	background:#fff;
+ }
+
+
+/*企业入驻*/
+/*供应商资质信息*/
+.supplierQualifyInfo{
+	border-bottom: 1px solid #E0E0E0;
+	padding-bottom:20px;
+}
+.supplierQualifyInfo .imgUpload .chooseFileWapper{
+	display:inline-block;
+}
+.supplierQualifyInfo .inputName{
+	display:inline-block;width:114px;
+	font-size:12px;
+}
+.supplierQualifyInfo .idValidityPeriod .beginTime{
+	margin-right:8px;
+}
+.supplierQualifyInfo .idValidityPeriod .finishTime{
+	margin-left:8px;
+}
+.supplierQualifyInfo .handidimg .imgExampleWapper2{
+	background:url(../../img/reg/handid.png) center center no-repeat;
+}
+.textDescriptionWapper{
+	display:inline-block;
+	vertical-align: top;
+}
+.textDescriptionWapper .textDescription{
+	margin-top:25px;margin-left:14px;
+}
+.textDescriptionWapper .textDescription p{
+	font-size:12px;line-height:26px;
+	
+}
+/*提交*/
+.submitBlock{
+	width:100%;height:69px;background:#fff;position:relative;
+}
+.submitBlock span{display:inline-block;width:100px;height:30px;
+line-height:30px;text-align:center;
+background:#FF3A46;color:#fff;font-size:14px;border-radius: 4px;
+/*position:absolute;top:0;right:0;bottom:0;left:0;*/
+margin:19px 574px;cursor: pointer;
+}
+
+/*蓝色提示信息*/
+.alertSpan{
+	display:inline-block;width:852px;height:24px;
+	line-height:24px;
+	background:url(../../img/reg/alert.png) 15px center no-repeat;
+	background-size:20px 20px;
+}
+.alertSpan .text{
+	margin-left:40px;
+}
+/*第三方店铺*/
+.thirdPlaygroundWapper{
+	margin-bottom:20px;
+}
+.thirdPlayground  .fillWapper .form-group .longInput{
+	margin-left:20px;
+	width:600px;height:22px;
+	border:1px solid #C0C0C0;
+	text-indent: 1em;
+	font-size:12px;color:#999;
+}
+.addThirdPlayground .fillWapper .inputName{
+	color:#fff;
+}
+.addThirdPlayground .deletShopLink{
+	display:inline-block;width:30px;height:30px;
+	background:url(../../img/reg/deletlink.png) center 16px no-repeat;
+	cursor:pointer;
+}
+.addThirdPlayground .addShopLink{
+	display:inline-block;width:30px;height:30px;
+	background:url(../../img/reg/addlink.png) center 16px no-repeat;
+	cursor:pointer;
+}
+.thirdPlaygroundWapper .addThirdPlayground .inputName{
+	margin-right:15px;
+}
+.thirdPlaygroundWapper .first .inputName{
+	margin-right:9px;
+}
+
+
+/*企业入驻*/
+
+
+.enterpriseEnterWapper .supplyManageInfo .inputBlock .detailWidth {
+	width:74px;text-align:right;
+    display: inline-block;
+    /*margin-right: 8px;*/
+    font-size: 12px;
+    color: #333;
+}
+.enterpriseEnterWapper .supplyEnterpriseInfo .inputBlock .detailWidth {
+	width:109px;text-align:right;
+    display: inline-block;
+    /*margin-right: 8px;*/
+    font-size: 12px;
+    color: #333;
+}
+.enterpriseEnterWapper .supplierQualifyInfo .inputBlock 
+.inputName{
+	width:114px;
+}
+.enterpriseEnterWapper .zhu{
+	width:1052px;
+	margin-left:114px;
+	margin-top:15px;font-size:14px;color:#333;
+}
+.enterpriseEnterWapper .supplierBrandInfo .inputBlockWapper .inputName{
+	width:110px;margin-right:0;
+}
+.enterpriseEnterWapper .leftWapper{
+	border:1px solid #c0c0c0;display:inline-block;
+	padding:9px;margin-top:12px;
+	margin-right:10px;margin-bottom:20px;
+	float:left;
+}
+.enterpriseEnterWapper .supplierBrandInfo{
+	border-bottom:1px solid #E0E0E0;
+}
+.enterpriseEnterWapper .supplierBrandInfo  .inputBlockWapper .brandValidityPeriod .zhi{
+	height:22px;line-height:22px;vertical-align: top;
+}
+.enterpriseEnterWapper .supplierBrandInfo  .inputBlockWapper .brandValidityPeriod .inputName{
+	vertical-align: top;
+}
+.enterpriseEnterWapper .supplierBrandInfo  .inputBlockWapper .brandValidityPeriod input[type=text]{
+	width:140px;height:22px;margin-left:-2px;
+}
+
+/*添加商标信息*/
+.enterpriseEnterWapper .inputBlockWapper .addBrandInfo{
+	display:inline-block;
+	width:120px;height:400px;
+	background:red;
+	vertical-align: top;margin-top:20px;
+	position:relative;
+	/*margin-top:206px;margin-left:23px;*/
+}
+.enterpriseEnterWapper .inputBlockWapper .addBrandInfo span{
+	display:inline-block;width:80px;height:22px;line-height:22px;
+	text-align:center;color:#fff;background:#FBBD00;
+	border-radius: 4px;font-size:12px;
+	position: absolute;
+	top:50%;left:50%;
+	margin-top:-11px;margin-left:-40px;
+}
+.bottomFoot{width:100%;height:150px;
+	line-height:150px;text-align:center;
+	background:#f6f6f6;color:#999;
+	font-size:12px;margin-top:100px;}
+	
+/*地址选择*/
+#distpicker5 .form-group{
+	height:22px;border-radius: 0px;
+	width:280px;
+}
+#distpicker5 .form-control{
+	height:22px;line-height:22px;padding:0;
+	border-radius: 0px;width:280px;
+}	
+.form-group {
+    margin-bottom: 0px !important;
+}
+.inputBlock .detailAddress{height:20px;line-height:20px;border:1px solid #C0C0C0;
+width:850px !important;
+}	
+/*}*/
+
+
+.supplierBrandInfo .blockBox{
+	display:inline-block;
+}
