@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;background: #fff;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;background: #fff;}
+a{color: #999;}
+b{font-weight: normal;}
+
+#title{margin: 15px;}
+#time{margin: 15px;}
+#title-2{margin: 15px;}
+#content{margin: 15px;}
+#content p{text-indent: 28px;margin: 0;}
+
+@media screen and (max-width: 340px)  {
+	#content p{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">消息详情</h1>
+</header>
+<div class="mui-content">
+    <div id="title">夏日白富美怎么防晒</div>
+    <p id="time">2017-07-27</p>
+    <div id="title-2">夏日防晒 安静的做个白美人不好吗？</div>
+    <div id="content">
+    	<p>身边或者耳边总是存在这样一类人：炎炎夏日，除了基础的护肤和日常妆容，从不使用任何的专业防晒产品，
+    		说是现在的很多BB啊隔离啊粉底啊基本上都附带防晒效果，再单独使用防晒霜，实属多此一举！只能说，这是一个很严重的误区！</p>
+    	<p>当你觉得防晒没用时，你已经被晒得很黑很黑了，此时斑已经从肌肤底层开始萌芽，慢慢开始往外生长了。</p>
+    	<p>当然，如果是军训，旅游，海边度假等特殊情况，白天防晒加防晒喷雾配合使用，出门不忘必要的物理防晒，晚上睡觉之前再敷个强效补水的面膜帮助皮肤舒缓镇定，相信在如此强大的防护网下，
+    		别人口中的什么皮肤晒后发红刺痛，脱皮过敏，日晒斑，将会统统与你无关......</p>
+    		<p>当然，如果是军训，旅游，海边度假等特殊情况，白天防晒加防晒喷雾配合使用，出门不忘必要的物理防晒，晚上睡觉之前再敷个强效补水的面膜帮助皮肤舒缓镇定，相信在如此强大的防护网下，
+    		别人口中的什么皮肤晒后发红刺痛，脱皮过敏，日晒斑，将会统统与你无关......</p>
+    		<p>当然，如果是军训，旅游，海边度假等特殊情况，白天防晒加防晒喷雾配合使用，出门不忘必要的物理防晒，晚上睡觉之前再敷个强效补水的面膜帮助皮肤舒缓镇定，相信在如此强大的防护网下，
+    		别人口中的什么皮肤晒后发红刺痛，脱皮过敏，日晒斑，将会统统与你无关......</p>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$.plusReady(function(){
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			$.openWindow({
+				"id": 'messagelistPage',
+				"url": 'messagelist.html'
+			})
+			plus.webview.currentWebview().hide();
+			setTimeout(function(){
+	    		plus.webview.close(plus.webview.currentWebview());
+	    	},500)
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

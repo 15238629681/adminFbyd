@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;background: #eee;}
+a{color: #999;}
+b{font-weight: normal;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{padding-top: 60px;width: 100%;padding-bottom: 50px;}
+
+#part1{background: #fff;font-size: 16px;padding: 0 10px 10px;}
+#part1 .title{padding: 0;}
+#mianimg{width: 100%;height: 180px;border: 1px #ddd solid;border-radius: 8px;background: url(../../images/experience/myreport/add.png) no-repeat center;}
+#mianimg img{width: 100%;height: 100%;border-radius: 8px;border: none;}
+.title{line-height: 40px;padding: 0 10px;}
+.title b{float: right;margin-right: 10px;color: #666;font-size: 14px;}
+.content{padding: 20px 10px;border-top: 1px #ddd solid;color: #666;}
+
+#part2{background: #fff;margin: 10px 0;font-size: 16px;}
+
+#part3{background: #fff;font-size: 16px;}
+#report{padding: 10px;border-top: 1px #ddd solid;color: #666;}
+/*#report img{width: 100%;height: 180px;border: 1px #ddd solid;border-radius: 8px;}
+#report div{padding: 4px 10px;text-indent: 30px;}*/
+
+#foot{position: fixed;bottom: 0;width: 100%;height: 40px;}
+#foot div{float: left;width: 33.33%;text-align: center;line-height: 40px;font-size: 16px;}
+#check{background: #fff;color:#FBBD00;}
+#reset{background:#FBBD00;color: #fff;}
+#display{background:rgb(255,58,70);color: #fff;}
+
+@media screen and (max-width: 340px)  {
+	#foot div{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">发表体验报告</h1>
+</header>
+<div class="mui-content">
+	<div id="part1">
+		<div class="title">体验报告主图</div>
+		<div id="mianimg">
+			<img src="" />
+		</div>
+	</div>
+	<div id="part2">
+		<div class="title">体验报告标题<b>编辑</b></div>
+		<div class="content">体验报告标题,限30个字</div>
+	</div>
+	<div id="part3">
+		<div class="title">体验报告正文<b>编辑</b></div>
+		<div class="content">上传文字、图片、短视频</div>
+		<div id="report"></div>
+	</div>
+</div>
+<div id="foot" class="clean">
+	<div id="check">预览</div>
+	<div id="reset">重置</div>
+	<div id="display">发布</div>
+</div>
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	window.addEventListener("refresh",function(){
+		plus.webview.currentWebview().reload();
+	})
+	$.plusReady(function(){
+		var ws = plus.webview.currentWebview();
+		var reportId = ws.reportId;
+//		window.addEventListener("headimg",function(e){
+//			var reportContent = JSON.parse(localStorage.getItem("report"+reportId));
+//			reportContent.mainimgsrc = e.detail.str;
+//			localStorage.setItem("report"+reportId,JSON.stringify(reportContent));
+//			plus.webview.currentWebview().reload();
+//		})
+		//图片绝对地址转换成base64位
+		function getBase64Image(img) {
+            //生成比例 
+            var w = img.width,
+                h = img.height,
+                scale = w / h; 
+                w = 100 || w;              //480  你想压缩到多大，改这里
+                h = w / scale;
+            var canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, w, h);
+            var dataURL = canvas.toDataURL("image/png",0.2);
+            return dataURL // return dataURL.replace("data:image/png;base64,", ""); 
+        } 
+
+		//拍照获取本地图片
+		function getImage(){
+			var c = plus.camera.getCamera();
+			c.captureImage(function(path){
+					plus.io.resolveLocalFileSystemURL(path,function(entry){
+						var img = doc.querySelector("#part1 img");
+			            img.src = entry.toLocalURL();
+			            var reportContent = JSON.parse(localStorage.getItem("report"+reportId));
+						reportContent.mainimgsrc = entry.toLocalURL();
+						localStorage.setItem("report"+reportId,JSON.stringify(reportContent));
+			            img.onload =function() { 
+			                var data = getBase64Image(img); 
+			                console.log(data);
+			            } 
+//						var s = entry.toLocalURL()+ "?version=" + new Date().getTime();//增加一个时间随机数
+//						doc.getElementById("head-img").src = s;
+//						$.openWindow({
+//							url: '../../my/clipimg.html',
+//							id: 'clipimg.html',
+//							extras: {
+//								path: entry.toLocalURL()
+//							}
+//						});
+					})
+					//alert(path);
+				},
+				function( error ) {
+					$.toast(error.message);
+				}
+			)
+		};
+		//获取本地相册文件
+		function galleryImg(){
+			plus.gallery.pick(function(path){
+				var img = doc.querySelector("#part1 img"); 
+	            var reportContent = JSON.parse(localStorage.getItem("report"+reportId));
+	            reportContent.mainimgsrc = path;
+	            localStorage.setItem("report"+reportId,JSON.stringify(reportContent));
+	            img.src = path;
+	            img.onload =function() { 
+	                var data = getBase64Image(img); 
+	                console.log(data); 
+	            } 
+//					Path = path;
+//					doc.getElementById("head-img").src = path;
+//					$.openWindow({
+//						url: '../../my/clipimg.html',
+//						id: 'clipimg.html',
+//						extras: {
+//							path: path
+//						}
+//					});
+				},
+				function(e){
+					$.toast("打开相册失败");
+				},
+				{filter:"image"}
+			)
+		};
+		doc.querySelector("#mianimg").addEventListener("tap",function(){
+			//弹出选择图片操作
+			if(mui.os.plus){
+				var a = [{
+					title: "拍照"
+				}, {
+					title: "从手机相册选择"
+				}];
+				plus.nativeUI.actionSheet({
+					title: "选择体验报告主图",
+					cancel: "取消",
+					buttons: a
+				}, function(b) {
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							getImage();
+							break;
+						case 2:
+							galleryImg();
+							break;
+						default:
+							break
+					}
+				})	
+			}
+		})
+		
+		if(localStorage.getItem("report"+reportId)){
+			doc.querySelector("#part2 .content").innerHTML = JSON.parse(localStorage.getItem("report"+reportId)).reporttitle;
+			doc.querySelector("#part1 img").src = JSON.parse(localStorage.getItem("report"+reportId)).mainimgsrc;
+			var Con = JSON.parse(localStorage.getItem("report"+reportId)).content;
+			if(Con){
+				doc.querySelector("#part3 .content").style.display = "none";
+				doc.querySelector("#report").innerHTML = Con;
+			}
+		}else{			
+			var reporttitle = doc.querySelector("#part2 .content").innerHTML;
+			var mainimgsrc = doc.querySelector("#part1 img").src;
+			var reportIndex = {
+				"reportId":reportId,
+				"reporttitle":reporttitle,
+				"mainimgsrc":mainimgsrc,
+				"content":""
+			}
+			localStorage.setItem("report"+reportId,JSON.stringify(reportIndex));
+		}
+		console.log(reportId,"report"+reportId,localStorage.getItem("report"+reportId));
+		//alert(localStorage.getItem("report"+reportId))
+		doc.querySelector("#part2 b").addEventListener("tap",function(){
+			$.openWindow({
+				id:"reporttitle",
+				url:"reporttitle.html",
+				extras:{
+					reportId:reportId
+				}
+			})
+		})
+		doc.querySelector("#part3 b").addEventListener("tap",function(){
+			$.openWindow({
+				id:"mainreport",
+				url:"mainreport.html",
+				extras:{
+					reportId:reportId
+				}
+			})
+		})
+		
+		//重置
+		doc.querySelector("#reset").addEventListener("tap",function(){
+			$.confirm('重置后编辑内容将清空','重置报告内容',['确认重置','取 消'],function (e) {
+				if(e.index==0){
+					var reportIndex = {
+						"reportId":reportId,
+						"reporttitle":"体验报告标题，限30个字",
+						"mainimgsrc":"",
+						"content":""
+					}
+					localStorage.setItem("report"+reportId,JSON.stringify(reportIndex));
+				}
+			},'div')
+		})
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+		};
+	})
+})(mui,document)
+	
+</script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/experience/myexperieence.css" />
+<style>
+</style>
+</head>
+
+<body>
+
+<div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+	<div class="mui-scroll">
+		<div id="itemlist">
+			<div class="item">
+				<div class="title">【抢先首发】Air Jorden 11 Space Jam</div>
+				<div class="goods clean">
+					<div class="goods-img">
+						<img src="../../images/experience/experience_report/2.png" />
+					</div>
+					<div class="goods-info">
+						<div class="state">
+							<span class="state0 state2">待审核</span>
+							<span class="num">申请人数：<b>1546</b></span>
+						</div>
+						<div>
+							<span data-id="1" class="action action1">补充申请理由</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../../js/mui.min.js"></script>
+<script>
+(function($,doc){
+	$.init({
+		pullRefresh : {
+		    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    down : {
+		     	style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+      			color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+      			height:'50px',//可选,默认50px.下拉刷新控件的高度,
+      			range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+      			offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+      			auto: false,//可选,默认false.首次加载自动上拉刷新一次
+		      	callback :downflash //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    },
+		    up : {
+		      height:50,//可选.默认50.触发上拉加载拖动距离
+		      auto:false,//可选,默认false.自动上拉加载一次
+		      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      callback :upflash //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+		 }
+	});
+	function downflash(){
+		$.toast("下拉加载没有最新数据");
+		$('#refreshContainer').pullRefresh().endPulldownToRefresh(true);
+	}
+	function upflash(){
+		$.toast("上拉加载没有更多数据");
+		 this.endPullupToRefresh(true);
+	}
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+	});
+	$("#itemlist").on("tap",".action1",function(){
+		var reportID = this.getAttribute("data-id");
+		$.openWindow({
+			id:"submitreason",
+			url:"submitreason.html",
+			extras:{
+				reportId:reportID
+			}
+		})
+	})
+})(mui,document)
+</script>
+
+</body>
+
+</html>

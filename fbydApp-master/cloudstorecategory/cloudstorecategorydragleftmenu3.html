@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>筛选页面----云店分类</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/dragleft.css" />
+	
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="title">筛选</div>
+
+			<div class="mainMenu">
+				<div class="priceScope">
+					<p class="priceTitle">价格区间(元)</p>
+					<input type="text" class="lowPrice inputBox" placeholder="最低价" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" onafterpaste="this.value=this.value.replace(/\D|^0/g,'')" />
+					<span>-</span>
+					<input type="text" class="heightPrice inputBox" placeholder="最高价" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" onafterpaste="this.value=this.value.replace(/\D|^0/g,'')" />
+				</div>
+
+				<div class="profitScope">
+					<p class="profitTitle">利润区间(元)</p>
+					<input type="text" class="lowProfit inputBox" placeholder="最低利润" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" onafterpaste="this.value=this.value.replace(/\D|^0/g,'')" />
+					<span>-</span>
+					<input type="text" class="heightProfit inputBox" placeholder="最高利润" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" onafterpaste="this.value=this.value.replace(/\D|^0/g,'')" />
+				</div>
+
+				<div class="sallScope">
+					<p class="profitTitle">销售区间(元)</p>
+					<input type="text" class="lowSall inputBox" placeholder="最低销量" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" onafterpaste="this.value=this.value.replace(/\D|^0/g,'')" />
+					<span>-</span>
+					<input type="text" class="heightSall inputBox" placeholder="最高销量" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" onafterpaste="this.value=this.value.replace(/\D|^0/g,'')" />
+				</div>
+
+				<div class="productType">
+					<input type="text" class="bandProduct" readonly="readonly" value="品牌产品" />
+					<input type="text" class="seaProduct" readonly="readonly" value="进口产品" />
+				</div>
+
+			</div>
+			<div class="footer mui-clearfix">
+				<span id="clearset-btn"  class="">重置</span>
+				<span id="close-btn"  class="">完成</span>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/public.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			window.addEventListener('resize', function() {
+				document.querySelector('.footer').style.display = document.body.clientHeight > 500 ? 'block' : 'none';
+			}, false);
+
+			var muicontent = document.getElementsByClassName("mui-content")[0];
+			//muicontent.style.height = (window.screen.availHeight) + "px";
+
+			//关闭back、menu按键监听，这样侧滑主界面会自动获得back和memu的按键事件，仅在主界面处理按键逻辑即可；
+			mui.init({
+				keyEventBind: {
+					backbutton: false,
+					menubutton: false
+				}
+			});
+
+			//关闭侧边导航
+			function closeMenu() {
+				mui.fire(main, "menu10:swiperight");
+			}
+
+			//左滑显示出来的菜单，只需监听右滑，然后将菜单关闭即可；在该菜单上左滑，不做任何操作；
+			window.addEventListener("swiperight", closeMenu);
+
+			//			价格
+			var lowPrice = document.getElementsByClassName("lowPrice")[0];
+			var heightPrice = document.getElementsByClassName("heightPrice")[0];
+			//			利润
+			var lowProfit = document.getElementsByClassName("lowProfit")[0];
+			var heightProfit = document.getElementsByClassName("heightProfit")[0];
+			//			销量
+			var lowSall = document.getElementsByClassName("lowSall")[0];
+			var heightSall = document.getElementsByClassName("heightSall")[0];
+			//			产品种类
+			var bandProduct = document.getElementsByClassName("bandProduct")[0];
+			var seaProduct = document.getElementsByClassName("seaProduct")[0];
+
+			var clearset_btn = document.getElementById("clearset-btn");
+			var close_btn = document.getElementById("close-btn");
+
+			var listArr = []; //商品总数据
+			var nowPageNum = 0; //当前请求的页数
+			var bandFlag = false;
+			var seaFlag = false;
+			var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+
+			//			var goodsListParams=JSON.parse(localStorage.getItem("goodsListParams"));
+			//var goodsListStr = JSON.stringify(goodsList);
+			//首页  请求参数
+			var goodsList = {
+				count: 10,
+				start: 0,
+				order: 1, //商品默认的排序方式  最新
+				keyword: "all", //搜索的关键字
+				fqcat: 0, //商品分类编号
+				token: userinfo.token,
+				uid: userinfo.userinfo.uid,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				price: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				lirun: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				volume: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				brand: "0",
+				sea: "0"
+			};
+
+			//品牌产品,进口产品
+			var productType = document.getElementsByClassName("productType")[0].getElementsByTagName("input");
+			productType[0].addEventListener("tap", function() {
+				if(!bandFlag) {
+					this.classList.add("choosedType");
+					goodsList.brand = "1";
+				} else {
+					this.classList.remove("choosedType");
+					goodsList.brand = "0";
+				}
+				bandFlag = !bandFlag;
+				//				将重置后的数据存入缓存
+				//				var goodsListParams=JSON.stringify(goodsList);
+				//				alert(goodsListParams);
+				//				localStorage.setItem("goodsListParams",goodsListParams);
+			});
+			productType[1].addEventListener("tap", function() {
+				if(!seaFlag) {
+					this.classList.add("choosedType");
+					goodsList.sea = "1";
+				} else {
+					this.classList.remove("choosedType");
+					goodsList.sea = "0";
+				}
+				seaFlag = !seaFlag;
+				//				将重置后的数据存入缓存
+				//				var goodsListParams=JSON.stringify(goodsList);
+				//				alert(goodsListParams);
+				//				localStorage.setItem("goodsListParams",goodsListParams);
+			});
+
+			function clearSetFn() {
+				noChoose = true;
+				//				alert("重置筛选页面的数据")
+				//				lowPrice.setAttribute("value","");
+				var allInput = document.getElementsByClassName("inputBox");
+				for(var i = 0; i < allInput.length; i++) {
+					allInput[i].value = "";
+				}
+				goodsList.price = {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				};
+				goodsList.lirun = {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				};
+				goodsList.volume = {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				};
+				//产品种类
+				if(goodsList.brand == "1") {
+					bandProduct.classList.remove("choosedType");
+					goodsList.brand = "0";
+					bandFlag = false;
+				}
+				if(goodsList.sea == "1") {
+					seaProduct.classList.remove("choosedType");
+					goodsList.sea = "0";
+					seaFlag = false;
+				}
+				var goodListParam = {
+					price: {
+						state: "0",
+						range: {
+							start: "",
+							end: ""
+						}
+					},
+					lirun: {
+						state: "0",
+						range: {
+							start: "",
+							end: ""
+						}
+					},
+					volume: {
+						state: "0",
+						range: {
+							start: "",
+							end: ""
+						}
+					},
+					sea: "0",
+					brand: "0"
+				};
+				var str = JSON.stringify(goodListParam);
+				localStorage.setItem("cloudstorecategorySxCondition", str);
+				noChoose = true;
+			}
+			window.addEventListener("clearSet", clearSetFn);
+			//重置按钮
+			clearset_btn.addEventListener("tap", clearSetFn);
+
+			var nowFqcat = localStorage.getItem("nowFqcat");
+//			alert("nowFqcat  筛选页面--" + nowFqcat);
+			var wid;
+			//				                    
+			switch(nowFqcat) {
+				case '1':
+					wid = "ladies";
+					break;
+				case '2':
+					wid = "men";
+					break;
+				case '3':
+					wid = "underwear";
+					break;
+				case '4':
+					wid = "baby";
+					break;
+				case '5':
+					wid = "bag";
+					break;
+				case '7':
+					wid = "house";
+					break;
+				case '8':
+					wid = "shoes";
+					break;
+				case '9':
+					wid = "food";
+					break;
+				case '10':
+					wid = "ras";
+					break;
+				case '11':
+					wid = "electric";
+					break;
+				case '12':
+					wid = "other";
+					break;
+				case '13':
+					wid = "accessories";
+					break;
+				case '14':
+					wid = "digital";
+					break;
+			}
+			var main;
+			var prevPage;
+			mui.plusReady(function() {
+				prevPage = plus.webview.getWebviewById(wid); //获取上个页面	
+				main = plus.webview.currentWebview().opener();
+			});
+
+			//完成按钮
+//			var main;
+//			var prevPage;
+			document.getElementById("close-btn").addEventListener('tap', function() {
+//				var nowFqcat = localStorage.getItem("nowFqcat");
+//				var wid;
+//				switch(nowFqcat) {
+//					case '1':
+//						wid = "ladies";
+//						break;
+//					case '2':
+//						wid = "men";
+//						break;
+//					case '3':
+//						wid = "underwear";
+//						break;
+//					case '4':
+//						wid = "baby";
+//						break;
+//					case '5':
+//						wid = "bag";
+//						break;
+//					case '7':
+//						wid = "house";
+//						break;
+//					case '8':
+//						wid = "shoes";
+//						break;
+//					case '9':
+//						wid = "food";
+//						break;
+//					case '10':
+//						wid = "ras";
+//						break;
+//					case '11':
+//						wid = "electric";
+//						break;
+//					case '12':
+//						wid = "other";
+//						break;
+//					case '13':
+//						wid = "accessories";
+//						break;
+//					case '14':
+//						wid = "digital";
+//						break;
+//				}
+//
+//				(function a() {
+//					mui.plusReady(function() {
+//						alert("wid---" + wid);
+//						prevPage = plus.webview.getWebviewById(wid); //获取上个页面	
+//						main = plus.webview.getWebviewById('category.html'); //获取主页面
+//					});
+//				})();
+
+				//请求参数   价格
+				if(lowPrice.value.trim() != "" || heightPrice.value.trim() != "") {
+					//重置输入框的值
+					if(parseInt(lowPrice.value) > parseInt(heightPrice.value)) { //第一个值大约第二个值分为，第二个是否为空
+
+						if(heightPrice.value.trim() != "") { //第二个不为空，调换位置
+							var a = lowPrice.value;
+							document.getElementsByClassName("lowPrice")[0].value = heightPrice.value;
+							document.getElementsByClassName("heightPrice")[0].value = a;
+							goodsList.price = {
+								state: "1",
+								range: {
+									start: lowPrice.value.trim(),
+									end: heightPrice.value.trim()
+								}
+							};
+						}
+						if(heightPrice.value.trim() == "") {
+							goodsList.price = {
+								state: "1",
+								range: {
+									start: lowPrice.value.trim(),
+									end: 0
+								}
+							};
+						}
+
+					} else {
+						goodsList.price = {
+							state: "1",
+							range: {
+								start: lowPrice.value.trim(),
+								end: heightPrice.value.trim()
+							}
+						};
+					}
+
+				} else { //两个都为空
+					goodsList.price = {
+						state: "0",
+						range: {
+							start: "",
+							end: ""
+						}
+					};
+				}
+
+				//利润
+				if(lowProfit.value.trim() != "" || heightProfit.value.trim() != "") {
+					//重置输入框的值
+					if(parseInt(lowProfit.value) > parseInt(heightProfit.value)) {
+						if(heightProfit.value.trim() != "") { //第二个不为空，调换位置
+							console.log("heightProfit---" + heightProfit)
+							var a = lowProfit.value;
+							document.getElementsByClassName("lowProfit")[0].value = heightProfit.value;
+							document.getElementsByClassName("heightProfit")[0].value = a;
+							goodsList.lirun = {
+								state: "1",
+								range: {
+									start: lowProfit.value.trim(),
+									end: heightProfit.value.trim()
+								}
+							};
+						}
+						if(heightProfit.value.trim() == "") {
+							goodsList.lirun = {
+								state: "1",
+								range: {
+									start: lowProfit.value.trim(),
+									end: 0
+								}
+							};
+						}
+					} else {
+						goodsList.lirun = {
+							state: "1",
+							range: {
+								start: lowProfit.value.trim(),
+								end: heightProfit.value.trim()
+							}
+						};
+					}
+
+				} else {
+					goodsList.lirun = {
+						state: "0",
+						range: {
+							start: "",
+							end: ""
+						}
+					};
+				}
+
+				//销量
+				if(lowSall.value.trim() != "" || heightSall.value.trim() != "") {
+					//重置输入框的值
+					if(parseInt(lowSall.value.trim()) > parseInt(heightSall.value.trim())) { //第一位大于第二位
+						//						alert("第一位比第二位大")
+						if(heightSall.value.trim() != "") { //第二个不为空，调换位置
+							var a = lowSall.value;
+							//							alert("第一位比第二位大，且第二位不为空")
+							document.getElementsByClassName("lowSall")[0].value = heightSall.value;
+							document.getElementsByClassName("heightSall")[0].value = a;
+							goodsList.volume = {
+								state: "1",
+								range: {
+									start: lowSall.value.trim(),
+									end: heightSall.value.trim()
+								}
+							};
+						}
+						if(heightSall.value.trim() == "") {
+							goodsList.volume = {
+								state: "1",
+								range: {
+									start: lowSall.value.trim(),
+									end: 0
+								}
+							};
+						}
+					} else { //第一位小于第二位
+						goodsList.volume = {
+							state: "1",
+							range: {
+								start: lowSall.value.trim(),
+								end: heightSall.value.trim()
+							}
+						};
+					}
+
+				} else { //两个都为空
+					goodsList.volume = {
+						state: "0",
+						range: {
+							start: "",
+							end: ""
+						}
+					};
+				}
+				var noChoose = false;
+				var nowFqcat = localStorage.getItem("nowFqcat");
+				var sliderCard = document.getElementsByClassName("sliderCard")[0];
+				//筛选条件为空
+				if(goodsList.price.state == "0" && goodsList.volume.state == "0" && goodsList.lirun.state == "0" && goodsList.brand == "0" && goodsList.sea == "0") {
+					//当前筛选条件为空
+					noChoose = true;
+					//文字不变色
+				}
+
+				mui.fire(main, "reRequest", { //根据筛选条件    进行局部刷新
+					noChoose: noChoose
+				});
+				localStorage.setItem("cloudstorecategorySxCondition", JSON.stringify(goodsList));
+				//				localStorage.setItem("nowCondition", JSON.stringify(nowCondition));
+				mui.fire(main, "menu10:swiperight");
+
+				//将本次的筛选条件存入缓存，用于判断用户是否改变筛选条件，然后进行局部刷新
+				//				var nowCondition = {
+				//					price: {
+				//						state: goodsList.price.state,
+				//						range: {
+				//							start: goodsList.price.range.start,
+				//							end: goodsList.price.range.end
+				//						}
+				//					},
+				//					lirun: {
+				//						state: goodsList.lirun.state,
+				//						range: {
+				//							start: goodsList.lirun.range.start,
+				//							end: goodsList.lirun.range.end
+				//						}
+				//					},
+				//					volume: {
+				//						state: goodsList.volume.state,
+				//						range: {
+				//							start: goodsList.volume.range.start,
+				//							end: goodsList.volume.range.end
+				//						}
+				//					},
+				//					sea: goodsList.sea,
+				//					brand: goodsList.brand
+				//				};
+				//				if(localStorage.getItem("sxCondition"))
+
+				//				var sxStr = "";
+				//				var a;
+				//				var b;
+				//				if(localStorage.getItem("sxCondition")) { //缓存中已经存在筛选条件
+				//					//					sxStr=JSON.stringify(localStorage.getItem("sxCondition"));
+				//					a = localStorage.getItem("sxCondition");
+				//					localStorage.setItem("nowCondition", JSON.stringify(nowCondition));
+				//					b = localStorage.getItem("nowCondition");
+				//					console.log("a----" + a);
+				//					console.log("b----" + b);
+				//					console.log(isObjectValueEqual(a, b));
+				//					if(isObjectValueEqual(a, b)) { //不进行局部刷新   当前筛选条件和缓存中的一样
+				//						//						alert("当前筛选条件和缓存中的一样")
+				//						return;
+				//					} else { //进行局部刷新
+				//						console.log("筛选条件发生变化，进行局部刷新");
+				//						var noChoose = false;
+				//						if(goodsList.price.state == "0" && goodsList.volume.state == "0" && goodsList.lirun.state == "0" && goodsList.brand == "0" && goodsList.sea == "0") {
+				//							//当前筛选条件为空
+				//							noChoose = true;
+				//						}
+				//						mui.fire(main, "reRequest", { //根据筛选条件    进行局部刷新
+				//							price: goodsList.price,
+				//							lirun: goodsList.lirun,
+				//							volume: goodsList.volume,
+				//							sea: goodsList.sea,
+				//							brand: goodsList.brand,
+				//							noChoose: noChoose
+				//						});
+				//					}
+				//				} else { //缓存中没有筛选记录       将空的筛选条件  存入缓存   不进行局部刷新
+				//					var goodListParam = {
+				//						price: {
+				//							state: "0",
+				//							range: {
+				//								start: "",
+				//								end: ""
+				//							}
+				//						},
+				//						lirun: {
+				//							state: "0",
+				//							range: {
+				//								start: "",
+				//								end: ""
+				//							}
+				//						},
+				//						volume: {
+				//							state: "0",
+				//							range: {
+				//								start: "",
+				//								end: ""
+				//							}
+				//						},
+				//						brand: "0",
+				//						sea: "0"
+				//					};
+				//					var str = JSON.stringify(goodListParam);
+				//					localStorage.setItem("sxCondition", str);
+				//				}
+				//
+				//				mui.fire(main, "menu:swiperight");
+				//				localStorage.setItem("sxCondition", JSON.stringify(nowCondition)); //当前记录存入缓存
+				//				
+
+				//				function isObjectValueEqual(a, b) {
+				//					var aProps = Object.getOwnPropertyNames(a);
+				//					var bProps = Object.getOwnPropertyNames(b);
+				//
+				//					if(aProps.length != bProps.length) {
+				//						return false;
+				//					}
+				//
+				//					for(var i = 0; i < aProps.length; i++) {
+				//						var propName = aProps[i];
+				//
+				//						if(a[propName] !== b[propName]) {
+				//							return false;
+				//						}
+				//					}
+				//
+				//					return true;
+				//				}
+
+			});
+
+			//价格区间/利润区间   大于0的整数或者小数
+
+			//销量  大约0的整数
+		</script>
+	</body>
+
+</html>

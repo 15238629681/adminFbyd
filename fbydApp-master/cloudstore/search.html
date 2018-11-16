@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<script type="text/javascript" src="../js/rem.js"></script>
+<link href="../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/all.css" />
+<link rel="stylesheet" href="../css/cloudstore/searchblock.css" />
+<style>
+html,body{
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+.searchKeyWords{
+	display: block;
+}
+.header {
+	height: 60px;
+	position: fixed;
+	top: 0;
+}
+
+.header .searchText {
+	display: inline-block;
+	position:absolute;
+	right:10px;bottom:10px;
+	/*margin-right:10px;*/
+	/*padding:0 10px 0 0;*/
+	font-size: 14px;
+	/*margin-left: 0.18rem;*/
+	/*margin-top: 18px;*/
+	color: #898989;
+	/*float:right;*/
+}
+.searchKeyWords .searchWordsDiv .searchInputKeyWord{
+	padding: 0;
+	margin: 0 !important;
+	padding-left: 1rem;
+	text-align: left;
+}
+</style>
+</head>
+
+<body>
+<form action="#">	
+	<div class="searchKeyWords">
+		<div class="searchWordsDiv">
+			<div class="mui-bar mui-bar-nav header">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft searchBlockBack"></a>
+				<input class="searchInputKeyWord" type="search" placeholder="搜索商品" />
+				<a class="searchText mui-pull-right " id="searchTextHistory" style="margin-left: 8px;">搜索</a>
+			</div>
+	
+			<div class="historyDiv mui-clearfix">
+				<p class="title">历史搜索<span id="delete" class="mui-icon mui-icon-trash" style="float: right;margin-right: 20px;"></span></p>			
+				<ul class="historySearchWord mui-clearfix mui-list-unstyled"></ul>
+			</div>
+		</div>
+	</div>
+</form>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	//alert(1)
+	historyBlock();
+	doc.getElementsByTagName("form")[0].addEventListener("submit",function(e){
+		e.preventDefault();
+		var searchWord = document.getElementsByClassName("searchInputKeyWord")[0].value.trim();
+		if(searchWord == ""){
+			document.getElementsByClassName("searchInputKeyWord")[0].blur();
+			$.toast("请输入关键词");
+		}else{
+			localStorage.setItem("keywordCloudStore", searchWord);
+			var historyArray = [];
+			if(localStorage.getItem("historyRecord")) { //缓存中存在该变量
+				historyArray = JSON.parse(localStorage.getItem("historyRecord"));
+			}
+			if(historyArray.indexOf(searchWord) == -1) { //如果缓存中不存在该记录
+				if(historyArray.length >= 12) {
+					historyArray.pop();
+				}
+				historyArray.unshift(searchWord); //从数组首位添加元素
+				var str = JSON.stringify(historyArray);
+				localStorage.setItem("historyRecord", str);
+			}
+			//goodsList.keyword = searchWord;
+			localStorage.setItem("keywordCloudStore", searchWord);
+			document.getElementsByClassName("searchInputKeyWord")[0].blur();
+			localStorage.setItem("keywordCloudStore", searchWord);
+			mui.openWindow({
+				url: "cloudstoresearchlist.html",
+				id: "cloudstoresearchlist.html",
+				extras: {
+					keyword: searchWord
+				}
+			});
+			return false;
+		}
+	})
+	
+	//搜索界面  搜索按钮
+	document.getElementById("searchTextHistory").addEventListener("tap", function(e) {
+		var searchWord = document.getElementsByClassName("searchInputKeyWord")[0].value.trim();
+		if(searchWord == ""){
+			document.getElementsByClassName("searchInputKeyWord")[0].blur();
+			$.toast("请输入关键词");
+		}else{
+			localStorage.setItem("keywordCloudStore", searchWord);
+			var historyArray = [];
+			if(localStorage.getItem("historyRecord")) { //缓存中存在该变量
+				historyArray = JSON.parse(localStorage.getItem("historyRecord"));
+			}
+			if(historyArray.indexOf(searchWord) == -1) { //如果缓存中不存在该记录
+				if(historyArray.length >= 12) {
+					historyArray.pop();
+				}
+				historyArray.unshift(searchWord); //从数组首位添加元素
+				var str = JSON.stringify(historyArray);
+				localStorage.setItem("historyRecord", str);
+			}
+			//goodsList.keyword = searchWord;
+			localStorage.setItem("keywordCloudStore", searchWord);
+			document.getElementsByClassName("searchInputKeyWord")[0].blur();
+			localStorage.setItem("keywordCloudStore", searchWord);
+			mui.openWindow({
+				url: "cloudstoresearchlist.html",
+				id: "cloudstoresearchlist.html",
+				extras: {
+					keyword: searchWord
+				}
+			});
+		}
+	});
+
+	//历史记录
+	//初始化历史搜索模块
+	function historyBlock() {
+		if(localStorage.getItem("historyRecord")){			
+			var searchWordArr = JSON.parse(localStorage.getItem("historyRecord"));
+			document.getElementsByClassName("historySearchWord ")[0].innerHTML = "";
+			if(searchWordArr) {
+				for(var i = 0; i < searchWordArr.length; i++) {
+					var oLi = document.createElement("li");
+					oLi.innerHTML = searchWordArr[i];
+					document.getElementsByClassName("historySearchWord ")[0].appendChild(oLi);
+				}
+			}
+		}
+	};
+
+	//历史搜索模块  li的点击事件
+	var historyDiv = document.getElementsByClassName("historyDiv")[0];
+	$(".historyDiv").on("tap", "li", function(e) {
+		document.getElementsByClassName("searchInputKeyWord")[0].blur();
+		var keyword = this.innerHTML;
+		localStorage.setItem("keywordCloudStore", keyword);
+		$.openWindow({
+			url: "cloudstoresearchlist.html",
+			id: "cloudstoresearchlist.html",
+		});
+	})
+	
+	//删除历史搜索记录
+	document.getElementById("delete").addEventListener("tap",function(){
+		$.confirm('删除历史搜索记录？','',['删除','取消'],function (e) {
+			if(e.index==0){
+				document.getElementsByClassName("historySearchWord ")[0].innerHTML = "";
+				localStorage.setItem("historyRecord","");
+			}
+		},'div')
+	})
+	
+	$.plusReady(function(){				
+		//重新定义后退函数(监听安卓后退键事件)
+		var backButtonPress = 0;
+		$.back = function(event) {
+			backButtonPress++;
+				if (backButtonPress==1) {
+					document.getElementsByClassName("searchInputKeyWord")[0].blur();
+					setTimeout(function(){						
+						plus.webview.close(plus.webview.currentWebview());
+					},20)
+				}else{				
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+			setTimeout(function() {
+				backButtonPress = 0;
+			}, 800);
+			return false;
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

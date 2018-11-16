@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+a{color: #999;}
+b{font-weight: normal;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{padding-top: 60px;font-size: 16px;}
+
+#input-money{margin-top: 10px;background: #fff;padding: 10px 20px;}
+#input-wrap{width: 100%;height: 100%;display: inline-block;position: relative;border-bottom: 1px solid #eee;margin-bottom: 10px;}
+#input-wrap b{position: absolute;font-size: 36px;height: 60px;line-height: 60px;}
+#input-wrap input{border: none;padding: 0;padding-left: 40px;height: 60px;margin-bottom: 0;font-size: 36px;}
+#money-num{color: #999;font-size: 14px;}
+
+#sendmoney-btn{padding:0;border:none;width: 90%;margin: 10px 5%;border-radius: 8px;height: 40px;line-height: 40px;text-align: center;
+background: rgb(243,173,26);color: #333;opacity: 0.6;}
+
+@media screen and (max-width: 340px)  {
+	.mui-content{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">账户余额</h1>
+</header>
+<div class="mui-content">
+    <div id="input-money">
+    	<div>提现金额</div>
+    	<div id="input-wrap" class="clean">
+    		<b>￥</b>
+    		<input id="money" type="number" />
+    	</div>
+    	<div id="money-num">可用提现金额<b>0.00</b>元</div>
+    </div>
+    <button id="sendmoney-btn" type="button" disabled="disabled" >申请提现</button>
+    <div>
+    	<ul class="mui-table-view">
+   			<li class="mui-table-view-cell">
+        		<a id="applymoneydetail" class="mui-navigate-right">提现明细</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="moneydetail" class="mui-navigate-right">财务明细</a>
+    		</li>
+		</ul>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){	
+	$.init();	
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	var allmoney
+	window.addEventListener("allmoney",function(e){
+		allmoney = e.detail.money;
+		document.getElementById("money-num").getElementsByTagName("b")[0].innerHTML = e.detail.money;
+		document.getElementById("money").addEventListener("input",function(){
+			var allmoney = e.detail.money;
+			var getmoney = parseFloat(document.getElementById("money").value);
+			if(getmoney <= allmoney){
+				document.getElementById("sendmoney-btn").style.opacity = 1;
+				document.getElementById("sendmoney-btn").disabled = false;
+				document.getElementById("money-num").style.color = "#999";
+				document.getElementById("money-num").innerHTML = "可用提现金额<b>"+allmoney+"</b>元";
+			}else if(getmoney > allmoney){
+				document.getElementById("sendmoney-btn").style.opacity = 0.6;
+				document.getElementById("sendmoney-btn").disabled = true;
+				document.getElementById("money-num").style.color = "rgb(255,35,35)";
+				document.getElementById("money-num").innerHTML = "提现金额大于余额，请重新输入";
+			};
+			if(document.getElementById("money").value==""){
+				document.getElementById("sendmoney-btn").style.opacity = 0.6;
+				document.getElementById("sendmoney-btn").disabled = true;
+				document.getElementById("money-num").style.color = "#999";
+				document.getElementById("money-num").innerHTML = "可用提现金额<b>"+allmoney+"</b>元";
+			}
+		});
+	})
+	$.plusReady(function(){			
+		doc.getElementById('sendmoney-btn').addEventListener("tap",function(){
+			var money = doc.getElementById("money").value;
+			//alert(money)
+			$.ajax({
+				type:"post",
+				url:"https://app.fanbaoyundian.com/appapi/applymoney.app.php",
+				data:{
+					token:user_token,
+					timestamp:time,
+					uid:user_id,
+					money:money
+				},
+				success:function(data){
+					//alert(JSON.stringify(data))
+					if(data.state==1){
+						//$.toast("提现成功");
+						if(JSON.parse(localStorage.getItem("userinfo")).userinfo.isshop=="1"){
+							$.openWindow({
+								id: 'applymoneystep_bPage',
+								url: 'applymoney-b.html',
+								extras:{
+									money:money
+								}
+							});
+						}else{
+							$.openWindow({
+								id: 'applymoneystep_cPage',
+								url: 'applymoney-c.html',
+								extras:{
+									money:money
+								}
+							});
+						}
+					}else{
+						$.toast("还有申请中的提现，请点击提现明细查看");
+					}
+				},
+				error:function(xhr,type,errorThrown){
+					if(type=="timeout"){
+						$.toast("请求超时，请检查网络");
+					}
+				}
+			});
+		});
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			document.getElementById("money").blur();
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+	})
+	document.getElementById("applymoneydetail").addEventListener("tap",function(){
+		var applymoneydetailPage = $.preload({
+			"id": 'applymoneydetailPage',
+			"url": 'applymoneydetail.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'applymoneydetailPage'
+			});
+		},20)
+	});
+	document.getElementById("moneydetail").addEventListener("tap",function(){
+		var moneydetailPage = $.preload({
+			"id": 'moneydetailPage',
+			"url": 'moneydetail.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'moneydetailPage'
+			});
+		},20)
+	});
+	
+})(mui,document)
+</script>
+</body>
+
+</html>

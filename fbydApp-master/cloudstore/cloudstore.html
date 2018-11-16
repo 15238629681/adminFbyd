@@ -1,0 +1,1225 @@
+
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>云店首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/all.css" />
+		<link rel="stylesheet" href="../css/cloudstore/public.css" />
+		<link rel="stylesheet" href="../css/cloudstore/cloudstore.css" />
+		<link rel="stylesheet" href="../css/cloudstore/searchblock.css" />
+		<style>
+		body{background:#eee;}
+		.header .mui-icon-search {
+			left: 10%;
+			margin-top: 0;
+		}
+		.mui-slider-indicator .mui-indicator {
+			background: #999;
+			box-shadow: none;
+		}
+		.mui-bar-nav~.mui-content {
+			padding-top: 38px;
+			height: auto;
+			background: #eee;
+		}
+		.mui-table-view-cell .mui-active {
+			background-color: #FFF500 !important;
+		}
+		.mui-table-view:after {
+			height: 0;
+		}
+		.userInfoBlock {
+			height: 84px;
+			width: 100%;
+			padding-top: 10px;
+			position: relative;
+			background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FBBE00)) !important;
+		}
+		.userInfoBlock #headImg {
+			/*position:absolute;*/
+			
+			width: 64px;
+			border-radius: 32px;
+			display: inline-block;
+			/*width:1.935rem;height:1.935rem;*/
+		}
+		.userInfoBlock .storeName {
+			font-size: 16px;
+			color: #000;
+			margin-bottom: 0.1rem;
+		}
+		.userInfoBlock .userDetail {
+			font-size: 10px;
+			color: #898989;
+		}
+		.QuickResponse {
+			position: absolute;
+			right: 40px;
+			bottom: 25px;
+			width: 20px;
+			height: 20px;
+		}
+		.fanNum {
+			margin-right: 20px;
+		}
+		</style>
+		<style>
+			/*云店分类*/
+			
+			.cloudstoreCategory {
+				height: 1.125rem;
+				line-height: 1.125rem;
+				font-size: 0.42rem;
+				color: #676767;
+				background: #fff;
+			}
+			
+			.cloudstoreCategory a {
+				padding-left: 0.555rem;
+				color: #676767;
+				border: none;
+				/*float:left;*/
+			}
+			
+			.cloudstoreCategory a:last-child {
+				padding-right: 0.555rem;
+			}
+			
+			.slideShow {
+				width: 100%;
+				height: 112px;
+				margin-bottom: 6px;
+			}
+			
+			.slideShow a img {
+				width: 100%;
+				height: 112px;
+			}
+			
+			.activityBlock {
+				background: #fff;
+				margin-bottom: 6px;
+			}
+		</style>
+		<style>
+			/*活动固定列表   固定导航栏*/
+			
+			.activetyCategory {
+				height: 1.125rem;
+				line-height: 1.125rem;
+				font-size: 0.42rem;
+				color: #676767;
+				display: none;
+				width: 100%;
+				overflow: auto;
+				white-space: nowrap;
+			}
+			
+			.activetyCategoryFixed {
+				z-index: 9996;
+				position: fixed;
+				top: 60px;
+				background: #fff;
+				border: none;
+			}
+			
+			.activetyCategory a {
+				margin-left: 20px;
+				color: #676767;
+				border: none;
+			}
+		</style>
+		<style>
+
+		</style>
+		<style>
+			#slider img {
+				width: 100%;
+			}
+		</style>
+		<style>
+			#searchInput {
+				width: 85%;
+				padding-left: 40px;
+			}
+			
+			#message {
+				background: url(../images/my/message.png) no-repeat center;
+				background-size: cover;
+				width: 25px;
+				height: 25px;
+			}
+			
+			.noGoodsDiv {
+				font-size: 14px;
+				width: 3.54rem;
+				height: 5.535rem;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -2.7675rem 0 0 -1.77rem;
+				text-align: center;
+			}
+			
+			.noGoodsDiv img {
+				width: 3.9rem;
+				height: 4.35rem;
+			}
+			
+			.noNetWorkDiv {
+				position: fixed;
+				top: 60px;
+				height: calc(100% - 60px);
+				width: 100%;
+				background: #fff;
+				z-index: 100;
+				display: none;
+			}
+			
+			#loading {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				background: url(../../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				/*background:url(../images/storehouse/icons/loading.gif)*/
+				z-index: 98;
+				background-size: 70%;
+				display: none;
+			}
+			
+			#waitingLoading {
+				/*width: 100%;*/
+				/*height:  calc(100% - 153px);*/
+				height: 100px;
+				width: 100%;
+				/*height:200px;*/
+				/*position: fixed;*/
+				/*top: 20px;*/
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				/*z-index: 1;*/
+				background-size: 70%;
+				color: #fff;
+				/*display: none;*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="loading"></div>
+		<div class="noNetWorkDiv">
+			<div class="storeGoodsBlock" style="">
+				<div class="noGoodsDiv" style=";">
+					<img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="" />
+					<div style="color:#959595;">请检查网络！</div>
+					<!--<div style="color:#;">没有找到相关宝贝</div>-->
+				</div>
+			</div>
+		</div>
+		<header class="mui-bar mui-bar-nav header">
+			<span class="mui-icon mui-icon-search"></span>
+			<input id="searchInput" readonly="readonly" placeholder="搜索商品" />
+			<span id="message"></span>
+		</header>
+		<!--固定导航栏-->
+		<div class="activetyCategory">
+			<div class="mui-scroll" style="white-space: nowrap;overflow-x:scroll;overflow-y:hidden;">
+				<!--<div id="Slider" style="width: 200%;height: 100%;position: absolute;top: 0;z-index: 98;"></div>-->
+				<a class="activityName" data-id="1" data-fqcat="0" style="color: #FBBD00;">首页</a>
+				<a class=" activityName" data-id="2" data-fqcat="1" data-activity="0" data-token="0">0元试用</a>
+				<a class="activityName" data-id="3" data-fqcat="2" data-activity="1" data-token="1">翻宝拼团</a>
+				<a class="activityName" data-id="4" data-fqcat="3" data-activity="2" data-token="2">爱逛街</a>
+				<a class="activityName" data-id="5" data-fqcat="4" data-activity="3" data-token="3">品牌折扣</a>
+				<a class="activityName" data-id="6" data-fqcat="5" data-activity="0" data-token="4">进口</a>
+				<a class="activityName" data-id="7" data-fqcat="7" data-activity="1" data-token="5">省钱妈咪</a>
+				<a class="activityName" data-id="8" data-fqcat="8" data-activity="2" data-token="6">居家男女</a>
+				<a class="activityName" data-id="9" data-fqcat="9" data-activity="3" data-token="7">翻遍美食</a>
+				<a class="activityName" data-id="10" data-fqcat="10" data-activity="0" data-token="8">型男潮流</a>
+				<a class="activityName" data-id="11" data-fqcat="11" data-activity="1" data-token="9">数码电器</a>
+
+			</div>
+		</div>
+
+		<script>
+		</script>
+
+		<div class="mui-content" id="refreshContainer" style="overflow: hidden;">
+			<!--用户信息-->
+			<ul class="mui-table-view mui-table-view-chevron userInfoBlock">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left userImg" id="headImg" src="../images/cloudstore/icons/cloudstoreMetrosexual man trend.png">
+
+						<div class="mui-media-body">
+							<p class="storeName">云店名</p>
+
+							<p class='mui-ellipsis userDetail'>
+								<span class="fan">粉丝数:</span>
+								<span class="fanNum">0</span>
+								<span class="trade">交易数:</span>
+								<span class="tradeNum">0</span>
+							</p>
+						</div>
+
+						<img class="QuickResponse" src="../images/my/wxcode.png" alt="" />
+					</a>
+				</li>
+			</ul>
+			<!--顶部导航    活动列表-->
+			<!--云店分类-->
+			<div class="cloudstoreCategory mui-scroll kindChooseList" style="white-space: nowrap;overflow-x:scroll;overflow-y:hidden;">
+				<a data-id="1" data-fqcat="0" style="color: #FBBD00;">首页</a>
+				<a data-id="2" data-fqcat="1">女装</a>
+				<a data-id="3" data-fqcat="2">男装</a>
+				<a data-id="4" data-fqcat="3">内衣</a>
+				<a data-id="5" data-fqcat="4">母婴</a>
+				<a data-id="6" data-fqcat="5">包包</a>
+				<a data-id="7" data-fqcat="7">居家</a>
+				<a data-id="8" data-fqcat="8">鞋品</a>
+				<a data-id="9" data-fqcat="9">美食</a>
+				<a data-id="10" data-fqcat="10">文体</a>
+				<a data-id="11" data-fqcat="11">家电</a>
+				<a data-id="12" data-fqcat="12">其他</a>
+				<a data-id="13" data-fqcat="13">配饰</a>
+				<a data-id="14" data-fqcat="14">数码</a>
+				<a data-id="15" data-fqcat="341">美妆</a>
+			</div>
+
+			<!--轮播图-->
+			<div class="slideShow">
+				<a id="img_1" href="">
+					<img style="display: none;width:100%;height: 100%;" src="" />
+				</a>
+				<div id="slider" class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop bannerLoop" id="sliderlist">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate addLast">
+							<a href="" data-title="">
+								<img src="" id="slider6">
+							</a>
+						</div>
+						<!--第一张-->
+						<div class="mui-slider-item">
+							<a href="" data-title="">
+								<img src="">
+							</a>
+						</div>
+						<!--第二张-->
+						<div class="mui-slider-item">
+							<a href="" data-title="">
+								<img src="">
+							</a>
+						</div>
+						<!-- 第三张 -->
+						<div class="mui-slider-item">
+							<a href="" data-title="">
+								<img src="">
+							</a>
+						</div>
+						<!-- 第四张 -->
+						<div class="mui-slider-item">
+							<a href="" data-title="">
+								<img src="">
+							</a>
+						</div>
+						<!-- 第五张 -->
+						<div class="mui-slider-item">
+							<a href="#" data-title="">
+								<img src="">
+							</a>
+						</div>
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate addFirst">
+							<a href="" data-title="">
+								<img src="" id="slider5">
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator iconCircle">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>
+
+			</div>
+
+			<!--活动列表-->
+			<div class="home-qnav activityBlock">
+				<div class="ui-flex flex-justify-sb">
+					<div class="activityItem" data-token="0" data-activity="0">
+						<img src="../images/cloudstore/icons/cloudstoreOn_trial.png" class="ico" />
+						<span class="activityName name" data-token="0">0元试用</span>
+					</div>
+					<div class="activityItem" data-token="1" data-activity="1">
+						<img src="../images/cloudstore/icons/cloudstoreFight_groups.png" class="ico" />
+						<span class="activityName name" data-token="1">翻宝拼团</span>
+					</div>
+					<div class="activityItem" data-token="2" data-activity="2">
+						<img src="../images/cloudstore/icons/cloudstoreshopping.png" class="ico" />
+						<span class="activityName name" data-token="2">爱逛街</span>
+					</div>
+					<div class="activityItem" data-token="3" data-activity="3">
+						<img src="../images/cloudstore/icons/cloudstoreBrand_discount.png" class="ico" />
+						<span class="activityName name" data-token="3">品牌折扣</span>
+					</div>
+					<div class="activityItem" data-token="4" data-activity="0">
+						<img src="../images/icons/sea.png" alt="" class="ico" />
+						<span class="activityName name" data-token="4">进口</span>
+					</div>
+				</div>
+				<div class="ui-flex flex-justify-sb">
+					<div class="activityItem" data-token="5" data-activity="1">
+						<img src="../images/cloudstore/icons/cloudstoreMoney_saving_mom.png" class="ico" />
+						<span class="activityName name" data-token="0">省钱妈咪</span>
+					</div>
+					<div class="activityItem" data-token="6" data-activity="2">
+						<img src="../images/cloudstore/icons/cloudstoreHome_men_and_women.png" class="ico" />
+						<span class="activityName name" data-token="1">居家男女</span>
+					</div>
+					<div class="activityItem" data-token="7" data-activity="3">
+						<img src="../images/cloudstore/icons/cloudstoreDelicous_food.png" class="ico" />
+						<span class="activityName name" data-token="2">翻遍美食</span>
+					</div>
+					<div class="activityItem" data-token="8" data-activity="0">
+						<img src="../images/cloudstore/icons/cloudstoreMetrosexual_man_trend.png" class="ico" />
+						<span class="activityName name" data-token="3">型男潮流</span>
+					</div>
+					<div class="activityItem" data-token="9" data-activity="1">
+						<img src="../images/cloudstore/icons/cloudstoreDigital_appliance.png" alt="" class="ico" />
+						<span class="activityName name" data-token="4">数码电器</span>
+					</div>
+				</div>
+			</div>
+
+			<!--商品列表-->
+			<div class="storeGoodsList mui-clearfix">
+					<!--<div class="storeGoodsBlock mui-clearfix">
+						<div class="goodsImg">
+							<img src="" alt="">
+						</div>
+						<div class="storeGoodsDetail">
+							<p class="goodsName">男鞋百搭夏季运动休闲鞋男透气</p>
+							<div class="goodsDetailT">
+								<span class="fbPrice">翻宝价
+									<span class="fbPriceNum">
+										￥15.00
+									</span>
+								</span>
+								<span class="sellNum">优惠劵15元</span>
+							</div>
+							
+							<div class="goodsDetailB">
+								<span class="tbPrice">淘宝价
+									<span class="tbPriceNum">￥15.00</span>
+								</span>
+								<span class="costPrice">进货价￥20.00</span>
+							</div>
+						</div>
+					
+					</div>-->
+
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			//				document.getElementsByClassName("activetyCategory")[0].addEventListener("dragend",function(){
+			//					document.getElementById("Slider").style.display = "none";
+			//				})
+
+			var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+
+			//轮播图的数据请求
+			var banner = {
+				token: userinfo.token,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				position: "cloudstoreindex"
+			}
+			//			设置轮播图为自动轮播	
+			var slider = mui("#slider");
+			slider.slider({
+				interval: 4000
+			});
+			//首页轮播图
+			var sliderWrap = document.getElementById("sliderlist").innerHTML;
+			function banner_request() {
+				mui.ajax("https://app.fanbaoyundian.com/appapi/cloudstorebanner.app.php ", {
+					data: {
+						token: banner.token,
+						timestamp: banner.timestamp,
+						position: banner.position,
+					},
+					dataType: 'json',
+					type: "post",
+					success: function(data) {
+						//alert(JSON.stringify(data))
+						//判断轮播图数量并显示
+						if(data.state == 1) {
+//							console.log("轮播图----" + JSON.stringify(data));
+							var imgNum = data.slide.length;
+							if(imgNum == 1) {
+								document.getElementById("slider").style.display = "none";
+								document.getElementById("img_1").setAttribute("href", data.slide[0].url);
+								document.getElementById("img_1").setAttribute("data-title", data.slide[0].title);
+								document.getElementById("img_1").getElementsByTagName("img")[0].src = "https://app.fanbaoyundian.com/" + data.slide[0].img;
+								document.getElementById("img_1").style.display = "block";
+							} else {
+								document.getElementById("slider6").src = "https://app.fanbaoyundian.com/" + data.slide[imgNum - 1].img;
+								document.getElementById("slider5").src = "https://app.fanbaoyundian.com/" + data.slide[0].img;
+								for(var j = 0; j < imgNum; j++) {
+									document.getElementsByClassName("mui-slider-item")[j + 1].getElementsByTagName("img")[0].src = "https://app.fanbaoyundian.com/" + data.slide[j].img;
+									document.getElementsByClassName("mui-slider-item")[j + 1].getElementsByTagName("a")[0].setAttribute("href", data.slide[j].url);
+									document.getElementsByClassName("mui-slider-item")[j + 1].getElementsByTagName("a")[0].setAttribute("data-title", data.slide[j].title);
+								}
+								for(var i = imgNum; i < 5; i++) {
+									document.getElementById("sliderlist").removeChild(document.getElementsByClassName("mui-slider-item")[i + 1]);
+									document.getElementsByClassName("mui-indicator")[i].style.display = "none";
+								}
+							}
+						} else {
+							mui.toast(data.message);
+						};
+						//跳转脉客H5页面
+						mui(".slideShow").on("tap", "a", function() {
+							var url = this.getAttribute("href");
+							var title = this.getAttribute("data-title");
+							mui.openWindow({
+								url: 'h5.html',
+								id: 'h5',
+								extras: {
+									h5Url: url,
+									h5Title: title
+								}
+							})
+						})
+					},
+					error: function(xhr, type, errorThrown) {
+						if(type == "timeout") {
+							$.toast("请求超时，请检查网络");
+						}
+					}
+				})
+
+			}
+
+			banner_request();
+			//				用户信息   
+			function getCloudstoreowner() {
+				//用户请求参数
+				var cloudstoreowner = {
+					token: userinfo.token,
+					timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+					uid: userinfo.userinfo.uid,
+				}
+				//用户信息请求
+				mui.ajax("https://app.fanbaoyundian.com/appapi/cloudstoreowner.app.php", {
+					data: {
+						token: cloudstoreowner.token,
+						timestamp: cloudstoreowner.timestamp,
+						uid: cloudstoreowner.uid,
+					},
+					dataType: 'json',
+					type: "post",
+					success: function(data) {
+						if(data.error == "0") {
+//							console.log("用户信息----" + JSON.stringify(data.cloudstoreinfo));
+							var cloudstoreinfo = data.cloudstoreinfo;
+							document.getElementsByClassName("userImg")[0].src = cloudstoreinfo.headimgurl;
+							document.getElementsByClassName("storeName")[0].innerHTML = cloudstoreinfo.realname + "的云店";
+							document.getElementsByClassName("fanNum")[0].innerHTML = cloudstoreinfo.fans;
+							document.getElementsByClassName("tradeNum")[0].innerHTML = cloudstoreinfo.dealnumber;
+						} else if(data.message == "非法调用") {
+							localStorage.clear();
+							localStorage.setItem("login", "1");
+							//localStorage.setItem("invite","1");
+							plus.webview.close(plus.webview.getWebviewById("commont"));
+							$.openWindow({
+								id: "login",
+								url: "../login.html"
+							})
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						if(type == "timeout") {
+							mui.toast("请求超时，请检查网络");
+						}
+					}
+				})
+			}
+			getCloudstoreowner();
+			(function($, doc) {
+
+				//检测版本更新
+				$.ajax({
+					type: "get",
+					url: "https://app.fanbaoyundian.com/appapi/safemode.app.php",
+					success: function(data) {
+						$.getJSON("../manifest.json", null, function(res) {
+							var code = res.version.code;
+//							console.log(code, data.onlinecode, data.code)
+							if(code < data.onlinecode) {
+								$.confirm('检查到最新应用版本', '更新检测', ['立即更新', '取 消'], function(e) {
+									if(e.index == 0) {
+										if($.os.ios) {
+											var updataUrl = "https://itunes.apple.com/cn/app/id1168878262";
+										} else {
+											var updataUrl = "http://fanbaoyundian.com/apk/fanbaoyundian_" + data.onlinecode + ".apk";
+										}
+										plus.runtime.openURL(updataUrl);
+									}
+								}, 'div')
+							}
+						});
+					}
+				});
+
+				//转到消息中心
+				$("body").on("tap", "#message", function(e) {
+					e.stopPropagation();
+					var messagelistPage = $.preload({
+						"id": 'messagelistPage',
+						"url": '../my/messagelist.html'
+					});
+					setTimeout(function() {
+						$.openWindow({
+							id: 'messagelistPage'
+						});
+					}, 20)
+				})
+
+				//云店首页顶部导航      点击事件   默认是首页 
+				$(".cloudstoreCategory").on("tap", "a", function() {
+					allOrActivity = false;
+					if(this.getAttribute("data-fqcat") == "0") {
+
+						this.style.cssText = "color:#fbbd00;";
+						document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+						goodsList.start = "0 ";
+						goodsList.fqcat = "0";
+						goodsList.time = parseInt(new Date().getTime() / 1000);
+						list_request();
+
+						//重置所有活动列表   活动名称
+						var allActivitysA = document.getElementsByClassName("activityName");
+						for(var i = 0; i < allActivitysA.length; i++) {
+							allActivitysA[i].style.cssText = "color:#363636;";
+						}
+						//固定导航首页 activetyCategory  activityName
+						document.getElementsByClassName("activetyCategory")[0].getElementsByClassName("activityName")[0].style.cssText = "color:#fbbd00;";
+					} else {
+						$.openWindow({
+							url: "../cloudstorecategory/category.html",
+							id: "category.html",
+							extras: {
+								dataFqcat: this.getAttribute("data-fqcat")
+							},
+							createNew: true
+						});
+					}
+				});
+
+				//隐藏滚动条
+				$.plusReady(function() {
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: "none"
+					});
+					setTimeout(function() {
+						plus.webview.close(plus.webview.getLaunchWebview());
+					}, 10000)
+				});
+
+				//点击分享二维码，邀请好友注册
+				doc.getElementsByClassName("userInfoBlock")[0].addEventListener("tap", function() {
+					var fansinvitPage_1 = $.preload({
+						"id": 'fansinvitPage_1',
+						"url": 'fansinvit.html'
+					});
+					setTimeout(function() {
+						$.openWindow({
+							id: 'fansinvitPage_1'
+						});
+					}, 20)
+				})
+
+				//滑动活动导航栏固定
+				if(mui.os.ios) {
+					document.getElementsByClassName("activetyCategory")[0].style.fontSize = "16px";
+				}
+				window.addEventListener("touchmove", function(e) {
+					var yheight1 = window.scrollY;
+					if(yheight1 >= 350) {
+						document.getElementsByClassName("activetyCategory")[0].style.display = "block";
+						document.getElementsByClassName("activetyCategory")[0].style.cssText = "display:block;position:fixed;top:60px;background:#fff;border:none;";
+						document.getElementsByClassName("activetyCategory")[0].classList.add("activetyCategory", "activetyCategoryFixed");
+					} else {
+						document.getElementsByClassName("activetyCategory")[0].style.display = "none";
+						document.getElementsByClassName("activetyCategory")[0].classList.remove("activetyCategoryFixed");
+					}
+				});
+				window.addEventListener("scroll", function(e) {
+					var yheight1 = window.scrollY;
+					if(yheight1 < 350) {
+						document.getElementsByClassName("activetyCategory")[0].style.display = "none";
+						document.getElementsByClassName("activetyCategory")[0].classList.remove("activetyCategoryFixed");
+					}
+				});
+
+				document.getElementById("searchInput").addEventListener("tap", function() {
+					$.openWindow({
+						url: "search.html",
+						id: "searchCloudStore"
+					})
+				})
+
+				//重新定义后退函数(监听安卓后退键事件)
+				var backButtonPress = 0;
+				$.back = function(event) {
+					backButtonPress++;
+					if(backButtonPress == 1) {
+						//plus.webview.close(plus.webview.currentWebview());
+					} else if(backButtonPress == 2) {
+						plus.nativeUI.toast('再按一次退出应用');
+					} else {
+						plus.runtime.quit();
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1500);
+					return false;
+				};
+
+			})(mui, document)
+
+			//var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+			var oneceLoad = true; //第一次载入的背景图
+			var nowPageNum = 0;
+			var allOrActivity = false;
+			var noGoods;
+			var downRefreshFlag=false;
+
+			//首页  请求参数
+			var goodsList = {
+				count: 10,
+				start: 0,
+				order: 1, //商品默认的排序方式  最新
+				keyword: "all", //搜索的关键字
+				fqcat: 0, //商品分类编号
+				token: userinfo.token,
+				uid: userinfo.userinfo.uid,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				price: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				lirun: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				volume: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				brand: "0",
+				sea: "0"
+			};
+
+			//首页的数据请求
+			function list_request() {
+//				console.log("云店首页请求数据----" + JSON.stringify(goodsList));
+				var start = goodsList.start;
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/storehouse.app.php", {
+						data: {
+							count: goodsList.count,
+							start: goodsList.start,
+							order: goodsList.order,
+							keyword: goodsList.keyword,
+							fqcat: goodsList.fqcat,
+							token: goodsList.token,
+							timestamp: goodsList.timestamp,
+							uid: goodsList.uid,
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							if(data.error == "0") {
+								document.getElementById("loading").style.display = "none";
+								var goodsList = data.goodslist;
+								console.log("云店首页商品列表---" + JSON.stringify(goodsList));
+								var storeGoodsBlockLength = document.getElementsByClassName("storeGoodsList")[0].getElementsByClassName("storeGoodsBlock").length;
+								//									alert("当前商品列表商品数---"+storeGoodsBlockLength);
+								if(goodsList.length == 0) {
+									if(storeGoodsBlockLength == 0) {
+										noGoods = true;
+										//										document.getElementsByClassName("storeGoodsList")[0].innerHTML = "<p style='text-align: center;margin: 20px;'>暂时没有商品</p>";
+										var muiContent = document.getElementsByClassName("mui-content")[0];
+										muiContent.style.height = (document.documentElement.clientHeight - 100) + "px";
+										//没有搜索到相应商品  或者  某个筛选条件下没有商品
+										muiContent.innerHTML = '<div class="storeGoodsBlock" style=""><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-2.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">非常抱歉</div><div style="color:#959595;">没有找到相关宝贝</div></div></div>';
+									} else {
+										mui.toast('暂时没有更多数据！');
+									}
+								} else {
+									document.getElementsByClassName("noNetWorkDiv")[0].style.cssText = "display:none";
+
+									noGoods = false;
+									var goodsListHtml = "";
+									for(var i = 0; i < goodsList.length; i++) {
+										//给每个商品添加自定义属性值
+										goodsListHtml += '<div class="storeGoodsBlock mui-clearfix" data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + '><div class="goodsImg"><img src="' + goodsList[i].pic_url + '_300x300.jpg" alt=""></div><div class="storeGoodsDetail"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodsDetailT"><span class="fbPrice">翻宝价<span class="priceFlag">￥</span><span class="fbPriceNum">' + goodsList[i].quanhou_price + '</span></span><span class="sellNum">优惠劵'+goodsList[i].quan+'元</span></div><div class="goodsDetailB"><span class="tbPrice">淘宝价<span class="tbPriceNum">￥' + goodsList[i].coupon_price + '</span></span><span class="costPrice">销量' + goodsList[i].volume + '</span></div></div></div>';
+									}
+									if(storeGoodsBlockLength == 0) {
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = goodsListHtml;
+									} else {
+										var mainDiv = document.createElement("div");
+										mainDiv.innerHTML = goodsListHtml;
+										if(nowPageNum!=1){
+											mainDiv.style.cssText = "margin-top:-6px;";
+										}
+										document.getElementsByClassName("storeGoodsList")[0].appendChild(mainDiv);
+									}
+								}
+
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								//document.getElementsByClassName("mui-content")[0].innerHTML = "请求超时，请检查网络";
+								noGoods = true;
+								var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+								storeGoodsList.style.height = (document.documentElement.clientHeight - 100) + "px";
+								storeGoodsList.innerHTML = '<div class="storeGoodsBlock" style=""><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-2.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">网络请求超时</div><div style="color:#959595;">请检查网络！</div></div></div>';
+								mui('#refreshContainer').pullRefresh().setStopped(true);
+								document.getElementsByClassName("mui-content")[0].setAttribute("id", "");
+								document.addEventListener('touchmove', function() {}, false); //阻止默认滑动事件
+
+								document.getElementsByClassName("noNetWorkDiv")[0].style.cssText = "display:block";
+								plus.nativeUI.toast("请求超时，请检查网络");
+							}
+							//取消load图
+							if(oneceLoad) {
+								setTimeout(function() {
+									document.getElementById("loading").style.display = "none";
+								}, 0)
+							}
+							oneceLoad = false;
+							console.log(type);
+						}
+					})
+			}
+			//首页数据初始化
+							list_request();
+
+			//活动产品  请求参数
+			var activityList_1 = {
+				count: 10,
+				start: 0,
+				order: 1,
+				keyword: "all", //搜索所有商品
+				token: userinfo.token,
+				timestamp: parseInt(new Date().getTime() / 1000),
+				uid: userinfo.userinfo.uid,
+				activity: 0 //默认的为聚划算
+			};
+			//仓库产品分类请求参数
+			var activityList_2 = {
+				count: 10,
+				start: 0,
+				order: 1,
+				keyword: "all",
+				fqcat: "",
+				token: userinfo.token,
+				timestamp: parseInt(new Date().getTime() / 1000),
+				uid: userinfo.userinfo.uid
+			};
+			
+			var noOpenActivityFlag=false;//判断当前的活动是否开放，没有开放，要禁止下拉刷新
+			var activityList; //请求传参
+			var activityID; //活动编号
+			var apiname; //接口名
+			//活动列表的数据请求
+			function activity_request(apiname) {
+				activityList.timestamp = parseInt(new Date().getTime() / 1000);
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/" + apiname + ".app.php", {
+						data: activityList,
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							var storeGoodsBlockLength = document.getElementsByClassName("storeGoodsList")[0].getElementsByClassName("storeGoodsBlock").length;
+							if(data.state == "1") {
+								var goodsList = data.goodslist;
+//								console.log("活动列表---" + JSON.stringify(goodsList));
+								if(goodsList.length == 0) {
+									if(storeGoodsBlockLength == 0) {
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = "<p style='text-align: center;margin: 20px;'>暂时没有商品</p>";
+									} else {
+										mui.toast('暂时没有更多数据');
+									}
+								} else {
+									//alert(storeGoodsBlockLength);
+									var goodsListHtml = "";
+									for(var i = 0; i < goodsList.length; i++) {
+										//给每个商品添加自定义属性值
+										goodsListHtml += '<div class="storeGoodsBlock mui-clearfix" data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + '><div class="goodsImg"><img src="' + goodsList[i].pic_url + '_300x300.jpg" alt=""></div><div class="storeGoodsDetail"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodsDetailT"><span class="fbPrice">翻宝价<span class="priceFlag">￥</span><span class="fbPriceNum">' + goodsList[i].quanhou_price + '</span></span><span class="sellNum">优惠劵'+goodsList[i].quan+'元</span></div><div class="goodsDetailB"><span class="tbPrice">淘宝价<span class="tbPriceNum">￥' + goodsList[i].coupon_price + '</span></span><span class="costPrice">销量' + goodsList[i].volume + '</span></div></div></div>';
+									}
+
+									if(storeGoodsBlockLength == 0) {
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+										//mainDiv.innerHTML=goodsListHtml;
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = goodsListHtml;
+									} else {
+										var mainDiv = document.createElement("div");
+										mainDiv.innerHTML = goodsListHtml;
+//										if(data.start > 1) {
+//											mainDiv.style.cssText = "margin-top:-6px;";
+//										}
+										if(nowPageNum!=1){
+											mainDiv.style.cssText = "margin-top:-6px;";
+										}
+										document.getElementsByClassName("storeGoodsList")[0].appendChild(mainDiv);
+									}
+								}
+
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								mui.toast("请检查网络");
+							}
+						}
+					})
+			};
+
+			function goodsListBlockHeight() {
+				//					获取商品列表以上的高度  
+				var headerHeight = window.getComputedStyle(document.getElementsByClassName("header")[0]).height;
+				var userInfoBlockrHeight = window.getComputedStyle(document.getElementsByClassName("userInfoBlock")[0]).height;
+				var cloudstoreCategoryHeight = window.getComputedStyle(document.getElementsByClassName("cloudstoreCategory")[0]).height;
+				var slideShowHeight = window.getComputedStyle(document.getElementsByClassName("slideShow")[0]).height;
+				var activityBlockHeight = window.getComputedStyle(document.getElementsByClassName("activityBlock")[0]).height;
+
+				var waitingBlockHeight = parseInt(headerHeight.substring(0, headerHeight.indexOf("p"))) +
+					parseInt(userInfoBlockrHeight.substring(0, userInfoBlockrHeight.indexOf("p"))) +
+					parseInt(cloudstoreCategoryHeight.substring(0, cloudstoreCategoryHeight.indexOf("p"))) +
+					parseInt(slideShowHeight.substring(0, slideShowHeight.indexOf("p"))) +
+					parseInt(activityBlockHeight.substring(0, activityBlockHeight.indexOf("p")));
+
+				var waitingLoadingHeight = window.screen.height - waitingBlockHeight - 50;
+				return waitingLoadingHeight;
+			}
+			
+			var downRefreshNum=0;
+			//下拉刷新    banner_request()  getCloudstoreowner()  list_request()
+			function downRefresh() {
+				nowPageNum=0;
+				if(noOpenActivityFlag){  //活动没有开放    不进行下拉刷新
+					setTimeout(function() {
+						mui('#refreshContainer').pullRefresh().endPulldown();
+					}, 10)
+					return;
+				}
+				downRefreshFlag=true;
+				document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+
+				//					document.getElementsByClassName("storeGoodsList")[0].innerHTML='<div id="waitingLoading"></div>';
+				//					var waitingLoadingHeight=goodsListBlockHeight();
+				//					document.getElementById("waitingLoading").style.cssText='height:'+waitingLoadingHeight+'px;';
+
+				//当用户在搜索模块时，就禁用此事件
+				if(!allOrActivity) {
+					goodsList.start = "0 ";
+					goodsList.time = parseInt(new Date().getTime() / 1000);
+					//						alert("当前是首页");
+					list_request();
+					document.getElementById("sliderlist").innerHTML = sliderWrap;
+					banner_request();
+					getCloudstoreowner();
+					setTimeout(function() {
+						mui.toast('已经是最新数据！', {
+							duration: 'short',
+							type: 'div'
+						});
+						mui('#refreshContainer').pullRefresh().endPulldown();
+					}, 1200);
+
+				} else {
+					//活动
+					activityList.time = parseInt(new Date().getTime() / 1000);
+					document.getElementById("sliderlist").innerHTML = sliderWrap;
+					banner_request();
+					getCloudstoreowner();
+					activity_request(apiname);
+					setTimeout(function() {
+						mui.toast('已经是最新数据！', {
+							duration: 'short',
+							type: 'div'
+						});
+						mui('#refreshContainer').pullRefresh().endPulldown();
+					}, 1200)
+				}
+
+			};
+			//上拉加载
+			function upRefresh() {
+				nowPageNum++;
+				if(!allOrActivity) {
+					//alert("首页")
+					goodsList.start = nowPageNum;
+					goodsList.count = 10;
+					goodsList.timestamp = parseInt(new Date().getTime() / 1000);
+					list_request();
+					var that = this;
+					setTimeout(function() {
+						that.endPullupToRefresh(true); //结束上拉加载
+						mui('#refreshContainer').pullRefresh().refresh(true); //重置上拉加载
+
+					}, 1500)
+				} else {
+					activityList.start = nowPageNum;
+					activityList.time = parseInt(new Date().getTime() / 1000);
+					//activityList.activity = activityID;
+					//alert(JSON.stringify(activityList))
+					activity_request(apiname);
+					var that = this;
+					setTimeout(function() {
+						that.endPullupToRefresh(true); //结束上拉加载
+						mui('#refreshContainer').pullRefresh().refresh(true); //重置上拉加载
+					}, 1500)
+				}
+			};
+
+			mui.init({
+				pullRefresh: {
+					container: "#refreshContainer",
+					down: {
+						style: "circle",
+						color: "#fbbd00",
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: false, //可选,默认false.首次加载自动上拉刷新一次
+						callback: downRefresh
+					},
+					up: {
+						height: 35, //可选.默认50.触发上拉加载拖动距离
+						auto: false, //可选,默认false.自动上拉加载一次
+						//contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了......', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: upRefresh, //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+
+			//活动列表点击事件
+			var activityItem = document.getElementsByClassName("activityItem");
+			var aActivityName = document.getElementsByClassName("activityName");
+			var activityItemFixed = document.getElementsByClassName("activetyCategory")[0].querySelectorAll("a");
+			var activityName;
+			mui(".activityBlock").on("tap", ".activityItem", function() {
+				//					document.getElementsByClassName("storeGoodsList")[0].innerHTML='<div id="waitingLoading"></div>';
+				//					var waitingLoadingHeight=goodsListBlockHeight();
+				//					document.getElementById("waitingLoading").style.cssText='height:'+waitingLoadingHeight+'px;';
+				//					
+				//					
+				//					activityBlock  activityName
+				var activityNameItems = document.getElementsByClassName("mui-content")[0].getElementsByClassName("activityBlock")[0].getElementsByClassName("activityName");
+				for(var i = 0; i < activityNameItems.length; i++) {
+					activityNameItems[i].style.cssText = "#363636;";
+				}
+
+				allOrActivity = true; //活动标识
+				var activityID = this.getAttribute("data-token"); //上拉加载所需的活动id配置
+				//未开放活动
+				activityList = null;
+				noOpenActivityFlag=false;
+				if(activityID == "0" || activityID == "1") {
+					noOpenActivityFlag=true;
+					mui.toast('活动暂未开放!');
+					return;
+				} else if(activityID == "3" || activityID == "4") {
+					apiname = "storehouseactivity";
+					activityList = activityList_1;
+					if(activityID == "3") {
+						activityList.activity = "2";
+					} else {
+						activityList.activity = "3";
+					}
+				} else if(activityID != "0" && activityID != "1" && activityID != "3" && activityID != "4") {
+					apiname = "storehouse";
+					activityList = activityList_2;
+					if(activityID == "2") {
+						activityList.fqcat = [1, 3, 5, 8, 13];
+					} else if(activityID == "5") {
+						activityList.fqcat = "4";
+					} else if(activityID == "6") {
+						activityList.fqcat = "7";
+					} else if(activityID == "7") {
+						activityList.fqcat = "9";
+					} else if(activityID == "8") {
+						activityList.fqcat = "2";
+					} else if(activityID == "9") {
+						activityList.fqcat = [11, 14];
+					}
+				}
+				//nowPageNum = 0; //点击活动，则从第一页开始加载
+				for(var i = 0; i < activityItem.length; i++) {
+					aActivityName[i].style.color = "#676767";
+				};
+				//点击顶部首页栏变灰
+				document.getElementsByClassName("cloudstoreCategory")[0].getElementsByTagName("a")[0].style.color = "#676767";
+				//固定导航栏先整体变灰
+				for(var i = 0; i < activityItemFixed.length; i++) {
+					activityItemFixed[i].style.color = "#676767";
+				}
+				//固定活动列表的   相应选项   颜色变黄  activetyCategory
+				var index = parseInt(this.getAttribute("data-token")) + 1;
+				document.getElementsByClassName("activetyCategory")[0].getElementsByTagName("a")[index].style.color = "#FBBD00";
+				var activityName_new = this.getElementsByTagName("span")[0]; //获取当前点击下的   活动名
+				//判断是否点击了相同按钮
+				if(activityName_new.innerHTML == activityName) {
+					activityName_new.style.color = "#FBBD00";
+				} else {
+					window.scrollTo(300, 400);
+					//更换活动列表时清零
+					document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+					activityName = activityName_new.innerHTML;
+					activityName_new.style.color = "#FBBD00";
+					//activityList.activity = this.getAttribute("data-activity"); //获取活动id
+					activityList.start = 0;
+					//alert(JSON.stringify(activityList))
+					nowPageNum = 0;
+					activity_request(apiname);
+					document.documentElement.scrollTop = document.body.scrollTop = "800px";
+				}
+
+			})
+
+			//固定的活动列表的点击事件
+			var activityItemFixed = document.getElementsByClassName("activetyCategory")[0].querySelectorAll("a");
+			var activityName_2;
+			mui(".activetyCategory").on("tap", "a", function(e) {
+				mui.scrollTo(430, 351);
+				var activityID = this.getAttribute("data-token"); //上拉加载所需的活动id配置
+				//未开放活动
+				activityList = null;
+				noOpenActivityFlag=false;
+				if(activityID == "0" || activityID == "1") {
+					noOpenActivityFlag=true;
+					mui.toast('活动暂未开放!');
+					return;
+				} else if(activityID == "3" || activityID == "4") {
+					apiname = "storehouseactivity";
+					activityList = activityList_1;
+					if(activityID == "3") {
+						activityList.activity = "2";
+					} else {
+						activityList.activity = "3";
+					}
+				} else if(activityID != "0" && activityID != "1" && activityID != "3" && activityID != "4") {
+					apiname = "storehouse";
+					activityList = activityList_2;
+					if(activityID == "2") {
+						activityList.fqcat = [1, 3, 5, 8, 13];
+					} else if(activityID == "5") {
+						activityList.fqcat = "4";
+					} else if(activityID == "6") {
+						activityList.fqcat = "7";
+					} else if(activityID == "7") {
+						activityList.fqcat = "9";
+					} else if(activityID == "8") {
+						activityList.fqcat = "2";
+					} else if(activityID == "9") {
+						activityList.fqcat = [11, 14];
+					}
+				}
+				//e.stopPropagation();
+				for(var i = 0; i < activityItemFixed.length; i++) {
+					activityItemFixed[i].style.color = "#676767";
+				};
+				this.style.color = "#FBBD00";
+				for(var i = 0; i < activityItem.length; i++) {
+					activityItem[i].getElementsByTagName("span")[0].style.color = "#676767";
+				}
+				var index = parseInt(this.getAttribute("data-id")) - 1;
+				if(index >= 1) {
+					activityItem[index - 1].getElementsByTagName("span")[0].style.color = "#FBBD00";
+				}
+				var activityName_2_new = this.innerHTML;
+				if(activityName_2_new == activityName_2) {
+					this.style.color = "#FBBD00";
+				} else {
+					//更换活动列表时清零
+					document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+					activityName_2 = activityName_2_new;
+					if(index == 0) {
+						//alert(1)
+						allOrActivity = false;
+						document.getElementsByClassName("cloudstoreCategory")[0].getElementsByTagName("a")[0].style.color = "#FBBD00";
+						//重置活动列表  文字的颜色
+						for(var i = 0; i < activityItem.length; i++) {
+							activityItem[i].getElementsByTagName("span")[0].style.color = "#676767";
+						};
+						goodsList.start = 0;
+						nowPageNum = 0;
+						list_request();
+					} else {
+						allOrActivity = true;
+						document.getElementsByClassName("cloudstoreCategory")[0].getElementsByTagName("a")[0].style.color = "#676767";
+						//activityList.activity = this.getAttribute("data-activity");
+						//activityID = this.getAttribute("data-activity");  //上拉加载所需的活动id配置
+						nowPageNum = 0;
+						activity_request(apiname);
+					}
+				}
+			})
+
+			//商品详情
+			//预加载详情页
+			//var detailPage=null;
+			mui('.mui-content').on('tap', '.storeGoodsBlock', function(e) {
+				//alert("详情页");
+				e.stopPropagation();
+				var goodsdetail = mui.preload({
+					"id": 'goodsdetail',
+					"url": 'goodsdetail.html'
+				});
+				//var id = this.getAttribute("id");
+				//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+				var gid = this.getAttribute("data-id");
+				var num_iid = this.getAttribute("data-numiid");
+				var cid = this.getAttribute("data-cid");
+				//打开详情页面
+				setTimeout(function() {
+					mui.fire(goodsdetail, 'transTodetail', {
+						gid: gid,
+						num_iid: num_iid,
+						cid: cid
+					});
+					mui.openWindow({
+						id: "goodsdetail"
+					});
+				}, 350)
+			});
+		</script>
+	</body>
+
+</html>

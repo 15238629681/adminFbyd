@@ -1,0 +1,708 @@
+<!documentTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<style>
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				overflow: hidden;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
+			body{padding-top: 200px;background: url(images/login/log.png) no-repeat center 50px;background-size: 40%;background-color: #fff;}
+			@media screen and (max-width: 330px)  {
+				body{padding-top: 150px;background: url(images/login/log.png) no-repeat center 30px;background-size: 40%;}
+			}
+			/*#loading{position: absolute;top: 0;width: 100%;height: 100%;z-index: 999;background: #efeff4;background:linear-gradient(to bottom, #fff100 0%,#fcc800 100%);}*/
+			/*#loading #load-img{-webkit-animation: load-icon 2.5s linear infinite alternate;width:180px;position: absolute;top: 50%;left: 50%;
+			margin-left: -90px;margin-top: -61px;}
+			@-webkit-keyframes load-icon{
+				0%   {-webkit-transform:rotateY(90deg);}
+    			25%  {-webkit-transform:rotateY(180deg);}
+    			50%  {-webkit-transform:rotateY(270deg);}
+    			100% {-webkit-transform:rotateY(360deg);}
+			}*/
+			.mui-content{height: 100%;background: #fff;}
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			#login-form{position: relative;}
+			#phonenumber-wrap{height: 40px;}
+			#phonenumber-wrap #phonenumber{width: 90%;border:none;background:#efefef;line-height: 20px;margin-left: 5%;border-radius: 15px;}
+			#verifycode-wrap #verifycode{width: 60%;border:none;background:#efefef;line-height: 20px;border-radius: 15px;margin: 15px 0 0 5%;}
+			#get-verifycode{position: absolute;right: 5%;top: 15px;border:1px solid #fdda00;height: 40px;color: #595757;border-radius: 15px;
+			padding:0 12px;line-height: 40px;}
+			button:enabled:active{background: #fdda00;color: #fff;}
+			
+			.mui-content-padded{margin: 15px 0;}
+			#login{width: 90%;margin: 0 auto;display: block;height: 40px;border-radius: 15px;background: #FDDA00;border: none;color: #65530f;
+			padding: 0;line-height: 40px;}
+			.link-area{margin-top: 8px;}
+			.link-area #reg{display:block;color: #231815;margin-left: 8%;font-size: 12px;width: 50px;height: 20px;}
+			.oauth-area {
+				position: absolute;
+				bottom: 40px;
+				left: 0px;
+				text-align: center;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			.oauth-area .oauth-btn {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				border-radius: 25px;
+			}
+			#weixinlogin{color:#999;position: absolute;bottom: 70px;width: 100%;}
+			#wx{width: 50px;height: 50px;background: url(images/login/weixin.png) no-repeat center;background-size: 100% 100%;margin: 0 auto;}
+			@media screen and (max-width: 340px)  {
+				#login-form input::-webkit-input-placeholder{font-size: 12px;}
+				#verifycode-wrap #verifycode{width: 56%;margin: 15px 0 0 5%;}
+				#get-verifycode{font-size: 12px;}
+				#send{font-size: 14px;}
+			}
+			
+			#close {
+				position: absolute;
+				width: 160px;
+				left: 50%;
+				margin-left: -80px;
+				bottom: 15%;
+				padding: 10px;
+				color: #fff;
+				border-color: #fff;
+			}
+			.item-logo {
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			/*.item-logo a {
+				width: 200px;
+				height: 200px;
+				display: block;
+				border: 1px solid #FFFFFF;
+				border-color: rgba(255, 255, 255, 0.5);
+				text-align: center;
+				line-height: 200px;
+				border-radius: 50%;
+				font-size: 40px;
+				color: #fff;
+				position: absolute;
+				top: 15%;
+				left: 50%;
+				margin-left: -100px;
+			}
+			.animate {
+				position: absolute;
+				left: 0;
+				bottom: 15%;
+				width: 100%;
+				color: #fff;
+				display: -moz-box;
+			}
+			.animate h2 {
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			.animate li {
+				width: 50%;
+				height: 30px;
+				line-height: 30px;
+				list-style: none;
+				font-size: 16px;
+				text-align: right;
+			}
+			.animate li:nth-child(3) {
+				text-align: left;
+				float: right;
+			}*/
+			.animated {
+				-webkit-animation-duration: 1s;
+				-webkit-animation-play-state: paused;
+				-webkit-animation-fill-mode: both;
+			}
+			.guide-show .bounceInDown {
+				-webkit-animation-name: bounceInDown;
+				-webkit-animation-play-state: running;
+				-webkit-animation-delay: 1s;
+				display: block;
+			}
+			.guide-show .bounceInLeft {
+				-webkit-animation-name: bounceInLeft;
+				display: block;
+				-webkit-animation-play-state: running;
+			}
+			.guide-show .bounceInRight {
+				-webkit-animation-name: bounceInRight;
+				display: block;
+				-webkit-animation-play-state: running;
+				-webkit-animation-delay: 0.5s;
+			}
+			@-webkit-keyframes bounceInDown {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(0, -3000px, 0);
+					transform: translate3d(0, -3000px, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(0, 25px, 0);
+					transform: translate3d(0, 25px, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(0, -5px, 0);
+					transform: translate3d(0, -5px, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(0, 3px, 0);
+					transform: translate3d(0, 3px, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInLeft {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(-3000px, 0, 0);
+					transform: translate3d(-3000px, 0, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(25px, 0, 0);
+					transform: translate3d(25px, 0, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(-10px, 0, 0);
+					transform: translate3d(-10px, 0, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(5px, 0, 0);
+					transform: translate3d(5px, 0, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+			@-webkit-keyframes bounceInRight {
+				0%, 60%, 75%, 90%, 100% {
+					-webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+				}
+				0% {
+					opacity: 0;
+					-webkit-transform: translate3d(3000px, 0, 0);
+					transform: translate3d(3000px, 0, 0);
+				}
+				60% {
+					opacity: 1;
+					-webkit-transform: translate3d(-25px, 0, 0);
+					transform: translate3d(-25px, 0, 0);
+				}
+				75% {
+					-webkit-transform: translate3d(10px, 0, 0);
+					transform: translate3d(10px, 0, 0);
+				}
+				90% {
+					-webkit-transform: translate3d(-5px, 0, 0);
+					transform: translate3d(-5px, 0, 0);
+				}
+				100% {
+					-webkit-transform: none;
+					transform: none;
+				}
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!--<div id="loading">
+			<img id="load-img" src="images/login/log.png" />
+		</div>-->
+		<div id="slider" class="mui-slider mui-fullscreen" style="display: none;z-index: 999;">
+			<div class="mui-slider-group">
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background:url(images/guide/1.png) no-repeat center;background-size: 100% auto;">
+					</div>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background:url(images/guide/2.png) no-repeat center;background-size: 100% auto;">
+					</div>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background:url(images/guide/3.png) no-repeat center;background-size: 100% auto;">
+					</div>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<div class="item-logo" style="background:url(images/guide/4.png) no-repeat center;background-size: 100% auto;">
+						<div class="animate">
+							<button id='close' class="mui-btn mui-btn-warning mui-btn-outlined">立即体验</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+		<div class="mui-content">
+			<form id='login-form'>
+				<div class="mui-input-row" id="phonenumber-wrap">
+					<input id='phonenumber' type="number" class="mui-input" placeholder="手机号">
+				</div>
+				<div class="mui-input-row" id="verifycode-wrap">
+					<input id='verifycode' type="number" class="mui-input" placeholder="验证码">
+					<button type="button" id="get-verifycode">获取验证码</button>
+				</div>
+			</form>
+			<div class="mui-content-padded">
+				<button id='login'>登录</button>
+				<div class="link-area"><a id='reg'href="#">注册</a></div>
+			</div>
+			<div class="mui-content-padded oauth-area">
+				<div id="weixinlogin">—使用微信直接登录—</div>
+				<div id="wx"></div>
+			</div>
+		</div>
+		<script src="js/mui.enterfocus.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			(function($, doc) {
+				
+				$.init();
+				
+				
+				//是否开启微信登录
+				$.ajax({
+					type:"get",
+					url:"https://app.fanbaoyundian.com/appapi/safemode.app.php",
+					success:function(data){
+						//出现键盘后自动隐藏和显示微信登录按钮
+						$.getJSON("manifest.json",null,function(res){
+							var code = res.version.code;
+							console.log(code,data.onlinecode,data.code)
+//							if(code < data.onlinecode){
+//								$.confirm('检查到最新应用版本','更新检测',['立即更新','取 消'],function (e) {
+//									if(e.index==0){										
+//										if($.os.ios){
+//											var updataUrl = "https://itunes.apple.com/cn/app/id1168878262";
+//										}else{
+//											var updataUrl = "http://fanbaoyundian.com/apk/fanbaoyundian_"+ data.onlinecode +".apk";
+//										}
+//										plus.runtime.openURL(updataUrl);
+//									}
+//								},'div')
+//							}
+							window.addEventListener('resize', function() {
+								if(data.iswechat == "1"&&$.os.ios&&code == data.code){
+									
+								}else{
+									document.querySelector('.oauth-area').style.display = document.body.clientHeight > 500 ? 'block' : 'none';
+								}
+								document.querySelector('#reg').style.display = document.body.clientHeight > 500 ? 'block' : 'none';
+							}, false);
+							if(data.iswechat == "1"&&$.os.ios&&code == data.code){
+								document.getElementsByClassName("oauth-area")[0].style.display = "none";
+							}else{
+								document.getElementsByClassName("oauth-area")[0].style.display = "block";
+							}
+							//跳转到注册微信注册跳转页面
+							var regButton = document.getElementById('reg');
+							regButton.addEventListener('tap', function(event) {
+								if(data.iswechat == "1"&&$.os.ios&&code == data.code){
+									$.openWindow({
+										url: 'reg.html',
+										id: 'reg',
+										preload: true,
+										show: {
+											aniShow: 'pop-in'
+										},
+										styles: {
+											popGesture: 'hide'
+										},
+										waiting: {
+											autoShow: false
+										}
+									});
+								}else{
+									$.openWindow({
+										url: 'toreg.html',
+										id: 'toreg',
+										preload: true,
+										show: {
+											aniShow: 'pop-in'
+										},
+										styles: {
+											popGesture: 'hide'
+										},
+										waiting: {
+											autoShow: false
+										}
+									});
+								}
+							}, false);
+						});
+					}
+				})
+				
+				$.plusReady(function() {
+//					if(mui.os.ios){	
+//						setTimeout(function(){
+//							plus.navigator.setStatusBarStyle("dark");
+//							plus.navigator.setStatusBarBackground("#fff");
+//						},1000)
+//					}
+					plus.nativeUI.closeWaiting();
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator:"none",
+						softinputMode: "adjustResize"
+					});
+					plus.screen.lockOrientation("portrait-primary"); //强制竖屏
+					//var settings = app.getSettings();
+					var store = JSON.parse(localStorage.getItem("userinfo"));
+					if(store){				
+						if(store.token){
+							$.openWindow({
+								url: 'commont.html',
+								id: 'commont',
+								preload: true,
+								show: {
+									aniShow: 'pop-in'
+								},
+								styles: {
+									popGesture: 'hide'
+								},
+								waiting: {
+									autoShow:false,
+								}
+							});
+							return;
+						}
+					}else if(localStorage.getItem("login") != "1"&&localStorage.getItem("invite")!= "1"){
+						//第一次登录并且注册
+						doc.getElementById("slider").style.display = "block";
+						//立即体验按钮点击事件
+						document.getElementById("close").addEventListener('tap', function(event) {
+							doc.getElementById("slider").style.display = "none";
+							getInvitecode();
+						}, false);
+					}
+					//微信登录和微信用户信息获取
+					var wxuserinfo = "";
+					function weixinLogin(obj,callback){
+						var auth = auths[obj.authId];
+						loginwey.wx = 1;
+						var waiting = plus.nativeUI.showWaiting();
+						auth.login(function() {
+							waiting.close();
+							auth.getUserInfo(function() {
+								plus.nativeUI.toast("微信认证成功");
+								wxuserinfo = auth.userInfo;
+								loginwey.wxunionid = auth.userInfo.unionid;
+								//var name = auth.userInfo.nickname;
+								//获取信息后跳转到注册页面进行页面传值的回调
+								if(typeof callback == "function"){
+									callback();
+								}
+							}, function(e) {
+								console.log("获取用户信息失败：" + e.message);
+							});
+						}, function(e) {
+							waiting.close();
+							plus.nativeUI.toast("微信认证失败：" + e.message + e.code);
+						});
+					}
+					
+					//跳转到首页的方法
+					var toIndex = function() {
+						
+						//预加载登录成功后的首页
+						var commont = $.preload({
+							"id": 'commont',
+							"url": 'commont.html'
+						});
+						setTimeout(function() {
+							$.openWindow({
+								id: 'commont',
+								show: {
+									aniShow: 'pop-in'
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+						}, 0);
+					};
+					var regPage = $.preload({
+						"id": 'reg',
+						"url": 'reg.html'
+					});
+					var toReg = function(obj) {
+						weixinLogin(obj,function(){
+							setTimeout(function(){								
+								$.fire(regPage, 'getWeixinUserinfo', wxuserinfo);
+								$.openWindow({
+									id: 'reg',
+									show: {
+										aniShow: 'pop-in'
+									},
+									waiting: {
+										autoShow: false
+									}
+								});
+							},0)
+						}); 
+					};
+					//点击获取邀请码按钮，发起请求判断手机号是否被被注册
+					var phonenumberBox = document.getElementById('phonenumber');
+					var verifycodeBox = document.getElementById('verifycode');
+					var loginInfo = {};
+					document.getElementById("get-verifycode").addEventListener("tap",function(e){
+						var this_ = this;
+						loginInfo = {
+							phonenumber: phonenumberBox.value,
+							verifycode: verifycodeBox.value
+						};
+						//正则判断手机号格式是否正确
+						if(!(/^1[34578]\d{9}$/.test(phonenumberBox.value))){ 
+        					 plus.nativeUI.alert("手机号格式错误");
+        					return;
+    					};
+    					(function(){
+    						this_.disabled=true;
+    						this_.innerHTML = "重新获取"+60+"s";
+    						var timelength = 60;
+    						var timer = setInterval(function(){
+    							if(timelength > 0){
+    								timelength--;
+    								this_.innerHTML = "重新获取"+timelength+"s";							
+    							}else{
+    								this_.innerHTML = "获取验证码";
+    								this_.disabled=false;
+    								clearInterval(timer);
+    							}
+    						},1000);
+    						if(timelength < 0) clearInterval(timer);
+    					})();
+						//请求判断手机号是否注册
+						$.ajax({
+							type:"get",
+							url:"https://app.fanbaoyundian.com/appapi/verify.app.php?phonenumber="+loginInfo.phonenumber+"&action=login",
+							async:false,
+							dataType:"json",
+							timeout:10000,
+							success:function(data){
+								//alert(JSON.stringify(data))
+								if(data.state==1){
+									//获取验证码操作逻辑代码块
+								}else{
+									 plus.nativeUI.alert(data.message);
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								plus.nativeUI.alert("请求超时，请检查网络");
+							}
+						});
+					});
+					
+					//获取登录方式信息
+					var loginwey = {
+						wx:"",
+						phonenumber:"",
+						verifycode:"",
+						wxunionid:""
+					}
+					//点击登录
+					//var loginButton = document.getElementById('login');
+					document.getElementById('login').addEventListener('tap', function(event) {
+						loginwey.wx = 0;
+						loginwey.phonenumber = phonenumberBox.value;
+						loginwey.verifycode = verifycodeBox.value;
+						//正则判断手机号格式是否正确
+						if(!(/^1[34578]\d{9}$/.test(phonenumberBox.value))){ 
+        					plus.nativeUI.alert("手机号格式错误");
+        					return;
+    					};
+						app.login(loginwey, function(err) {
+							if (err) {
+								 plus.nativeUI.alert(err);
+								return;
+							}
+						});
+					});
+					
+						//第三方登录
+						var authBtns = ['weixin']; //配置业务支持的第三方登录
+						var auths = {};
+						var oauthArea = document.querySelector('.oauth-area');
+						plus.oauth.getServices(function(services) {
+							for (var i in services) {   //生成微信登录按钮
+								var service = services[i];
+								auths[service.id] = service;
+								if (~authBtns.indexOf(service.id)) {
+									var isInstalled = app.isInstalled(service.id);
+									var btn = document.createElement('div');
+									//如果微信未安装，则为不启用状态
+									btn.setAttribute('class', 'oauth-btn' + (!isInstalled && service.id === 'weixin' ? (' disabled') : ''));
+									btn.authId = service.id;
+									document.getElementById("wx").appendChild(btn);
+								}
+							}
+							$(oauthArea).on('tap', '.oauth-btn', function() {
+								if (this.classList.contains('disabled')) {
+									 plus.nativeUI.alert('您尚未安装微信客户端');
+									return;
+								};
+								var that = this;
+								weixinLogin(this,function(){
+									$.ajax({
+										type:"post",
+										url:"https://app.fanbaoyundian.com/appapi/login.app.php",
+										data:{
+											wx:loginwey.wx,
+											wxunionid:loginwey.wxunionid
+										},
+										async:false,
+										timeout:10000,
+										success:function(data){
+											if(data.state==1){
+												//微信登录跳转主页
+												localStorage.setItem("userinfo",JSON.stringify(data));
+												//alert(localStorage.getItem("userinfo"))
+												toIndex();
+											}else if(data.error==3){
+												//微信未绑定手机号，跳转注册页面
+												toReg(that);
+											}
+										},
+										error:function(xhr,type,errorThrown){
+											plus.nativeUI.alert("请求超时，请检查网络");
+										}
+									});
+								});
+							});
+						});
+					
+					//点击获取焦点事件
+					$.enterfocus('#login-form input', function() {
+						$.trigger(loginButton, 'tap');
+					});
+					//邀请码口令
+					function getInvitecode(){
+						if($.os.ios){
+							var UIPasteboard = plus.ios.importClass("UIPasteboard");
+							var generalPasteboard = UIPasteboard.generalPasteboard();
+							//generalPasteboard.plusCallMethod({getValue:"testValue", forPasteboardType:"public.utf8-plain-text"});
+	 						var value = generalPasteboard.plusCallMethod({valueForPasteboardType:"public.utf8-plain-text"});
+	 						if(!value){
+	 							value = "";
+	 						}
+	 						if(value.indexOf("#") != -1){
+	 							var code1 = value.substring(value.indexOf("#")+1,value.length-1);
+	 							if(code1.indexOf("#") != -1){
+	 								var code2 = code1.substring(0,code1.indexOf("#"));
+	 								value = "#"+code2+"#";
+	 							}
+	 						}
+							
+	 						if(value){	 							
+	 							if(value.charAt(0)=="#"&&value.charAt(value.length-1)=="#"){
+	 								var isInvite = true;
+	 							}else{
+	 								var isInvite = false;
+	 							}
+	 						}
+						}else{
+							var Context = plus.android.importClass("android.content.Context");
+							var main = plus.android.runtimeMainActivity();
+							var clip = main.getSystemService(Context.CLIPBOARD_SERVICE);
+							if(plus.android.invoke(clip,"getText") == null){
+								var value = "";
+							}else{
+								var value = plus.android.invoke(clip,"getText").toString();
+							}
+							if(value.indexOf("#") != -1){
+	 							var code1 = value.substring(value.indexOf("#")+1,value.length-1);
+	 							if(code1.indexOf("#") != -1){
+	 								var code2 = code1.substring(0,code1.indexOf("#"));
+	 								value = "#"+code2+"#";
+	 							}
+	 						}
+							
+							if(value){								
+								if(value.charAt(0)=="#"&&value.charAt(value.length-1)=="#"){
+		 							var isInvite = true;
+		 						}else{
+		 							var isInvite = false;
+		 						}
+							}
+						}
+						if(isInvite){
+							$.confirm('恭喜 您已获得云店体验资格！ ','已获得邀请码',['带我去体验'],function (e) {
+								if(e.index==0){
+									$.openWindow({
+										url: 'toreg.html',
+										id: 'toreg'
+									});
+								}
+							},'div')
+						}
+					}
+					//用户未注册时会显示邀请码
+					if(localStorage.getItem("invite") != "1"){
+						var sliderStyle = document.defaultView.getComputedStyle(doc.getElementById("slider"), null);
+						if(doc.getElementById("slider").style.display == "none"){
+							getInvitecode();
+						}						
+					}
+					
+					
+					//重新定义后退函数(监听安卓后退键事件)
+					var backButtonPress = 0;
+					$.back = function(event) {
+						backButtonPress++;
+						if (backButtonPress > 1) {
+							plus.runtime.quit();
+						} else {
+							plus.nativeUI.toast('再按一次退出应用');
+						}
+						setTimeout(function() {
+							backButtonPress = 0;
+						}, 1000);
+						return false;
+					};
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

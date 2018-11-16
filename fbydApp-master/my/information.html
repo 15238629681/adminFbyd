@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/my/mui.picker.min.css" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+#save{margin-top: 12px;color: #595757;display: none;}
+a{color: #999;}
+b{font-weight: normal;}
+.mui-content>.mui-table-view:first-child{margin-top: 0;}
+.mui-table-view-cell>a:not(.mui-btn){color: #3E3A39;}
+.mui-content li a{font-size: 16px;}
+.mui-content li span{font-size: 12px;color: #9FA0A0;float: right;margin-right: 20px;}
+
+#change{width: 100%;height: 100%;position: absolute;top: 60px;background: #eee;display: none;}
+#change input{border: none;}
+#sextype{display: none;}
+
+@media screen and (max-width: 340px)  {
+	.mui-content li a{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">个人资料</h1>
+    <a class="mui-pull-right" id="save">完成</a>
+</header>
+<div class="mui-content">
+    <ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+    		<a id="sex" class="mui-navigate-right">性别<span></span></a>
+		</li>
+		<li class="mui-table-view-cell">
+    		<a id="birthday" class="mui-navigate-right">生日<span>去设置</span></a>
+		</li>
+		<li class="mui-table-view-cell">
+    		<a id="constellation">星座<span></span></a>
+		</li>
+		<li class="mui-table-view-cell">
+    		<a id="aliwangwang" class="mui-navigate-right">绑定淘宝账号<span></span></a>
+		</li>
+		<li class="mui-table-view-cell">
+    		<a id="qq" class="mui-navigate-right">绑定QQ账号<span></span></a>
+		</li>
+	</ul>
+</div>
+<div id="change">
+	<input id="input1" data-id="" type="text" />
+	<ul id="sextype" class="mui-table-view mui-table-view-radio" data-sex="">
+		<li class="mui-table-view-cell">
+			<a class="mui-navigate-right">男</a>
+		</li>
+		<li class="mui-table-view-cell">
+			<a class="mui-navigate-right">女</a>
+		</li>
+	</ul>
+</div>
+<script src="../js/mui.min.js"></script>
+<script src="../js/mui.picker.all.js" ></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	var submitinfo = [
+		{sex:""},
+		{birthday:""},
+		{constellation:""},
+		{aliwangwang:""},
+		{qq:""}
+	];
+	var Input = doc.getElementById("input1");
+	var Change = doc.getElementById("change");
+	var Save = doc.getElementById("save");
+	var changestate = 0;
+	function getUserinfo(submitinfo){	
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/setting.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				uid:user_id,
+				userinfo:{
+					sex:submitinfo[0].sex,
+					birthday:submitinfo[1].birthday,
+					constellation:submitinfo[2].constellation,
+					aliwangwang:submitinfo[3].aliwangwang,
+					qq:submitinfo[4].qq
+				}
+			},
+			success:function(res){
+				//alert(JSON.stringify(res));
+				if(res.state==1){
+					if(res.userinfo.sex == 1){						
+						doc.getElementById("sex").getElementsByTagName('span')[0].innerHTML = "男";
+						doc.getElementById('sextype').getElementsByTagName("li")[0].className = "mui-table-view-cell mui-selected";
+						doc.getElementById('sextype').getElementsByTagName("li")[1].className = "mui-table-view-cell";
+					}else{
+						doc.getElementById("sex").getElementsByTagName('span')[0].innerHTML = "女";
+						doc.getElementById('sextype').getElementsByTagName("li")[0].className = "mui-table-view-cell";
+						doc.getElementById('sextype').getElementsByTagName("li")[1].className = "mui-table-view-cell mui-selected";
+					};
+					if(res.userinfo.birthday == 0){
+						doc.getElementById("birthday").getElementsByTagName('span')[0].innerHTML = "请设置";
+					}else{
+						//alert(res.userinfo.birthday)
+						var time =  new Date(res.userinfo.birthday*1000);
+						var birthday = time.getFullYear() + '-' + time.getMonth() + '-' + time.getDate();
+						doc.getElementById("birthday").getElementsByTagName('span')[0].innerHTML = birthday;
+					}
+					doc.getElementById("constellation").getElementsByTagName('span')[0].innerHTML = res.userinfo.constellation;
+					doc.getElementById("aliwangwang").getElementsByTagName('span')[0].innerHTML = res.userinfo.aliwangwang;
+					doc.getElementById("qq").getElementsByTagName('span')[0].innerHTML = res.userinfo.qq;
+				}else{
+					$.toast(res.message);
+				};
+				doc.getElementById("sextype").style.display = "none";
+				Change.style.display = "none";
+				Input.blur();
+				Save.style.display = "none";
+				changestate = 0;
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					$.toast("请求超时，请检查网络");
+				}
+			}
+		});
+	};
+	getUserinfo(submitinfo);
+	$.plusReady(function(){
+		var constellation = "魔羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯";
+		$(".mui-table-view").on("tap","a",function(){
+			var type = this.getAttribute("id");
+			switch (type){
+				case "sex":
+					Input.style.display = "none";
+					doc.getElementById("sextype").style.display = "block";
+					var list = document.querySelector('.mui-table-view.mui-table-view-radio');
+					Input.setAttribute("data-id","sex");
+					//选择性别
+					list.addEventListener('selected',function(e){
+						if(e.detail.el.innerText=="女"){
+							doc.getElementById("sextype").setAttribute("data-sex","2");
+						}else{
+							doc.getElementById("sextype").setAttribute("data-sex","1");
+						}
+					});
+					Save.style.display = "block";
+					Change.style.display = "block";
+					break;
+				case "birthday":
+					var options = {
+						"type":"date",
+						"beginYear":1960,
+						"endYear":2017
+					};
+					var picker = new $.DtPicker(options);
+					picker.show(function(rs) {
+						doc.getElementById("birthday").getElementsByTagName("span")[0].innerText = rs.text;
+						//显示对应星座
+						var m = rs.m.value.charAt(0)=="0" ? rs.m.value.charAt(1) : rs.m.value;
+						var constellation_name = constellation.substr(m*2-(rs.d.text<"102223444433".charAt(m-1)- -19)*2,2);
+						doc.getElementById("constellation").getElementsByTagName("span")[0].innerText = constellation_name;
+						//生日时间戳
+						var date = new Date(rs.y.value,rs.m.value,rs.d.value);
+						var birthday = date.getTime();
+						submitinfo[1].birthday = birthday/1000;
+						submitinfo[2].constellation = constellation_name;						
+						//alert(JSON.stringify(submitinfo))
+						getUserinfo(submitinfo)
+						picker.dispose();						
+					});
+					break;
+				case "aliwangwang":
+					Input.value = doc.getElementById("aliwangwang").getElementsByTagName("span")[0].innerHTML;
+					Input.setAttribute("type","text");
+					Input.setAttribute("placeholder","请输入淘宝账号");
+					Input.style.display = "block";
+					Input.setAttribute("data-id","aliwangwang");
+					Save.style.display = "block";
+					Change.style.display = "block";
+					break;
+				case "qq":
+					Input.value = doc.getElementById("qq").getElementsByTagName("span")[0].innerHTML;
+					Input.setAttribute("type","number");
+					Input.setAttribute("placeholder","请输入qq号");
+					Input.style.display = "block";
+					Input.setAttribute("data-id","qq");
+					Save.style.display = "block";
+					Change.style.display = "block";
+					break;
+			};
+			changestate = 1;
+		});
+		document.getElementById("save").addEventListener("tap",function(){
+			var type = Input.getAttribute("data-id");
+			if(type=="sex"){
+				submitinfo[0].sex = doc.getElementById("sextype").getAttribute("data-sex");
+				getUserinfo(submitinfo);
+			}else if(type=="aliwangwang"){
+				doc.getElementById(type).getElementsByTagName("span")[0].innerHTML = Input.value;
+				submitinfo[3].aliwangwang = Input.value;
+				getUserinfo(submitinfo);
+			}else if(type=="qq"){
+				doc.getElementById(type).getElementsByTagName("span")[0].innerHTML = Input.value;
+				submitinfo[4].qq = Input.value;
+				getUserinfo(submitinfo);
+			}
+		})
+		
+		//重新定义后退函数(监听安卓后退键事件)
+		var backButtonPress = 0;
+		$.back = function(event) {
+			backButtonPress++;
+			if (backButtonPress==1&&changestate==0) {
+				plus.webview.close(plus.webview.currentWebview());
+			}else if(changestate==1){
+				Save.style.display = "none";
+				Change.style.display = "none";
+				Input.blur();
+				doc.getElementById("sextype").style.display = "none";
+				changestate = 0;
+			}else{
+				//plus.nativeUI.toast('再按一次退出应用');
+			}
+			setTimeout(function() {
+				backButtonPress = 0;
+			}, 800);
+			return false;
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

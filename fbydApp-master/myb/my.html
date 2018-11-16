@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<script src="../js/mui.min.js"></script>
+<script>	
+function loadStyles(url) {
+	var link = document.createElement("link");
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	link.href = url;
+	document.getElementsByTagName("head")[0].appendChild(link);
+}
+if(mui.os.ios){
+	loadStyles("../css/ios.css");
+}else{
+	loadStyles("../css/android.css");
+}
+</script>
+<style>
+html,body{width: 100%;}
+body{padding-bottom: 60px;}
+ul,li{list-style: none;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+#head{width: 100%;height: 60px;position: fixed;top: 0;z-index: 999;background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FBBE00));}
+#setting,#message{position: absolute;top: 28px;}
+#setting{left: 20px;font-size: 16px;}
+#message{right: 10px;background: url(../images/my/message.png) no-repeat center;background-size: cover;width: 25px;height: 25px;}
+.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){border: none;}
+/*.mui-table-view-cell:after{height: 0.5px;background-color: #d9d9d9;}*/
+
+#part-1{width: 100%;height: 160px;background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FBBE00));position: relative;}
+#head-icon-wrap{width:100%;height: 120px;position: absolute;bottom: 0;padding:30px 20px 10px;}
+#head-icon{width: 70px;height: 70px;border-radius: 50%;float: left;margin-right: 20px;}
+#name{font-size: 14px;color: #333;margin-top: 10px;margin-bottom: 10px;background: url(../images/my/vip.png) no-repeat 90px center;
+background-size: 20px;color: #F6A200;padding-left: 115px;}
+#account-info{font-size: 16px;color: #333;margin-top: 10px;margin-bottom: 10px;word-break:keep-all;max-width: 14rem;
+white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+#usercode{position: absolute;right: 20px;top: 50px;}
+#code{width: 20px;height: 20px;}
+#usercode span{font-size: 18px;position: relative;top: -4px;color: #898989;}
+
+#part-1-1 li a{font-size: 16px;}
+#part-1-1 li span{font-size: 12px;color: #9FA0A0;float: right;margin-right: 20px;}
+#part-1-1 #mystore{padding-left: 46px;background-position: 12px center;background-repeat: no-repeat;background-size: 22px;background-image: url(../images/my/open.png);}
+#part-1-1 li a > div{float: left;width: 33.3%;text-align: center;font-size: 14px;}
+#part-1-1 #tab-2 div{width: 25%;}
+#part-1-1 #income div{width: 25%;}
+/*#part-1-1 li a .active{color: #FBBD00;}*/
+#part-1-1 .mui-table-view-cell .mui-active{background-color: #fff;}
+
+#part-2-1{margin-top: 10px;}
+#part-2-1 li a{font-size: 16px;padding-left: 46px;background-position: 12px center;background-repeat: no-repeat;background-size: 22px;}
+#part-2-1 li #storeinvite{background-image: url(../images/my/part-2-1-icon-1.png);}
+#part-2-1 li #cloudstorehouse{background-image: url(../images/my/part-2-1-icon-2.png);}
+#part-2-1 li span{font-size: 12px;color: #9FA0A0;float: right;margin-right: 20px;}
+
+#part-2{margin-top: 10px;}
+#part-2 li span{font-size: 10px;color: #9FA0A0;float: right;margin-right: 20px;}
+#part-2 li a{padding-left: 46px;background-position: 12px center;background-repeat: no-repeat;background-size: 22px;}
+#part-2 li #openstore{background-image: url(../images/my/open.png);}
+#part-2 li #money{background-image: url(../images/my/money.png);}
+#part-2 li #money span{font-size: 14px;}
+#part-2 li #gupiao{background-image: url(../images/my/gupiao.png);}
+#part-2 .mui-table-view-cell>a:not(.mui-btn){font-size: 16px;}
+#part-2 li #gupiao span{position: absolute;right: 20px;font-size: 14px;}
+#part-2 li #gupiao #slider-1{top: 12px;}
+#part-2 li #gupiao #slider-2{top: 40px;}
+#part-2 li #gupiao #slider-3{top: 70px;}
+
+.part-head{padding:10px 15px;border-bottom: 0.5px solid #eee;}
+.item-name{font-size: 16px;}
+.checkmore{float: right;font-size: 14px;}
+.checkmore .mui-icon-arrowright{font-size: 15px;color: #9FA0A0;}
+.part-content ul{padding: 10px 15px;margin: 10px 0;}
+.part-content ul li{float: left;width: 20%;}
+.part-content ul li img{width: 20px;display: block;margin: 0 auto;}
+.part-content ul li p{text-align:center;font-size: 12px;margin-top: 4px;}
+#part-3{margin-top: 10px;width: 100%;background: #fff;}
+#part-4{width: 100%;background: #fff;}
+
+#part-5 li a{padding-left: 46px;background-position: 15px center;background-repeat: no-repeat;background-size: 20px;}
+#part-5 li #user-setting{background-image: url(../images/my/part5-icon-1.png);}
+#part-5 li #user-message{background-image: url(../images/my/part5-icon-2.png);}
+#part-5 li #user-servies{background-image: url(../images/my/part5-icon-3.png);}
+#part-5 .mui-table-view-cell>a:not(.mui-btn){font-size: 16px;}
+
+@media screen and (max-width: 340px)  {
+	#part-1-1 li a{font-size: 14px;}
+	#part-2-1 li a{font-size: 14px;}
+	#part-2 li span{margin-right: 15px;}
+	#part-2 li a{padding-left: 40px;background-position: 12px center;background-size: 20px;}
+	#part-5 li a{padding-left: 40px;background-position: 12px center;background-size: 15px;}
+	#part-2 .mui-table-view-cell>a:not(.mui-btn){font-size: 12px;}
+	#part-5 .mui-table-view-cell>a:not(.mui-btn){font-size: 12px;}
+	.item-name{font-size: 12px;}
+	.checkmore{font-size: 12px;}
+}
+
+.mui-slider{position: absolute;width: 40%;right: 32px;font-size: 14px;top: 12px;text-align:right;}
+.mui-slider .mui-slider-item{color: #FBBD00;}
+</style>
+</head>
+
+<body>
+<div id="head">	
+	<span id="setting">设置</span>
+	<span id="message"></span>
+</div>
+<div class="mui-content" id="refreshContainer">
+    <div id="part-1">
+    	<!--<span id="setting">设置</span>
+    	<span id="message"></span>-->
+    	<div id="head-icon-wrap" class="clean">
+    		<img id="head-icon" src="../images/my/group.png" />
+    		<div id="name">合伙人</div>
+    		<div id="account-info">用户名</div>
+    		<div id="usercode">
+    			<img id="code" src="../images/my/wxcode.png" />
+    			<span class="mui-icon mui-icon-arrowright"></span>
+    		</div>
+    	</div>
+    </div>
+    <div id="part-1-1">
+    	<ul class="mui-table-view">
+   			<li class="mui-table-view-cell">
+        		<a id="mystore" class="mui-navigate-right">我的云店<span>管理</span></a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="tab-1">
+        			<div data-type="today" style="color: #FBBD00;">今日</div>
+        			<div data-type="thismonth">本月</div>
+        			<div data-type="alldata">累计</div>
+        		</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="tab-2">
+        			<div>销售额</div>
+        			<div>订单量</div>
+        			<div>利润</div>
+        			<div>奖励</div>
+        		</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="income">
+        			<div>0</div>
+        			<div>0</div>
+        			<div>0.00</div>
+        			<div>0.00</div>
+        		</a>
+    		</li>
+		</ul>
+    </div>
+    <div id="part-2-1">
+    	<ul class="mui-table-view">
+   			<li class="mui-table-view-cell">
+        		<a id="storeinvite" class="mui-navigate-right">邀请开店<span>邀请更多好友成为代理，收益翻倍</span></a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="cloudstorehouse" class="mui-navigate-right">翻宝云仓<span>精选品牌和性价比宝贝</span></a>
+    		</li>
+		</ul>
+    </div>
+    <div id="part-2">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell">
+        		<a id="money" class="mui-navigate-right">账户余额
+        			<span style="color: #FBBD00;">0.00元</span>
+        		</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="gupiao">翻宝股票
+        			<div class="mui-slider">
+  						<div class="mui-slider-group mui-slider-loop">
+  							<div class="mui-slider-item mui-slider-item-duplicate">共持有0股</div>
+    						<div class="mui-slider-item">总估值0.00元</div>
+    						<div class="mui-slider-item">今日股价0.00元/股</div>
+    						<div class="mui-slider-item">共持有0股</div>
+    						<div class="mui-slider-item mui-slider-item-duplicate">总估值0.00元</div>
+  						</div>
+					</div>
+        		</a>
+    		</li>
+		</ul>
+    </div>
+    <div id="part-3">
+    	<div class="part-head">
+    		<span class="item-name">我的试用</span>
+    		<span data-state="0" class="checkmore">查看全部<span class="mui-icon mui-icon-arrowright"></span></span>
+    	</div>
+    	<div class="part-content">
+    		<ul class="clean">
+    			<li data-state="1">
+    				<img src="../images/my/part3-icon-1.png" />
+    				<p>待审核</p>
+    			</li>
+    			<li data-state="2">
+    				<img src="../images/my/part3-icon-2.png" />
+    				<p>待下单</p>
+    			</li>
+    			<li data-state="3">
+    				<img src="../images/my/part3-icon-3.png" />
+    				<p>待提交</p>
+    			</li>
+    			<li data-state="4">
+    				<img src="../images/my/part3-icon-4.png" />
+    				<p>待返现</p>
+    			</li>
+    			<li data-state="5">
+    				<img src="../images/my/part3-icon-5.png" />
+    				<p>已完成</p>
+    			</li>
+    		</ul>
+    	</div>
+    </div>
+    <div id="part-4">
+    	<div class="part-head">
+    		<span class="item-name">我的拼团</span>
+    		<span class="checkmore">查看全部<span class="mui-icon mui-icon-arrowright"></span></span>
+    	</div>
+    	<div class="part-content">
+    		<ul class="clean">
+    			<li>
+    				<img src="../images/my/part4-icon-1.png" />
+    				<p>待付款</p>
+    			</li>
+    			<li>
+    				<img src="../images/my/part4-icon-2.png" />
+    				<p>待成团</p>
+    			</li>
+    			<li>
+    				<img src="../images/my/part4-icon-3.png" />
+    				<p>待发货</p>
+    			</li>
+    			<li>
+    				<img src="../images/my/part4-icon-4.png" />
+    				<p>待收货</p>
+    			</li>
+    			<li>
+    				<img src="../images/my/part4-icon-5.png" />
+    				<p>待评价</p>
+    			</li>
+    		</ul>
+    	</div>
+    </div>
+    <div id="part-5">
+    	<ul class="mui-table-view">
+   			<li class="mui-table-view-cell">
+        		<a id="user-setting" class="mui-navigate-right">账户设置</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="user-message" class="mui-navigate-right">消息中心</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="user-servies" class="mui-navigate-right">服务中心</a>
+    		</li>
+		</ul>
+    </div>
+</div>
+<script type="text/javascript">
+(function($,doc){
+	//$.init();
+//	var gallery = mui('.mui-slider');
+//	gallery.slider({
+//		interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
+//	});
+	
+$.plusReady(function(){
+	plus.webview.currentWebview().setStyle({
+		scrollIndicator:"none"
+	});
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	function getUserinfo(){
+		doc.getElementById("tab-1").getElementsByTagName("div")[0].style.color = "#FBBD00";
+		doc.getElementById("tab-1").getElementsByTagName("div")[1].style.color = "#333";
+		doc.getElementById("tab-1").getElementsByTagName("div")[2].style.color = "#333";
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/my.app.php",
+			data:{
+				uid:user_id,
+				token:user_token,
+				timestamp:time
+			},
+			success:function(data){
+				//alert(JSON.stringify(data))
+				if(data.state==1){
+					localStorage.setItem("codeurl",data.userinfo.scodeimg); //二维码存放在本地中
+					localStorage.setItem("headimgurl",data.userinfo.headimgurl);//存放头像到本地
+					document.getElementById("head-icon").src = data.userinfo.headimgurl;
+					document.getElementById("account-info").innerHTML = data.userinfo.nickname;
+					document.getElementById("income").getElementsByTagName("div")[0].innerHTML = data.todaydata.revenue;
+					document.getElementById("income").getElementsByTagName("div")[1].innerHTML = data.todaydata.ordernumber;
+					document.getElementById("income").getElementsByTagName("div")[2].innerHTML = data.todaydata.netincome.toFixed(2);
+					document.getElementById("income").getElementsByTagName("div")[3].innerHTML = data.todaydata.bonus.toFixed(2);
+					document.getElementById("money").getElementsByTagName("span")[0].innerHTML = data.userinfo.money;
+					document.getElementsByClassName("mui-slider-item")[0].innerHTML = "共持有"+data.userinfo.stockbalance+"股";
+					document.getElementsByClassName("mui-slider-item")[1].innerHTML = "总估值"+data.userinfo.riches+"元";
+					document.getElementsByClassName("mui-slider-item")[2].innerHTML = "今日股价"+data.userinfo.stockprice +"元";
+					document.getElementsByClassName("mui-slider-item")[3].innerHTML = "共持有"+data.userinfo.stockbalance+"股";
+					document.getElementsByClassName("mui-slider-item")[4].innerHTML = "总估值"+data.userinfo.riches+"元";
+					$("#tab-1").on("tap","div",function(){
+						var datatype = this.getAttribute("data-type");
+						for(var i=0;i<3;i++){						
+							doc.getElementById("tab-1").getElementsByTagName("div")[i].style.color = "#333";
+						}
+						this.style.color = "#FBBD00";
+						if(datatype=="today"){						
+							document.getElementById("income").getElementsByTagName("div")[0].innerHTML = data.todaydata.revenue;
+							document.getElementById("income").getElementsByTagName("div")[1].innerHTML = data.todaydata.ordernumber;
+							document.getElementById("income").getElementsByTagName("div")[2].innerHTML = data.todaydata.netincome.toFixed(2);
+							document.getElementById("income").getElementsByTagName("div")[3].innerHTML = data.todaydata.bonus.toFixed(2);
+						}else if(datatype=="thismonth"){
+							document.getElementById("income").getElementsByTagName("div")[0].innerHTML = data.thismonthdata.revenue;
+							document.getElementById("income").getElementsByTagName("div")[1].innerHTML = data.thismonthdata.ordernumber;
+							document.getElementById("income").getElementsByTagName("div")[2].innerHTML = data.thismonthdata.netincome.toFixed(2);
+							document.getElementById("income").getElementsByTagName("div")[3].innerHTML = data.thismonthdata.bonus.toFixed(2);
+						}else if(datatype=="alldata"){
+							document.getElementById("income").getElementsByTagName("div")[0].innerHTML = data.alldata.revenue;
+							document.getElementById("income").getElementsByTagName("div")[1].innerHTML = data.alldata.ordernumber;
+							document.getElementById("income").getElementsByTagName("div")[2].innerHTML = data.alldata.netincome.toFixed(2);
+							document.getElementById("income").getElementsByTagName("div")[3].innerHTML = data.alldata.bonus.toFixed(2);
+						}
+					})
+					//翻宝云仓
+					document.getElementById("cloudstorehouse").addEventListener("tap",function(){
+						var storehousePage = $.preload({
+							"id": 'storehousePage',
+							"url": '../storehouse/store/storehouse.html'
+						});
+						setTimeout(function(){					
+							$.openWindow({
+								id: 'storehousePage'
+							});
+						},20)
+					});
+					//传余额到提现页面
+					document.getElementById("money").addEventListener("tap",function(){
+						var applymoneyPage = $.preload({
+							"id": 'applymoneyPage',
+							"url": '../my/applymoney.html'
+						});
+						setTimeout(function(){
+							$.fire(applymoneyPage,"allmoney",{money:data.userinfo.money})
+							$.openWindow({
+								id: 'applymoneyPage'
+							});
+						},200)
+					});
+					//传用户信息到用户设置页面
+					$("body").on("tap","#user-setting,#setting",function(){
+						var settingPage = $.preload({
+							"id": 'settingPage',
+							"url": '../my/setting.html'
+						});
+						setTimeout(function(){
+							$.fire(settingPage,'userinfo',{
+								nickname:data.userinfo.nickname,
+								url:data.userinfo.headimgurl
+							});
+							$.openWindow({
+								id: 'settingPage'
+							});
+						},150)
+					});
+					$('#refreshContainer').pullRefresh().endPulldownToRefresh(true);
+				}else{
+					$('#refreshContainer').pullRefresh().endPulldownToRefresh(true);
+					plus.nativeUI.toast(data.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					plus.nativeUI.toast("请求超时，请检查网络");
+				}
+				plus.nativeUI.toast(errorThrown);
+			}
+		});
+	}
+	getUserinfo();
+	function pullfresh(){
+		getUserinfo();
+		$('#refreshContainer').pullRefresh().endPulldown();
+	}
+	$.init({
+		swipeBack:true,
+		pullRefresh : {
+    		container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+    		down : {
+      			style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+      			color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+      			height:'50px',//可选,默认50px.下拉刷新控件的高度,
+      			range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+      			offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+      			auto: true,//可选,默认false.首次加载自动上拉刷新一次
+      			callback :pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+    		}
+  		}
+	});
+	
+	var gallery = $('.mui-slider');
+	gallery.slider({
+  		interval:2000//自动轮播周期，若为0则不自动播放，默认为0；
+	});
+	
+	//分享二维码/邀请开店
+	$(".mui-content").on("tap","#usercode,#storeinvite",function(){					
+		var fansinvitPage = $.preload({
+			"id": 'fansinvitPage',
+			"url": 'fansinvit.html'
+		});
+		setTimeout(function(){
+			//$.fire(fansinvitPage,"codeurl",{url:data.userinfo.scodeimg});
+			//localStorage.setItem("codeurl",data.userinfo.scodeimg);
+			$.openWindow({
+				id: 'fansinvitPage'
+			});
+		},20)
+	})
+	//打开我的云店
+	document.getElementById("mystore").addEventListener("tap",function(){
+		var storePage = $.preload({
+			"id": 'storePage',
+			"url": 'store.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'storePage'
+			});
+		},20)
+	});
+//	document.getElementById("gupiao").addEventListener("tap",function(){
+//		var stockPage = $.preload({
+//			"id": 'stockPage',
+//			"url": '../my/stock.html'
+//		});
+//		setTimeout(function(){					
+//			$.openWindow({
+//				id: 'stockPage'
+//			});
+//		},20)
+//	})
+	$("body").on("tap","#user-message,#message",function(){
+		var messagelistPage = $.preload({
+			"id": 'messagelistPage',
+			"url": '../my/messagelist.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'messagelistPage'
+			});
+		},20)
+	})
+	
+	$("#part-3").on("tap","li,.checkmore",function(){
+		var id = this.getAttribute("data-state");
+		$.openWindow({
+			url:"../experience/myexperience/mylist.html",
+			id:"mylist",
+			extras:{
+				index:id
+			}
+		})
+	})
+	
+	$(".mui-content").on("tap","#part-4",function(){
+		plus.nativeUI.toast("功能暂未开通，请耐心等待惊喜！");
+	})
+	
+	document.getElementById("user-servies").addEventListener("tap",function(){
+		var helpPage = $.preload({
+			"id": 'helpPage',
+			"url": '../my/help.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'helpPage'
+			});
+		},20)
+	})
+
+	//重新定义后退函数(监听安卓后退键事件)
+	var backButtonPress = 0;
+	$.back = function(event) {
+		backButtonPress++;
+		if (backButtonPress==1) {
+			//plus.webview.close(plus.webview.currentWebview());
+		}else if(backButtonPress==2){
+			plus.nativeUI.toast('再按一次退出应用');
+		}else{
+			plus.runtime.quit();
+		}
+		setTimeout(function() {
+			backButtonPress = 0;
+		}, 1500);
+		return false;
+	};
+})
+})(mui,document)
+</script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+a{color: #999;}
+b{font-weight: normal;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{padding-top: 60px;background: #eee;font-size: 16px;}
+
+.time-wrap{width: 100%;padding: 10px 15px 5px;background: #eee;}
+.time-wrap .month{font-size: 16px;}
+.time-wrap span{font-size: 14px;color: #969696;}
+
+.data-wrap{background: #fff;}
+.data{border-bottom: 1px solid #eee;padding: 10px 15px 5px;position: relative;}
+.data-name{margin-bottom: 4px;}
+.send-time{font-size: 14px;color: #969696;}
+.money{position: absolute;top: 20px;right: 20px;}
+
+#null{width: 150px;height: 120px;background: url(../images/goodsdetail/nulllist.png) no-repeat center 0;padding-top: 100px;
+position: absolute;top: 50%;left: 50%;margin-left: -75px;margin-top: -60px;display: none;}
+#null p{text-align: center;width: 100%;margin: 0;}
+
+@media screen and (max-width: 340px)  {
+	.mui-bar-nav~.mui-content{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">财务明细</h1>
+</header>
+<div class="mui-scroll-wrapper mui-content">
+	<div id="null">
+		<p>暂无销售订单明细</p>		
+	</div>
+    <div class="mui-scroll">
+        <div class="item">
+        	<div class="monthwrap" style="display: none;">
+        		<div class="time-wrap">
+        			<div class="month">2017年 7月</div>
+        			<span class="out">支出￥<b>1300.00</b></span>&nbsp;&nbsp;<span class="init">收入￥<b>1500.00</b></span>
+        		</div>       		
+        		<div class="data-wrap">
+        		</div>
+        	</div>
+        	<div class="monthwrap" style="display: none;">
+        		<div class="time-wrap">
+        			<div class="month">2017年 7月</div>
+        			<span class="out">支出￥<b>1300.00</b></span>&nbsp;&nbsp;<span class="init">收入￥<b>1500.00</b></span>
+        		</div>       		
+        		<div class="data-wrap">
+        		</div>
+        	</div>
+        </div>
+    </div>
+</div>
+<div class="data" style="display: none;">
+	<div class="data-name">提现</div>
+	<div class="send-time">7月26日 06:07</div>
+	<span class="money">-99.99</span>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    function createItem(listinfo){
+    	var item = doc.getElementsByClassName("data")[0].cloneNode(true);
+    	if(listinfo.remarks=="提现"){
+    		item.getElementsByClassName("data-name")[0].innerHTML = listinfo.remarks;
+    		item.getElementsByClassName("money")[0].style.color = "#333";
+    		item.getElementsByClassName("money")[0].innerHTML = "-"+listinfo.mmoney;
+    	}else if(listinfo.remarks=="试用奖金"){
+    		item.getElementsByClassName("data-name")[0].innerHTML = listinfo.remarks;
+    		item.getElementsByClassName("money")[0].style.color = "#FBAB00";
+    		item.getElementsByClassName("money")[0].innerHTML = "+"+listinfo.mmoney;
+    	}else{
+    		item.getElementsByClassName("data-name")[0].innerHTML = listinfo.remarks;
+    		item.getElementsByClassName("money")[0].style.color = "#FBAB00";
+    		item.getElementsByClassName("money")[0].innerHTML = "+"+listinfo.mmoney;
+    	}
+    	item.getElementsByClassName("send-time")[0].innerHTML = listinfo.successtime;
+    	item.style.display = "block";
+    	return item;
+    }
+    $.plusReady(function(){
+    	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		var now = new Date();
+   		var nowMonth = now.getMonth()+1;
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/moneydetail.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				uid:user_id,
+				apply:"0"
+			},
+			success:function(data){
+				//alert(JSON.stringify(data.totalmoney));
+				if(data.moneylist.length==0){
+					doc.getElementById("null").style.display = "block";
+					return;
+				};
+				if(data.state==1&&data.moneylist.length>0){
+					for(var i=0;i<data.moneylist.length;i++){
+						var month = parseInt(data.moneylist[i].successtime.substr(5,6));
+						var year = parseInt(data.moneylist[i].successtime.substr(2,3));
+						var list = createItem(data.moneylist[i]);
+						//月份							
+						if(month==nowMonth){
+							doc.getElementsByClassName("monthwrap")[0].getElementsByClassName("month")[0].innerHTML = data.moneylist[i].successtime.substr(0,4)+"年 "+month+"月";
+							doc.getElementsByClassName("out")[0].getElementsByTagName('b')[0].innerHTML = data.totalmoney.thismonth.payment;
+							doc.getElementsByClassName("init")[0].getElementsByTagName('b')[0].innerHTML = data.totalmoney.thismonth.revenue;
+							doc.getElementsByClassName("monthwrap")[0].style.display = "block";
+							doc.getElementsByClassName("data-wrap")[0].appendChild(list);
+						}else{
+							doc.getElementsByClassName("monthwrap")[1].getElementsByClassName("month")[0].innerHTML = data.moneylist[i].successtime.substr(0,4)+"年 "+month+"月";
+							doc.getElementsByClassName("out")[1].getElementsByTagName('b')[0].innerHTML = data.totalmoney.lastmonth.payment;
+							doc.getElementsByClassName("init")[1].getElementsByTagName('b')[0].innerHTML = data.totalmoney.lastmonth.revenue;
+							doc.getElementsByClassName("monthwrap")[1].style.display = "block";
+							doc.getElementsByClassName("data-wrap")[1].appendChild(list);
+						}
+					}
+				}else{
+					plus.nativeUI.toast(data.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					plus.nativeUI.toast("请求超时，请检查网络");
+				}
+			}
+		});
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+    })
+})(mui,document)
+</script>
+</body>
+
+</html>

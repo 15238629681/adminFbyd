@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="css/mui.min.css" rel="stylesheet" />
+<style>
+	html{background: #fff;}
+/*//底部选项卡*/
+.footerTab  img{
+	width:20px;height:20px;
+}
+.mui-bar-tab .mui-tab-item{
+	border-top: 1px solid #ddd;
+	padding-top: 3px;
+}
+.mui-bar-tab .mui-tab-item.mui-active{
+	color:#FBBD00;
+}
+.mui-bar{
+	background: #fff !important;
+}
+.mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label{margin-top: -2px;}
+</style>
+</head>
+
+<body>
+<nav class="mui-bar mui-bar-tab footerTab">
+    <a class="mui-tab-item mui-active" id="cloudstore" href="cloudstore/cloudstore.html">
+        <span class="mui-icon">
+        	<img src="images/cloudstore/icons/1color.png" alt="" />
+        </span>
+        <span class="mui-tab-label">云店</span>
+    </a>
+    <a class="mui-tab-item" id="storehouse" href="experience/experiencespec.html">
+    <!--<a class="mui-tab-item" id="storehouse" href="experience/experiencespec.html">-->
+        <span class="mui-icon ">
+        	<img src="images/cloudstore/icons/2.png" alt="" />
+        </span>
+        <span class="mui-tab-label">体验</span>
+    </a>
+    <a class="mui-tab-item" id="fanbao" href="ishop/ishop.html">
+        <span class="mui-icon">
+        	<img src="images/cloudstore/icons/3.png" alt="" />
+        </span>
+        <span class="mui-tab-label">翻宝</span>
+    </a>
+    <a class="mui-tab-item" id="fun" href="share/fansinvit.html">
+        <span class="mui-icon ">
+        	<img src="images/cloudstore/icons/4.png" alt="" />
+        </span>
+        <span class="mui-tab-label">乐趣</span>
+    </a>
+     <a class="mui-tab-item" id="my" href="my/my.html">
+        <span class="mui-icon">
+        	<img src="images/cloudstore/icons/5.png" alt="" />
+        </span>
+        <span class="mui-tab-label">我的</span>
+    </a>
+</nav>
+
+<script src="js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	
+	$.init();
+	
+	//个推推送消息
+	$.plusReady(function(){
+		
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		if(!localStorage.getItem("pushid")){
+			var info = plus.push.getClientInfo();			
+			$.ajax({
+				type:"post",
+				url:"https://app.fanbaoyundian.com/appapi/setting.app.php",
+				data:{
+					token:user_token,
+					timestamp:time,
+					uid:user_id,
+					userinfo:{
+						clientId:info.clientid,
+						apnstoken:info.token
+					}
+				},
+				success:function(res){
+					localStorage.setItem("pushid",1);
+				},
+				error:function(xhr,type,errorThrown){
+					plus.nativeUI.toast("请求超时，请检查网络");
+				}
+			});
+		}
+		var pushServer = "http://demo.dcloud.net.cn/push/?";
+		var h5Url,h5Title;
+		plus.push.addEventListener( "click", function( msg ) {
+			//处理透传过来的数据
+//			console.log(msg.payload.payload);
+//			var msgobj = JSON.parse(msg.payload.payload);
+			if($.os.ios){
+				h5Url = msg.payload.payload;
+				h5Title = msg.payload.title;
+			}else{
+				h5Url = msg.payload;
+				h5Title = msg.title;
+			}
+			function GetRequest() {
+				var url = h5Url;
+				url = url.substring(url.indexOf("?")+1,url.length);
+			    var theRequest = new Object();
+			    if (url.indexOf("?") == -1) {
+			        strs = url.split("&");
+			        for(var i = 0; i < strs.length; i ++) {
+			            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			        }
+			    }
+			    return theRequest;
+			}
+			var Request = new GetRequest();
+			if(h5Url.indexOf("http") > 0){				
+		        if(msg.payload){
+		        	$.openWindow({
+						url: 'cloudstore/h5.html',
+						id: 'h5',
+						extras: {
+							h5Url: h5Url,
+							h5Title: h5Title
+						}
+					})
+		        }
+			}else{
+				var Url = h5Url.substring(0,h5Url.indexOf("?"));
+				console.log(Url);
+				if(Url.indexOf("goodsdetail") != -1){					
+					var goodsdetail = mui.preload({
+						"id": 'goodsdetail',
+						"url": 'storehouse/goodsdetail.html'
+					});
+					//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+					var gid = Request["gid"];
+					var num_iid = Request["num_iid"];
+					var cid = Request["cid"];
+					//打开详情页面
+					setTimeout(function() {
+						mui.fire(goodsdetail, 'transTodetail', {
+							gid: gid,
+							num_iid: num_iid,
+							cid: cid
+						});
+						mui.openWindow({
+							id: "goodsdetail"
+						});
+					}, 250)
+				}else if(Url.indexOf("messagedetail") != -1){
+					//消息详情页
+					var articalID = Request["id"];
+					console.log(articalID);
+					//打开详情页面
+					$.openWindow({
+						"id": 'messagedetailPage',
+						"url": 'my/messagedetail.html',
+						"extras":{articalID:articalID}
+					});
+				}
+			}
+	    }, false );
+	    // 监听在线消息事件
+	    plus.push.addEventListener( "receive", function( msg ) {
+	        if ( msg.aps ) {  // Apple APNS message
+	            console.log( "接收到在线APNS消息：" );
+	        } else {
+	            console.log( "接收到在线透传消息：" );
+	        }
+	        if($.os.ios){
+				h5Url = msg.payload.payload;
+				h5Title = msg.payload.title;
+			}else{
+				h5Url = msg.payload;
+				h5Title = msg.title;
+			}
+			function GetRequest() {
+				var url = h5Url;
+				url = url.substring(url.indexOf("?")+1,url.length);
+			    var theRequest = new Object();
+			    if (url.indexOf("?") == -1) {
+			        strs = url.split("&");
+			        for(var i = 0; i < strs.length; i ++) {
+			            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			        }
+			    }
+			    return theRequest;
+			}
+			var Request = new GetRequest();
+			if(h5Url.indexOf("http") > 0){				
+		        if(msg.payload){
+		        	$.openWindow({
+						url: 'cloudstore/h5.html',
+						id: 'h5',
+						extras: {
+							h5Url: h5Url,
+							h5Title: h5Title
+						}
+					})
+		        }
+			}else{
+				var Url = h5Url.substring(0,h5Url.indexOf("?"));
+				console.log(Url);
+				if(Url.indexOf("goodsdetail") != -1){					
+					var goodsdetail = mui.preload({
+						"id": 'goodsdetail',
+						"url": 'storehouse/goodsdetail.html'
+					});
+					//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+					var gid = Request["gid"];
+					var num_iid = Request["num_iid"];
+					var cid = Request["cid"];
+					//打开详情页面
+					setTimeout(function() {
+						mui.fire(goodsdetail, 'transTodetail', {
+							gid: gid,
+							num_iid: num_iid,
+							cid: cid
+						});
+						mui.openWindow({
+							id: "goodsdetail"
+						});
+					}, 250)
+				}else if(Url.indexOf("messagedetail") != -1){
+					//消息详情页
+					var articalID = Request["id"];
+					console.log(articalID);
+					//打开详情页面
+					$.openWindow({
+						"id": 'messagedetailPage',
+						"url": 'my/messagedetail.html',
+						"extras":{articalID:articalID}
+					});
+				}
+			}
+	    }, false );
+	    
+//		function requireTranMsg(){
+//			var inf = plus.push.getClientInfo();
+//			var url = pushServer+'type=tran&appid='+encodeURIComponent(plus.runtime.appid);
+//			inf.id&&(url+='&id='+inf.id);
+//			url += ('&cid='+encodeURIComponent(inf.clientid));
+//			if(plus.os.name == 'iOS'){
+//				url += ('&token='+encodeURIComponent(inf.token));
+//			}
+//			url += ('&title='+encodeURIComponent('Hello H5+'));
+//			url += ('&content='+encodeURIComponent('带透传数据推送通知，可通过plus.push API获取数据并进行业务逻辑处理！'));
+//			url += ('&payload='+encodeURIComponent('{"title":"Hello H5+ Test","content":"test content","payload":"http://www.baidu.com"}'));
+//			url += ('&version='+encodeURIComponent(plus.runtime.version));
+//			console.log(url);
+//		}
+//		requireTranMsg();
+	})
+	
+	
+	var subpages = [
+		'cloudstore/cloudstore.html', 
+		'experience/experiencespec.html',
+		//'cloudstorecategory2/category2.html',
+		'ishop/ishop.html',
+		'share/fansinvit.html',
+		'my/my.html'
+	];
+	//判断是B端和C端用户
+	var user_type = JSON.parse(localStorage.getItem("userinfo")).userinfo.isshop;
+	if(user_type=="1"){
+		subpages[4] = 'myb/my.html';
+		doc.getElementsByTagName("a")[4].setAttribute("href","myb/my.html");
+	}else{
+		localStorage.setItem("applyStore","0"); //申请开店状态
+	}
+	var subpage_style = {
+		top: '0px',
+		bottom: '50px'
+	};
+	var aniShow = {};
+	
+	//创建子页面，首个选项卡页面显示，其它均隐藏
+	$.plusReady(function() {
+		var self = plus.webview.currentWebview();
+		for (var i = 0; i < 5; i++) {
+			var temp = {};
+			var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+			if (i > 0) {
+				sub.hide();
+			}else{
+				temp[subpages[i]] = "true";
+				$.extend(aniShow,temp);
+			}
+			self.append(sub);
+		}
+	});
+	
+	//当前激活选项
+	var activeTab = subpages[0]; //默认激活云店首页
+	$(".footerTab").on("tap","a",function(){
+		var targetTab = this.getAttribute('href');
+		if (targetTab == activeTab) {
+			return;
+		}
+		for(var i=0;i<5;i++){
+			doc.getElementsByTagName("img")[i].src = "images/cloudstore/icons/"+(i+1)+".png";
+		}
+		switch (targetTab)
+		{
+			case subpages[0]:
+				this.getElementsByTagName("img")[0].src = "images/cloudstore/icons/1color.png";
+				break;
+			case subpages[1]:
+				this.getElementsByTagName("img")[0].src = "images/cloudstore/icons/2color.png";
+				break;
+			case subpages[2]:
+				this.getElementsByTagName("img")[0].src = "images/cloudstore/icons/3color.png";
+				break;
+			case subpages[3]:
+				this.getElementsByTagName("img")[0].src = "images/cloudstore/icons/4color.png";
+				break;
+			case subpages[4]:
+				this.getElementsByTagName("img")[0].src = "images/cloudstore/icons/5color.png";
+				break;
+		}
+		//显示目标选项卡
+		if(mui.os.ios||aniShow[targetTab]){
+			plus.webview.show(targetTab);
+		}else{
+			//否则，使用fade-in动画，且保存变量
+			var temp = {};
+			temp[targetTab] = "true";
+			mui.extend(aniShow,temp);
+			plus.webview.show(targetTab,"fade-in",300);
+		}
+		plus.webview.hide(activeTab);
+		activeTab = targetTab;
+	})
+	
+	//页面输入法撑开底部导航栏问题
+	$.plusReady(function(){
+		plus.nativeUI.closeWaiting();
+		if(!$.os.ios){			
+			document.getElementsByClassName('footerTab')[0].style.top = (plus.display.resolutionHeight-50) + "px";
+		}
+		//重新定义后退函数(监听安卓后退键事件)
+		var backButtonPress = 0;
+		$.back = function(event) {
+			backButtonPress++;
+			if (backButtonPress==1) {
+				//plus.webview.close(plus.webview.currentWebview());
+			}else if(backButtonPress==2){
+				plus.nativeUI.toast('再按一次退出应用');
+			}else{
+				plus.runtime.quit();
+			}
+			setTimeout(function() {
+				backButtonPress = 0;
+			}, 1500);
+			return false;
+		};
+	})
+})(mui,document)
+	
+	
+</script>
+</body>
+
+</html>

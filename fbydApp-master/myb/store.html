@@ -1,0 +1,368 @@
+
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+#save{margin-top: 12px;color: #595757;display: none;}
+a{color: #999;}
+b{font-weight: normal;}
+.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after{background-color:#eee;left: 0;}
+.mui-table-view-cell:after{background-color: #eee;}
+.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell{padding-left: 11px;padding-right: 11px;}
+.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){margin-right: -15px;border-bottom: 1px solid #eee;}
+.mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{margin-right: -15px;}
+.mui-table-view-cell.mui-collapse.mui-active{margin-top: 0;}
+.mui-table-view-chevron .mui-table-view-cell{padding-right: 15px;background: #fff;}
+.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){border: none;}
+
+.part-wrap{font-size: 16px;}
+.part-wrap .title{padding: 10px;color: #969696;background-position: 15px center;background-repeat: no-repeat;background-size: 22px;padding-left: 44px;}
+.part-wrap ul li .first,.part-wrap ul li .second{color: #969696;}
+.part-wrap li div .active{color: #FBBD00;}
+.part-wrap .mui-collapse .mui-table-view-cell > div >div{float: left;width: 33.3%;text-align: center;font-size: 14px;}
+#part-1 .title{background-image: url(../images/my/storemanage-part1.png);}
+#part-2 .title{background-image: url(../images/my/storemanage-part2.png);}
+#part-3 .title{background-image: url(../images/my/storemanage-part3.png);}
+
+#part-4{margin-top: 10px;margin-bottom: 10px;}
+#part-2 li span{font-size: 12px;color: #9FA0A0;float: right;margin-right: 20px;}
+.mui-table-view-cell .mui-active{background-color: #fff;}
+
+@media screen and (max-width: 340px)  {
+	.part-wrap{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">云店管理</h1>
+</header>
+<div class="mui-content">
+    <div id="part-1" class="part-wrap">
+    	<div class="title">店铺管理</div>
+    	<div class="mui-table-view">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+        			<a id="setstore" class="mui-navigate-right">店铺设置</a>
+    			</li>
+    			<li class="mui-table-view-cell">
+        			<a id="activityItemAllList" class="mui-navigate-right">推送清单</a>
+    			</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">云店报表</a>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<div class="clean first cloud">
+								<div data-index="1" class="active">本月</div>
+								<div data-index="2">上月</div>
+								<div data-index="3">上上月</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="clean second">
+								<div>成交预估利润</div>
+								<div>确认预估利润</div>
+								<div>待确认利润</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="clean third">
+								<div>6753.78</div>
+								<div>1204.50</div>
+								<div>4675.95</div>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+    </div>
+    <div id="part-2" class="part-wrap">
+    	<div class="title">粉丝管理</div>
+    	<div class="mui-table-view">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+        			<a id="creategroup" class="mui-navigate-right">建群并绑定</a>
+    			</li>
+    			<li class="mui-table-view-cell">
+        			<a id="usercode" class="mui-navigate-right">邀请好友注册<span>终身粉丝 终身受益</span></a>
+    			</li>
+				<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">粉丝报表</a>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<div class="clean first fansreport">
+								<div>已建社群</div>
+								<div>社群粉丝</div>
+								<div>注册粉丝</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="clean second">
+								<div>3</div>
+								<div>720</div>
+								<div>120</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="clean third">
+								<div>粉丝估值</div>
+								<div>￥1235.22</div>
+								<div>￥648.00</div>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+    </div>
+    <div id="part-3" class="part-wrap">
+    	<div class="title">分销管理</div>
+    	<div class="mui-table-view">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+        			<a id="agents" class="mui-navigate-right">分销团队</a>
+    			</li>
+    			<li class="mui-table-view-cell">
+        			<a id="storeinvite" class="mui-navigate-right">邀请开店</a>
+    			</li>
+				<li class="mui-table-view-cell mui-collapse"><a class="mui-navigate-right" href="#">分销报表</a>
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell">
+							<div class="clean first distributor">
+								<div data-index="1" class="active">本月</div>
+								<div data-index="2">上月</div>
+								<div data-index="3">累计</div>
+							</div class="clean">
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="clean second">
+								<div>分销数量</div>
+								<div>订单数量</div>
+								<div>奖金</div>
+							</div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="clean third">
+								<div>12</div>
+								<div>12</div>
+								<div>4675.95</div>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+    </div>
+    <div id="part-4">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell">
+        		<a id="saledetail" class="mui-navigate-right">销售明细</a>
+    		</li>
+		</ul>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+		};
+	})
+	function getCloudreport(cloudreportInfo){
+		var third_cloud = doc.getElementsByClassName("third")[0];
+		doc.getElementsByClassName("first")[0].getElementsByTagName("div")[0].innerHTML = cloudreportInfo.thismonthdata.month+"月";
+		doc.getElementsByClassName("first")[0].getElementsByTagName("div")[1].innerHTML = cloudreportInfo.lastmonthdata.month+"月";
+		doc.getElementsByClassName("first")[0].getElementsByTagName("div")[2].innerHTML = cloudreportInfo.lasttwomonthdata.month+"月";
+		third_cloud.getElementsByTagName("div")[0].innerHTML = cloudreportInfo.thismonthdata.dealpreview.toFixed(2);
+		third_cloud.getElementsByTagName("div")[1].innerHTML = cloudreportInfo.thismonthdata.confirmpreview.toFixed(2);
+		third_cloud.getElementsByTagName("div")[2].innerHTML = cloudreportInfo.thismonthdata.unconfirmpreview.toFixed(2);
+		$(".cloud").on("tap","div",function(){
+			var datatype = this.getAttribute("data-index");
+			for(var i=0;i<3;i++){						
+				doc.getElementsByClassName("first")[0].getElementsByTagName("div")[i].style.color = "#333";
+			}
+			this.style.color = "#FBBD00";
+			if(datatype=="1"){						
+				third_cloud.getElementsByTagName("div")[0].innerHTML = cloudreportInfo.thismonthdata.dealpreview.toFixed(2);
+				third_cloud.getElementsByTagName("div")[1].innerHTML = cloudreportInfo.thismonthdata.confirmpreview.toFixed(2);
+				third_cloud.getElementsByTagName("div")[2].innerHTML = cloudreportInfo.thismonthdata.unconfirmpreview.toFixed(2);
+			}else if(datatype=="2"){
+				third_cloud.getElementsByTagName("div")[0].innerHTML = cloudreportInfo.lastmonthdata.dealpreview.toFixed(2);
+				third_cloud.getElementsByTagName("div")[1].innerHTML = cloudreportInfo.lastmonthdata.confirmpreview.toFixed(2);
+				third_cloud.getElementsByTagName("div")[2].innerHTML = cloudreportInfo.lastmonthdata.unconfirmpreview.toFixed(2);
+			}else if(datatype=="3"){
+				third_cloud.getElementsByTagName("div")[0].innerHTML = cloudreportInfo.lasttwomonthdata.dealpreview.toFixed(2);
+				third_cloud.getElementsByTagName("div")[1].innerHTML = cloudreportInfo.lasttwomonthdata.confirmpreview.toFixed(2);
+				third_cloud.getElementsByTagName("div")[2].innerHTML = cloudreportInfo.lasttwomonthdata.unconfirmpreview.toFixed(2);
+			}
+		})		
+	};
+	function getFansreport(fansreportInfo){
+		doc.getElementsByClassName("second")[1].getElementsByTagName("div")[0].innerHTML = fansreportInfo.groupnumber;
+		doc.getElementsByClassName("second")[1].getElementsByTagName("div")[1].innerHTML = fansreportInfo.groupfansnumber;
+		doc.getElementsByClassName("second")[1].getElementsByTagName("div")[2].innerHTML = fansreportInfo.fanbaofansnumber;
+		doc.getElementsByClassName("third")[1].getElementsByTagName("div")[1].innerHTML = "￥"+fansreportInfo.groupfansmoney.toFixed(2);
+		//doc.getElementsByClassName("third")[1].getElementsByTagName("div")[1].innerHTML = fansreportInfo.;
+		doc.getElementsByClassName("third")[1].getElementsByTagName("div")[2].innerHTML = "￥"+fansreportInfo.fanbaofansmoney.toFixed(2);
+	};
+	function getDistributorreport(distributorreportInfo){
+		var third_distributor = doc.getElementsByClassName("third")[2];
+		third_distributor.getElementsByTagName("div")[0].innerHTML = distributorreportInfo.thismonth.newdistributor;
+		third_distributor.getElementsByTagName("div")[1].innerHTML = distributorreportInfo.thismonth.ordernumber;
+		third_distributor.getElementsByTagName("div")[2].innerHTML = distributorreportInfo.thismonth.bonus.toFixed(2);
+		$(".distributor").on("tap","div",function(){
+			var datatype = this.getAttribute("data-index");
+			for(var i=0;i<3;i++){						
+				doc.getElementsByClassName("first")[2].getElementsByTagName("div")[i].style.color = "#333";
+			}
+			this.style.color = "#FBBD00";
+			if(datatype=="1"){						
+				third_distributor.getElementsByTagName("div")[0].innerHTML = distributorreportInfo.thismonth.newdistributor;
+				third_distributor.getElementsByTagName("div")[1].innerHTML = distributorreportInfo.thismonth.ordernumber;
+				third_distributor.getElementsByTagName("div")[2].innerHTML = distributorreportInfo.thismonth.bonus.toFixed(2);
+			}else if(datatype=="2"){
+				third_distributor.getElementsByTagName("div")[0].innerHTML = distributorreportInfo.lastmonth.newdistributor;
+				third_distributor.getElementsByTagName("div")[1].innerHTML = distributorreportInfo.lastmonth.ordernumber;
+				third_distributor.getElementsByTagName("div")[2].innerHTML = distributorreportInfo.lastmonth.bonus.toFixed(2);
+			}else if(datatype=="3"){
+				third_distributor.getElementsByTagName("div")[0].innerHTML = distributorreportInfo.all.newdistributor;
+				third_distributor.getElementsByTagName("div")[1].innerHTML = distributorreportInfo.all.ordernumber;
+				third_distributor.getElementsByTagName("div")[2].innerHTML = distributorreportInfo.all.bonus.toFixed(2);
+			}
+		})
+	}
+	(function(){
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		$.plusReady(function(){			
+			$.ajax({
+				type:"post",
+				url:"https://app.fanbaoyundian.com/appapi/report.app.php",
+				data:{
+					uid:user_id,
+					token:user_token,
+					timestamp:time
+				},
+				success:function(data){
+					//alert(JSON.stringify(data));
+					if(data.state==1){
+						getCloudreport(data.cloudreport);
+						getFansreport(data.fansreport);
+						getDistributorreport(data.distributorreport);
+					}else{
+						plus.nativeUI.toast(data.message);
+					}
+				},
+				error:function(xhr,type,errorThrown){
+					if(type=="timeout"){
+						plus.nativeUI.toast("请求超时，请检查网络");
+					}
+					plus.nativeUI.toast(errorThrown);
+				}
+			});
+		})
+	})()
+	document.getElementById("setstore").addEventListener("tap",function(){
+		var setstorePage = $.preload({
+			"id": 'setstorePage',
+			"url": 'setstore.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'setstorePage'
+			});
+		},20)
+	});
+	document.getElementById("agents").addEventListener("tap",function(){
+		var agentsPage = $.preload({
+			"id": 'agentsPage',
+			"url": 'agents.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'agentsPage'
+			});
+		},20)
+	});
+	//分享二维码/邀请开店
+	$(".mui-content").on("tap","#storeinvite",function(){					
+		var fansinvitPage = $.preload({
+			"id": 'fansinvitPage',
+			"url": 'fansinvit.html'
+		});
+		setTimeout(function(){
+			$.openWindow({
+				id: 'fansinvitPage'
+			});
+		},20)
+	})
+	//分享二维码/邀请好友注册
+	$(".mui-content").on("tap","#usercode",function(){					
+		var fansinvitPage_2 = $.preload({
+			"id": 'fansinvitPage_2',
+			"url": '../my/fansinvit.html'
+		});
+		setTimeout(function(){
+			$.openWindow({
+				id: 'fansinvitPage_2'
+			});
+		},20)
+	})
+	document.getElementById("saledetail").addEventListener("tap",function(){
+		var salelistPage = $.preload({
+			"id": 'salelistPage',
+			"url": 'salelist.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'salelistPage'
+			});
+		},20)
+	});
+	document.getElementById("creategroup").addEventListener("tap",function(){
+		var creategroupPage = $.preload({
+			"id": 'creategroupPage',
+			"url": 'creategroup.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'creategroupPage'
+			});
+		},20)
+	});
+	//清单
+	document.getElementById("activityItemAllList").addEventListener("tap", function() {
+		mui.openWindow({
+			url: "../storehouse/sendlist/alllist.html", 
+			id: 'alllist',
+			waiting: {
+				autoShow: false
+			}
+		})
+	});
+})(mui,document)
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1076 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>云店---搜索列表页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" href="../css/all.css" />-->
+		<link rel="stylesheet" href="../css/cloudstore/searchblock.css" />
+		<link rel="stylesheet" href="../css/storehouse/iconfont.css" />
+		<style>
+			/*上拉加载样式设置*/
+.mui-pull-caption {
+	font-size: 12px;
+	color: #595757;
+	font-weight: normal;
+}
+			/*页面头部*/
+			
+			#searchInput{
+			}
+			.header .mui-icon-search {
+			}
+			
+			#message{
+				background: url(../images/my/message.png) no-repeat center;
+				background-size: cover;
+				width: 25px;
+				height: 25px;
+			}
+			@media screen and (max-width: 340px)  {
+				.header .mui-icon-search {
+					left: 12%;
+				}
+			}
+		</style>
+
+		<style>
+			#loading {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				z-index: 9998;
+				background-size: 70%;
+				/*display: none;*/
+			}
+			
+			#waitingLoading {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0px;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				z-index: 1;
+				background-size: 70%;
+				color: #fff;
+				display: none;
+			}
+		</style>
+		<style>
+			/*商品列表*/
+			
+			.storeGoodsList {
+				background: #EEEEEE;
+				width: 100%;
+			}
+			
+			.storeGoodsList div {
+				display: inline-block;
+			}
+			/*商品块*/
+			
+			.storeGoodsList .storeGoodsBlock {
+				/*width: 5.34rem;*/
+				width: calc(50% - 3px);
+				margin-bottom: 6px;
+				margin-right: 6px;
+				display: inline-block;
+				float: left;
+				background: #fff;
+			}
+			/*ul li:nth-child(2n+1) {
+				margin-right: 0;
+			}*/
+			
+			.storeGoodsBlock:nth-child(even) {
+				margin-right: 0;
+			}
+			
+			.storeGoodsList .goodsImg {
+				/*width: 5.34rem;*/
+				width: 100%;
+				height: 5.34rem;
+			}
+			
+			.storeGoodsList .goodsImg img {
+				width: 100%;height:5.34rem;
+				/*height: 185px;*/
+			}
+			
+			.storeGoodsDetail {
+				padding: 0 8px;
+				font-size:12px;
+				/*background:red;*/
+			}
+			
+			.goodsDetailT,
+			.goodsDetailB {
+				font-size: 10px;width:100%;
+			}
+			p{
+				margin-bottom:0;
+			}
+			.goodsName {
+				font-size: 0.35rem;
+				color: #000;
+				overflow: hidden;
+				height:20px;
+				width:100%;
+			}
+			/*淘宝整块*/
+			.taoBaoBlock{
+				/*width:2.5rem;*/
+				text-align: left;
+			}
+			
+			.tbPrice {
+				/*margin-right:0.7rem;*/
+				color: #898989;
+				text-decoration: line-through;
+			}
+			
+			/*翻宝整块*/
+			.fbPrice {  
+				display:inline-block;
+				text-align: left;
+				/*width:2.5rem;*/
+				/*margin-right:0.4rem;*/
+			}
+			.sellNum,.costPrice{
+				float:right;color: #898989;
+			}
+			.fanbaoPrice {
+				font-size: 14px;
+				color: #FBBD00;
+			}
+			.goodsDetailB{
+				padding-bottom:3px;
+			}
+
+		</style>
+		<style>
+			/*公共排序*/
+			/*排序方式  公共部分*/
+			
+			.publicOrder {
+				position: fixed;
+				top: 60px;
+				width: 100%;
+				/*display:none;*/
+				background: #fff;
+				z-index: 10;
+			}
+			
+			#orderBlock {
+				width: 100%;
+				height: 40px;
+				line-height: 40px;
+				font-size: 0.39rem;
+				color: #595757;
+			}
+			
+			#orderBlock .zhpxText {
+				width: 3.6rem;
+				float: left;
+				text-align: left;
+				color: #FBBD00;
+				margin-left: 0.525rem;
+			}
+			
+			#orderBlock .zhpxText .upArrow {
+				display: inline-block;
+				width: 0;
+				height: 0;
+				border-top: 6px solid #FBBD00;
+				border-left: 6px solid transparent;
+				border-right: 6px solid transparent;
+			}
+			
+			#orderBlock .xlText {
+				margin-right: 1rem;
+				float: left;
+			}
+			
+			#orderBlock .yhldText {
+				margin-right: 0.5rem;
+			}
+			/*综合排序*/
+			/*综合排序    内容块*/
+			
+			.zhpxList {
+				font-size: 12px;
+				color: #676767;
+				background: #fff;
+				width: 100%;
+				display: none;
+				border-top: 1px solid #EEEEEE;
+			}
+			
+			.publicOrder ul li {
+				margin-right: 0.54rem;
+			}
+			
+			.defaultOrder .selectIcon {
+				display: inline-block;
+			}
+			
+			.kOrderBlock .sxIcon,
+			.kOrderBlock .sxIconColor {
+				width: 0.2rem;
+				height: 0.24rem;
+				display: inline-block;
+				margin-left: 0.24rem;
+				/*position: absolute;right:0;float:right;*/
+			}
+			
+			.kOrderBlock .sxIcon img,
+			.kOrderBlock .sxIconColor img {
+				width: 0.2rem;
+				height: 0.24rem;
+				margin-left: 0.1rem;
+			}
+			
+			.kOrderBlock .sxIconColor {
+				display: none;
+			}
+			/*综合排序列表   小图标*/
+			
+			@font-face {
+				font-family: "iconfont";
+				src: url('../fonts/iconfont.ttf?t=1503591788319') format('truetype');
+				/* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+			}
+			
+			.iconfont {
+				font-family: "iconfont" !important;
+				font-size: 26px;
+				font-style: normal;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.icon-selected:before {
+				content: "\e6ad";
+			}
+			/*综合排序*/
+			
+			.clearFloat {
+				clear: both;
+			}
+			
+			.sliderCard .zhpxList li {
+				margin: 0 0.52rem 0 0;
+			}
+			
+			.selectIcon {
+				display: none;
+			}
+			/*默认情况下,综合排序  选中*/
+			
+			.zhpxList .defaultOrder a {
+				color: #FBBD00;
+			}
+			
+			.zhpxList .defaultOrder .selectIcon {
+				display: inline-block;
+			}
+			
+			.zhpxList .defaultOrder {
+				color: #FBBD00;
+			}
+			
+			.defaultOrder .selectIcon {
+				display: inline-block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="loading"></div>
+		<div id="waitingLoading">
+
+		</div>
+
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft" style="color:#898989;"></a>
+			<!--<span class="mui-icon mui-icon-search"></span>-->
+			<input readonly="readonly" id="searchInput" placeholder="搜索商品" />
+			<!--<span class="message">
+				<img src="../images/cloudstore/icons/message.png" alt="" />
+			</span>-->
+			<span id="message"></span>
+		</header>
+
+		<div class="mui-content" id="refreshContainer" style="position:relative;">
+			<!--筛选框提示框-->
+			<!--公共的排序-->
+			<div class="publicOrder">
+				<!--排序方式-->
+				<div class="kOrderBlock  mui-clearfix" id="orderBlock">
+					<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+						<div class=" mui-inline">
+							<span class="zhpxSpan">综合排序</span>
+							<span class="upArrow"></span>
+						</div>
+					</div>
+					<div class="mui-inline orderDiv xlText" data-order="2">
+						<span class="allOrder">销量优先</span>
+					</div>
+					<div class="mui-inline orderDiv yhldText" data-order="6">
+						<span class="allOrder">优惠力度</span>
+					</div>
+					<div class="mui-inline orderDiv sxText">
+						<span class="allOrder" id="filterSpan">筛选</span>
+						<span class="sxIcon">
+							<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+						</span>
+						<span class="sxIconColor">
+							<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+						</span>
+					</div>
+				</div>
+				<!--//综合排序提示框-->
+				<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0" id="zhpxListFixed">
+					<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+						<a class="">综合排序</a>
+						<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="1" data-order="5">
+						<a class="">价格由高到低</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="2" data-order="7">
+						<a class="">价格由低到高</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+					</li>
+				</ul>
+			</div>
+			<!--商品列表-->
+			<div class="storeGoodsList" style="overflow: hidden;">
+
+			</div>
+
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/storehous/iconfont.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0005;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: false, //是否显示滚动条
+					deceleration: deceleration
+				});
+				
+				doc.getElementById("searchInput").addEventListener("tap", function() {
+					$.plusReady(function() {
+						plus.webview.getWebviewById("search").reload();
+						setTimeout(function() {
+							plus.webview.close(plus.webview.currentWebview());
+						}, 250);
+					})
+				});
+				
+				$("body").on("tap","#message",function(e){
+					e.stopPropagation();
+					var helpPage = $.preload({
+						"id": 'helpPage',
+						"url": '../my/help.html'
+					});
+					setTimeout(function(){					
+						$.openWindow({
+							id: 'helpPage'
+						});
+					},20)
+				})
+			})(mui, document)
+
+			//			隐藏页面滚动条
+			document.documentElement.style.overflowY = "hidden";
+			//获取页面高度
+
+			//初始化内容区域
+			var mainContent = document.getElementsByClassName("mui-content")[0];
+			mainContent.style.marginTop = "58px";
+			var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+			var listArr = []; //商品总数据
+			var nowPageNum = 0;
+			var oneceLoad = true; //第一次载入的背景图
+			var chooseCondition = false; //是否在筛选条件下，用于判断是在筛选条件下没有搜索到商品，还是用户在搜索关键字的时候没有搜索到商品，然后提示不同的信息
+			var noGoods = false; //没有商品条件下，禁用综合排序和筛选的事件
+			var partRefresh = false; //局部刷新变量，用于标识原生等待框的显示和隐藏;筛选条件、综合条件下要进行局部刷新
+			var goodsListParams = JSON.parse(localStorage.getItem("goodsListParams"));
+			//  请求参数
+			var goodsList = {
+				count: 10,
+				start: 0,
+				order: "1", //商品默认的排序方式  最新
+				keyword: "all", //搜索的关键字
+				fqcat: 0, //商品分类编号
+				token: userinfo.token,
+				uid: userinfo.userinfo.uid,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				price: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				lirun: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				volume: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				brand: 0,
+				sea: 0
+			};
+			//首页的数据请求
+			function list_request() {
+				console.log("搜索列表页--请求函数中的请求参数---" + JSON.stringify(goodsList));
+				mui.ajax("https://app.fanbaoyundian.com/appapi/storehousesearch.app.php", {
+					data: {
+						count: goodsList.count,
+						start: goodsList.start,
+						order: goodsList.order,
+						keyword: goodsList.keyword,
+						fqcat: goodsList.fqcat,
+						token: goodsList.token,
+						timestamp: goodsList.timestamp,
+						uid: goodsList.uid,
+						price: {
+							state: goodsList.price.state,
+							range: {
+								start: goodsList.price.range.start,
+								end: goodsList.price.range.end
+							}
+						},
+						lirun: {
+							state: goodsList.lirun.state,
+							range: {
+								start: goodsList.lirun.range.start,
+								end: goodsList.lirun.range.end
+							}
+						},
+						volume: {
+							state: goodsList.volume.state,
+							range: {
+								start: goodsList.volume.range.start,
+								end: goodsList.volume.range.end
+							}
+						},
+						brand: goodsList.brand,
+						sea: goodsList.sea
+					},
+					dataType: 'json',
+					type: "post",
+					timeout: 5000,
+					success: function(data) {
+						if(data.error == "0") {
+							if(oneceLoad) {
+								setTimeout(function() {
+									document.getElementById("loading").style.display = "none";
+								}, 0);
+							}
+							oneceLoad = false;
+							if(partRefresh) { //排序的等待框
+								//局部刷新的话，关闭等待框
+								document.getElementById("waitingLoading").style.display = "none";
+								partRefresh != partRefresh;
+							}
+							var goodsList = data.goodslist;
+							console.log(JSON.stringify(goodsList));
+							if(goodsList.length == 0) {
+								if(listArr.length == 0) {
+									noGoods = true;
+									var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+									storeGoodsList.style.height = (document.documentElement.clientHeight - 100) + "px";
+									//没有搜索到相应商品  或者  某个筛选条件下没有商品
+									storeGoodsList.innerHTML = '<div class="storeGoodsBlock" style=""><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-2.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">非常抱歉</div><div style="color:#959595;">没有找到相关宝贝</div></div></div>';
+								} else {
+									mui.toast('暂无更多数据', {
+										duration: 'long',
+										type: 'div'
+									});
+								}
+							} else {
+								noGoods=false;
+								var goodsListHtml = "";
+								for(var i = 0; i < goodsList.length; i++) {
+									goodsListHtml += '<div class="storeGoodsBlock mui-clearfix" style="" data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + '><div class="goodsImg"><img src="' + goodsList[i].pic_url + '_300x300.jpg" alt=""></div><div class="storeGoodsDetail"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodsDetailT"><div class="taoBaoBlock"><span class="tbPrice">淘宝价￥' + goodsList[i].coupon_price + '</span></div><span class="sellNum">优惠劵' + goodsList[i].quan + '元</span></div><div class="goodsDetailB"><span class="fbPrice">翻宝价<span class="fanbaoPrice">￥' + goodsList[i].quanhou_price + '</span></span><span class="costPrice">销量' + goodsList[i].volume + '</span></div></div></div>';
+								}
+								if(listArr.length == 0) {
+									document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+									document.getElementsByClassName("storeGoodsList")[0].style.height="auto";
+									document.getElementsByClassName("storeGoodsList")[0].innerHTML = goodsListHtml;
+								} else {
+									var mainDiv = document.createElement("div");
+									mainDiv.innerHTML = goodsListHtml;
+									if(data.start > 1){
+										mainDiv.style.cssText="margin-top:-6px;";
+									}
+									document.getElementsByClassName("storeGoodsList")[0].style.height="auto";
+									document.getElementsByClassName("storeGoodsList")[0].appendChild(mainDiv);
+								}
+								listArr = listArr.concat(goodsList);
+							}
+							//
+								if(noGoods){
+									mui.init({
+										swipeBack: false,
+										beforeback: back,
+									});
+								}else{
+									mui.init({
+											swipeBack: false,
+											beforeback: back,
+											pullRefresh: {
+												container: "#refreshContainer",
+												down: {
+													style: "circle",
+													color: "#FCCB58",
+													height: "50px",
+													range: "100px",
+													auto: false,
+													callback: downrefresh
+												},
+												up: {
+													height: 100,
+													auto: false,
+													contentrefresh: "正在加载...",
+													contentnomore: "没有更多数据了",
+													callback: uprefresh
+												}
+											}
+										}
+					
+									);
+								
+								}//
+							
+							
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						if(type == "timeout") {
+							//document.getElementsByClassName("mui-content")[0].innerHTML = "请求超时，请检查网络";
+							noGoods = true;
+							var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+							storeGoodsList.style.height = (document.documentElement.clientHeight - 100) + "px";
+							storeGoodsList.innerHTML = '<div class="storeGoodsBlock" style=""><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-2.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">网络请求超时</div><div style="color:#959595;">请检查网络！</div></div></div>';
+							mui('#refreshContainer').pullRefresh().setStopped(true);
+							document.getElementsByClassName("mui-content")[0].setAttribute("id", "");
+							document.addEventListener('touchmove', function() {}, false); //阻止默认滑动事件
+							//plus.nativeUI.toast("请求超时，请检查网络");
+						}
+						//取消load图
+						if(oneceLoad) {
+							setTimeout(function() {
+								document.getElementById("loading").style.display = "none";
+							}, 0)
+						}
+						oneceLoad = false;
+						console.log(type);
+					}
+				})
+			};
+
+			//下拉刷新
+			function downrefresh() {
+				//当用户在搜索模块时，就禁用此事件
+				listArr = [];
+				goodsList.start = "0";
+				goodsList.time = parseInt(new Date().getTime() / 1000);
+				goodsList.orderId = localStorage.getItem("nowOrderSearchList");
+				list_request();
+				setTimeout(function() {
+					mui.toast('已经是最新数据了', {
+						duration: 'short',
+						type: 'div'
+					});
+					mui('#refreshContainer').pullRefresh().endPulldown();
+				}, 1000)
+			}
+
+			;
+			//上拉加载
+			function uprefresh() {
+				nowPageNum++;
+				goodsList.start = nowPageNum;
+				goodsList.timestamp = parseInt(new Date().getTime() / 1000);
+				goodsList.order = localStorage.getItem("nowOrderSearchList");
+				console.log(goodsList.uid + "---" + goodsList.count + "---当前页数：" + goodsList.start + "---" + goodsList.order + "---" + goodsList.keyword + "---" + goodsList.fqcat + "---" + goodsList.token + "---" + goodsList.timestamp + "---");
+				list_request();
+				var that = this;
+				setTimeout(function() {
+					that.endPullupToRefresh(true); //结束上拉加载
+					mui('#refreshContainer').pullRefresh().refresh(true); //重置上拉加载
+				}, 2000)
+			};
+			mui.plusReady(function() {
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: "none"
+					});
+					
+					goodsList.keyword = localStorage.getItem("keywordCloudStore");
+					//alert(localStorage.getItem("keywordCloudStore"))
+					var searchInput = document.getElementById("searchInput");
+					searchInput.setAttribute("placeholder", "	" + goodsList.keyword);
+					localStorage.setItem("sxConditionSearchList",JSON.stringify(goodsList));
+					localStorage.setItem("nowOrderSearchList","1");
+					searchInput.setAttribute("placeholder",goodsList.keyword);
+					list_request();
+
+					//plusReady事件后，自动创建menu窗口；   左划菜单
+					main = plus.webview.currentWebview();
+					//setTimeout的目的是等待窗体动画结束后，再执行create webview操作，避免资源竞争，导致窗口动画不流畅；
+					setTimeout(function() {
+						//进行预加载
+						menu5 = mui.preload({
+							id: 'cloudstoresearchlistdragleftmenu.html',
+							url: 'cloudstoresearchlistdragleftmenu.html',
+							styles: {
+								left: "30%",
+								width: '70%',
+								zindex: 9997
+							}
+						});
+					}, 300);
+				}
+
+			);
+
+			window.onload = function() {
+				var goodsImg = document.getElementsByClassName("goodsImg");
+				for(var i = 0; i < goodsImg.length; i++) {
+					goodsImg[i].getElementsByTagName("img")[0].setAttribute("height", window.screen.availWidth * 0.498)
+				}
+			}
+
+			//预加载详情页
+			//var detailPage=null;
+			mui('.mui-content').on('tap', '.storeGoodsBlock', function(e) {
+					//alert("详情页");
+					e.stopPropagation();
+					var goodsdetail = mui.preload({
+						"id": 'goodsdetail',
+						"url": '../cloudstore/goodsdetail.html'
+					});
+					var id = this.getAttribute("id");
+					//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+					var gid = this.getAttribute("data-id");
+					var num_iid = this.getAttribute("data-numiid");
+					var cid = this.getAttribute("data-cid");
+					//打开详情页面
+					setTimeout(function() {
+						mui.fire(goodsdetail, 'transTodetail', {
+							gid: gid,
+							num_iid: num_iid,
+							cid: cid
+						});
+						mui.openWindow({
+							id: "goodsdetail"
+						});
+					}, 250)
+				}
+
+			);
+
+			var zhpxFlag = false;
+			var publicOrder = document.getElementsByClassName("publicOrder")[0];
+			var zhpxText = document.getElementsByClassName("zhpxText")[0];
+			//综合排序模块  
+			function comprehensiveRankTextFn() { //综合排序文字  的点击事件
+				if(noGoods){
+					return;
+				}
+				
+				if(!zhpxFlag) { //目前是隐藏的
+					publicOrder.getElementsByClassName("zhpxList")[0].style.display = "block";
+					publicOrder.getElementsByClassName("upArrow")[0].style.cssText="border-bottom: 6px solid #FBBF00;border-top:none;";
+
+				} else {
+					publicOrder.getElementsByClassName("zhpxList")[0].style.display = "none";
+					publicOrder.getElementsByClassName("upArrow")[0].style.cssText="border-top: 6px solid #FBBF00;border-bottom:none;";
+				}
+				zhpxFlag = !zhpxFlag;
+			};
+			zhpxText.addEventListener("tap", comprehensiveRankTextFn);
+
+			//综合排序列表点击事件
+			mui(".publicOrder .zhpxList").on("tap", "li", function() {
+				zhpxFlag = false;
+				//重置公共   zhpxList所有样式
+				var lists = this.parentNode.getElementsByTagName("li");
+				for(var i = 0; i < lists.length; i++) {
+					lists[i].getElementsByClassName("selectIcon")[0].style.display = "none";
+					lists[i].getElementsByTagName("a")[0].style.cssText = "color:#727171";
+				}
+
+				//显示对号
+				this.getElementsByClassName("selectIcon")[0].style.display = "inline-block";
+				this.getElementsByTagName("a")[0].style.color = "#FBBF00";
+
+				var orderText = this.getElementsByTagName("a")[0].innerHTML;
+				var ulIndex = this.parentNode.getAttribute("data-index"); //获取当前ul的index
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByTagName("span")[0].innerHTML = orderText;
+
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByTagName("span")[0].style.color = "#FBBF00";
+
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByTagName("span")[1].style.cssText = "border-top: 6px solid #FBBF00;";
+
+				//重置另两个样式
+				publicOrder.getElementsByClassName("xlText")[0].getElementsByTagName("span")[0].style.color = "#727171";
+
+				publicOrder.getElementsByClassName("yhldText")[0].getElementsByTagName("span")[0].style.color = "#727171";
+
+
+				//关闭排序的内容列表
+				this.parentNode.style.display = "none";
+
+				//	sliderCard.getElementsByClassName("storeGoodsList")[ulIndex].innerHTML = "";
+				partRefresh = true; //开始局部刷新
+				listArr = [];
+				goodsList.order = this.getAttribute("data-order");
+				goodsList.start = "0";
+				localStorage.setItem("nowOrderSearchList",goodsList.order);
+//				localStorage.setItem("zhpxOrderSearchList", goodsList.order);
+				//获取当前的筛选条件
+				if(localStorage.getItem("sxConditionSearchList")) {
+					var param = JSON.parse(localStorage.getItem("sxConditionSearchList"));
+					goodsList.price = param.price;
+					goodsList.lirun = param.price;
+					goodsList.volume = param.volume;
+					goodsList.brand = param.brand;
+					goodsList.sea = param.sea;
+				}
+				var nowFqcat = localStorage.getItem("nowFqcat");
+				goodsList.fqcat = nowFqcat;
+				list_request(nowFqcat);
+			});
+			
+			//销量优先文字
+			var publicOrderXlText = publicOrder.getElementsByClassName("xlText")[0];
+			publicOrderXlText.addEventListener("tap", function() {
+				if(noGoods){
+					return;
+				}
+				zhpxFlag = false;
+				publicOrder.getElementsByClassName("zhpxList")[0].style.display = "none";
+				this.getElementsByTagName("span")[0].style.color = "#FBBF00";
+				//重置另两个样式
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByTagName("span")[0].style.color = "#595757";
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByClassName("zhpxSpan")[0].innerHTML = "综合排序";
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByClassName("upArrow")[0].style.cssText = "border-top: 6px solid #595757;";
+				//重置所有样式   包含公共部分
+				mui(".zhpxList li").each(function() {
+					this.getElementsByTagName("a")[0].style.color = "#595757";
+					this.getElementsByClassName("selectIcon")[0].style.display = "none";
+				});
+				publicOrder.getElementsByClassName("yhldText")[0].getElementsByTagName("span")[0].style.color = "#595757";
+				partRefresh = true; //开始局部刷新
+				listArr = [];
+				
+				goodsList.order = publicOrder.getElementsByClassName("xlText")[0].getAttribute("data-order");
+//				localStorage.setItem("zhpxOrder", goodsList.order);
+				localStorage.setItem("nowOrderSearchList",goodsList.order);
+				//获取当前的筛选条件
+				if(localStorage.getItem("sxConditionSearchList")) {
+					var param = JSON.parse(localStorage.getItem("sxConditionSearchList"));
+					goodsList.price = param.price;
+					goodsList.lirun = param.price;
+					goodsList.volume = param.volume;
+					goodsList.brand = param.brand;
+					goodsList.sea = param.sea;
+				}
+				goodsList.start = "0";
+				list_request();
+				//	localStorage.setItem("nowOrderFlag","2");
+			})
+
+			//优惠力度
+			var publicOrderYhldText = publicOrder.getElementsByClassName("yhldText")[0];
+			publicOrderYhldText.addEventListener("tap", function() {
+				if(noGoods){
+					return;
+				}
+				zhpxFlag = false;
+				this.getElementsByTagName("span")[0].style.color = "#FBBF00";
+
+				//	zhpxText.getElementsByClassName("downArrow")[0].style.display="inline-block";
+				//重置另两个样式
+				publicOrder.getElementsByClassName("xlText")[0].getElementsByTagName("span")[0].style.color = "#595757";
+				publicOrder.getElementsByClassName("zhpxList")[0].style.display = "none";
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByTagName("span")[0].style.color = "#595757";
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByClassName("zhpxSpan")[0].innerHTML = "综合排序";
+				publicOrder.getElementsByClassName("zhpxText")[0].getElementsByClassName("upArrow")[0].style.cssText = "border-top: 6px solid #595757;";
+				//重置所有样式   包含公共部分
+				mui(".zhpxList li").each(function() {
+					this.getElementsByTagName("a")[0].style.color = "#595757";
+					this.getElementsByClassName("selectIcon")[0].style.display = "none";
+				});
+
+				partRefresh = true; //开始局部刷新
+				listArr = [];
+				
+				goodsList.order = publicOrder.getElementsByClassName("yhldText")[0].getAttribute("data-order");
+//				localStorage.setItem("zhpxOrder", goodsList.order);
+				localStorage.setItem("nowOrderSearchList",goodsList.order);
+				//获取当前的筛选条件
+				if(localStorage.getItem("sxConditionSearchList")) {
+					var param = JSON.parse(localStorage.getItem("sxConditionSearchList"));
+					goodsList.price = param.price;
+					goodsList.lirun = param.price;
+					goodsList.volume = param.volume;
+					goodsList.brand = param.brand;
+					goodsList.sea = param.sea;
+				}
+				goodsList.start = "0";
+				list_request();
+				//	localStorage.setItem("nowOrderFlag","5");
+			});
+
+			//筛选事件
+			var publicOrder = document.getElementsByClassName("publicOrder")[0];
+			var sxText = publicOrder.getElementsByClassName("sxText")[0];
+			sxText.addEventListener("tap", function() {
+				if(chooseCondition==false&&noGoods==true){
+					return;
+				}
+				//关闭综合排序列表
+				publicOrder.getElementsByClassName("zhpxList")[0].style.display = "none";
+				zhpxFlag = false;
+				setTimeout(function() {
+					openMenu();
+				}, 500);
+			});
+
+
+			//筛选
+			var main, menu5, mask = mui.createMask(_closeMenu);
+			var showMenu = false,
+				mode = 'menu-move';
+
+			//			判断处理左划  菜单是否显示
+			//			页面返回之前处理的函数
+			function back() {
+				if(showMenu) {
+					closeMenu();
+					return false;
+				} else {
+					//					菜单隐藏的时候,执行返回的时,先close菜单页面,然后执行mui.back逻辑关闭主窗口
+				}
+			}
+
+			/*
+			 * 显示菜单菜单
+			 */
+			function openMenu() {
+				if(!showMenu) {
+					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					if(mui.os.android && parseFloat(mui.os.version) < 4.4) {
+						document.querySelector("header.mui-bar").style.position = "static";
+						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "0px";
+					}
+
+					//侧滑菜单处于隐藏状态，则立即显示出来；
+					//显示完毕后，根据不同动画效果移动窗体；
+					menu5.show('none', 0, function() {
+						switch(mode) {
+							case 'menu-move':
+								menu5.setStyle({
+									left: '30%',
+									transition: {
+										duration: 150
+									}
+								});
+								break;
+						}
+					});
+					//显示主窗体遮罩
+					mask.show();
+					showMenu = true;
+				}
+			};
+
+			//			关闭侧滑菜单
+			function closeMenu() {
+				_closeMenu();
+				//关闭遮罩层
+				mask.close();
+			}
+
+			/*** 关闭侧滑菜单(业务部分)*/
+			function _closeMenu() {
+				showMenu = true;
+				if(showMenu) {
+					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					if(mui.os.android && parseFloat(mui.os.version) < 4.4) {
+						//						document.querySelector("header.mui-bar").style.position = "fixed";
+						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "44px";
+					}
+
+					switch(mode) {
+						case 'main-move':
+							//主窗体开始侧滑；
+							main.setStyle({
+								left: '0',
+								transition: {
+									duration: 150
+								}
+							});
+							break;
+						case 'menu-move':
+							//主窗体开始侧滑；
+							menu5.setStyle({
+								left: '100%',
+								transition: {
+									duration: 150
+								}
+							});
+							break;
+						case 'all-move':
+							//主窗体开始侧滑；
+							main.setStyle({
+								left: '0',
+								transition: {
+									duration: 150
+								}
+							});
+							//menu页面同时移动
+							menu5.setStyle({
+								left: '100%',
+								transition: {
+									duration: 150
+								}
+							});
+
+							break;
+					}
+					//等窗体动画结束后，隐藏菜单webview，节省资源；
+					setTimeout(function() {
+						menu5.hide();
+					}, 300);
+					showMenu = false;
+				}
+			}
+
+			//在android4.4中的swipe事件，需要preventDefault一下，否则触发不正常
+			//故，在dragleft，dragright中preventDefault
+			window.addEventListener('dragright', function(e) {
+				e.detail.gesture.preventDefault();
+			});
+			window.addEventListener('dragleft', function(e) {
+				e.detail.gesture.preventDefault();
+			});
+			//主界面向左滑动，若菜单未显示，则显示菜单；否则不做任何操作；
+			//			window.addEventListener("swipeleft", openMenu);
+			//主界面向右滑动，若菜单已显示，则关闭菜单；否则，不做任何操作；
+			//			window.addEventListener("swiperight", closeMenu);
+			//menu页面向右滑动，关闭菜单；
+			window.addEventListener("menu5:swiperight", closeMenu);
+			//重写mui.menu方法，Android版本menu按键按下可自动打开、关闭侧滑菜单；
+			mui.menu5 = function() {
+				if(showMenu) {
+					closeMenu();
+				} else {
+					openMenu();
+				}
+			}
+
+			//			筛选条件下,进行的数据请求,局部刷新;筛选条件下，初始排序方式是综合排序即order为1
+			window.addEventListener("reRequest", function(event) {
+				var nowFqcat = localStorage.getItem("nowFqcat");
+
+				chooseCondition = true; //筛选条件下
+				partRefresh = true; //要进行局部刷新
+				//	document.getElementById("waitingLoading").style.display = "block";
+				listArr = [];
+				goodsList.order =localStorage.getItem("nowOrderSearchList");
+//				alert(goodsList.order)
+//				localStorage.setItem("zhpxOrder", goodsList.order);
+				goodsList.start = "0";
+				nowPageNum="0";
+				var param = JSON.parse(localStorage.getItem("sxConditionSearchList"));
+				goodsList.price = param.price;
+				goodsList.lirun = param.price;
+				goodsList.volume = param.volume;
+				goodsList.brand = param.brand;
+				goodsList.sea = param.sea;
+				
+				if(!event.detail.noChoose) { //当前条件下  筛选条件不为空
+					document.getElementsByClassName("publicOrder")[0].getElementsByClassName("sxText")[0].getElementsByTagName("span")[0].style.color="#FBBD00";
+					document.getElementsByClassName("publicOrder")[0].getElementsByClassName("sxText")[0].getElementsByClassName("sxIcon")[0].style.cssText="display:none;";
+						document.getElementsByClassName("publicOrder")[0].getElementsByClassName("sxText")[0].getElementsByClassName("sxIconColor")[0].style.cssText="display:inline-block;";
+				}
+
+
+				console.log("自定义函数----请求的参数--" + JSON.stringify(goodsList));
+				list_request();
+
+			});			
+			//滚动窗口   关闭zhpxList
+			//用户进行上下滑动,如果综合排序的列表出现的话,就关闭
+			var mybody = document.getElementsByTagName('body')[0];
+			var startX, startY, moveEndX, moveEndY, X, Y;
+			mybody.addEventListener('touchstart', function(e) {
+				// e.preventDefault(); 
+				startX = e.touches[0].pageX;
+				startY = e.touches[0].pageY;
+			}, false);
+			mybody.addEventListener('touchmove', function(e) {
+				// e.preventDefault();
+				moveEndX = e.changedTouches[0].pageX;
+				moveEndY = e.changedTouches[0].pageY;
+				X = moveEndX - startX;
+				Y = moveEndY - startY;
+				if(Math.abs(X) > Math.abs(Y) && X > 0) {
+					// right alert('向右'); 
+
+				} else if(Math.abs(X) > Math.abs(Y) && X < 0) {
+					// left alert('向左');
+
+				} else if(Math.abs(Y) > Math.abs(X) && Y > 0) {
+					// down alert('向下'); 
+					//关闭综合排序列表
+					if(zhpxFlag) {
+						document.getElementsByClassName("zhpxList")[0].style.display = "none";
+						document.getElementsByClassName("zhpxText")[0].getElementsByClassName("upArrow")[0].style.display = "none";
+						document.getElementsByClassName("zhpxText")[0].getElementsByClassName("downArrow")[0].style.display = "inline-block";
+						e.stopPropagation();
+					}
+					zhpxFlag = false;
+				} else if(Math.abs(Y) > Math.abs(X) && Y < 0) {
+					// up alert('向上');
+					//关闭综合排序列表
+					if(zhpxFlag) {
+						document.getElementsByClassName("zhpxList")[0].style.display = "none";
+						document.getElementsByClassName("zhpxText")[0].getElementsByClassName("upArrow")[0].style.display = "none";
+//						document.getElementsByClassName("zhpxText")[0].getElementsByClassName("downArrow")[0].style.display = "inline-block";
+						e.stopPropagation();
+					}
+					zhpxFlag = false;
+				} else {
+					//没有发生滑动 alert('没有发生滑动'); 
+				}
+			});
+		</script>
+	</body>
+
+</html>

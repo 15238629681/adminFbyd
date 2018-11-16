@@ -1,0 +1,1131 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>体验模块----首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/all.css" />
+		<link rel="stylesheet" href="../css/experience/public.css" />
+		<link rel="stylesheet" href="../css/experience/goodsList.css" />
+		<link rel="stylesheet" href="../css/storehouse/searchblock.css" />
+		<style>
+			body {
+				background: #eee;
+			}
+			/*点击之后,显示下划线,去掉背景色,字体颜色变为黄色    仓库分类导航以及排序导航*/
+			
+			.mui-segmented-control .mui-control-item.mui-active {
+				color: #FBBD00;
+				border-bottom: 0.03rem solid #FBBD00;
+				background: #fff;
+			}
+			
+			.mui-segmented-control {
+				border: none;
+				font-size: 13px;
+				color: #676767;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				background: none;
+				border-left: none;
+				margin-right: 0.15rem;
+				color: #676767;
+			}
+			/*活动固定导航*/
+			
+			.title-fixed {
+				display: none;
+				position: fixed;
+				top: 60px;
+				z-index: 9999;
+				background: #fff;
+			}
+			/*排序固定类*/
+			
+			.paiXu-fixed {
+				position: fixed;
+				top: 98px;
+				z-index: 9999;
+				background: #fff;
+			}
+			/*活动列表*/
+			
+			.allList {
+				background: #fff;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+				width: auto;
+				height: 40px;
+				white-space: nowrap;
+			}
+			
+			.mui-scroll {
+				position: absolute;
+				z-index: 1;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted {
+				width: auto;
+			}
+			
+			#loading {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				z-index: 98;
+				background-size: 70%;
+				display: none;
+			}
+		</style>
+		<style>
+			/*活动固定列表*/
+			
+			.activetyCategory {
+				height: 40px;
+				line-height: 40px;
+				font-size: 14px;
+				color: #676767;
+				display: none;
+			}
+			
+			.activetyCategoryFixed {
+				z-index: 9996;
+				position: fixed;
+				top: 60px;
+				background: #fff;
+				border: none;
+			}
+			
+			.activetyCategory a {
+				padding-left: 18px;
+				color: #676767;
+				border: none;
+			}
+		</style>
+		<style>
+			/*仓库种类   顶部导航*/
+			
+			.kindChooseList {
+				height: 1.125rem;
+				line-height: 1.125rem;
+				font-size: 0.42rem;
+				color: #676767;
+				border-bottom: 0.5px solid #D9D9D9 !important;
+			}
+			
+			.kindChooseList a {
+				border-bottom: none;
+				color: #676767;
+				padding-left: 0.555rem;
+			}
+			
+			.kindChooseList a:last-child {
+				padding-left: 0.555rem;
+			}
+			/*活动*/
+			
+			.activityBlock {
+				padding-bottom: 10px;
+				margin-bottom: 5px;
+			}
+			
+			.activityBlock .ui-flex .activityItem {
+				width: 25%;
+			}
+			
+			.mui-content {
+				margin-top: 16px;
+				background: #EFEFF4;
+			}
+			
+			.mui-segmented-control {
+				background: #fff;
+			}
+			
+			.goodsList {
+				background: #fff;
+			}
+			
+			.goodsList .goodsBlock:first-child {
+				margin-top: 0;
+			}
+			
+			.publicOrder:before {
+				content: "";
+				display: block;
+				position: absolute;
+				left: -50%;
+				width: 200%;
+				height: 1px;
+				background: #E0E0E0;
+				-webkit-transform: scale(0.5);
+			}
+		</style>
+		<link rel="stylesheet" href="../css/experience/order.css" />
+	</head>
+
+	<body>
+		<div id="loading"></div>
+		<!--遮罩层    透明的遮罩层     点击筛选的时候-->
+		<div class="maskDiv" id="backdrop"></div>
+
+		<!--搜索关键字模块-->
+		<header class="mui-bar mui-bar-nav header">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>-->
+			<span class="mui-icon mui-icon-search"></span>
+			<input readonly="readonly" id="searchInput" placeholder="   搜索商品" />
+		</header>
+
+		<div class="mui-content main" id="refreshContainer" style="max-width:100%;position:relative;">
+			<!--窗口滑动    固定在顶部的导航   活动列表-->
+			<div class="mui-segmented-control  title-fixed">
+				<a class="mui-control-item mui-active" id="firstPage" data-token="-1">首页</a>
+				<a class="mui-control-item " data-token="0">新手入门</a>
+				<a class="mui-control-item" data-token="1">体验广场</a>
+				<a class="mui-control-item" data-token="2">我的体验</a>
+				<a class="mui-control-item" data-token="3">邀请好友</a>
+				<!--<a class="mui-control-item" data-token="4">邀请好友</a>-->
+			</div>
+
+			<!--顶部导航    活动列表-->
+			<div class="allList" id="allList">
+				<div style="white-space: nowrap;overflow-x:scroll;overflow-y:hidden;" class="kindChooseList mui-scroll">
+					<a class=" firstPage" style="" data-id="1" data-fqcat="0">首页</a>
+					<a class="" data-id="2" data-fqcat="1">女装</a>
+					<a class="" data-id="3" data-fqcat="2">男装</a>
+					<a class="" data-id="4" data-fqcat="3">内衣</a>
+					<a class="" data-id="5" data-fqcat="4">母婴</a>
+					<a class="" data-id="6" data-fqcat="5">包包</a>
+					<a class="" data-id="7" data-fqcat="7">居家</a>
+					<a class="" data-id="8" data-fqcat="8">鞋品</a>
+					<a class="" data-id="9" data-fqcat="9">美食</a>
+					<a class="" data-id="10" data-fqcat="10">文体</a>
+					<a class="" data-id="11" data-fqcat="11">家电</a>
+					<a class="" data-id="12" data-fqcat="12">其他</a>
+					<a class="" data-id="13" data-fqcat="13">配饰</a>
+					<a class="" data-id="14" data-fqcat="14">数码</a>
+					<a class="" data-id="15" data-fqcat="341">数码</a>
+				</div>
+
+				<!--轮播图   仓库详情页的轮播图-->
+				<div id="goods-info">
+					<img id="img_1" style="display: none;width:100%;height: 100%;" src="" />
+					<div id="slider" class="mui-slider">
+						<div class="mui-slider-group mui-slider-loop" id="sliderlist">
+							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img id="slider6" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+								</a>
+							</div>
+							<!-- 第一张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img id="slider0" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+								</a>
+							</div>
+							<!-- 第二张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img id="slider1" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+								</a>
+							</div>
+							<!-- 第三张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img id="slider2" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+								</a>
+							</div>
+							<!-- 第四张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img id="slider3" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+								</a>
+							</div>
+							<!-- 第五张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img id="slider4" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+								</a>
+							</div>
+							<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img id="slider5" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+								</a>
+							</div>
+						</div>
+						<div class="mui-slider-indicator">
+							<div class="mui-indicator mui-active"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+						</div>
+					</div>
+				</div>
+
+				<!--活动列表-->
+				<div class="home-qnav activityBlock">
+					<div class="ui-flex flex-justify-sb">
+						<div class="activityItemAllList activityItem" data-token="0" data-activity="0">
+							<img src="../images/experience/icons/experiencematerialxsty.png" class="ico" /><span class="activityName name" data-token="0">新手入门</span>
+						</div>
+						<div class="activityItem" data-token="1" data-activity="0">
+							<img src="../images/experience/icons/experiencematerialtygc.png" class="ico" /><span class="activityName name" data-token="1">体验广场</span>
+						</div>
+						<div class="activityItem" data-token="2" data-activity="1">
+							<img src="../images/experience/icons/experiencematerialwdty.png" class="ico" /><span class="activityName name" data-token="2">我的体验</span>
+						</div>
+						<div class="activityItem" data-token="3" data-activity="2">
+							<img src="../images/experience/icons/experiencematerialyqhy.png" class="ico" /><span class="activityName name" data-token="3">邀请好友</span>
+						</div>
+						<!--<div class="activityItem" data-token="4" data-activity="3">
+							<img src="../images/storehouse/icons/sea.png" alt="" class="ico" /><span class="activityName name" data-token="4">进口</span>
+						</div>-->
+					</div>
+				</div>
+
+			</div>
+
+			<!--商品列表-->
+			<!--排序方式-->
+			<!--<div class="mui-segmented-control paiXu">
+				<a class="mui-control-item mui-active  orderItem" data-order="1">综合排序</a>
+				<a class="mui-control-item orderItem" data-order="2">剩余份数</a>
+				<a class="mui-control-item orderItem" data-order="3">申请人数</a>
+				<a class="mui-control-item orderItem" data-order="4">筛选</a>
+				<!--<a class="mui-control-item orderItem" data-order="5">价格</a>-->
+			<!--</div>-->
+
+			<!--公共的排序-->
+			<div class="publicOrder">
+				<!--排序方式-->
+				<div class="kOrderBlock  mui-clearfix" id="orderBlock">
+					<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+						<div class=" mui-inline">
+							<span class="zhpxSpan">综合排序</span>
+							<span class="upArrow"></span>
+						</div>
+					</div>
+					<div class="mui-inline orderDiv xlText" data-order="2">
+						<span class="allOrder">人气</span>
+					</div>
+					<div class="mui-inline orderDiv yhldText" data-order="6">
+						<span class="allOrder">剩余份数最多</span>
+					</div>
+					<div class="mui-inline orderDiv sxText">
+						<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+					</div>
+				</div>
+				<!--//综合排序提示框-->
+				<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0" id="zhpxListFixed">
+					<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+						<a class="">综合排序</a>
+						<span class="mui-icon iconfont icon-selected mui-inline  selectIcon"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="2" data-order="7">
+						<a class="">最新</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="2" data-order="7">
+						<a class="">申请人数低到高</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="1" data-order="5">
+						<a class="">售价由高到低</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="2" data-order="7">
+						<a class="">售价由低到高</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+					</li>
+				</ul>
+				<div class="popDiv">
+					<span class="upArrow"></span>
+					<ul class="selectList">
+						<li class="allType">所有</li>
+						<li class="playingType">体验申请中</li>
+					</ul>
+				</div>
+
+			</div>
+
+			<!--商品列表-->
+			<div class="goodsList">
+				<div class="boxLeft">
+					<div class="goodsBlock">
+						<img src="../images/experience/goods2.png" alt="">
+						<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+						<div class="goodDetail">
+							<span class="tbPrice tyl">体验量：200份</span>
+							<span class="sellNum yxty">
+							有新体验
+						</span>
+
+						</div>
+						<div class="goodsDetail2">
+							<span class="status">状态：
+								<span class="statusText">申请中</span>
+							</span>
+							<span class="clickAgree">
+								<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+								520
+							</span>
+						</div>
+						<div class="clearBlock"></div>
+					</div>
+				</div>
+				<div class="boxRight">
+					<!--<div class="goodsBlock">
+						<img src="../images/experience/goods1.png" alt="">
+						<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+						<div class="goodDetail">
+							<span class="tbPrice tyl">体验量：200份</span>
+							<span class="sellNum yxty">
+							有新体验
+						</span>
+
+						</div>
+						<div class="goodsDetail2">
+							<span class="status">状态：
+							<span class="statusText">申请中</span>
+							</span>
+							<span class="clickAgree">
+							<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+							520
+						</span>
+						</div>
+						<div class="clearBlock"></div>
+					</div>
+					-->
+				</div>
+			
+			</div>
+
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			localStorage.setItem("nowOrderExperiencespec", "1");
+			
+//			动态初始化筛选框显示的位置
+			function getComputedHeight(elem){
+//				alert(elem);
+				var height=window.getComputedStyle(document.getElementsByClassName(elem)[0]).height;
+				return (height.substring(0,height.indexOf("p")));
+			}
+			
+			var popDivTop=parseFloat(getComputedHeight("header"))+parseFloat(getComputedHeight("kindChooseList"))+parseFloat(getComputedHeight("mui-slider-item"))+parseFloat(getComputedHeight("activityBlock"))+parseFloat(getComputedHeight("kOrderBlock"))+5;
+			document.getElementsByClassName("popDiv")[0].style.height=popDivTop+"px";
+//			alert(popDivTop);
+			
+			//设置轮播图为自动轮播	
+			var slider = mui("#slider");
+			slider.slider({
+				interval: 4000
+			});
+
+			var deceleration = mui.os.ios ? 0.03 : 0.005;
+			mui(".mui-scroll-wrapper").scroll({
+				bounce: false,
+				indicators: false, //是否显示滚动条
+				deceleration: deceleration
+			})
+
+			mui.plusReady(function() {
+				localStorage.setItem("nowOrderExperiencespec", "1");
+
+				//隐藏滚动条
+				plus.webview.currentWebview().setStyle({
+					scrollIndicator: "none"
+				});
+				//预加载  筛选菜单
+				main = plus.webview.currentWebview();
+				setTimeout(function() {
+					menu = mui.preload({
+						id: "experiencespecdragleftmenu.html",
+						url: "experiencespecdragleftmenu.html",
+						styles: {
+							left: "30%",
+							width: "70%",
+							zindex: 9999
+						}
+					});
+				}, 300);
+			});
+			document.getElementById("searchInput").addEventListener("tap", function() {
+				mui.openWindow({
+					url: "experiencesearch.html",
+					id: "experiencesearch",
+					waiting: {
+						autoShow: false,
+
+					}
+				});
+
+			});
+
+			var partRefresh = false; //局部刷新   点击排序的时候做标记
+			var searchKeyFlag = false; //搜索关键字的界面
+			var oneceLoad = true; //第一次载入的背景图
+			var listArr = []; //商品总数据
+			var nowPageNum = 0; //当前请求的页数
+			var allOrActivity = false; //用于判断用户点击的是   	仓库种类还是活动列表
+			var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+			localStorage.setItem("order", "1");
+			//首页  请求参数
+			var goodsList = {
+				count: 10,
+				start: 0,
+				order: 1, //商品默认的排序方式  最新
+				keyword: "all", //搜索的关键字
+				fqcat: 0, //商品分类编号
+				token: userinfo.token,
+				uid: userinfo.userinfo.uid,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+
+				price: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				lirun: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				volume: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				brand: "0",
+				sea: "0"
+			};
+
+			//活动产品  请求参数
+			var activityList = {
+				count: 10,
+				start: 0,
+				order: 1,
+				keyword: "all", //搜索所有商品
+				token: userinfo.token,
+				timestamp: parseInt(new Date().getTime() / 1000),
+				uid: userinfo.userinfo.uid,
+				activity: 0 //默认的为聚划算
+			};
+
+			//首页的数据请求
+			function list_request() {
+				console.log(goodsList.uid + "---" + goodsList.count + "---" + goodsList.start + "---" + goodsList.order + "---" + goodsList.keyword + "---" + goodsList.fqcat + "---" + goodsList.token + "---" + goodsList.timestamp + "---")
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/storehouse.app.php", {
+						data: {
+							count: goodsList.count,
+							start: goodsList.start,
+							order: goodsList.order,
+							keyword: goodsList.keyword,
+							fqcat: goodsList.fqcat,
+							token: goodsList.token,
+							timestamp: goodsList.timestamp,
+							uid: goodsList.uid,
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							//取消load图
+							if(oneceLoad) {
+								setTimeout(function() {
+									document.getElementById("loading").style.display = "none";
+								}, 0)
+							}
+							oneceLoad = false;
+							if(data.error == "0") {
+								var goodsList = data.goodslist;
+								console.log(JSON.stringify(goodsList));
+								//var refreshContainer = document.getElementById("refreshContainer");
+								if(goodsList.length == 0) {
+									if(document.getElementsByClassName("goodsBlock").length == 0) {
+										document.getElementsByClassName("goodsList")[0].innerHTML = "暂时没有更多商品！";
+										document.getElementsByClassName("goodsList")[0].style.cssText = "text-align: center;height:200px;line-height:200px;color:#676767";
+										//										mui('.mui-content').pullRefresh().endPullupToRefresh(true);
+										window.addEventListener("scroll", function() {
+											return;
+										})
+									} else {
+										mui.toast('已经是最新数据了', {
+											duration: 'long',
+											type: 'div'
+										});
+									}
+								} else { //请求到数据   goodsList
+									if(partRefresh) {
+										document.getElementsByClassName("boxLeft")[0].innerHTML = "";
+										document.getElementsByClassName("boxRight")[0].innerHTML = "";
+									}
+
+									var goodsListHtml = "";
+									for(var i = 0; i < goodsList.length; i++) {
+										var leftHeight = window.getComputedStyle(document.getElementsByClassName("boxLeft")[0]).height;
+										var rightHeight = window.getComputedStyle(document.getElementsByClassName("boxRight")[0]).height;
+
+										leftHeight = leftHeight.substring(0, leftHeight.indexOf("px"));
+										rightHeight = rightHeight.substring(0, rightHeight.indexOf("px"));
+										var mainDiv = document.createElement("div");
+										goodsListHtml = '<!--//商品块--><div class="goodsBlock"><img src="' + goodsList[i].pic_url + '_160x160.jpg" alt=""><div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div><div class="goodDetail"><span class="tbPrice tyl">体验量：200份</span><span class="sellNum yxty">有新体验</span></div><div class="goodsDetail2"><span class="status">状态：<span class="statusText">申请中</span></span><span class="clickAgree"><img src="../images/experience/icons/experiencematerialwxz.png" alt="" />520</span></div><div class="clearBlock"></div></div>';
+										mainDiv.innerHTML = goodsListHtml;
+
+										if(document.getElementsByClassName("goodsBlock").length == 0) {
+											document.getElementsByClassName("boxRight")[0].appendChild(mainDiv);
+										} else {
+											if(parseFloat(leftHeight) <= parseFloat(rightHeight)) {
+												document.getElementsByClassName("boxLeft")[0].appendChild(mainDiv);
+											} else {
+												document.getElementsByClassName("boxRight")[0].appendChild(mainDiv);
+											}
+										}
+									}
+								}
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								plus.nativeUI.toast("请求超时，请检查网络");
+							}
+							console.log(type);
+							//plus.nativeUI.toast(errorThrown);
+						}
+					})
+			}
+
+			//预加载默认页面
+			list_request();
+			//活动列表的数据请求
+			function activity_request() {
+				activityList.timestamp = parseInt(new Date().getTime() / 1000);
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/storehouseactivity.app.php", {
+						data: {
+							count: activityList.count,
+							start: activityList.start,
+							order: activityList.order,
+							keyword: activityList.keyword,
+							token: activityList.token,
+							timestamp: activityList.timestamp,
+							uid: activityList.uid,
+							activity: activityList.activity,
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							if(data.error == "0") {
+								var goodsList = data.goodslist;
+								//								console.log("goodsList"+goodsList);
+								//var refreshContainer = document.getElementById("refreshContainer");
+								if(goodsList.length == 0) {
+									if(listArr.length == 0) {
+										document.getElementsByClassName("goodsList")[0].innerHTML = "暂时没有更多商品！";
+									} else {
+										mui.toast('我也是有底线的', {
+											duration: 'long',
+											type: 'div'
+										})
+									}
+								} else {
+									var goodsListHtml = "";
+									for(var i = 0; i < goodsList.length; i++) {
+										//给每个商品添加自定义属性值
+										if(goodsList[i].choose == "1") { //已经加入发送
+											goodsListHtml += '<div class="goodsBlock"  data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + ' data-choose=' + goodsList[i].choose + '><div class="left"><img  src="' + goodsList[i].pic_url + '_160x160.jpg" alt=""></div><div class="maskDiv" data-choose' + goodsList[i].choose + ' style="text-align: center;background: url(../../images/goodsdetail/yijiar.png) rgba(0, 0, 0, 0.4) no-repeat center 25px;background-size: 30px;" >已加入</div><div class="middle"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodDetail">淘宝价<span class="tbPrice">￥' + goodsList[i].coupon_price + '</span><span class="sellNum">销售量：' + goodsList[i].volume + '</span></div><p class="costPrice">进货价￥' + goodsList[i].cgprice + '</p><p class="fbPrice">翻宝价￥' + goodsList[i].quanhou_price + '</p></div><div class="right"><span class="profitText">利润</span><span class="profit profitText">￥' + goodsList[i].lirun + '元</span><span class="addSend">取消发送</span><span class="spread" data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + ' >马上推广</span></div><div class="clearBlock"></div></div>';
+										} else {
+											goodsListHtml += '<div class="goodsBlock"  data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + ' data-choose=' + goodsList[i].choose + '><div class="left"><img  src="' + goodsList[i].pic_url + '_160x160.jpg" alt=""></div><div class="maskDiv maskDivNone" data-choose' + goodsList[i].choose + ' style="text-align: center;background: url(../../images/goodsdetail/yijiar.png) rgba(0, 0, 0, 0.4) no-repeat center 25px;background-size: 30px;" >已加入</div><div class="middle"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodDetail">淘宝价<span class="tbPrice">￥' + goodsList[i].coupon_price + '</span><span class="sellNum">销售量：' + goodsList[i].volume + '</span></div><p class="costPrice">进货价￥' + goodsList[i].cgprice + '</p><p class="fbPrice">翻宝价￥' + goodsList[i].quanhou_price + '</p></div><div class="right"><span class="profitText">利润</span><span class="profit profitText">￥' + goodsList[i].lirun + '元</span><span class="addSend">加入发送</span><span class="spread" data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + ' >马上推广</span></div><div class="clearBlock"></div></div>';
+										}
+									}
+
+									if(listArr.length == 0) {
+										document.getElementsByClassName("goodsList")[0].innerHTML = "";
+										//mainDiv.innerHTML=goodsListHtml;
+										document.getElementsByClassName("goodsList")[0].innerHTML = goodsListHtml;
+									} else {
+										var mainDiv = document.createElement("div");
+										mainDiv.innerHTML = goodsListHtml;
+										document.getElementsByClassName("goodsList")[0].appendChild(mainDiv);
+										//结束上拉加载
+										//mui("#refreshContainer").pullRefresh().refresh(true);
+										//this.endPullupToRefresh(false);
+									}
+									listArr = listArr.concat(goodsList);
+								}
+
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								plus.nativeUI.toast("请求超时，请检查网络");
+							}
+							plus.nativeUI.toast(errorThrown);
+						}
+					})
+			};
+
+			//下拉刷新
+			function downRefresh() {
+				document.getElementsByClassName("boxRight")[0].innerHTML="";
+				document.getElementsByClassName("boxLeft")[0].innerHTML="";
+				
+				//当用户在搜索模块时，就禁用此事件
+				if(!searchKeyFlag) {
+					if(!allOrActivity) {
+						listArr = [];
+						goodsList.start = "0 ";
+						goodsList.time = parseInt(new Date().getTime() / 1000);
+						goodsList.order = localStorage.getItem("order");
+						list_request();
+						setTimeout(function() {
+							mui.toast('已经是最新数据！', {
+								duration: 'short',
+								type: 'div'
+							});
+							mui('#refreshContainer').pullRefresh().endPulldown();
+						}, 1000)
+					} else {
+						//活动
+						listArr = [];
+						activityList.time = parseInt(new Date().getTime() / 1000);
+						activityList.order = localStorage.getItem("order");
+						activityList.activity = localStorage.getItem("activity");
+						//						alert(activityList.start);
+						activity_request();
+						setTimeout(function() {
+							mui.toast('已经是最新数据！', {
+								duration: 'short',
+								type: 'div'
+							});
+							mui('#refreshContainer').pullRefresh().endPulldown();
+						}, 1000)
+					}
+				}
+			};
+			//上拉加载
+			function upRefresh() {
+				console.log("1")
+				if(!searchKeyFlag) { //只有不在搜索界面时，上拉加载才触发
+					nowPageNum++;
+					if(!allOrActivity) {
+						//首页情况下，上拉加载
+						listArr = [];
+						//					alert("我是首页加载 nowPageNum--- " + nowPageNum)
+						goodsList.start = nowPageNum;
+						goodsList.timestamp = parseInt(new Date().getTime() / 1000);
+						goodsList.order = localStorage.getItem("order");
+						console.log(goodsList.uid + "--- " + goodsList.count + "--- " + goodsList.start + "--- " + goodsList.order + "--- " + goodsList.keyword + "--- " + goodsList.fqcat + "--- " + goodsList.token + "--- " + goodsList.timestamp + "--- ");
+						list_request();
+						var that = this;
+						setTimeout(function() {
+							that.endPullupToRefresh(true); //结束上拉加载
+							mui('#refreshContainer').pullRefresh().refresh(true); //重置上拉加载
+						}, 2000)
+					} else {
+						//活动
+						//listArr=[];
+						//					alert("我是活动加载-- " + nowPageNum);
+						activityList.start = nowPageNum;
+						//						alert(nowPageNum);
+						activityList.time = parseInt(new Date().getTime() / 1000);
+						activityList.order = localStorage.getItem("order");
+						activityList.activity = localStorage.getItem("activity");
+						activity_request();
+						var that = this;
+						setTimeout(function() {
+							that.endPullupToRefresh(true); //结束上拉加载
+							mui('#refreshContainer').pullRefresh().refresh(true); //重置上拉加载
+						}, 2000)
+					}
+				}
+			};
+			
+			
+
+			mui.init({
+				swipeBack: false,
+				//预加载搜索页面
+				preloadPages: [{
+					url: "experiencesearch.html",
+					id: "experiencesearch",
+					styles: {
+						top: 0,
+						bottom: 0
+					}, //窗口参数
+					extras: {}, //自定义扩展参数
+					subpages: [{}, {}] //预加载页面的子页面
+				}],
+
+				pullRefresh: {
+					container: "#refreshContainer",
+					down: {
+						style: "circle",
+						color: "#fbbd00",
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: false, //可选,默认false.首次加载自动上拉刷新一次
+						callback: downRefresh
+					},
+					up: {
+						height: 100, //可选.默认50.触发上拉加载拖动距离
+						auto: false, //可选,默认false.自动上拉加载一次
+						//						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了......', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: upRefresh, //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+						//						fontWeight: normal
+					}
+
+				}
+			});
+
+			//活动列表点击事件
+			var activityItem = document.getElementsByClassName("activityItem");
+			for(var i = 0; i < activityItem.length; i++) {
+				activityItem[i].addEventListener("tap", function() {
+					allOrActivity = true; //活动标识
+					nowPageNum = 0; //点击活动，则从第一页开始加载
+					var aActivityName = document.getElementsByClassName("activityName"); //获取所有活动名
+					for(var i = 0; i < aActivityName.length; i++) {
+						aActivityName[i].style.color = "#676767";
+					}
+					//顶部导航 颜色变灰
+					var kindList = document.getElementsByClassName("kindChooseList")[0].querySelectorAll("a");
+					for(var i = 0; i < kindList.length; i++) {
+						kindList[i].style.color = "#676767 ";
+						kindList[i].style.borderBottom = "1px solid #fff";
+						kindList[i].classList.remove("mui-active");
+					}
+					//固定导航  对应模块颜色变黄
+					var token = this.getAttribute("data-token");
+					var fixedTitleA = document.getElementsByClassName("title-fixed")[0].querySelectorAll("a");
+					if(this.getAttribute("data-token") == "1") {
+						mui.openWindow({
+							url: 'reportlist.html',
+							id: 'reportlist'
+						})
+					}
+					if(this.getAttribute("data-token") == "2") {
+						mui.openWindow({
+							url: 'myexperience/mylist.html',
+							id: 'mylist',
+							extras: {
+								index: "0"
+							}
+						})
+					}
+
+					//初始化固定导航的颜色
+					fixedTitleA[0].style.color = "#676767";
+					fixedTitleA[0].classList.remove("mui-active");
+					fixedTitleA[1].style.color = "#676767";
+					fixedTitleA[1].classList.remove("mui-active");
+					fixedTitleA[2].style.color = "#676767";
+					fixedTitleA[2].classList.remove("mui-active");
+					fixedTitleA[3].style.color = "#676767";
+					fixedTitleA[3].classList.remove("mui-active");
+					fixedTitleA[4].style.color = "#676767";
+					fixedTitleA[4].classList.remove("mui-active");
+					//					fixedTitleA[5].style.color = "#676767";
+					//					fixedTitleA[5].classList.remove("mui-active");
+
+					for(var i = 0; i < fixedTitleA.length; i++) {
+						if(fixedTitleA[i].getAttribute("data-token") == token) {
+							fixedTitleA[i].style.color = "#FCCB58";
+							fixedTitleA[i].classList.add("mui-active");
+						}
+					}
+
+					var activityName = this.getElementsByTagName("span")[0]; //获取当前点击下的   活动名
+					activityName.style.color = "#FCCB58";
+					var activityId = this.getAttribute("data-activity"); //获取活动id
+					localStorage.setItem("activity", activityId);
+					//					alert(localStorage.getItem("activity"));
+					activityList.activity = activityId;
+					//点击活动  默认的排序方式是最新
+					activityList.order = 1;
+					var orderItems = document.getElementsByClassName("publicOrder")[0].getElementsByTagName("a");
+					for(var i = 0; i < orderItems.length; i++) {
+						orderItems[i].classList.remove("mui-active");
+					}
+					orderItems[0].classList.add("mui-active"); //默认的排序方式为最新
+
+					activityList.timestamp = parseInt(new Date().getTime() / 1000);
+					listArr = [];
+					//					alert("当前请求页数----" + activityList.start)
+					//					activity_request();
+				})
+			}
+
+			//商品排序方式     orderId     最新  销售排行  利润  默认是首页内容
+			var aOrderItem = document.getElementsByClassName("orderItem");
+			for(var i = 0; i < aOrderItem.length; i++) {
+				aOrderItem[i].addEventListener("tap", function() {
+					//					goodsList.orderId = this.getAttribute("data-order");
+					localStorage.setItem("order", this.getAttribute("data-order"));
+					//首页情况下
+					if(!allOrActivity) {
+						//						alert("order" + "首页");
+						goodsList.order = this.getAttribute("data-order"); //获取排序方式
+						goodsList.time = parseInt(new Date().getTime() / 1000);
+						goodsList.keyword = "all";
+						listArr = [];
+						list_request();
+					}
+					if(allOrActivity) //活动
+					{ //活动情况下
+						listArr = [];
+						activityList.order = this.getAttribute("data-order");
+						activityList.activity = localStorage.getItem("activity");
+						activity_request();
+					}
+				})
+			};
+
+			//体验种类    点击事件   默认是首页 
+			var kindList = document.getElementsByClassName("kindChooseList")[0].querySelectorAll("a");
+			kindList[0].style.color = "#FCCB58";
+			kindList[0].classList.add("mui-active");
+			for(var i = 0; i < kindList.length; i++) {
+				kindList[i].addEventListener("tap", function() {
+					nowPageNum = 0;
+					//重置活动列表  文字颜色
+					var aActivityName = document.getElementsByClassName("activityName"); //获取所有活动名
+					for(var i = 0; i < aActivityName.length; i++) {
+						aActivityName[i].style.color = "#676767";
+						aActivityName[i].classList.remove("mui-active");
+					}
+
+					if(this.getAttribute("data-id") == "1") { //首页
+						//						alert("首页");
+						this.style.color = "#FCCB58";
+//						this.style.borderBottom = "1px solid #FCCB58";
+						this.classList.add("mui-active");
+						listArr = []; //商品列表为空
+						goodsList.start = nowPageNum;
+						goodsList.keyword = "all";
+						goodsList.order = "1";
+						goodsList.fqcat = "0";
+						goodsList.time = parseInt(new Date().getTime() / 1000);
+						allOrActivity = false; //点击首页后，表示 排序情况   要在首页的情况下
+						list_request();
+
+						//改变固定导航栏的颜色
+						var fixed = document.getElementsByClassName("title-fixed")[0];
+						for(var i = 1; i < fixed.getElementsByTagName("a").length; i++) {
+							fixed.getElementsByTagName("a")[i].style.color = "#676767";
+							fixed.getElementsByTagName("a")[i].classList.remove("mui-active");
+						}
+
+						fixed.getElementsByTagName("a")[0].style.color = "#FCCB58";
+						fixed.getElementsByTagName("a")[0].style.borderBottom = "1px solid #FCCB58";
+						fixed.getElementsByTagName("a")[0].classList.addClass = "mui-active";
+
+					} else { //女装  男装  内衣  母婴    跳转到仓库种类页面
+						this.style.color = "#676767";
+						this.style.borderBottom = "1px solid #fff";
+						mui.openWindow({
+							//							url: "storehouseclassification.html#item" + (this.getAttribute("data-id")) + "",
+							//							url: "storehouseclassification.html#item" + this.getAttribute('data-fqcat')+"",
+							url: "../experiencecategory/category.html",
+							id: "experiencecategory/category.html",
+							extras: {
+								dataFqcat: this.getAttribute("data-fqcat")
+							}
+						});
+
+					}
+				})
+			}
+
+			//滑动过程中   固定在顶部的导航  首页+活动
+			var fixedHeader = document.getElementsByClassName("title-fixed")[0];
+			var fixedHeaderA = fixedHeader.getElementsByTagName("a");
+			for(var i = 0; i < fixedHeaderA.length; i++) {
+				fixedHeaderA[i].addEventListener("tap", function() {
+					mui.scrollTo(70, 10);
+					nowPageNum = 0;
+					//当前固定栏
+					for(var i = 0; i < fixedHeaderA.length; i++) {
+						fixedHeaderA[i].style.color = "#676767";
+					}
+					this.style.color = "#FBBD00";
+
+					var token = this.getAttribute("data-token");
+					//					alert("我是固定栏的token---"+token );
+					//如果是首页，改变仓库分类中的  首页  颜色
+					if(token == "-1") { //首页
+						allOrActivity = false;
+						//改变仓库列表的首页  颜色
+						document.getElementsByClassName("firstPage")[0].style.color = "#FBBD00";
+						document.getElementsByClassName("firstPage")[0].style.borderBottom = "1px solid #FBBD00";
+						//初始化未固定栏活动列表颜色
+						var activityBlock = document.getElementsByClassName("activityBlock")[0];
+						var aActivityName = activityBlock.getElementsByClassName("activityName");
+						for(var i = 0; i < aActivityName.lenght; i++) {
+							aActivityName[i].style.color = "#676767";
+						}
+
+						listArr = []; //商品列表为空
+						goodsList.keyword = "all";
+						goodsList.order = "1";
+						goodsList.fqcat = "0";
+						goodsList.start = nowPageNum;
+						goodsList.time = parseInt(new Date().getTime() / 1000);
+						allOrActivity = false; //点击首页后，表示 排序情况   要在首页的情况下
+						list_request();
+
+					} else {
+						allOrActivity = true;
+						//改变未固定栏    对应该活动的颜色
+						var activityBlock = document.getElementsByClassName("activityBlock")[0];
+						var aActivityName = activityBlock.getElementsByClassName("activityName");
+						//初始化未固定活动的所有颜色
+						for(var i = 0; i < aActivityName.lenght; i++) {
+							aActivityName[i].style.color = "#676767";
+						}
+
+						document.getElementsByClassName("firstPage")[0].style.color = "#676767";
+						document.getElementsByClassName("firstPage")[0].style.borderBottom = "1px solid #fff";
+						for(var i = 0; i < aActivityName.length; i++) {
+							if(aActivityName[i].getAttribute("data-token") == token) { //改变对应token的颜色
+								aActivityName[i].style.color = "#FBBD00";
+							}
+						}
+						//活动数据请求
+						activityList.activity = this.getAttribute("data-token") - 1;
+						localStorage.setItem("activity", activityList.activity);
+						//默认排序为最新
+						activityList.order = "1";
+						//点击活动  默认的排序方式是最新
+						var orderItems = document.getElementsByClassName("publicOrder")[0].getElementsByTagName("a");
+						for(var i = 0; i < orderItems.length; i++) {
+							orderItems[i].classList.remove("mui-active");
+						}
+						orderItems[0].classList.add("mui-active"); //默认的排序方式为最新
+
+						//体验广场
+						if(this.getAttribute("data-token") == "1") {
+							mui.openWindow({
+								url: 'reportlist.html',
+								id: 'reportlist'
+							})
+						}
+
+						//						activityList.timestamp = parseInt(new Date().getTime() / 1000);
+						//						activityList.start = nowPageNum;
+						//						listArr = [];
+						//						activity_request();
+					}
+				})
+			}
+
+			//预加载详情页
+			//var detailPage=null;
+			mui('.mui-content').on('tap', '.goodsBlock', function(e) {
+				//alert("详情页");
+				e.stopPropagation();
+				var goodsdetail = mui.preload({
+					"id": 'experienceproduct',
+					"url": 'experienceproduct.html'
+				});
+				var id = this.getAttribute("id");
+				//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+				var gid = this.getAttribute("data-id");
+				var num_iid = this.getAttribute("data-numiid");
+				var cid = this.getAttribute("data-cid");
+				//打开详情页面
+				setTimeout(function() {
+					mui.fire(goodsdetail, 'transTodetail', {
+						gid: gid,
+						num_iid: num_iid,
+						cid: cid
+					});
+					mui.openWindow({
+						id: "experienceproduct"
+					});
+				}, 250)
+			});
+
+			//滑动到一定距离,固定活动导航以及排序方式
+			var yheight1 = 0;
+			window.addEventListener("scroll", function(e) {
+				//隐藏zhpxList
+				if(zhpxFlag) {
+					document.getElementsByClassName("zhpxList")[0].style.display = "none";
+					e.stopPropagation();
+					var nowOrder = localStorage.getItem("nowOrderExperiencespec");
+					if(nowOrder == "2" || nowOrder == "6") {
+						publicOrder.getElementsByClassName("upArrow")[0].style.cssText = "border-top: 6px solid #727171;border-bottom:none;";
+					} else {
+						publicOrder.getElementsByClassName("upArrow")[0].style.cssText = "border-top: 6px solid #FBBF00;border-bottom:none;";
+					}
+				}
+				zhpxFlag = false;
+				document.getElementById("backdrop").style.display = "none";
+				document.getElementsByClassName("popDiv")[0].style.display = "none";
+				hiddenPopDiv = true;
+				//固定排序方式		
+				var searchKeyFlag = false; //搜索关键字的界面
+
+				if(!searchKeyFlag) {
+					yheight1 = document.body.scrollTop;
+					//		console.log(yheight1);
+					if(yheight1 >= 152) {
+						//固定的活动导航   体验首页
+						document.getElementsByClassName("title-fixed")[0].style.cssText = "display:block;";
+						document.getElementsByClassName("publicOrder")[0].classList.add("paiXu-fixed");
+						document.getElementsByClassName("publicOrder")[0].style.cssText = "font-size:0.37rem;";
+						document.getElementsByClassName("popDiv")[0].style.cssText = "top:145px;";
+					} else {
+						//			console.log("yheight1---"+yheight1);
+//						var top = 338 - parseFloat(yheight1);
+						var top = popDivTop - parseFloat(yheight1)+10;
+						document.getElementsByClassName("popDiv")[0].style.cssText = "top:" + top + "px;";
+
+						document.getElementsByClassName("title-fixed")[0].style.cssText = "display:none;"
+						document.getElementsByClassName("publicOrder")[0].classList.remove("paiXu-fixed");
+						document.getElementsByClassName("publicOrder")[0].style.cssText = "font-size:0.39rem";
+						//			document.getElementsByClassName("popDiv")[0].style.cssText="top:338px";
+					}
+				}
+			});
+
+			//重新定义后退函数(监听安卓后退键事件)
+			var backButtonPress = 0;
+			mui.back = function(event) {
+				backButtonPress++;
+				if(backButtonPress == 1) {
+					plus.webview.close(plus.webview.currentWebview());
+				} else {
+					//plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 800);
+				return false;
+			};
+		</script>
+
+		<script src="../js/experience/experiencespecorder.js"></script>
+	</body>
+
+</html>

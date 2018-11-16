@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>云店首页---分类</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/cloudstore/searchblock.css" />
+		<link rel="stylesheet" href="../css/cloudstore/cloudstorecategory.css" />
+		<style>
+			html,
+			body {
+				background-color: #fff;
+				width: 100%;
+			}
+			
+			.mui-bar {
+				height: 60px;
+				padding-top: 20px;
+				background: #fff;
+				border-bottom: 1px solid rgb(239, 239, 239);
+			}
+			
+			a {
+				color: #999;
+			}
+			
+			b {
+				font-weight: normal;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+				min-width: 100%;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-control-item {
+				padding: 0;
+				color: #727171;
+				line-height: 20px;
+				padding: 10px 10px;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				color: #FBBD00;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted {
+				border-bottom: 1px solid #eee;
+			}
+			
+			.mui-bar-nav~.mui-content .mui-slider.mui-fullscreen {
+				top: 60px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #fff;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper {
+				height: 40px;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.banner {
+				margin-top: 40px;
+				border-bottom: 1px solid #333;
+			}
+		</style>
+		<style>
+			.kOrderBlock {
+				position: fixed;
+				top: 100px;
+				display: none;
+			}
+			/*遮罩层*/
+			
+			.maskDiv {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				display: none;
+				z-index: 9999;
+				background-color: rgba(0, 0, 0, 0.3);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="maskDiv"></div>
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+			<span class="mui-icon mui-icon-search"></span>
+			<input readonly="readonly" id="searchInput" placeholder="搜索商品" />
+			<span id="message"></span>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen" >
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll" style="border-bottom:0.5px solid #ddd;">
+						<a class="mui-control-item" href="#" data-wid="ladies1" data-fqcat="1" data-index="1">女装</a>
+						<a class="mui-control-item" href="#" data-wid="men1" data-fqcat="2" data-index="2">男装</a>
+						<a class="mui-control-item" href="#" data-wid="underwear1" data-fqcat="3" data-index="3">内衣</a>
+						<a class="mui-control-item" href="#" data-wid="baby1" data-fqcat="4" data-index="4">母婴</a>
+						<a class="mui-control-item" href="#" data-wid="bag1" data-fqcat="5" data-index="5">包包</a>
+						<a class="mui-control-item" href="#" data-wid="house1" data-fqcat="7" data-index="6">居家</a>
+						<a class="mui-control-item" href="#" data-wid="shoes1" data-fqcat="8" data-index="7">鞋品</a>
+						<a class="mui-control-item" href="#" data-wid="food1" data-fqcat="9" data-index="8">美食</a>
+						<a class="mui-control-item" href="#" data-wid="ras1" data-fqcat="10" data-index="9">文体</a>
+						<a class="mui-control-item" href="#" data-wid="electric1" data-fqcat="11" data-index="10">家电</a>
+						<a class="mui-control-item" href="#" data-wid="other1" data-fqcat="12" data-index="11">其他</a>
+						<a class="mui-control-item" href="#" data-wid="accessories1" data-fqcat="13" data-index="12">配饰</a>
+						<a class="mui-control-item" href="#" data-wid="digital1" data-fqcat="14" data-index="13">数码</a>
+						<a class="mui-control-item" href="#" data-wid="beauty1" data-fqcat="341" data-index="14">美妆</a>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/webviewGroup.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var pageId = "";
+			(function($, doc) {
+				window.addEventListener("publicOrderFn", function(event) {
+					var show = event.detail.show;
+					if(show) {
+						document.getElementsByClassName("kOrderBlock")[0].setAttribute("display", "block")
+						document.getElementById("slider").style.display = "none";
+						//						alert(document.getElementsByClassName("kOrderBlock")[0].getAttribute("display"));
+					} else {
+						document.getElementsByClassName("kOrderBlock")[0].style.display = "none";
+						document.getElementById("slider").style.display = "block";
+					}
+				});
+
+				window.addEventListener("changeBackground", function(event) {
+					document.getElementsByClassName("maskDiv")[0].style.cssText = "display:block;";
+				});
+				window.addEventListener("changeBackground2", function(event) {
+					document.getElementsByClassName("maskDiv")[0].style.cssText = "display:none;";
+				});
+				$.init();
+
+				document.getElementById("sliderSegmentedControl").addEventListener("swiperight", function() {
+					console.log("右滑重置滚动");
+					$("#sliderSegmentedControl").scroll().scrollTo(0, 0);
+				})
+
+				$.plusReady(function() {
+					var openedPageId="ladies1";
+					var ws = plus.webview.currentWebview();
+					var group = new webviewGroup(ws.id, {
+						items: [{
+								id: "ladies1",
+								url: "ladies.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "1",
+									index: 0
+								},
+								waiting: {
+									autoShow: false
+								}
+							}, {
+								id: "men1",  
+								url: "men.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "2",
+									index: 1
+								},
+								waiting: {
+									autoShow: false
+								}
+							}, {
+								id: "underwear1",
+								url: "underwear.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "3",
+									index: 2
+								}
+							}, {
+								id: "baby1",
+								url: "baby.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "4",
+									index: 3
+								}
+							}, {
+								id: "bag1",
+								url: "bag.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "5",
+									index: 4
+								}
+							}, {
+								id: "house1",
+								url: "house.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "7",
+									index: 5
+								}
+							}, {
+								id: "shoes1",
+								url: "shoes.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "8",
+									index: 6
+								}
+							},
+
+							{
+								id: "food1",
+								url: "food.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "9",
+									index: 7
+								}
+							}, {
+								id: "ras1",
+								url: "ras.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "10",
+									index: 8
+								}
+							}, {
+								id: "electric1",
+								url: "electric.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "11",
+									index: 9
+								}
+							}, {
+								id: "other1",
+								url: "other.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "12",
+									index: 10
+								}
+							}, {
+								id: "accessories1",
+								url: "accessories.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "13",
+									index: 11
+								}
+							}, {
+								id: "digital1",
+								url: "digital.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "14",
+									index: 12
+								}
+							}, {
+								id: "beauty1",
+								url: "beauty.html",
+								styles: {
+									top: "100px",
+									bottom: "0"
+								},
+								extras: {
+									fqcat: "341",
+									index: 13
+								}
+							}
+							//							beauty1
+						],
+						onChange: function(obj) {
+							var items=[ "ladies1", "men1","underwear1","baby1","bag1","house1","shoes1","food1","ras1","electric1","other1","accessories1","digital1","beauty1"];
+							openedPageId=items[obj.index];
+							
+							localStorage.removeItem("cloudstorecategoryOrder");
+							localStorage.removeItem("cloudstorecategorySxCondition");
+							plus.nativeUI.closeWaiting();
+							var c = document.querySelector(".mui-control-item.mui-active");
+							var nowFqcat;
+							if(obj.index <= 4) {
+								nowFqcat = obj.index + 1;
+							} else if(obj.index <= 12) {
+								nowFqcat = obj.index + 2;
+							} else {
+								nowFqcat = "341";
+							}
+
+							var scrollLeft = document.getElementById("sliderSegmentedControl").clientWidth;
+							if(obj.index == 6) {
+								console.log("scroll-left");
+								$("#sliderSegmentedControl").scroll().scrollTo(0, 0);
+							} else if(obj.index == 7) {
+								console.log("scroll-right");
+								if($.os.ios) {
+									$("#sliderSegmentedControl").scroll().scrollTo(-scrollLeft+20, 0);
+								} else {
+									$("#sliderSegmentedControl").scroll().scrollTo(-scrollLeft, 0);
+								}
+							}
+
+							localStorage.setItem("nowFqcat", nowFqcat);
+							if(c) {
+								c.classList.remove("mui-active");
+							}
+							document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")").classList.add("mui-active");
+							activeIndex = (parseInt(obj.index) + 1);
+						}
+					});
+
+					//					var self = plus.webview.currentWebview();
+					(function skipPage() {
+						var fqcat = parseInt(ws.dataFqcat);
+						var scrollLeft = document.getElementById("sliderSegmentedControl").clientWidth;
+						if(fqcat > 8){
+							if($.os.ios) {
+								$("#sliderSegmentedControl").scroll().scrollTo(-scrollLeft+20, 0);
+							} else {
+								$("#sliderSegmentedControl").scroll().scrollTo(-scrollLeft, 0);
+							}
+						}
+						var index = parseInt(ws.dataIndex);
+						//						alert(index);
+						localStorage.setItem("nowFqcat", fqcat);
+						if(fqcat <= 5) {
+							var controlItem = document.getElementsByClassName("mui-control-item")[fqcat - 1];
+							localStorage.setItem("nowFqcat", fqcat - 1);
+						} else if(fqcat <= 14) {
+							var controlItem = document.getElementsByClassName("mui-control-item")[fqcat - 2];
+							localStorage.setItem("nowFqcat", fqcat - 2);
+						} else {
+							var controlItem = document.getElementsByClassName("mui-control-item")[13];
+							localStorage.setItem("nowFqcat", "341");
+						}
+						if(controlItem) {
+							plus.nativeUI.closeWaiting();
+							//alert("我是跳转过来的----")
+							controlItem.classList.add("mui-active");
+							var wid = controlItem.getAttribute("data-wid");
+							group.switchTab(wid);
+							localStorage.removeItem("cloudstorecategoryOrder");
+							localStorage.removeItem("cloudstorecategorySxCondition");
+							//						localStorage.removeItem("cloudstorecategoryOrder");
+						}
+
+					})();
+
+					$(".mui-scroll").on("tap", ".mui-control-item", function(e) {
+						localStorage.removeItem("cloudstorecategoryOrder");
+						localStorage.removeItem("cloudstorecategorySxCondition");
+						//						alert("我是点击过来的---")
+						//						var muiControlItem = document.getElementsByClassName("mui-control-item");
+						//						for(var i = 0; i < muiControlItem.length; i++) {
+						//							muiControlItem[i].classList.remove("mui-active");
+						//						}
+						//						this.classList.add("mui-active");
+						var wid = this.getAttribute("data-wid");
+						pageId = wid;
+						var fqcat = this.getAttribute("data-fqcat");
+						localStorage.setItem("nowFqcat", fqcat);
+						group.switchTab(wid);
+						localStorage.removeItem("cloudstorecategoryOrder");
+
+						plus.nativeUI.closeWaiting();
+					});
+					
+					
+					
+					document.getElementsByClassName("maskDiv")[0].addEventListener("tap", function() {
+						this.style.display = "none";
+//						alert(openedPageId);
+						var main = plus.webview.getWebviewById(openedPageId) //获取父页面A对象
+						mui.fire(main,"closeSX");
+					});
+
+					var activeIndex = 0;
+					var targetIndex = activeIndex;
+					var subPageIdArr = ["ladies1", "men1", "underwear1", "baby1", "bag1", "house1", "shoes1", "food1", "ras1", "electric1", "other1", "accessories1", "digital1", "beauty1"];
+					window.addEventListener("swiper_event", function(event) {
+						var direction = event.detail.direction;
+						activeIndex = event.detail.index;
+						if(direction == "left") {
+							if(activeIndex == 13) {
+								console.log("最右边一页");
+								return;
+							}
+							targetIndex = activeIndex + 1;
+						} else {
+							if(activeIndex == 0) {
+								console.log("第一页了");
+								return;
+							}
+							targetIndex = activeIndex - 1;
+						}
+						switchPage("switch", activeIndex, targetIndex);
+					});
+
+					function switchPage(_event, _active, _target) {
+						console.log("_target----" + _target);
+						console.log("subPageIdArr[_target]----" + subPageIdArr[_target]);
+						subPageIdArr[_target].show("fade-in");
+//						group.switchTab(wid);
+						var sliderSegmentedControl = document.getElementsByClassName("sliderSegmentedControl")[0];
+						if(_event == "switch") {
+							sliderSegmentedControl.getElementsByClassName("mui-control-item")[_active].classList.remove("mui-active");
+							sliderSegmentedControl.getElementsByClassName("mui-control-item")[_target].classList.add("mui-active");
+						}
+						subPageIdArr[_active].hide("none");
+						activeIndex = _target;
+					}
+
+				});
+			})(mui, document)
+
+			//搜索页面的点击事件
+			document.getElementById("searchInput").addEventListener("tap", function() {
+				mui.openWindow({
+					url: "../cloudstore/search.html",
+					id: "searchCloudStore"
+				})
+			});
+		</script>
+	</body>
+
+</html>

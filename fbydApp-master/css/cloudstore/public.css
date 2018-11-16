@@ -1,0 +1,316 @@
+/*上拉加载样式设置*/
+.mui-pull-caption {
+	font-size: 12px;
+	color: #595757;
+	font-weight: normal;
+}
+
+
+/*自适应代码*/
+
+#noContent {
+	background: #fff;
+	text-align: center;
+	height: 200px;
+	line-height: 200px;
+}
+
+html,
+#slider,
+.mui-content {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	/*margin-top: 45px;*/
+	width: 100%;background:#fff;
+	height: calc(100% - 45px);
+}
+
+.mui-slider-group {
+	height: calc(100% - 45px);
+}
+
+.mui-control-content {
+	background-color: white;
+}
+
+.mui-control-content .mui-loading {
+	margin-top: 50px;
+}
+
+
+/*顶部整体*/
+
+a {
+	color: #000;
+}
+
+.header {
+	height: 60px;
+	padding-top: 20px;
+	/*font-family: PingFang-SC-Medium;*/
+}
+
+
+/*去掉header默认的boxShadow*/
+
+.mui-bar-nav {
+	box-shadow: none;
+}
+
+.mui-content {
+	background: #fff;
+	margin-top: 22px;
+}
+
+
+#header .navHeader {
+	background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FBBE00));
+}
+
+
+/*输入框*/
+
+#header .searchInput {
+	margin-top: 0.5rem;
+	height: 0.915rem;
+	line-height: 0.915rem;
+	font-size: 12px;
+	vertical-align: top;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FDDD5C));
+}
+
+
+/*搜索小图标*/
+
+#header .searchIcon {
+	color: #898989;
+}
+
+.searchInput input {
+	position: relative;
+}
+
+.navHeader .headerSearch {
+	font-size: 13px;
+	color: #000;
+	line-height: 13.5px;
+	margin-top: 0.5rem;
+}
+.searchKeyWords  .searchInputKeyWord{
+	background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FDDD5C));
+}
+
+
+.mui-icon-back:before, .mui-icon-left-nav:before{
+	color:#898989;
+}
+
+
+/*商品排序规则   列表*/
+.mui-action-back{
+	color:#898989;
+}
+
+.mui-segmented-control {
+	border: none;
+	font-size: 13px;
+	color: #676767;
+}
+
+.mui-segmented-control .mui-control-item {
+	background: none;
+	border-left: none;
+	margin-right: 0.15rem;
+	color: #676767;
+}
+
+.mui-segmented-control.mui-scroll-wrapper .mui-control-item {
+}
+
+
+/*点击之后,显示下划线,去掉背景色,字体颜色变为黄色*/
+
+.mui-segmented-control .mui-control-item.mui-active {
+	color: #FBBD00;
+	/*border-bottom: 0.03rem solid #FBBD00;*/
+	background: #fff;
+}
+
+
+/*活动列表*/
+
+.allList {
+	background: #fff;
+}
+
+.activityBlock {
+	padding-bottom: 0.45rem;
+	font-size: 0.36rem
+}
+
+.activityBlock .activityItem {
+	/*float:left;*/
+}
+.activityBlock .ui-flex .activityItem{
+	width:20%;
+	/*background: red;*/
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+	/*border-bottom: 1px solid #FBBD00;*/
+	color: #FBBD00;
+}
+
+.mui-active {
+	/*border-bottom: 1px solid #FBBD00;*/
+	/*color: #FBBD00;*/
+}
+
+.mui-segmented-control.mui-scroll-wrapper .mui-control-item {
+	padding-right: 0.57rem
+}
+
+/*商品列表块  云店*/
+/*商品列表*/
+			
+			.storeGoodsList {
+				background: #EEEEEE;
+			}
+			
+			.storeGoodsList div {
+				display: inline-block;
+			}
+			
+			
+			/*商品块*/
+			.storeGoodsList .storeGoodsBlock {
+				width: calc(50% - 3px);
+				margin-bottom: 6px;
+				margin-right: 6px;
+				display: inline-block;
+				float: left;
+				background: #fff;
+			}
+			
+			.storeGoodsBlock:nth-child(even) {
+				margin-right: 0;
+			}
+			
+			.storeGoodsList .goodsImg {
+				width: 100%;
+				height: 5.34rem;
+			}
+			
+			.storeGoodsList .goodsImg img {
+				width: 100%;
+				height: 100%;
+			}
+			.storeGoodsDetail {
+				height:70px;
+				padding: 0 8px;
+				font-size: 12px;
+				/*background:red;*/
+			}
+			.goodsDetailT,
+			.goodsDetailB {
+				font-size: 10px;
+				width: 100%;
+			}
+			
+			p {
+				margin-bottom: 0;
+			}
+			
+			.goodsName {
+				font-size: 0.38rem;
+				color: #000;
+				overflow: hidden;
+				height: 20px;
+				width: 100%;
+			}
+			/*淘宝整块*/
+			
+			.taoBaoBlock {
+				/*width:2.5rem;*/
+				text-align: left;
+			}
+			
+			.tbPrice {
+				/*margin-right:0.7rem;*/
+				color: #898989;
+				text-decoration: line-through;
+			}
+			/*翻宝整块*/
+			
+			.fbPrice {
+				margin-top:2px;
+				display: inline-block;
+				text-align: left;
+				/*width:2.5rem;*/
+				/*margin-right:0.4rem;*/
+			}
+			.fbPriceNum{
+				font-size:14px;
+				color:#FF3A46;
+			}
+			.priceFlag{
+				font-size:11px;color:#FF3A46;
+			}
+			.sellNum,
+			.costPrice {
+				font-size:10px;
+				float: right;color: #898989;
+			}
+			.sellNum{
+				display:inline-block;
+				border:1px solid #fbbd00;
+				border-radius:2px;
+				height:14px;color:#fbbd00;
+				line-height:14px;
+				margin-top:5px;
+				/*padding:3px;*/
+			}
+			.fanbaoPrice {
+				font-size: 14px;
+				color: #FBBD00;
+			}
+
+			.goodsDetailB{
+				padding-bottom:3px;
+			}
+
+
+
+/*加入发送,蒙版层*/
+
+.maskDiv {
+	/*display:none;*/
+	width: 3rem;
+	height: 3rem;
+	position: absolute;
+	color: #fff;
+	line-height: 3rem;
+	text-align: center;
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	/*background:#000000;opacity: 0.5;*/
+	/*position: absolute;top: 0;width:100%;height: 100%;*/
+	text-align: center;
+	background: url(../static/img/goodsdetail/yijiar.png) rgba(0, 0, 0, 0.4) no-repeat center 25px;
+	color: #fff;
+	line-height: 100px;
+	background-size: 30px;
+	padding-top: 20px;
+}
+
+.maskDivNone {
+	display: none;
+}
+
+
+
+

@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;background: #fff;}
+a{color: #999;}
+b{font-weight: normal;position: absolute;bottom: 10px;right: 20px;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{width: 100%;padding: 70px 10px 10px;background: #fff;padding-bottom: 90px;}
+#save{margin-top: 12px;color: #595757;font-size: 16px;}
+#mianimg{width: 100%;height: 180px;border: 1px #ddd solid;border-radius: 8px;background: url(../../images/experience/myreport/add.png) no-repeat center;}
+
+/*#container div{padding: 4px 10px;text-indent: 30px;}*/
+#container textarea{line-height: 24px;font-size: 16px;min-height: 24px;width: 100%;height: 100%;padding: 0;}
+/*#container img{width: 100%;height: 180px;border: 1px #ddd solid;border-radius: 8px;margin-bottom: 10px;}*/
+
+#foot{width: 100%;position: fixed;bottom: 0;height: 80px;background: #fff;display: none;}
+#foot div{width: 33.33%;float: left;text-align: center;padding-top: 45px;color: #666;}
+#text{background: url(../../images/experience/myreport/text.png) no-repeat center 0;background-size: 40px;}
+#img{background: url(../../images/experience/myreport/image.png) no-repeat center 0;background-size: 40px;}
+#video{background: url(../../images/experience/myreport/video.png) no-repeat center 0;background-size: 40px;}
+@media screen and (max-width: 340px)  {
+	
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">体验报告主体</h1>
+    <span class="mui-pull-right" id="save">保存</span>
+</header>
+<div class="mui-content">
+	<!--<div style="position: relative;">		
+		<textarea name="" rows="" cols="" maxlength="30"></textarea>
+	</div>-->
+	<div id="container"></div>
+	<div id="part1">
+		<div id="mianimg">
+		</div>
+	</div>
+</div>
+<div id="foot">
+	<div id="text">文字</div>
+	<div id="img">图片</div>
+	<div id="video">视频</div>
+</div>
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$.plusReady(function(){
+		var ws = plus.webview.currentWebview();
+		var reportId = ws.reportId;
+		doc.querySelector("#container").innerHTML = JSON.parse(localStorage.getItem("report"+reportId)).content;
+		//弹出和关闭内容类型导航栏
+		doc.querySelector("#part1").addEventListener("tap",function(e){
+			e.stopPropagation();
+			doc.querySelector("#foot").style.display = "block";
+		})
+		doc.querySelector("body").addEventListener("tap",function(){
+			doc.querySelector("#foot").style.display = "none";
+		})
+		function getBase64Image(img) {
+            //生成比例 
+            var w = img.width,
+                h = img.height,
+                scale = w / h; 
+                w = 100 || w;              //480  你想压缩到多大，改这里
+                h = w / scale;
+            var canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, w, h);
+            var dataURL = canvas.toDataURL("image/png",0.2);
+            return dataURL // return dataURL.replace("data:image/png;base64,", ""); 
+        }
+		function getImage(imgIndex){
+			var c = plus.camera.getCamera();
+			c.captureImage(function(path){
+					plus.io.resolveLocalFileSystemURL(path,function(entry){
+						var Img = doc.getElementById("container").getElementsByTagName("img")[imgIndex];
+			            Img.src = entry.toLocalURL();
+			            Img.onload =function() { 
+			                var data = getBase64Image(Img); 
+			                //console.log(data);
+			            }
+					})
+				},
+				function( error ) {
+					$.toast(error.message);
+				}
+			)
+		};
+		//获取本地相册文件
+		function galleryImg(imgIndex){
+			plus.gallery.pick(function(path){
+					var Img = doc.getElementById("container").getElementsByTagName("img")[imgIndex];
+		            Img.src = path;
+		            Img.onload =function() { 
+		                var data = getBase64Image(Img);
+		            }
+				},
+				function(e){
+					$.toast("打开相册失败");
+				},
+				{filter:"image"}
+			)
+		};
+		$("#foot").on("tap","div",function(e){
+			e.stopPropagation();
+			var type = this.id;
+			if(type == "text"){
+				var textWrap = doc.createElement("div");
+				var Text = doc.createElement("textarea");
+				textWrap.appendChild(Text)
+				doc.querySelector("#container").appendChild(textWrap);
+			}else if(type == "img"){
+				var imgIndex = doc.getElementById("container").getElementsByTagName("img").length;
+				var imgWrap = doc.createElement("img");
+				imgWrap.style.cssText = "width: 100%;height: 180px;border: 1px #ddd solid;border-radius: 8px;margin-bottom: 10px;";
+				imgWrap.setAttribute("data-index",imgIndex);
+				doc.querySelector("#container").appendChild(imgWrap);
+				if(mui.os.plus){
+					var a = [{
+						title: "拍照"
+					}, {
+						title: "从手机相册选择"
+					}];
+					plus.nativeUI.actionSheet({
+						title: "选择图片",
+						cancel: "取消",
+						buttons: a
+					}, function(b) {
+						switch (b.index) {
+							case 0:
+								break;
+							case 1:
+								getImage(imgIndex);
+								break;
+							case 2:
+								galleryImg(imgIndex);
+								break;
+							default:
+								break
+						}
+					})	
+				}
+			}
+		})
+		
+		doc.querySelector("#save").addEventListener("tap",function(){
+			var textareaLength = doc.getElementsByTagName("textarea").length;
+			alert(textareaLength)
+			for(var i=0;i<textareaLength;i++){
+				doc.getElementsByTagName("textarea")[0].parentNode.style.cssText = "padding: 4px 10px;text-indent: 15px;";
+				doc.getElementsByTagName("textarea")[0].parentNode.innerHTML = doc.getElementsByTagName("textarea")[0].value;
+			}
+			var reportContent = JSON.parse(localStorage.getItem("report"+reportId));
+			reportContent.content += doc.querySelector("#container").innerHTML;
+			localStorage.setItem("report"+reportId,JSON.stringify(reportContent));
+			var editreport = plus.webview.currentWebview().opener();
+			mui.fire(editreport,'refresh');
+			setTimeout(function(){
+				plus.webview.close(plus.webview.currentWebview());
+			},20)
+			
+			//$.back();
+		})
+		
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			var textareaLength = doc.getElementsByTagName("textarea").length;
+			for(var i=0;i<textareaLength;i++){				
+				doc.getElementsByTagName("textarea")[i].blur();
+			}
+			setTimeout(function(){
+				plus.webview.close(plus.webview.currentWebview());
+			},20)
+		};
+	})
+})(mui,document)
+	
+</script>
+</body>
+
+</html>

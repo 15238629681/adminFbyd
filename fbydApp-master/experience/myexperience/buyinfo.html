@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;background: #eee;}
+a{color: #999;}
+b{font-weight: normal;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{padding-top: 60px;width: 100%;padding-bottom: 40px;}
+
+.goods{padding: 10px 0 10px 10px;position: relative;background: #fff;}
+.goods-img{float: left;width: 100px;height: 100px;margin-right: 10px;}
+.goods-img img{width: 100%;border-radius: 10px;}
+.title{font-size: 14px;margin-top: 6px;}
+.state{position: absolute;bottom: 20px;left: 120px;}
+.state0{padding: 2px 10px;border: 1px #ddd solid;font-size: 14px;border-radius: 4px;border-color: #fbb000;color: #fbb000;}
+.num{margin-left: 8px;font-size: 14px;}
+.num b{font-weight: normal;margin-left: 6px;}
+
+.part{padding: 10px;margin-top: 10px;background: #fff;}
+.part-title{border-bottom: 1px solid #ddd;line-height: 40px;font-size: 16px;margin-bottom: 8px;}
+.info{font-size: 14px;line-height: 24px;}
+.info b{color: #FBB000;}
+.condition{padding-left: 20px;}
+.part input{padding: 2px 10px;margin: 0;font-size: 14px;height: 20px;line-height: 20px;width: 60%;margin-left: 10px;}
+
+#send{width: 90%;background: #FBBD00;color: #fff;text-align: center;line-height: 40px;border-radius: 20px;margin: 20px auto 20px;
+font-size: 16px;}
+
+@media screen and (max-width: 340px)  {
+	.title{font-size: 14px;}
+	.state0{font-size: 12px;padding: 2px 8px;}
+	.num{font-size: 12px;}
+	.action{font-size: 12px;}
+	.part-title{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">下单体验</h1>
+</header>
+<div class="mui-content">
+	<div class="goods clean">
+		<div class="goods-img">
+			<img src="../../images/experience/experience_report/2.png" />
+		</div>
+		<div class="goods-info">
+			<div class="title">【抢先首发】Air Jorden 11 Space Jam</div>
+			<div class="state">
+				<span class="state0">申请中</span>
+				<span class="num">申请人数：<b>1546</b></span>
+			</div>
+		</div>
+	</div>
+	<div class="part">
+		<div class="part-title">一、搜索商品</div>
+		<div class="info">打开手机淘宝APP，搜索“<b>无线路由器</b>”关键词</div>
+		<div class="info">选择“<b>全部</b>”分类</div>
+		<div class="info">按“<b>销量优先</b>”排序</div>
+		<div class="info">设置筛选条件</div>
+		<div class="info condition">价格区间：100-200元</div>
+		<div class="info condition">发货地：江浙沪</div>
+		<div class="info condition">网络设备/路由器/网络相关：无线路由器</div>
+		<div class="info">在排序<b>第12名</b>找到本商品</div>
+	</div>
+	<div class="part">
+		<div class="part-title">二、确认信息</div>
+		<div class="info">仔细浏览商品详情页内容，在详情页底部找到以字母FB开头的<b>体验暗号</b>，例如：FB11227890</div>
+		<div class="info" style="margin-top: 10px;">本产品的<b>体验暗号</b>为：</div>
+		<div style="margin: 6px 0;">		
+			<input type="text" placeholder="填写暗号" />
+		</div>
+	</div>
+	<div class="part">
+		<div class="part-title">三、购买商品</div>
+		<div class="info">确认体验暗号正确后，以<b>129.11元在手机淘宝下单购买</b>。体验完成后，系统<b>返还129.11元</b>至你的翻宝账户中。</div>
+		<div class="info" style="margin-top: 10px;">在淘宝下单的<b>订单号</b>为：</div>
+		<div style="margin: 6px 0;">			
+			<input type="text" placeholder="填写订单号" />
+		</div>
+		<div id="send">提交信息</div>
+	</div>
+</div>
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$.plusReady(function(){
+		
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+		};
+	})
+})(mui,document)
+	
+</script>
+</body>
+
+</html>

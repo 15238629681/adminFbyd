@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="MobileOptimized" content="320" />
+<title></title>
+<link href="../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+<style>
+html,body{width: 100%;height: 100%;background: #fff;}
+body{padding-bottom: 90px;}
+ul{padding: 0;margin: 0;width: 100%;}
+ul,li{list-style:none;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+#loading{width: 100%;height: 100%;position: absolute;top: 0;background: url(../images/icons/loading.gif) no-repeat center #fff;
+z-index: 99;background-size: 70%;}
+.mui-content{background: #fff;position: relative;width: 100%;height: 100%;}
+#back{position: absolute;display: inline-block;width: 30px;height: 30px;z-index: 98;background: rgba(0,0,0,0.25);top: 30px;left: 10px;border-radius: 50%;;}
+.mui-icon-back:before, .mui-icon-left-nav:before{color: #fff;width: 30px;height: 30px;display: inline-block;text-align: center;line-height: 30px;}
+
+#share-img{width: 100%;height: 100%;background-repeat: no-repeat;background-size: 95%;background-position: center 10px;}
+#timg{width:320px;height: 100%;}
+
+#share-button{position: fixed;bottom: 0;width: 100%;background: #f7f7f7;height: 90px;}
+#share-button li{float: left;width: 20%;text-align: center;font-size: 14px;background-repeat: no-repeat;background-size: 60%;
+background-position: center 10px;height: 80px;padding-top: 60px;}
+#wx{background-image: url(../images/icons/wechat.png);}
+#wxtimeline{background-image: url(../images/icons/pengyou.png);}
+#qq{background-image: url(../images/icons/qq.png);}
+#qzone{background-image: url(../images/icons/qzone.png);}
+#sina{background-image: url(../images/icons/weibo.png);}
+#pic{
+	width:100px;
+	height:100px;
+}
+</style>
+</head>
+<body>
+<!--<div id="loading"></div>-->
+<div class="mui-content">
+	<div id="back" class="mui-icon mui-icon-back mui-action-back"></div>
+    <div id="share-img">
+    </div>
+    <div id="share-button">
+    	<ul class="clean">
+    		<li class="share-btn" id="wx">微信好友</li>
+    		<li class="share-btn" id="wxtimeline">朋友圈</li>
+    		<li class="share-btn" id="qq">QQ</li>
+    		<li class="share-btn" id="qzone">QQ空间</li>
+    		<li class="share-btn" id="sina">新浪微博</li>
+    	</ul>
+    </div>
+	<div id="dcontent" class="dcontent" style="display: none;">
+		<img id="pic" src=""/>
+	</div>
+</div>
+</body>
+<script src="../js/mui.min.js"></script>
+<script src="../js/md5.min.js"></script>
+<script src="../js/imgload.js"></script>
+<script>
+(function($,doc){
+	
+	//判断数据请求是否成功
+	var loadingStyle = document.defaultView.getComputedStyle(doc.getElementById("loading"), null);
+	setTimeout(function(){
+		if(loadingStyle.display == "block"){					
+			$.confirm('页面暂时去了火星','',['取消','返回列表'],function (e) {
+				if(e.index==1){
+					plus.webview.close(plus.webview.currentWebview());
+				}
+			},'div')
+		}
+	},5000)
+	
+	$.init({
+		swipeBack:true //启用右滑关闭功能
+	});
+	var productinfo = {
+		gid:"",
+		num_iid:""
+	};
+	window.addEventListener("shareinfo",function(e){
+		productinfo.gid= e.detail.gid;
+		productinfo.num_iid= e.detail.num_iid;
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var shares=null;
+		$.plusReady(function(){
+			$.ajax({
+				type:"post",
+				url:"https://app.fanbaoyundian.com/appapi/forward.app.php",
+				data:{
+        			gid:productinfo.gid,
+					num_iid:productinfo.num_iid,
+					uid:user_id,
+					token:user_token,
+					timestamp:time
+        		},
+        		timeout:10000,
+        		success:function(data){
+        			var imgUrl = "http://fanbaoyundian.com"+data.tuiimg.substring(2,data.tuiimg.length);
+        			document.getElementById("share-img").style.backgroundImage = "url("+imgUrl+")";
+      				document.getElementById("share-img").innerHTML = '<img id="timg" style="display:none" src="../images/icons/loading.gif" data-src="'+imgUrl+'" onload="load(this)"/>';
+      				document.getElementById("loading").style.display = "none";
+        			setTimeout(function(){
+        				//alert(localImgurl);
+
+//						初始化服务对象的数据
+        				function updateSerivces(){
+
+//        					分享服务对象   s={id:"weixin",}
+		 					plus.share.getServices(function(s){
+		 					shares={};
+		 					for(var i in s){  //i为属性名
+								var t=s[i];  // t为属性值
+								shares[t.id]=t;  //t.id="weixin"
+							}
+		 				}, function(e){
+		 						plus.nativeUI.toast('获取分享服务列表失败');
+		 					});
+
+		 				};
+		 				updateSerivces();
+
+//						分享操作
+		 				function shareAction(sb,bh) {
+//							sb=[{title:'微信好友',s:ss,x:'WXSceneSession'},{title:'微信朋友圈',s:ss,x:'WXSceneTimeline'},{title:'QQ',s:ss},{title:'新浪微博',s:ss}];
+		 					if(!sb||!sb.s){
+		 						plus.nativeUI.toast('无效的分享服务！');
+		 						return;
+		 					}
+		 					var msg={content:"",extra:{scene:sb.x}};
+		 					if(pic&&pic.realUrl){
+		 						msg.pictures=[pic.realUrl];
+		 					}
+		 					// 发送分享
+		 					if(sb.s.authenticated){
+		 						//plus.nativeUI.toast('---已授权---');
+		 						shareMessage(msg, sb.s);
+		 					}else{
+		 						//plus.nativeUI.toast('---未授权---');
+		 						sb.s.authorize(function(){
+		 							shareMessage(msg,sb.s);
+		 						}, function(e){
+		 							plus.nativeUI.toast('认证授权失败：'+e.code+' - '+e.message);
+		 						});
+		 					}
+		 				}
+		 				function shareMessage(msg, s){
+		 					s.send(msg, function(){		 						
+		 						plus.nativeUI.toast('分享到'+s.description+'成功！');
+		 						plus.webview.close(plus.webview.currentWebview());
+		 					}, function(e){
+		 						plus.nativeUI.toast('分享到'+s.description+'失败！');
+		 					});
+		 				}
+						function loadImg(callback){
+							var url = "file://"+localImgurl;
+							setTimeout(function(){								
+								plus.io.resolveLocalFileSystemURL(url, function(entry){
+									pic.src=entry.toLocalURL();
+									pic.realUrl=url;
+								}, function(e){
+									$.toast('读取图片错误：'+e.message);
+								});
+								callback();
+							},200)
+						};
+
+//						分享按钮
+						$("#share-button").on("tap",".share-btn",function(){
+      						var this_ = this;
+		 					// 更新分享列表   参数是回调函数
+		 					loadImg(function(){
+		 						setTimeout(function(){
+									var shareBts=[];
+
+									//微信分享
+									var ss=shares['weixin'];
+									ss&&ss.nativeClient&&(
+										shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}),
+										shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'})
+									);
+									ss=shares['qq'];
+									ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});
+
+									ss=shares['sinaweibo'];
+									ss&&shareBts.push({title:'新浪微博',s:ss});
+
+									var shareType = this_.getAttribute("id");
+									switch (shareType)
+									{
+										case "wx":
+											shareAction(shareBts[0],false);
+											break;
+										case "wxtimeline":
+											shareAction(shareBts[1],false);
+											break;
+										case "qq":
+											shareAction(shareBts[2],false);
+											break;
+										case "qzone":
+											shareAction(shareBts[2],false);
+											break;
+										case "sina":
+											shareAction(shareBts[3],false);
+											break;
+									}
+		 						},200)
+		 					})
+     					});
+
+        			},500)
+        		},
+        		error:function(xhr,type,errorThrown){
+					if(type=="timeout"){
+						plus.nativeUI.toast("请求超时，请检查网络");
+					}
+					plus.nativeUI.toast(errorThrown);
+				}
+			});
+		})
+	})
+	//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+})(mui,document)
+</script>
+</html>

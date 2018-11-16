@@ -1,0 +1,29 @@
+body{color: #333;}
+/* clear float */
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+span{display: inline-block;}
+.item{background: #fff;margin: 8px 0;}
+.title{margin-left: 10px;border-bottom: 1px solid #eee;line-height: 40px;font-size: 14px;}
+.goods{padding: 10px 0 10px 10px;}
+.goods-img{float: left;width: 100px;height: 100px;margin-right: 10px;}
+.goods-img img{width: 100%;border-radius: 6px;}
+.goods-info{}
+.state{margin-top: 10px;margin-bottom: 25px;}
+.state0{padding: 2px 10px;border: 1px #ddd solid;font-size: 14px;border-radius: 4px;}
+.state1{border-color: #FBBD00;color: #FBBD00;}
+.state2{border-color: #7fd53e;color: #7fd53e;}
+.state3{border-color: #ff3a46;color: #ff3a46;}
+.state4{border-color: #fd8619;color: #fd8619;}
+.state5{border-color: #0bc840;color: #0bc840;}
+.state6{background: #eee;}
+.num{margin-left: 8px;font-size: 14px;}
+.num b{font-weight: normal;margin-left: 6px;}
+.action{padding: 2px 10px;font-size: 14px;color: #fff;background: #FBBD00;border-radius: 10px;}
+
+@media screen and (max-width: 340px)  {
+	.state0{font-size: 12px;padding: 2px 8px;}
+	.num{font-size: 12px;}
+	.action{font-size: 12px;}
+}

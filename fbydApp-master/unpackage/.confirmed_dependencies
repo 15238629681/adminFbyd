@@ -1,0 +1,485 @@
+{
+	"share/fansinvit.html": {
+		"resources": [
+			"images/my/share.png",
+			"images/my/code-share.png"
+		]
+	},
+	"experience/experiencespec.html": {
+		"resources": [
+			"images/experience/icons/experiencematerialtygc.png",
+			"images/experience/icons/experiencematerialxsty.png",
+			"images/experience/icons/experiencematerialwxz.png",
+			"js/rem.js",
+			"images/experience/goods1.png",
+			"css/experience/public.css",
+			"images/experience/icons/experiencematerialyqhy.png",
+			"css/experience/goodsList.css",
+			"js/experience/experiencespecorder.js",
+			"css/mui.min.css",
+			"images/experience/goods2.png",
+			"images/experience/icons/experiencematerialwdty.png",
+			"images/cloudstore/ishop.png",
+			"css/all.css",
+			"css/storehouse/searchblock.css",
+			"images/storehouse/icons/loading.gif",
+			"css/experience/order.css",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"fonts/iconfont.ttf"
+		],
+		"refer": [
+			"experience/experiencespecdragleftmenu.html",
+			"experience/reportlist.html",
+			"experience/myexperience/mylist.html",
+			"experience/experienceproduct.html",
+			"experiencecategory/category.html",
+			"experience/experiencesearch.html"
+		]
+	},
+	"commont.html": {
+		"resources": [
+			"images/cloudstore/icons/1color.png",
+			"images/cloudstore/icons/3.png",
+			"images/cloudstore/icons/2color.png",
+			"fonts/mui.ttf",
+			"images/cloudstore/icons/2.png",
+			"cloudstore/cloudstore.html",
+			"images/cloudstore/icons/4.png",
+			"images/cloudstore/icons/1.png",
+			"images/cloudstore/icons/5.png",
+			"images/cloudstore/icons/5color.png",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"share/fansinvit.html",
+			"experience/experiencespec.html",
+			"myb/my.html",
+			"cloudstore/cloudstore.html",
+			"ishop/ishop.html"
+		]
+	},
+	"experience/experiencespecdragleftmenu.html": {
+		"resources": [
+			"js/public.js",
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"js/rem.js"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"js/app.js",
+			"images/login/weixin.png",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/login/log.png",
+			"manifest.json",
+			"js/mui.enterfocus.js"
+		],
+		"refer": [
+			"commont.html"
+		]
+	},
+	"myb/my.html": {
+		"resources": [
+			"images/my/vip.png",
+			"images/my/part4-icon-4.png",
+			"images/my/open.png",
+			"images/my/part4-icon-1.png",
+			"images/my/part5-icon-2.png",
+			"images/my/part-2-1-icon-2.png",
+			"images/my/part3-icon-2.png",
+			"images/my/group.png",
+			"images/my/gupiao.png",
+			"images/my/part3-icon-1.png",
+			"images/my/part5-icon-3.png",
+			"images/my/wxcode.png",
+			"images/my/part4-icon-5.png",
+			"images/my/part4-icon-2.png",
+			"images/my/money.png",
+			"images/my/part3-icon-4.png",
+			"images/my/part-2-1-icon-1.png",
+			"images/my/part4-icon-3.png",
+			"images/my/part3-icon-5.png",
+			"images/my/part5-icon-1.png",
+			"css/android.css",
+			"images/my/part3-icon-3.png",
+			"images/my/message.png",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"myb/store.html",
+<<<<<<< HEAD
+			"storehouse/store/storehouse.html"
+=======
+			"experience/myexperience/mylist.html",
+			"myb/fansinvit.html"
+>>>>>>> a36028278eb5f505e4baca09d8a25a9724c026d9
+		]
+	},
+	"cloudstore/cloudstore.html": {
+		"resources": [
+			"images/icons/sea.png",
+			"images/cloudstore/icons/cloudstoreDelicous_food.png",
+			"images/cloudstore/icons/cloudstoreFight_groups.png",
+			"images/cloudstore/icons/cloudstoreOn_trial.png",
+			"images/cloudstore/icons/cloudstoreshopping.png",
+			"images/cloudstore/icons/cloudstoreDigital_appliance.png",
+			"css/cloudstore/public.css",
+			"images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png",
+			"images/cloudstore/icons/cloudstoreMetrosexual_man_trend.png",
+			"css/cloudstore/searchblock.css",
+			"images/cloudstore/icons/cloudstoreBrand_discount.png",
+			"images/cloudstore/icons/cloudstoreHome_men_and_women.png",
+			"manifest.json",
+			"css/cloudstore/cloudstore.css",
+			"images/cloudstore/icons/cloudstoreMoney_saving_mom.png",
+			"images/my/wxcode.png",
+			"js/rem.js",
+			"css/mui.min.css",
+			"css/all.css",
+			"images/my/message.png",
+			"fonts/mui.ttf",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"my/messagelist.html",
+			"cloudstore/search.html"
+		]
+	},
+	"ishop/ishop.html": {
+		"resources": [
+			"images/my/message.png",
+			"images/cloudstore/ishop.png",
+			"css/cloudstore/searchblock.css",
+			"css/cloudstore/cloudstore.css",
+			"css/mui.min.css",
+			"css/all.css",
+			"js/rem.js"
+		]
+	},
+	"experience/reportlist.html": {
+		"resources": [
+			"images/cloudstore/icons/usericon.png",
+			"images/experience/experience_report/1.png",
+			"images/experience/experience_report/like.png",
+			"images/experience/experience_report/enjoy.png",
+			"images/experience/experience_report/message.png",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"experience/report.html"
+		]
+	},
+	"experience/report.html": {
+		"resources": [
+			"images/experience/experience_report/liked.png",
+			"images/experience/experience_report/msg.png",
+			"js/mui.min.js",
+			"images/experience/experience_report/3.png",
+			"css/mui.min.css",
+			"images/experience/experience_report/2.png",
+			"images/cloudstore/icons/usericon.png",
+			"images/experience/experience_report/1.png",
+			"images/experience/experience_report/like.png",
+			"images/experience/experience_report/enjoy.png",
+			"images/experience/experience_report/message.png",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"experience/otherexperience/othermainpage.html"
+		]
+	},
+	"experience/myexperience/mylist.html": {
+		"resources": [
+			"js/mui.min.js",
+			"experience/myexperience/experstate1.html",
+			"js/webviewGroup.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"experience/myexperience/experstate1.html",
+			"experience/myexperience/experstate2.html",
+			"experience/myexperience/experstate4.html",
+			"experience/myexperience/experstate3.html",
+			"experience/myexperience/experstate5.html"
+		]
+	},
+	"experience/myexperience/experstate1.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/experience/experience_report/2.png",
+			"css/experience/myexperieence.css"
+		]
+	},
+	"experience/myexperience/experstate2.html": {
+		"resources": [
+			"css/experience/myexperieence.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"experience/myexperience/submitreason.html"
+		]
+	},
+	"myb/store.html": {
+		"resources": [
+			"images/my/storemanage-part2.png",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/my/storemanage-part1.png",
+			"images/my/storemanage-part3.png"
+		],
+		"refer": [
+			"myb/salelist.html"
+		]
+	},
+	"myb/salelist.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"css/mui.min.css"
+		]
+	},
+<<<<<<< HEAD
+	"experience/experienceproduct.html": {
+		"resources": [
+			"images/experience/icons/experienceproductmaterailshare.png",
+			"images/experience/icons/tylc.png",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/experience/icons/experiencematerialwxz.png",
+			"images/cloudstore/ishop.png",
+			"js/rem.js"
+		]
+	},
+	"experiencecategory/category.html": {
+		"resources": [
+			"css/cloudstore/cloudstorecategory.css",
+			"experiencecategory/ladies.html",
+			"js/webviewGroup.js",
+			"css/cloudstore/searchblock.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/rem.js"
+		],
+		"refer": [
+			"experiencecategory/ladies.html",
+			"experience/experiencesearch.html"
+		]
+	},
+	"experiencecategory/ladies.html": {
+		"resources": [
+			"js/experience/category/publicOrder.js",
+			"js/experience/category/category.js",
+			"css/experience/experiencecategory.css",
+			"js/experience/category/angle.js",
+			"js/experience/category/sliderOrder2.js",
+			"images/experience/goods1.png",
+			"fonts/mui.ttf",
+			"images/experience/icons/experiencematerialwxz.png",
+			"js/rem.js",
+			"css/experience/goodsList.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/experience/goods2.png",
+			"images/cloudstore/ishop.png",
+			"images/storehouse/icons/loading.gif",
+			"css/experience/order.css"
+		]
+	},
+	"my/messagelist.html": {
+		"resources": [
+			"images/my/msg1.png",
+			"images/my/msg2.png",
+			"images/my/msg3.png"
+		]
+	},
+	"experience/experiencesearch.html": {
+		"refer": [
+			"experience/experiencesearchlist.html"
+		],
+		"resources": [
+			"css/cloudstore/searchblock.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/all.css",
+			"js/rem.js"
+		]
+	},
+	"experience/experiencesearchlist.html": {
+		"refer": [
+			"experience/experiencesearchlistdragleftmenu.html"
+		],
+		"resources": [
+			"css/cloudstore/searchblock.css",
+			"css/experience/public.css",
+			"images/my/message.png",
+			"js/mui.min.js",
+			"css/experience/goodsList.css",
+			"js/experience/experiencespecorder.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/rem.js",
+			"css/experience/order.css"
+		]
+	},
+	"cloudstore/search.html": {
+		"refer": [
+			"cloudstore/cloudstoresearchlist.html"
+		]
+	},
+	"cloudstore/cloudstoresearchlistdragleftmenu.html": {
+		"resources": [
+			"css/dragleft.css"
+		]
+	},
+	"cloudstore/cloudstoresearchlist.html": {
+		"resources": [
+			"images/cloudstore/icons/choose.jpg",
+			"images/cloudstore/icons/choosecolor.jpg",
+			"css/storehouse/iconfont.css",
+			"js/storehous/iconfont.js"
+		],
+		"refer": [
+			"cloudstore/cloudstoresearchlistdragleftmenu.html"
+		]
+	},
+	"storehouse/store/storehouse.html": {
+		"resources": [
+			"images/goodsdetail/yijiar.png",
+			"images/storehouse/icons/pin.png",
+			"css/storehouse/public.css",
+			"images/storehouse/icons/qianggou.png",
+			"images/storehouse/icons/sea.png",
+			"images/storehouse/icons/juhuasuan.png",
+			"images/storehouse/icons/order.png"
+		],
+		"refer": [
+			"storecategory/category.html"
+		]
+	},
+	"storecategory/lady.html": {
+		"resources": [
+			"js/storehous/category/choose.js",
+			"js/storehous/category/publicOrder.js",
+			"js/storehous/category/angle.js",
+			"js/storehous/category/category.js",
+			"css/storehouse/zhpx.css"
+		],
+		"refer": [
+			"storecategory/cloudstorecategorydragleftmenu1.html"
+		]
+	},
+	"storecategory/category.html": {
+		"resources": [
+			"storecategory/lady.html"
+		],
+		"refer": [
+			"storecategory/lady.html"
+=======
+	"experience/otherexperience/othermainpage.html": {
+		"resources": [
+			"images/experience/experience_report/foucs.png",
+			"js/mui.min.js",
+			"js/webviewGroup.js",
+			"experience/otherexperience/expreport.html",
+			"css/mui.min.css",
+			"images/experience/experience_report/top-fouse.png"
+		],
+		"refer": [
+			"experience/otherexperience/expreport.html",
+			"experience/otherexperience/focus.html",
+			"experience/otherexperience/comment.html",
+			"experience/otherexperience/fans.html"
+		]
+	},
+	"experience/otherexperience/expreport.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"experience/otherexperience/focus.html": {
+		"resources": [
+			"images/experience/experience_report/focused.png",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"experience/otherexperience/comment.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"experience/otherexperience/fans.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"experience/myexperience/submitreason.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"experience/myexperience/experstate4.html": {
+		"resources": [
+			"css/experience/myexperieence.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"experience/myexperience/editreport.html"
+		]
+	},
+	"experience/myexperience/experstate3.html": {
+		"resources": [
+			"css/experience/myexperieence.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"experience/myexperience/buyinfo.html"
+		]
+	},
+	"experience/myexperience/buyinfo.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"experience/myexperience/experstate5.html": {
+		"resources": [
+			"css/experience/myexperieence.css",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"experience/myexperience/editreport.html": {
+		"resources": [
+			"images/experience/myreport/add.png",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"myb/fansinvit.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/my/b-code-share.png"
+>>>>>>> a36028278eb5f505e4baca09d8a25a9724c026d9
+		]
+	}
+}

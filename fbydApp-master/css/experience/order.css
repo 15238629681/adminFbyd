@@ -1,0 +1,228 @@
+
+
+/*公共排序*/
+/*排序方式  公共部分*/
+.publicOrder {
+	/*position: fixed;*/
+	/*top: 60px;*/
+	width: 100%;
+	background: #fff;
+	/*z-index: 10;*/
+}
+
+#orderBlock {
+	width: 100%;
+	height: 1.2rem;
+	line-height: 1.2rem;
+	font-size: 0.39rem;
+	color: #595757;
+}
+
+#orderBlock .zhpxText {
+	width: 3.6rem;
+	float: left;
+	text-align: left;
+	color: #FBBD00;
+	margin-left: 0.525rem;
+}
+
+#orderBlock .zhpxText .upArrow {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-top: 0.18rem solid #FBBD00;
+	border-left: 0.18rem solid transparent;
+	border-right: 0.18rem solid transparent;
+}
+
+#orderBlock .xlText {
+	margin-right: 0.8rem;
+	float: left;
+}
+
+#orderBlock .yhldText {
+	/*margin-right: 0.5rem;*/
+	margin: 0.21rem 0.54rem 0.21rem 0;
+	display: inline-block;
+	border-right: 1px solid #E0E0E0;
+	/*background:red;*/
+	padding-right: 0.51rem;
+	vertical-align: top;
+	height: 0.75rem;
+	line-height: 0.75rem;
+}
+
+
+/*sxText  menu*/
+
+#orderBlock .sxText #menu {
+	margin-top: 0.23rem;
+	color: #333;
+	margin-left:0.1rem;
+	/*font-size:20px;*/
+}
+#orderBlock .sxText .mui-icon{
+	font-size:20px;
+}
+
+/*综合排序*/
+/*综合排序    内容块*/
+
+.zhpxList {
+	font-size: 12px;
+	color: #676767;
+	background: #fff;
+	width: 100%;
+	display: none;
+	border-top: 1px solid #EEEEEE;
+}
+
+.publicOrder .zhpxList li {
+	margin-right: 0.54rem;
+}
+
+.defaultOrder .selectIcon {
+	display: inline-block;
+}
+
+.kOrderBlock .sxIcon,
+.kOrderBlock .sxIconColor {
+	width: 0.2rem;
+	height: 0.24rem;
+	display: inline-block;
+	margin-left: 0.24rem;
+	/*position: absolute;right:0;float:right;*/
+}
+
+.kOrderBlock .sxIcon img,
+.kOrderBlock .sxIconColor img {
+	width: 0.2rem;
+	height: 0.24rem;
+	margin-left: 0.1rem;
+}
+
+.kOrderBlock .sxIconColor {
+	display: none;
+}
+
+
+/*综合排序列表   小图标*/
+
+@font-face {
+	font-family: "iconfont";
+	src: url('../../fonts/iconfont.ttf?t=1503591788319') format('truetype');
+	/* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+}
+
+.iconfont {
+	font-family: "iconfont" !important;
+	font-size: 26px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+}
+
+.icon-selected:before {
+	content: "\e6ad";
+}
+
+
+/*综合排序*/
+
+.clearFloat {
+	clear: both;
+}
+
+.sliderCard .zhpxList li {
+	margin: 0 0.52rem 0 0;
+}
+
+.selectIcon {
+	display: none;
+}
+
+
+/*默认情况下,综合排序  选中*/
+
+.zhpxList .defaultOrder a {
+	color: #FBBD00;
+}
+
+.zhpxList .defaultOrder .selectIcon {
+	display: inline-block;
+}
+
+.zhpxList .defaultOrder {
+	color: #FBBD00;
+}
+
+.defaultOrder .selectIcon {
+	display: inline-block;
+}
+
+.zhpxList li .selectIcon {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	line-height: 40px;
+	height: 40px;
+	right: 10px;
+	color: #FBBD00;
+}
+
+
+/*筛选弹出层*/
+
+.popDiv {
+	font-size: 12px;
+	display: inline-block;
+	position: fixed;
+	right: 0;
+	/*top: 344px;*/
+	z-index: 100;
+	background:#fff;
+	color:#333;border: 1px solid #E0E0E0;
+	display: none;
+}
+
+.popDiv ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.popDiv li {
+	margin: 0 10px;
+	width: 60px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+
+.popDiv li:first-child {
+	color: #FBBD00;border-bottom: 1px solid #E0E0E0;
+}
+
+.popDiv .upArrow {
+	display: inline-block;
+	position: absolute;
+	top: -5px;
+	left: 1.15rem;
+	width: 0;
+	height: 0;
+	border-bottom: 0.2rem solid #fff;
+	border-left: 0.2rem solid transparent;
+	border-right: 0.2rem solid transparent;
+}
+
+
+/*遮罩层*/
+			.maskDiv {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;display:none;
+				z-index: 99;
+				background-color: rgba(0, 0, 0, 0);
+			}
+			

@@ -1,0 +1,108 @@
+
+
+/* 搜索框 */
+.header {
+	height: 60px;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF500), to(#FBBF00));
+}
+/*回退按钮*/
+.mui-icon-back:before, .mui-icon-left-nav:before {
+    color: #898989;
+}
+.header .mui-icon-search {
+	position: absolute;
+	left: 15%;
+	color: #898989;
+}
+
+#searchInput {
+	display: inline-block;
+	margin-top: 10px;
+	border-radius: 15px;
+	width: 85%;
+	height: 30px;margin:0 auto;
+	border: none;
+	color: #898989;
+	font-size: 14px;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from(#FFF75C), to( #FDDC5C));
+	padding-left: 1rem;
+}
+
+.header .searchText {
+	display: inline-block;
+	font-size: 12px;
+	margin-left: 8px;
+	/*margin-top: 18px;*/
+	color: #000;
+}
+
+
+/*搜索关键字模块   div*/
+
+.searchKeyWords {
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	position:fixed;
+	top: 0;
+	left: 0;
+	z-index: 98;
+}
+
+.searchWordsDiv .header {
+	background: #fff;
+}
+
+.searchWordsDiv .header input.searchInputKeyWord {
+	border: none;
+	width: 7.95rem;
+	height: 30px;
+	font-size: 14px;
+	border-radius: 0.45rem;
+	background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FDDD5C));
+	margin-top: 0.4rem;
+	margin-right: 0.35rem;
+	color: #898989;
+	padding-left: 1rem;
+}
+
+.searchWordsDiv .header .searchText {
+	color: #898989;
+	/*height:60px;line-height:60px;*/
+}
+
+
+/*/*搜索关键字    内容区域*/
+
+.searchWordsDiv .historyDiv {
+	background: #fff;
+	margin-top: 70px;
+	padding: 0 0.345rem;
+	font-size: 0.36rem;
+	color: #595757;
+	/*background: red;*/
+}
+
+.searchWordsDiv .historyDiv .historySearchWord {
+	color: #595757;
+}
+
+.searchWordsDiv .historySearchWord li {
+	float: left;
+	margin-right: 0.735rem;
+	margin-bottom: 0.645rem;
+	background: #EFEFEF;
+	height: 23px;
+	padding: 0 12px;
+	border-radius: 12px;
+}
+
+@media screen and (max-width: 340px)  {
+	#searchInput {
+		font-size: 12px;
+	}
+	.searchWordsDiv .header input.searchInputKeyWord{
+		font-size: 12px;
+	}
+}

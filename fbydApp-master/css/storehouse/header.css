@@ -1,0 +1,39 @@
+/*<script src="../../js/rem.js"></script>
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/all.css" />*/
+
+/*//页面头部    黄色渐变背景*/
+
+			#header {
+				height: 60px;
+				/*line-height:70px;*/
+				/*height:60px;*/
+				background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF500), to(#FBBF00));
+			}
+			
+			#header .mui-icon-search {
+				position: absolute;
+				margin-left: 5px;
+				margin-top: -3px;
+				color: #898989;
+			}
+			
+			#searchInput {
+				display: inline-block;
+				margin-top: 0.3rem;
+				border-radius:0.45rem;
+				width: 8.4rem;
+				height: 0.9rem;
+				border: none;
+				color: #898989;
+				font-size: 12px;
+				background: -webkit-gradient(linear, 0 0, 100% 0, from(#FFF75C), to( #FDDC5C));
+			}
+			
+			#header .searchText {
+				display: inline-block;
+				font-size: 12px;
+				margin-left: 0.24rem;
+				/*margin-top: 18px;*/
+				color: #000;
+			}

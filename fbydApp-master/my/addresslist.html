@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+a{color: #999;}
+b{font-weight: normal;}
+.mui-pull-right{margin-top: 12px;color: #595757;}
+
+.address-wrap{padding: 10px;background: #fff;margin-bottom: 10px;}
+.name span{display: inline-block;width: 50%;float: left;font-size: 16px;}
+.name .user-phone{text-align: right;}
+.address{font-size: 14px;padding-top: 10px;padding-bottom: 10px;border-bottom: 1px solid #eee;color: #3E3A39;}
+.action{padding-top: 10px;font-size: 14px;color: #3E3A39;}
+.action-left{float: left;}
+.action-right{float: right;}
+.action-left b{position: relative;top: -5px;}
+.action span{display: inline-block;width: 20px;height: 20px;border-radius: 50%;border:1px solid #666;margin-right: 4px;}
+.action .chosen{background: url(../images/my/mysetting/chosen.png) no-repeat;background-size: cover;border-color: #FBBD00;}
+.action-right a{display: inline-block;height: 24px;line-height: 24px;padding-left: 24px;margin-right: 10px;color:#333;}
+.edit{background: url(../images/my/mysetting/edit.png) no-repeat 0 center;background-size: 24px;}
+.delete{background: url(../images/my/mysetting/delete.png) no-repeat 0 center;background-size: 24px}
+
+#null{position: absolute;top: 50%;left: 50%;width: 200px;margin-left: -100px;height: 100px;background: url(../images/my/mysetting/part2-icon-1-2.png) no-repeat center 0;
+background-size: 30px;padding-top: 32px;margin-top: -50px;display: none;}
+#null p{text-align: center;font-size: 16px;}
+#toadd{padding:0;border:none;width: 200px;border-radius: 8px;height: 36px;line-height: 36px;text-align: center;
+background:#FBBD00;color: #333;}
+
+@media screen and (max-width: 340px)  {
+	.address{font-size: 12px;}
+	.name span{font-size: 14px;}
+	.action{padding-top: 10px;font-size: 12px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">收货地址</h1>
+    <a class="mui-pull-right" id="add-address">添加</a>
+</header>
+<div id="null">
+	<p>还没有收货地址哦!</p>
+	<div id="toadd">添加地址</div>
+</div>
+<div class="mui-content">
+</div>
+<div class="address-wrap" style="display: none;">
+	<div class="name clean">
+		<span class="user-name" data-name=""></span>
+		<span class="user-phone" data-phone=""></span>
+	</div>
+	<div class="address" data-province="" data-city="" data-country="" data-detail="">
+		
+	</div>
+	<div class="action clean">
+		<div data-id="1" class="action-left"><span></span><b>设为默认</b></div>
+		<div class="action-right">
+			<a href="#" class="edit" data-id="1">编辑</a>
+			<a href="#" class="delete" data-id="1">删除</a>
+		</div>
+	</div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	var firstItem = doc.getElementsByClassName("address-wrap")[0];
+	var address_wrap = doc.getElementsByClassName("mui-content")[0];
+	function createItem(addressinfo){
+		item = firstItem.cloneNode(true);
+		item.getElementsByClassName("user-name")[0].innerHTML = addressinfo.name;
+		item.getElementsByClassName("user-name")[0].setAttribute("data-name",addressinfo.name);
+		item.getElementsByClassName("user-phone")[0].innerHTML = addressinfo.phone;
+		item.getElementsByClassName("user-phone")[0].setAttribute("data-phone",addressinfo.phone);
+		item.getElementsByClassName("address")[0].innerHTML = addressinfo.province+addressinfo.city+addressinfo.country+addressinfo.detail;
+		item.getElementsByClassName("address")[0].setAttribute("data-province",addressinfo.province);
+		item.getElementsByClassName("address")[0].setAttribute("data-city",addressinfo.city);
+		item.getElementsByClassName("address")[0].setAttribute("data-country",addressinfo.country);
+		item.getElementsByClassName("address")[0].setAttribute("data-detail",addressinfo.detail);
+		item.getElementsByClassName("action-left")[0].setAttribute("data-id",addressinfo.id);
+		item.getElementsByClassName("edit")[0].setAttribute("data-id",addressinfo.id);
+		item.getElementsByClassName("delete")[0].setAttribute("data-id",addressinfo.id);
+		if(addressinfo.isdefault == 1){
+			item.getElementsByClassName("action-left")[0].getElementsByTagName("span")[0].className = "chosen";
+			item.getElementsByClassName("action-left")[0].getElementsByTagName("b")[0].innerHTML = "已设为默认";
+			item.getElementsByClassName("action-left")[0].getElementsByTagName("b")[0].style.color = "#FBBD00";
+		};
+		item.style.display = "block";
+		return item;
+	}
+//	var action
+	function getAddress(){
+//		action = action || "";
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/address.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				uid:user_id,
+				//action:action,
+			},
+			success:function(data){
+				//alert(JSON.stringify(data));
+				if(data.addresslist.length==0){
+					doc.getElementById("null").style.display = "block";
+				}
+				if(data.state==1){
+					for(var i=0;i<data.addresslist.length;i++){
+						var list = createItem(data.addresslist[i]);
+						address_wrap.appendChild(list);
+					}
+					//设为默认收货地址
+					$(".address-wrap").on("tap",".action-left",function(){
+						var id = this.getAttribute("data-id");
+						var this_ = this;
+						//alert(id);
+						$.ajax({
+							type:"post",
+							url:"https://app.fanbaoyundian.com/appapi/address.app.php",
+							data:{
+								token:user_token,
+								timestamp:time,
+								uid:user_id,
+								id:id,
+								action:"set"
+							},
+							success:function(data){
+								//alert(JSON.stringify(data))
+								if(data.state==1){
+									var len = doc.getElementsByClassName("action-left").length;
+									for(var i=0;i<len;i++){
+										doc.getElementsByClassName("action-left")[i].getElementsByTagName("span")[0].className = "";
+										doc.getElementsByClassName("action-left")[i].getElementsByTagName("b")[0].innerHTML = "设为默认";
+										doc.getElementsByClassName("action-left")[i].getElementsByTagName("b")[0].style.color = "#333";
+									}
+									this_.getElementsByTagName("span")[0].className = "chosen";
+									this_.getElementsByTagName("b")[0].innerHTML = "已设为默认";
+									this_.getElementsByTagName("b")[0].style.color = "#FBBD00";
+								}else{
+									$.toast(data.message);
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								if(type=="timeout"){
+									$.toast("请求超时，请检查网络");
+								}
+							}
+						});
+					});
+					//删除收货地址
+					$(".address-wrap").on("tap",".delete",function(){
+						var id = this.getAttribute("data-id");
+						var this_ = this;
+						$.ajax({
+							type:"post",
+							url:"https://app.fanbaoyundian.com/appapi/address.app.php",
+							data:{
+								token:user_token,
+								timestamp:time,
+								uid:user_id,
+								id:id,
+								action:"delete"
+							},
+							success:function(data){
+								if(data.state==1){
+									var that = this_.parentNode.parentNode.parentNode;
+									var par = doc.getElementsByClassName("mui-content")[0];
+									$.confirm('确认删除收货地址？','',['取消','确认'],function (e) {
+										if(e.index==1){
+											par.removeChild(that);
+										}
+									},'div')
+								}else{
+									$.toast(data.message);
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								if(type=="timeout"){
+									$.toast("请求超时，请检查网络");
+								}
+							}
+						});
+					});
+					//编辑收货地址，传值到添加页面
+					$(".address-wrap").on("tap",".edit",function(){
+						var edit_addressPage = $.preload({
+							"id": 'edit_addressPage',
+							"url": 'edit-address.html'
+						});
+						var id = this.getAttribute("data-id");
+						var this_ = this;
+						$.ajax({
+							type:"post",
+							url:"https://app.fanbaoyundian.com/appapi/address.app.php",
+							data:{
+								token:user_token,
+								timestamp:time,
+								uid:user_id,
+								id:id,
+								action:"edit"
+							},
+							success:function(data){
+								//alert(JSON.stringify(data))
+								if(data.state==1){
+									var that = this_.parentNode.parentNode.parentNode;
+									setTimeout(function(){
+										$.fire(edit_addressPage,'areainfo',{
+											name:that.getElementsByClassName("user-name")[0].getAttribute("data-name"),
+											phone:that.getElementsByClassName("user-phone")[0].getAttribute("data-phone"),
+											province:that.getElementsByClassName("address")[0].getAttribute("data-province"),
+											city:that.getElementsByClassName("address")[0].getAttribute("data-city"),
+											country:that.getElementsByClassName("address")[0].getAttribute("data-country"),
+											detail:that.getElementsByClassName("address")[0].getAttribute("data-detail"),
+											id:id
+										});
+										setTimeout(function(){											
+											$.openWindow({
+												id: 'edit_addressPage'
+											});
+										},250)
+									},20)
+								}else{
+									$.toast(data.message);
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								if(type=="timeout"){
+									$.toast("请求超时，请检查网络");
+								}
+							}
+						});
+					})
+				}else{
+					$.toast(data.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					$.toast("请求超时，请检查网络");
+				}
+			}
+		});
+	}
+	getAddress();
+	$("body").on("tap","#toadd,#add-address",function(){
+		var add_addressPage = $.preload({
+			"id": 'add_addressPage',
+			"url": 'add-address.html'
+		});
+		setTimeout(function(){
+			$.openWindow({
+				id: 'add_addressPage'
+			});
+		},20)		
+	});
+})(mui,document)
+</script>
+</body>
+
+</html>

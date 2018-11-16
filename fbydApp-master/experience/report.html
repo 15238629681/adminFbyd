@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{
+	width: 100%;
+	height: 100%;
+	background: #eee;
+	/*overflow: auto;*/
+}
+body{
+	padding-bottom: 50px;
+	position: relative;
+}
+span{display: inline-block;}
+b{font-weight: normal;}
+p{margin-bottom: 0;}
+a{color: #999;}
+/* clear float */
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+
+.mui-bar-nav~.mui-content{padding-top: 60px;height: 100%;overflow: auto;}
+
+#product-cover{width: 100%;padding: 20px 10px 10px;background: #fff;}
+#product-cover img{width: 100%;border-radius: 4px;}
+
+#product-title{font-size: 16px;padding: 10px;background: #fff;}
+
+#authorinfo{position: relative;height: 30px;background: #fff;}
+#name{position: absolute;left: 10px;width: 50%;}
+#name img{width: 30px;float: left;}
+#name #nickname{font-size: 12px;line-height: 30px;margin-left: 36px;color: #999;}
+#time{position: absolute;right: 10px;font-size: 12px;line-height: 30px;color: #999;}
+
+#aritical-wrap{position: relative;padding-bottom: 10px;padding: 10px;background: #fff;}
+#aritical-wrap p{font-size: 14px;text-indent:24px;margin: 10px 0;}
+#aritical-wrap img{width: 100%;border-radius: 4px;}
+#aritical-type{position: absolute;right: 10px;bottom: 5px;font-size: 12px;color: #999;}
+
+.title{font-size: 18px;margin: 10px 0;}
+#tips{padding: 10px;background: #fff;margin: 10px 0;}
+#tips-wrap{margin: 10px 0;}
+.tip{padding: 3px 20px;border: 1px solid #ddd;border-radius: 18px;margin-right: 10px;font-size: 14px;}
+
+#product{padding: 10px;background: #fff;margin: 10px 0;position: relative;}
+#product-img{width: 100px;height: 100px;float: left;}
+#product-img img{width: 100%;border-radius: 4px;}
+/*#product-wrap{border: 1px solid #eee;border-radius: 4px;}*/
+#product-info{margin-left: 110px;}
+#product-name{font-size: 14px;min-height: 16px;max-height: 32px;overflow: hidden;line-height: 16px;margin-top: 10px;}
+#price{color:#ff3a46;font-size: 20px;margin-top: 20px;}
+#buy{position: absolute;bottom: 25px;right: 15px;padding: 3px 20px;background: #ff3a46;color: #fff;border-radius: 18px;font-size: 14px;}
+
+#author-wrap{padding: 10px;background: #fff;margin: 10px 0;}
+#author-info{background: #f5f5f5;border-radius: 4px;padding: 10px;position: relative;}
+#author-info img{float: left;width: 40px;}
+#author-name{margin-left: 50px;font-size: 14px;}
+#author-name span{font-size: 12px;background: #ff3a46;border-radius: 8px;color: #fff;display: block;width:50px;text-align: center;}
+#author-tip-wrap{position: absolute;right: 10px;top: 20px;}
+.author-tips{font-size: 12px;}
+.author-tips b{font-size: 18px;color: #FBBD00;}
+#author-wrap p{margin: 8px 0;padding-left: 10px;}
+#award{width: 100%;background: #ff3a46;text-align: center;color: #fff;height: 36px;line-height: 36px;margin: 15px 0;}
+#award-num{margin: 6px 0;height: 24px;}
+#award-num img{width: 24px;}
+#award-num span{font-size: 12px;line-height: 24px;color: #989898;position: relative;top: -5px;}
+
+#comment{padding: 10px;background: #fff;margin: 10px 0;}
+.comment-wrap{border-top: 1px solid #ddd;padding: 10px;}
+.comment-img{float: left;width: 70px;height: 70px;border-radius: 50%;margin-right: 10px;margin-top: 8px;}
+.comment-img img{width: 100%;}
+.comment-info .name{font-size: 16px;}
+.comment-info .like{float: right;background: url(../images/experience/experience_report/like.png) no-repeat 0 center;padding-left: 24px;
+background-size: 20px;color: #999;}
+.comment-info .liked{float: right;background: url(../images/experience/experience_report/liked.png) no-repeat 0 center;padding-left: 24px;
+background-size: 20px;color: #999;}
+.comment-info .time{font-size: 12px;color: #999;}
+.comment-content{font-size: 12px;height: 40px;line-height: 20px;overflow: hidden;}
+#allcomment{height: 40px;text-align: center;line-height: 30px;border-top: 1px #ddd solid;font-size: 14px;padding-top: 10px;}
+
+#other-report{padding:0 10px;background: #fff;margin: 10px 0;}
+#other-report .title{margin: 0;padding-top: 10px;}
+.report-wrap{padding-bottom: 10px;border-bottom: 1px #ddd solid;padding-top: 10px;}
+#other-report .report-wrap:last-child{border: none;}
+.report-img{width: 100px;float: left;margin-right: 10px;height: 60px;}
+.report-img img{width: 100%;height: 100%;}
+.report-title{font-size: 12px;line-height: 16px;}
+.report-info{color:#999;font-size: 12px;width: 100%;height: 24px;margin-top: 6px;}
+.report-info span{height: 24px;line-height: 24px;}
+.report-info .name{word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width: 3.5rem;}
+.report-info .like{background: url(../images/experience/experience_report/like.png) no-repeat 0 center;padding-left: 20px;
+background-size: 18px;margin-right: 6px;}
+.report-info .enjoy{background: url(../images/experience/experience_report/enjoy.png) no-repeat 0 center;padding-left: 20px;
+background-size: 18px;margin-right: 6px;}
+.report-info .msg{background: url(../images/experience/experience_report/message.png) no-repeat 0 center;padding-left: 20px;
+background-size: 18px;}
+
+#foot-toorbar{position:fixed;bottom: 0;width: 100%;z-index: 80;background: #fff;height: 50px;}
+#foot-toorbar #input1{border: none;margin: 0;width: 40%;height: 40px;margin-top: 5px;border-radius: 20px;margin-left: 10px;
+background: url(../images/experience/experience_report/msg.png) #eee no-repeat 10px center;font-size: 14px;float: left;background-size: 20px;padding-left: 32px;}
+#foot-toorbar #input2{width: calc( 90% - 6rem );margin-left: 5%;background: #eee;font-size: 14px;padding-left: 16px;
+border: none;height: 40px;margin-top: 5px;}
+#foot-toorbar .msg{background: url(../images/experience/experience_report/message.png) no-repeat center;background-size: 20px;
+margin-top: 10px;height: 30px;float: left;width: calc((60% - 6rem - 10px)/3);}
+#foot-toorbar .like{background: url(../images/experience/experience_report/like.png) no-repeat center;background-size: 20px;
+margin-top: 10px;height: 30px;float: left;width: calc((60% - 6rem - 10px)/3);}
+#foot-toorbar .enjoy{background: url(../images/experience/experience_report/enjoy.png) no-repeat center;background-size: 20px;
+margin-top: 10px;height: 30px;float: left;width: calc((60% - 6rem - 10px)/3);}
+#foot-toorbar .award{float: right;background: #ff3a46;color: #fff;height: 50px;line-height: 50px;text-align: center;
+border-bottom-left-radius: 25px;border-top-left-radius: 25px;font-size: 14px;width: 6rem;padding-left: 10px;}
+#foot2{display: none;}
+
+@media screen and (max-width: 340px)  {
+#aritical-wrap p{font-size: 12px;}
+.title{font-size: 16px;}
+.tip{padding: 3px 16px;}
+#price{color:#ff3a46;font-size: 18px;margin-top: 20px;}
+#foot-toorbar #input1{width: 35%;font-size: 12px;background-size: 20px;padding-left: 30px;}
+#foot-toorbar .msg{width: calc((65% - 5rem - 10px)/3);}
+#foot-toorbar .like{width: calc((65% - 5rem - 10px)/3);}
+#foot-toorbar .enjoy{width: calc((65% - 5rem - 10px)/3);}
+#foot-toorbar .award{font-size: 12px;width: 5rem;padding-left: 10px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">体验报告</h1>
+</header>	
+<div class="mui-content">
+    <!--<div class="mui-scroll">-->
+        <div id="product-cover">
+        	<img src="../images/experience/experience_report/1.png" />
+        </div>
+        <div id="product-title">换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲</div>
+        <div id="authorinfo">
+        	<div id="name">
+        		<img src="../images/cloudstore/icons/usericon.png" />
+        		<div id="nickname">七七七七七</div>
+        	</div>
+        	<div id="time">2017-09-15</div>
+        </div>
+        <div id="aritical-wrap">
+        	<span id="aritical-type">体验报告</span>
+        	<p class="aritical-text">换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松get撩汉神
+        		技能，秒变气场两米八，瞬间秒杀路人甲.换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松get撩汉神
+        		技能，秒变气场两米八，瞬间秒杀路人甲</p>
+        	<div class="aritical-img">
+        		<img src="../images/experience/experience_report/1.png" />
+        	</div>
+        	<p class="aritical-text">换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松get撩汉神
+        		技能，秒变气场两米八，瞬间秒杀路人甲.换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松get撩汉神
+        		技能，秒变气场两米八，瞬间秒杀路人甲</p>
+        	<div class="aritical-img">
+        		<img src="../images/experience/experience_report/1.png" />
+        	</div>
+        	<p class="aritical-text">换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松get撩汉神
+        		技能，秒变气场两米八，瞬间秒杀路人甲.换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松get撩汉神
+        		技能，秒变气场两米八，瞬间秒杀路人甲</p>
+        </div>
+        <div id="tips">
+        	<div class="title">相关标签</div>
+        	<div id="tips-wrap">
+        		<span class="tip">时尚</span><span class="tip">时尚</span><span class="tip">时尚</span>
+        	</div>
+        </div>
+        <div id="product">
+        	<div class="title">本文中的商品</div>
+        	<div id="product-wrap" class="clean">
+        		<div id="product-img">
+        			<img src="../images/experience/experience_report/2.png" />
+        		</div>
+        		<div id="product-info">
+        			<div id="product-name">换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松</div>
+        			<span id="price">￥120.00</span>
+        		</div>
+        		<span id="buy">去购买</span>
+        	</div>
+        </div>
+        <div id="author-wrap" class="clean">
+        	<div class="title">作者</div>
+        	<div id="author-info" data-id="1">
+        		<img src="../images/cloudstore/icons/usericon.png" />
+        		<div id="author-name">七七七七<span>合伙人</span></div>
+        		<div id="author-tip-wrap">
+        			<span style="margin-right: 10px;" class="author-tips">体验<b> 22 </b></span><span class="author-tips">评论<b> 5266 </b></span>
+        		</div>
+        	</div>
+        	<p>爱卿发表有功，朕定当重重有赏</p>
+        	<div id="award">朕要打赏</div>
+        	<div id="award-num">
+        		<img src="../images/cloudstore/icons/usericon.png" />
+        		<img src="../images/cloudstore/icons/usericon.png" />
+        		<img src="../images/cloudstore/icons/usericon.png" />
+        		<img src="../images/cloudstore/icons/usericon.png" />
+        		<img src="../images/cloudstore/icons/usericon.png" />
+        		<span>..60人已打赏</span>
+        	</div>
+        </div>
+        <div id="comment" class="clean">
+        	<div class="title">热门评论</div>
+        	<div class="comment-wrap">
+        		<div class="comment-img">
+        			<img src="../images/cloudstore/icons/usericon.png" />
+        		</div>
+        		<div class="comment-info">
+        			<div><span class="name">七七七</span><span class="like">21</span></div>
+        			<div class="time">2017-09-15</div>      			
+        		</div>
+        		<div class="comment-content">
+        			换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松
+        		</div>
+        	</div>
+        	<div class="comment-wrap">
+        		<div class="comment-img">
+        			<img src="../images/cloudstore/icons/usericon.png" />
+        		</div>
+        		<div class="comment-info">
+        			<div><span class="name">七七七</span><span class="liked">21</span></div>
+        			<div class="time">2017-09-15</div>      			
+        		</div>
+        		<div class="comment-content">
+        			换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲换季将套装进行到底，轻松
+        		</div>
+        	</div>
+        	<div id="allcomment">查看全部评论</div>
+        </div>
+        <div id="other-report">
+        	<div class="title">相关体验报告</div>
+        	<div class="report-wrap clean">
+        		<div class="report-img">
+        			<img src="../images/experience/experience_report/3.png" />
+        		</div>
+        		<div class="report-title">
+        			换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八
+        		</div>
+        		<div class="report-info clean">
+        			<span class="name">七七七</span>
+        			<div style="float: right;">
+        				<span class="like">21</span>
+        				<span class="enjoy">21</span>
+        				<span class="msg">21</span>
+        			</div>
+        			
+        		</div>
+        	</div>
+        	<div class="report-wrap clean">
+        		<div class="report-img">
+        			<img src="../images/experience/experience_report/3.png" />
+        		</div>
+        		<div class="report-title">
+        			换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八
+        		</div>
+        		<div class="report-info clean">
+        			<span class="name">七七七</span>
+        			<div style="float: right;">
+        				<span class="like">21</span>
+        				<span class="enjoy">21</span>
+        				<span class="msg">21</span>
+        			</div>
+        			
+        		</div>
+        	</div>
+        </div>
+  <!--  </div>-->
+</div>
+<div id="foot-toorbar">
+	<div id="foot1">   		
+    	<input id="input1" readonly="readonly" type="text" placeholder="朕要写评论..." />
+    	<span class="msg"></span>
+    	<span class="like"></span>
+    	<span class="enjoy"></span>
+    	<span class="award">打赏作者</span>
+	</div>
+	<div id="foot2">    		
+		<textarea id="input2"></textarea>
+		<span class="award">发表</span>
+	</div>
+	
+</div>
+
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		var self = plus.webview.currentWebview();
+		var reportId = self.reportId;
+		
+		doc.querySelector("#author-info").addEventListener("tap",function(){
+			var authorId = this.getAttribute("data-id");
+			$.openWindow({
+				id:"othermainpage",
+				url:"otherexperience/othermainpage.html",
+				extras:{"authorId":authorId}
+			})
+		})
+		
+		doc.querySelector("#input1").addEventListener("tap",function(){
+			doc.querySelector("#foot1").style.display = "none";
+			doc.querySelector("#foot2").style.display = "block";
+		})
+		doc.querySelector("#input2").onblur = function(){
+			doc.querySelector("#foot1").style.display = "block";
+			doc.querySelector("#foot2").style.display = "none";
+		}
+		doc.querySelector("#foot2 .award").addEventListener("tap",function(){
+			doc.querySelector("#input2").blur();
+		})
+		
+		$.back = function(event){
+			plus.webview.close(plus.webview.currentWebview());
+		}
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

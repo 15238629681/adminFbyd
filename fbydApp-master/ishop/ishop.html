@@ -1,0 +1,545 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>爱逛街</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/all.css" />
+		<link rel="stylesheet" href="../css/cloudstore/cloudstore.css" />
+		<link rel="stylesheet" href="../css/cloudstore/searchblock.css" />
+		
+		<style>
+			html,body{background: #eee;}
+			/*用户信息*/
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 38px;
+				height: auto;
+				background: #eee;
+			}
+			
+			.mui-table-view-cell .mui-active{
+				background-color: #FFF500 !important;
+			}
+			.userInfoBlock {
+				height: 84px;
+				width: 100%;
+				padding-top: 10px;
+				position: relative;
+				background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FBBE00)) !important;
+			}
+			
+			.userInfoBlock #headImg {
+				/*position:absolute;*/
+				width: 64px;
+				border-radius: 32px;
+				display: inline-block;
+				/*width:1.935rem;height:1.935rem;*/
+			}
+			
+			.userInfoBlock .storeName {
+				font-size: 16px;
+				color: #000;
+				margin-bottom: 0.1rem;
+			}
+			
+			.userInfoBlock .userDetail {
+				font-size: 10px;
+				color: #898989;
+			}
+			
+			.QuickResponse {
+				position: absolute;
+				right: 40px;
+				bottom: 25px;
+				width: 20px;
+				height: 20px;
+			}
+			
+			.fanNum {
+				margin-right: 20px;
+			}
+		</style>
+		<style>
+			/*云店分类*/
+			
+			/*.cloudstoreCategory {
+				height: 40px;
+				line-height: 40px;
+				font-size: 14px;
+				color: #676767;
+				
+			}*/
+			/*.cloudstoreCategoryFixed {
+				z-index: 9999;
+				position: fixed;
+				top: 60px;
+				background: #fff;
+				border: none;
+			}*/
+			
+			/*.cloudstoreCategory a {
+				padding-left: 18px;
+				color: #676767;
+				border: none;
+			}*/
+			
+			.slideShow {
+				width: 100%;
+				height: 112px;
+				margin-top:16px;
+				margin-bottom: 4px;
+			}
+			
+			/*.slideShow a img {
+				width: 100%;
+				height: 112px;
+			}*/
+		</style>
+		<!--<style>
+			.activetyCategory {
+				height: 50px;
+				font-size: 14px;
+				color: #676767;
+				display: none;
+				width: 100%;
+				overflow: auto;
+				white-space: nowrap;
+			}
+			
+			.activetyCategoryFixed {
+				z-index: 9996;
+				position: fixed;
+				top: 60px;
+				background: #fff;
+				border: none;
+			}
+			
+			.activetyCategory a {
+				padding-left: 18px;
+				color: #676767;
+				border: none;
+			}
+		</style>-->
+		<style>
+			/*商品列表*/
+			
+			
+			.storeGoodsList {
+				background: #EEEEEE;
+			}
+			
+			.storeGoodsList div {
+				display: inline-block;
+			}
+			
+			
+			/*商品块*/
+			.storeGoodsList .storeGoodsBlock {
+				width: calc(50% - 3px);
+				margin-bottom: 6px;
+				margin-right: 6px;
+				display: inline-block;
+				float: left;
+				background: #fff;
+			}
+			
+			.storeGoodsBlock:nth-child(even) {
+				margin-right: 0;
+			}
+			
+			.storeGoodsList .goodsImg {
+				width: 100%;
+				height: 5.34rem;
+			}
+			
+			.storeGoodsList .goodsImg img {
+				width: 100%;
+				height: 100%;
+			}
+			.storeGoodsDetail {
+				height:70px;
+				padding: 0 8px;
+				font-size: 12px;
+				/*background:red;*/
+			}
+			.goodsDetailT,
+			.goodsDetailB {
+				font-size: 10px;
+				width: 100%;
+			}
+			
+			p {
+				margin-bottom: 0;
+			}
+			
+			.goodsName {
+				font-size: 0.38rem;
+				color: #000;
+				overflow: hidden;
+				height: 20px;
+				width: 100%;
+			}
+			/*淘宝整块*/
+			
+			.taoBaoBlock {
+				/*width:2.5rem;*/
+				text-align: left;
+			}
+			
+			.tbPrice {
+				/*margin-right:0.7rem;*/
+				color: #898989;
+				text-decoration: line-through;
+			}
+			/*翻宝整块*/
+			
+			.fbPrice {
+				margin-top:2px;
+				display: inline-block;
+				text-align: left;
+				/*width:2.5rem;*/
+				/*margin-right:0.4rem;*/
+			}
+			.fbPriceNum{
+				font-size:14px;
+				color:#FF3A46;
+			}
+			.priceFlag{
+				font-size:11px;color:#FF3A46;
+			}
+			.sellNum,
+			.costPrice {
+				font-size:10px;
+				float: right;color: #898989;
+			}
+			.sellNum{
+				display:inline-block;
+				border:1px solid #fbbd00;
+				border-radius:2px;
+				height:14px;color:#fbbd00;
+				line-height:14px;
+				margin-top:5px;
+				/*padding:3px;*/
+			}
+			.fanbaoPrice {
+				font-size: 14px;
+				color: #FBBD00;
+			}
+
+			.goodsDetailB{
+				padding-bottom:3px;
+			}
+
+
+			
+		</style>
+		<style>
+			#slider img {
+				width: 100%;
+			}
+		</style>
+		<style>
+			/*#loading {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				z-index: 9999;
+				background-size: 70%;
+			}*/
+		</style>
+		<style>
+			#message{
+				background: url(../images/my/message.png) no-repeat center;
+				background-size: cover;
+				width: 25px;
+				height: 25px;
+				display: inline-block;
+				position: absolute;
+				right: 10px;
+				top: 28px;
+			}
+			/*上拉加载样式设置*/
+.mui-pull-caption {
+	font-size: 12px;
+	color: #595757;
+	font-weight: normal;
+}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<span style="left: 10%;" class="mui-icon mui-icon-search"></span>
+			<input style="margin-left: 5%;" id="searchInput" readonly="readonly" placeholder="搜索商品" />
+			<span id="message"></span>
+		</header>
+
+		<div class="mui-content" id="refreshContainer" style="overflow: hidden;">
+
+			<!--轮播图-->
+			<div class="slideShow">
+				<!--<a id="img_1" href="#">					
+					<img style="display: none;width:100%;height: 100%;" src="../images/cloudstore/ishop.jpg" />
+				</a>-->
+				<img style="width:100%;height: 100%;" src="../images/cloudstore/ishop.png" />
+			</div>
+
+			<!--商品列表-->
+			<div class="storeGoodsList mui-clearfix">
+				<!--<div class="goodsList">-->
+				<!--//商品块-->
+				<!--<div class="storeGoodsBlock mui-clearfix">
+					<div class="goodsImg">
+						<img src="" alt="">
+					</div>
+					<div class="storeGoodsDetail">
+						<p class="goodsName">男鞋百搭夏季运动休闲鞋男透气</p>
+						<div class="goodsDetailT">
+							<span class="tbPrice">淘宝价￥29.00</span>
+							<span class="sellNum">优惠劵15元</span>
+						</div>
+						<div class="goodsDetailB">
+							<span class="fbPrice">翻宝价
+									<span class="fanbaoPrice">
+										￥15.00
+									</span>
+							</span>
+							<span class="costPrice">进货价￥20.00</span>
+						</div>
+					</div>
+				</div>-->
+
+			</div>
+
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			(function($,doc){
+				var nowPageNum = 0;
+				
+				//隐藏滚动条
+				$.plusReady(function(){
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator:"none"
+					});
+				})
+				
+				$("body").on("tap","#message",function(e){
+					e.stopPropagation();
+					var helpPage = $.preload({
+						"id": 'helpPage',
+						"url": '../my/help.html'
+					});
+					setTimeout(function(){					
+						$.openWindow({
+							id: 'helpPage'
+						});
+					},20)
+				})
+				
+				document.getElementById("searchInput").addEventListener("tap",function(){
+					$.openWindow({
+						url:"../cloudstore/search.html",
+						id:"searchCloudStore"
+					})
+				})
+				
+				//重新定义后退函数(监听安卓后退键事件)
+				var backButtonPress = 0;
+				$.back = function(event) {
+					backButtonPress++;
+					if (backButtonPress==1) {
+						//plus.webview.close(plus.webview.currentWebview());
+					}else if(backButtonPress==2){
+						plus.nativeUI.toast('再按一次退出应用');
+					}else{
+						plus.runtime.quit();
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1500);
+					return false;
+				};
+				
+			})(mui,document)
+			var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+						
+//			var cloudstoreowner = {
+//				token: userinfo.token,
+//				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+//				uid: userinfo.userinfo.uid,
+//			}
+			//var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+			var oneceLoad = true; //第一次载入的背景图
+			var nowPageNum = 0;
+			var allOrActivity = false;
+			var activityList = {
+				count: 10,
+				start: 0,
+				order: 1,
+				keyword: "all",
+				fqcat: [1,3,5,8,13],
+				token: userinfo.token,
+				timestamp: parseInt(new Date().getTime() / 1000),
+				uid: userinfo.userinfo.uid
+			};
+			//首页的数据请求
+			function list_request() {
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/storehouse.app.php", {
+						data: {
+							count: activityList.count,
+							start: activityList.start,
+							order: activityList.order,
+							keyword: activityList.keyword,
+							fqcat: activityList.fqcat,
+							token: activityList.token,
+							timestamp: activityList.timestamp,
+							uid: activityList.uid,
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							//alert(JSON.stringify(data))
+							if(data.error == "0") {
+								//document.getElementById("loading").style.display = "none";
+								var goodsList = data.goodslist;
+								var storeGoodsBlockLength =  document.getElementsByClassName("storeGoodsList")[0].getElementsByClassName("storeGoodsBlock").length;
+								if(goodsList.length == 0) {
+									if(storeGoodsBlockLength == 0) {
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = "<p style='text-align: center;margin: 20px;'>暂时没有商品</p>";
+									} else {
+										mui.toast('我也是有底线的');
+									}
+								} else {
+									if(downRefreshFlag){
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+										downRefreshFlag=false;
+									}
+									
+									var goodsListHtml = "";
+									for(var i = 0; i < goodsList.length; i++) {
+										//给每个商品添加自定义属性值
+									goodsListHtml += '<div class="storeGoodsBlock mui-clearfix" data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + '><div class="goodsImg"><img src="' + goodsList[i].pic_url + '_300x300.jpg" alt=""></div><div class="storeGoodsDetail"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodsDetailT"><span class="fbPrice">翻宝价<span class="priceFlag">￥</span><span class="fbPriceNum">' + goodsList[i].quanhou_price + '</span></span><span class="sellNum">优惠劵'+goodsList[i].quan+'元</span></div><div class="goodsDetailB"><span class="tbPrice">淘宝价<span class="tbPriceNum">￥' + goodsList[i].coupon_price + '</span></span><span class="costPrice">销量' + goodsList[i].volume + '</span></div></div></div>';}
+									if(storeGoodsBlockLength == 0) {
+
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = "";
+										//mainDiv.innerHTML=goodsListHtml;
+										document.getElementsByClassName("storeGoodsList")[0].innerHTML = goodsListHtml;
+									} else {
+										var mainDiv = document.createElement("div");
+										mainDiv.innerHTML = goodsListHtml;
+										if(data.start > 1){
+											mainDiv.style.cssText="margin-top:-6px;";
+										}
+										document.getElementsByClassName("storeGoodsList")[0].appendChild(mainDiv);
+									}
+								}
+
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								mui.toast("请检查网络");
+							}
+						}
+					})
+			}
+			//首页数据初始化
+			list_request();
+
+			//下拉刷新
+			var downRefreshFlag=false;
+			function downRefresh() {
+				downRefreshFlag=true;
+				
+				activityList.start = "0 ";
+				activityList.time = parseInt(new Date().getTime() / 1000);
+				list_request();
+				setTimeout(function() {
+					mui.toast('已经是最新数据！', {
+						duration: 'short',
+						type: 'div'
+					});
+					mui('#refreshContainer').pullRefresh().endPulldown();
+				}, 200)
+
+			};
+			//上拉加载
+			function upRefresh() {
+				nowPageNum++;
+				activityList.start = nowPageNum;
+				activityList.timestamp = parseInt(new Date().getTime() / 1000);
+				list_request();
+				var that = this;
+				setTimeout(function() {
+					that.endPullupToRefresh(true); //结束上拉加载
+					mui('#refreshContainer').pullRefresh().refresh(true); //重置上拉加载
+					
+				}, 200)
+			};
+
+			mui.init({
+
+				pullRefresh: {
+					container: "#refreshContainer",
+					down: {
+						style: "circle",
+						color: "#fbbd00",
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: false, //可选,默认false.首次加载自动上拉刷新一次
+						callback: downRefresh
+					},
+					up: {
+						height: 100, //可选.默认50.触发上拉加载拖动距离
+						auto: false, //可选,默认false.自动上拉加载一次
+						//contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了......', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: upRefresh, //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+
+			//商品详情
+			//预加载详情页
+			//var detailPage=null;
+			mui('.mui-content').on('tap', '.storeGoodsBlock', function(e) {
+				//alert("详情页");
+				e.stopPropagation();
+				var goodsdetail = mui.preload({
+					"id": 'goodsdetail',
+					"url": '../cloudstore/goodsdetail.html'
+				});
+				var id = this.getAttribute("id");
+				//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+				var gid = this.getAttribute("data-id");
+				var num_iid = this.getAttribute("data-numiid");
+				var cid = this.getAttribute("data-cid");
+				//打开详情页面
+				setTimeout(function() {
+					mui.fire(goodsdetail, 'transTodetail', {
+						gid: gid,
+						num_iid: num_iid,
+						cid: cid
+					});
+					mui.openWindow({
+						id: "goodsdetail"
+					});
+				}, 250)
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+#save{margin-top: 12px;color: #595757;display: none;}
+a{color: #999;}
+b{font-weight: normal;}
+
+.mui-table-view li div{width: 20%;text-align: center;float: left;font-size: 14px;word-break:keep-all;
+white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.mui-table-view .groupinfo div{color:#898989;}
+.mui-table-view-cell:after{left: 0;}
+
+#null{width: 200px;height: 120px;background: url(../images/my/group.png) no-repeat center 0;padding-top: 100px;
+position: absolute;top: 50%;left: 50%;margin-left: -100px;margin-top: -60px;background-size: 100px;display: none;}
+#null p{width: 100%;margin: 0;text-align: center;}
+
+@media screen and (max-width: 340px)  {
+	.mui-table-view .groupinfo div{font-size: 12px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">已有群信息</h1>
+</header>
+<div class="mui-content">
+	<div id="null">
+		<p>您还未建群</p>
+		<p>快去建群并绑定，马上赚取利润</p>
+	</div>
+	<ul class="mui-table-view">
+    	<li class="mui-table-view-cell">
+    		<div>群ID</div><div>群名称</div><div>群人数</div><div>机器人ID</div><div>群状态</div>
+    	</li>
+		<li class="mui-table-view-cell groupinfo" style="display: none;">
+			<div>30159</div>
+			<div>优惠券1群</div>
+			<div>56</div>
+			<div>26328</div>
+			<div>正常</div>
+		</li>
+	</ul>    
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	var firstitem = doc.getElementsByClassName("groupinfo")[0];
+	function getItem(groupinfo){
+		var item = 	firstitem.cloneNode(true);
+		item.getElementsByTagName("div")[0].innerHTML = groupinfo.gid;
+		item.getElementsByTagName("div")[1].innerHTML = groupinfo.groupname;
+		item.getElementsByTagName("div")[2].innerHTML = groupinfo.people;
+		item.getElementsByTagName("div")[3].innerHTML = groupinfo.robotid;
+		item.getElementsByTagName("div")[4].innerHTML = groupinfo.gstatestr;
+		item.style.display = "block";
+		return item;
+	}
+	$.ajax({
+		type:"post",
+		url:"https://app.fanbaoyundian.com/appapi/addgroup.app.php",
+		data:{
+			uid:user_id,
+			token:user_token,
+			timestamp:time
+		},
+		success:function(data){
+			if(data.state==1){
+				var item_wrap = doc.getElementsByTagName("ul")[0];
+				for(var i=0;i<data.grouplist.length;i++){
+					var item = getItem(data.grouplist[i]);
+					item_wrap.appendChild(item);
+				}
+			}else{
+				$.toast(data.message);
+			}
+		},
+		error:function(xhr,type,errorThrown){
+			if(type=="timeout"){
+				$.toast("请求超时，请检查网络");
+			}
+		}
+	});
+})(mui,document)
+</script>
+</body>
+
+</html>

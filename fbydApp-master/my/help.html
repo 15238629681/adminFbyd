@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;background: #eee;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;}
+a{color: #999;}
+b{font-weight: normal;}
+#loading{width: 100%;height: 100%;position: fixed;top: 0;background: url(../images/icons/loading.gif) no-repeat center #fff;
+z-index: 99;background-size: 70%;}
+
+#part-1{margin-top: 10px;}
+#part-1 li{font-size: 16px;color:#595757;}
+#part-1 li span{float: right;font-size: 14px;color:#595757;}
+
+#part-2{margin-top: 10px;}
+#part-2 #qq,#part-2 #wx{float: left;width: 50%;font-size: 12px;background-repeat: no-repeat;background-position: 0 center;
+background-size: 30px;padding-left: 40px;height: 30px;line-height: 30px;}
+#qq{background-image: url(../images/my/qq.png);}
+#wx{background-image: url(../images/my/wechat.png);}
+@media screen and (max-width: 340px)  {
+	#part-1 li,#part-2 li{font-size: 14px;color:#595757;}
+	#part-1 li span{float: right;font-size: 12px;color:#595757;}
+	#part-2 .mui-table-view-cell{padding: 11px 5px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">服务中心</h1>
+</header>
+<div id="loading"></div>
+<div class="mui-content">
+    <div id="part-1">
+    	<ul class="mui-table-view">
+    		<li id="more" class="mui-table-view-cell" style="color: #000;">帮助中心<span>更多</span></li>
+    		<li class="mui-table-view-cell" data-id=""></li>
+    		<li class="mui-table-view-cell" data-id=""></li>
+    		<li class="mui-table-view-cell" data-id=""></li>
+    		<li class="mui-table-view-cell" data-id=""></li>
+    		<li class="mui-table-view-cell" data-id=""></li>
+		</ul>
+    </div>
+    <div id="part-2">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell">客服中心</li>
+    		<li class="mui-table-view-cell clean">
+    			<!--<div id="wx">
+    				<div>2455785260 翻宝爸爸</div>
+    				<div>2455785260 翻宝爸爸</div>
+    			</div>
+    			<div id="qq">
+    				<div>2455785260 翻宝爸爸</div>
+    				<div>2455785260 翻宝爸爸</div>
+    			</div>-->
+    			<div id="wx">
+    				<div>点击复制微信号</div>
+    			</div>
+    			<div id="qq">
+    				<div>发起QQ&nbsp;闪电联系</div>
+    			</div>
+    		</li>
+		</ul>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	//var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	$.ajax({
+		type:"post",
+		url:"https://app.fanbaoyundian.com/appapi/service.app.php",
+		data:{
+			token:user_token,
+			timestamp:time,
+			count:5,
+			start:0
+		},
+		success:function(data){
+			//alert(JSON.stringify(data))
+			if(data.state == 1){
+				for(var i=1;i<5;i++){
+					doc.getElementById('part-1').getElementsByClassName("mui-table-view-cell")[i].innerHTML = data.servicelist[i-1].title;
+					doc.getElementById('part-1').getElementsByClassName("mui-table-view-cell")[i].setAttribute("data-id",data.servicelist[i-1].id);
+				}
+				doc.getElementById("loading").style.display = "none";
+			}else{
+				$.toast(data.message);
+			}
+		},
+		error:function(xhr,type,errorThrown){
+			if(type=="timeout"){
+				$.toast("请求超时，请检查网络");
+			}
+			$.toast(errorThrown);
+		}
+	});
+	
+	document.getElementById("more").addEventListener("tap",function(){
+		var helpcenterPage = $.preload({
+			"id": 'helpcenterPage',
+			"url": 'helpcenter.html'
+		});
+		setTimeout(function(){				
+			$.openWindow({
+				id: 'helpcenterPage'
+			});
+		},20)
+	});
+	$("#part-1").on("tap",".mui-table-view-cell",function(){
+		var id = this.getAttribute("data-id");
+		if(id){
+			setTimeout(function(){
+				$.openWindow({
+					"id": 'helpdetailPage',
+					"url": 'helpdetail.html',
+					"extras":{artical:id}
+				});
+			},20)
+		}
+	});
+	$.plusReady(function(){
+		
+		//点击QQ聊天
+		doc.getElementById("qq").addEventListener("tap",function(){
+			if ($.os.ios) {  
+           		plus.runtime.launchApplication({  
+               	action: "mqq://im/chat?chat_type=wpa&uin=389405322&version=1&src_type=web"
+           		}, function(e) {  
+               		plus.nativeUI.confirm("检查到您未安装qq，请先到appstore搜索下载？", function(i) {  
+                   		if (i.index == 0) {  
+                    		iosAppstore("itunes.apple.com/cn/app/mqq/");  
+                   		}  
+               		});  
+           		});  
+       		}else{
+       			var main = plus.android.runtimeMainActivity(); 
+            	var Intent = plus.android.importClass('android.content.Intent'); 
+            	var Uri = plus.android.importClass('android.net.Uri'); 
+            	var intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=389405322")); 
+            	main.startActivity(intent);
+       		}
+		})
+		
+		doc.getElementById("wx").addEventListener("tap",function(){
+			var Number = "youareapig11";
+			if($.os.ios){
+				var UIPasteboard  = plus.ios.importClass("UIPasteboard");
+				var generalPasteboard = UIPasteboard.generalPasteboard();
+				// 设置/获取文本内容:
+				generalPasteboard.setValueforPasteboardType(Number, "public.utf8-plain-text");
+				//var value = generalPasteboard.valueForPasteboardType("public.utf8-plain-text");
+				$.toast("已复制微信号"+Number+" 请去微信添加好友");
+			}else{
+				var Context = plus.android.importClass("android.content.Context");
+				var main = plus.android.runtimeMainActivity();
+				var clip = main.getSystemService(Context.CLIPBOARD_SERVICE);
+				plus.android.invoke(clip,"setText",Number);
+				$.toast("已复制微信号"+Number+" 请去微信添加好友");
+			}
+		})
+		
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+	})
+})(mui,document)
+mui.init()
+</script>
+</body>
+
+</html>

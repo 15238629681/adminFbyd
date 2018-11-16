@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>仓库分类页---webview模式</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/cloudstore/searchblock.css" />
+		<link rel="stylesheet" href="../css/cloudstore/cloudstorecategory.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+			<span class="mui-icon mui-icon-search"></span>
+			<input readonly="readonly" id="searchInput" placeholder="搜索商品" />
+			<!--<span class="message">
+				<img src="../images/cloudstore/icons/message.png" alt="" />
+			</span>-->
+			<span id="message"></span>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item " href="#item1mobile" data-wid="cloudstorecategory-subpage-1.html">
+							女装
+						</a>
+						<a class="mui-control-item" href="#item2mobile" data-wid="cloudstorecategory-subpage-2.html">
+							男装
+						</a>
+						<a class="mui-control-item" href="#item3mobile" data-wid="cloudstorecategory-subpage-3.html">
+							内衣
+						</a>
+						<a class="mui-control-item" href="#item4mobile" data-wid="cloudstorecategory-subpage-4.html">
+							母婴
+						</a>
+						<a class="mui-control-item" href="#item5mobile" data-wid="cloudstorecategory-subpage-5.html">
+							包包
+						</a>
+						<a class="mui-control-item " href="#item6mobile" data-wid="cloudstorecategory-subpage-6.html">
+							居家
+						</a>
+						<a class="mui-control-item" href="#item7mobile" data-wid="cloudstorecategory-subpage-7.html">
+							鞋品
+						</a>
+						<a class="mui-control-item" href="#item8mobile" data-wid="cloudstorecategory-subpage-8.html">
+							美食
+						</a>
+						<a class="mui-control-item" href="#item9mobile" data-wid="cloudstorecategory-subpage-9.html">
+							文体
+						</a>
+						<a class="mui-control-item" href="#item10mobile" data-wid="cloudstorecategory-subpage-10.html">
+							家电
+						</a>
+						<a class="mui-control-item" href="#item11mobile" data-wid="cloudstorecategory-subpage-11.html">
+							其他
+						</a>
+						<a class="mui-control-item" href="#item12mobile" data-wid="cloudstorecategory-subpage-12.html">
+							配饰
+						</a>
+						<a class="mui-control-item" href="#item13mobile" data-wid="cloudstorecategory-subpage-13.html">
+							数码
+						</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/webviewGroup.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				pullRefresh : {
+					container : "#refreshContainer",
+					down : {
+						style: "circle",
+						color: "#595757",
+						height: '50px', //可选,默认50px.下拉刷新控件的高度,
+						range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+						offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+						auto: false, //可选,默认false.首次加载自动上拉刷新一次
+						callback: downRefresh
+					},
+					up : {
+						height: 35, //可选.默认50.触发上拉加载拖动距离
+						auto: false, //可选,默认false.自动上拉加载一次
+						//contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						contentnomore: '没有更多数据了......', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: upLoad, //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+			
+			var fqcat=1;
+			mui.plusReady(function(){
+				var ws = plus.webview.currentWebview();
+				var group = new webviewGroup(ws.id,{
+					items : [{
+						id : "cloudstorecategory-subpage-1.html",
+						url: "cloudstorecategory-subpage-1.html",
+						extras:{}
+					}
+					,{
+						id : "cloudstorecategory-subpage-2.html",
+						url : "cloudstorecategory-subpage-2.html",
+						extras:{}
+					}
+					
+					,{
+						id : "cloudstorecategory-subpage-3.html",
+						url : "cloudstorecategory-subpage-3.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-4.html",
+						url : "cloudstorecategory-subpage-4.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-5.html",
+						url : "cloudstorecategory-subpage-5.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-6.html",
+						url : "cloudstorecategory-subpage-6.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-7.html",
+						url : "cloudstorecategory-subpage-7.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-8.html",
+						url : "cloudstorecategory-subpage-8.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-9.html",
+						url : "cloudstorecategory-subpage-9.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-10.html",
+						url : "cloudstorecategory-subpage-10.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-11.html",
+						url : "cloudstorecategory-subpage-11.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-12.html",
+						url : "cloudstorecategory-subpage-12.html",
+						extras:{}
+					},{
+						id : "cloudstorecategory-subpage-13.html",
+						url : "cloudstorecategory-subpage-13.html",
+						extras:{}
+					}],
+					onChange: function(obj) {
+						var c = document.querySelector(".mui-control-item.mui-active");
+						if(c) {
+							c.classList.remove("mui-active");
+						}
+						document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")").classList.add("mui-active");
+					}
+				});
+				
+				//跳转到对应webview去
+				var self=plus.webview.currentWebview();
+				fqcat=parseInt(self.dataFqcat);
+				if(fqcat<=5){
+					var controlItem=document.getElementsByClassName("mui-control-item")[fqcat-1];
+				}else{
+					var controlItem=document.getElementsByClassName("mui-control-item")[fqcat-2];
+				}
+				controlItem.classList.add("mui-active");
+				var wid = controlItem.getAttribute("data-wid");
+				group.switchTab(wid);
+				
+				
+//				点击选项卡的分类导航,跳转到对应的webview去
+				mui(".mui-scroll").on("tap",".mui-control-item",function(e){
+					var wid = this.getAttribute("data-wid");
+					group.switchTab(wid);
+				});
+				mui.back=function(){
+					var _self=plus.webview.currentWebview();
+					_self.close("auto");
+				}
+				
+			});
+		
+			document.getElementById("searchInput").addEventListener("tap", function() {
+					mui.openWindow({
+						url: "search.html",
+						id: "search"
+					})
+			});
+			mui("body").on("tap", "#message", function(e) {
+					e.stopPropagation();
+					var helpPage = mui.preload({
+						"id": 'helpPage',
+						"url": '../my/help.html'
+					});
+					setTimeout(function() {
+						mui.openWindow({
+							id: 'helpPage'
+						});
+					}, 20)
+			});
+			
+			
+			
+			
+			//首页  请求参数
+			var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+			var goodsList = {
+				count: 10,
+				start: 0,
+				order: 1, //商品默认的排序方式  最新
+				keyword: "all", //搜索的关键字
+				fqcat: 0, //商品分类编号
+				token: userinfo.token,
+				uid: userinfo.userinfo.uid,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				price: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				lirun: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				volume: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				brand: 0,
+				sea: 0
+			};
+
+			//首页的数据请求
+			function list_request(index) {
+				console.log("云店分类页面---传递的数据---" + JSON.stringify(goodsList));
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/storehousesearch.app.php", {
+						data: {
+							count: goodsList.count,
+							start: goodsList.start,
+							order: goodsList.order,
+							keyword: goodsList.keyword,
+							fqcat: goodsList.fqcat,
+							token: goodsList.token,
+							timestamp: goodsList.timestamp,
+							uid: goodsList.uid,
+							price: {
+								state: goodsList.price.state,
+								range: {
+									start: goodsList.price.range.start,
+									end: goodsList.price.range.end
+								}
+							},
+							lirun: {
+								state: goodsList.lirun.state,
+								range: {
+									start: goodsList.lirun.range.start,
+									end: goodsList.lirun.range.end
+								}
+							},
+							volume: {
+								state: goodsList.volume.state,
+								range: {
+									start: goodsList.volume.range.start,
+									end: goodsList.volume.range.end
+								}
+							},
+							brand: goodsList.brand,
+							sea: goodsList.sea
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							if(data.error == "0") {
+//								if(oneceLoad) {
+//									setTimeout(function() {
+//										document.getElementById("loading").style.display = "none";
+//									}, 0);
+//								}
+//								oneceLoad = false;
+//								if(partRefresh) {
+//									document.getElementById("waitingLoading").style.display = "none";
+//									partRefresh != partRefresh;
+//								}
+								var goodsList = data.goodslist;
+								console.log("商品列表" + JSON.stringify(goodsList));
+								if(goodsList.length == 0) {
+									if(listArr.length == 0) {
+										noGoods = true;
+//										if(index <= 5) { //获取dom元素
+//											var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 1];
+//										} else {
+//											var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 2];
+//										}
+										//var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+										var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+										storeGoodsList.style.height = (document.documentElement.clientHeight - 140) + "px";
+										//没有搜索到相应商品  或者  某个筛选条件下没有商品
+										storeGoodsList.innerHTML = '<div class="storeGoodsBlock" style="background:red;"><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-3.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">非常抱歉</div><div style="color:#959595;">没有找到相关宝贝</div></div></div>';
+										document.getElementsByClassName("mui-content")[0].setAttribute("id", "");
+										document.addEventListener('touchmove', function() {}, false); //阻止默认滑动事件
+
+									} else {
+										mui.toast('暂时没有更多商品！', {
+											duration: 'long',
+											type: 'div'
+										});
+									}
+								} else {
+									console.log("goodsList.length-----"+goodsList.length);
+									var goodsListHtml = "";
+									for(var i = 0; i < goodsList.length; i++) {
+										if(goodsList[i].pic_url.indexOf("http")==-1){
+											goodsList[i].pic_url = "http:"+goodsList[i].pic_url;
+										}
+										goodsListHtml += '<div class="storeGoodsBlock mui-clearfix"  data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + '><div class="goodsImg"><img src="' + goodsList[i].pic_url + '_300x300.jpg" alt=""></div><div class="storeGoodsDetail"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodsDetailT"><div class="taoBaoBlock"><span class="tbPrice">淘宝价￥' + goodsList[i].coupon_price + '</span></div><span class="sellNum">优惠劵' + goodsList[i].quan + '元</span></div><div class="goodsDetailB"><span class="fbPrice">翻宝价<span class="fanbaoPrice">￥' + goodsList[i].quanhou_price + '</span></span><span class="costPrice">销量' + goodsList[i].volume + '</span></div></div></div>';
+									}
+									goodsListHtml += "";
+									if(index <= 5) { //获取dom元素
+										var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 1];
+										if(storeGoodsList) storeGoodsList.style.height="auto";
+									} else {
+										var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 2];
+										if(storeGoodsList) storeGoodsList.style.height="auto";
+									}
+									if(listArr.length == 0) {
+										//storeGoodsList.innerHTML = "";
+										//mainDiv.innerHTML=goodsListHtml;
+										if(storeGoodsList) storeGoodsList.innerHTML = goodsListHtml;
+									} else {
+										var mainDiv = document.createElement("div");
+										mainDiv.innerHTML = goodsListHtml;
+										if(data.start > 1) {
+											mainDiv.style.cssText = "margin-top:-6px;";
+										}
+										storeGoodsList.appendChild(mainDiv);
+									}
+									listArr = "1";
+								}
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								//document.getElementsByClassName("mui-content")[0].innerHTML = "请求超时，请检查网络";
+								noGoods = true;
+								var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+								storeGoodsList.style.height = (document.documentElement.clientHeight - 100) + "px";
+								storeGoodsList.innerHTML = '<div class="storeGoodsBlock" style=""><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-2.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">网络请求超时</div><div style="color:#959595;">请检查网络！</div></div></div>';
+								mui('#refreshContainer').pullRefresh().setStopped(true);
+								document.getElementsByClassName("mui-content")[0].setAttribute("id", "");
+								document.addEventListener('touchmove', function() {}, false); //阻止默认滑动事件
+								//plus.nativeUI.toast("请求超时，请检查网络");
+							}
+							//取消load图
+							if(oneceLoad) {
+								setTimeout(function() {
+									document.getElementById("loading").style.display = "none";
+								}, 0)
+							}
+							oneceLoad = false;
+							console.log(type);
+						}
+					})
+			};
+			
+			var banner = {
+				token: userinfo.token,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				position: "cloudstorecategory",
+				marks: "1" //首页
+			};
+
+			//banner图数据请求
+			function banner_request(marks) { //marks就是fqcat
+				//				console.log("云店分类  图片   数据请求--" + JSON.stringify(banner));
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/cloudstorebanner.app.php", {
+						data: {
+							token: banner.token,
+							timestamp: banner.timestamp,
+							position: banner.position,
+							marks: marks
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							//							console.log("云店分类页   图片" + JSON.stringify(data));
+							if(data.error == "0") {
+								var slide = data.slide;
+								if(marks <= 5) {
+									var banner = document.getElementsByClassName("banner")[marks - 1];
+								} else { //7开始
+									var banner = document.getElementsByClassName("banner")[marks - 2];
+								}
+								if(marks) {
+									banner.getElementsByTagName("a")[0].setAttribute("href", slide[0].url);
+									banner.getElementsByTagName("img")[0].setAttribute("src", "https://app.fanbaoyundian.com/" + slide[0].img);
+								}
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								plus.nativeUI.toast("请求超时，请检查网络");
+							}
+							console.log(type);
+							//							plus.nativeUI.toast(errorThrown);
+						}
+					})
+			}
+			
+			//下拉刷新
+			function downRefresh(index) {
+				//				alert("我进行下拉刷新")
+				listArr = [];
+				goodsList.time = parseInt(new Date().getTime() / 1000);
+				goodsList.orderId = localStorage.getItem("order");
+				//				alert("当前请求的页数--" + activityList.start)
+				goodsList.start = 0;
+				list_request(index);
+				setTimeout(function() {
+					mui.toast('已经是最新数据！', {
+						duration: 'short',
+						type: 'div'
+					})
+					//					mui('#refreshContainer').pullRefresh().endPulldown();
+				}, 100)
+			}
+			
+			//上拉加载
+			function upLoad(index) {
+				var self=this;
+				//				alert("我进行下拉刷新")
+				listArr = [];
+				goodsList.time = parseInt(new Date().getTime() / 1000);
+				goodsList.orderId = localStorage.getItem("order");
+				//alert("当前请求的页数--" + activityList.start)
+				goodsList.start++;
+				list_request(index);
+				setTimeout(function() {
+					self.endPullUpToRefresh();
+				}, 1000);
+			};
+			
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;}
+body{padding-bottom: 60px;}
+a{color: #999;}
+b{font-weight: normal;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{padding-top: 60px;background: #eee;}
+#title-tips{width: 100%;font-size: 12px;background: url(../images/my/light.png) no-repeat 15px center;background-size: 20px;
+padding-left: 40px;height: 30px;line-height: 30px;}
+
+#part-1{width: 100%;height: 120px;background: rgb(251,189,0);padding-top: 30px;}
+#part-1 div{text-align: center;}
+#money{color: #fff;font-size: 30px;margin-bottom: 8px;}
+#today-money{font-size: 14px;color:#3E3A39;}
+#my-level{font-size: 16px;margin-top: 10px;color:#3E3A39;}
+
+#part-2{padding: 10px;background: #fff;height: 60px;}
+#part-2 > div{width: 50%;float: left;text-align: center;font-size: 16px;}
+
+.mui-table-view-cell{padding-left: 25px;font-size: 16px;}
+.mui-table-view .part-head{padding-left: 15px;font-size: 18px;}
+.mui-table-view-cell a span{font-size: 12px;margin-left: 40px;color:#9FA0A0;margin-right: 20px;}
+
+#part-3{margin-top: 10px;}
+#part-3 li a b{display: inline-block;width: 5rem;}
+
+#part-4{margin: 10px 0;}
+#chat-wrap{background: #fff;}
+.chart {height: 200px;margin: 0px;padding: 0px;background: #fff;}
+
+#part-1 a{width: 14px;height: 14px; font-size: 10px;border: 1px solid #fff;display: inline-block;border-radius: 50%;color: #fff;text-align: center;line-height: 14px;position: relative;top: -8px;left: 2px;}
+#part-2 a{width: 14px;height: 14px; font-size: 10px;border: 1px solid rgb(251,189,0);display: inline-block;border-radius: 50%;color: rgb(251,189,0);text-align: center;line-height: 14px;position: relative;top: -8px;left: 2px;}
+
+#popover{width: 80%;min-height: 200px;font-size: 14px;}
+#popover2{width: 90%;min-height: 36px;}
+#popover2 > div{padding: 6px;font-size: 14px;}
+
+@media screen and (max-width: 340px)  {
+	.mui-table-view .part-head{font-size: 16px;}
+	.mui-table-view-cell{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">翻宝股票</h1>
+</header>
+<div class="mui-content">
+    <div id="title-tips">翻股为模拟发行股票，受法律限制，仅在平台内使用</div>
+    <div id="part-1">
+    	<div id="money">0.1元/股</div>
+    	<div id="today-money">今日股价</div>
+    	<div id="my-level">我的等级：1.0<a href="#popover">?</a></div>
+    </div>
+    <div id="part-2" class="clean">
+    	<div>425股</div>
+    	<div>42.50元</div>
+    	<div>我的翻股</div>
+    	<div>我的财富<a href="#popover2">?</a></div>
+    </div>
+    <div id="part-3">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell part-head">
+        		<a>我要增股</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a><b>每日登录</b><span>+2股</span></a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a class="mui-navigate-right"><b>完善注册信息</b><span>+5股</span></a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a class="mui-navigate-right"><b>购物</b><span>+10股/100元</span></a>
+   			</li>
+   			<li class="mui-table-view-cell">
+        		<a class="mui-navigate-right"><b>分享宝贝</b><span>+1股(每日最高20股)</span></a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a class="mui-navigate-right"><b>分享翻宝</b><span>+1股(每日最高20股)</span></a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a class="mui-navigate-right"><b>开通云店</b><span>+200股</span></a>
+   			</li>
+		</ul>
+    </div>
+    <div id="part-4">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell part-head">
+        		<a class="mui-navigate-right">我要提现 <span style="float: right;">提现的翻股可用于平台消费</span></a>
+    		</li>
+    		<li class="mui-table-view-cell part-head">
+        		<a class="mui-navigate-right">翻股明细</a>
+    		</li>
+    	</ul>
+    </div>
+    <div id="part-5">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell part-head">
+        		<a>翻宝股价</a>
+    		</li>
+    	</ul>
+    	<div id="chat-wrap">
+    		<div class="chart" id="lineChart"></div>
+    	</div>
+    </div>
+<div id="popover" class="mui-popover">
+	<ul class="mui-table-view">
+    	<li class="mui-table-view-cell">默认等级为1</li>
+    	<li class="mui-table-view-cell">每消费满200元，等级加0.1，等级最高为2
+30天未登录，则30天后每满10天未登录等级减0.1，等级最低为0</li>
+    	<li class="mui-table-view-cell">60天未消费，则60天后每满30天未消费等级减0.1，等级最低为0</li>
+  </ul>
+</div>
+<div id="popover2" class="mui-popover">
+	<div>我的财富（元）=今日股价×我的翻股×我的等级</div>
+</div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script src="../js/echarts-all.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+	})
+	document.getElementById("part-4").getElementsByTagName("li")[1].addEventListener("tap",function(){
+		var stockdetailPage = $.preload({
+			"id": 'stockdetailPage',
+			"url": 'stockdetail.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'stockdetailPage'
+			});
+		},20)
+	})
+	var getOption = function() {
+		var chartOption = {
+			grid: {
+				x: 30,
+				x2: 10,
+				y: 30,
+				y2: 25,
+				borderColor: '#fff',
+			},
+			//calculable: true,
+			xAxis: [{
+				type: 'category',
+				data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+				splitLine: {show: false},
+				axisLine:{
+					lineStyle:{
+						color:"#999",
+						width:1
+					}
+				}
+			}],
+			yAxis: [{
+				min: 0,
+  				max: 100,
+  				interval:10,
+				type: 'value',
+				splitLine: {show: false},
+				axisLine:{
+					lineStyle:{
+						color:"#999",
+						width:1
+					}
+				}
+			}],
+			series: [{
+				name: 'price',
+				type: "line",
+				data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 18.8, 6.0, 2.3],
+				itemStyle : {
+					normal: {
+						label : {show: true},
+						lineStyle : {width:1}
+					}
+				},
+			}]
+		};
+		return chartOption;
+	};
+	var lineChart = echarts.init(document.getElementById('lineChart'));
+	lineChart.setOption(getOption());
+})(mui,document)
+</script>
+</body>
+
+</html>

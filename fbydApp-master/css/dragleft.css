@@ -1,0 +1,127 @@
+body,
+			html {
+				height: 100%;
+			}
+			
+			.mui-content {
+				background-color: #fff;
+				color: #898989;
+				height: 100%;
+			}
+			
+			header.mui-bar {
+				display: none;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding: 0;
+			}
+			
+			.title {
+				/*padding-top:18px;*/
+				margin: 0px 0px 10px 0px;
+				padding-left: 15px;
+				background: #EFEFEF;
+				height: 40px;
+				line-height: 40px;
+			}
+			
+			.title+.footer {
+				/*margin: 10px 15px 35px;*/
+				color: #bbb;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				text-indent: 1em;
+				font-size: 14px;
+				line-height: 24px;
+			}
+			
+			.mui-content {
+				font-family: PingFang-SC-Light;
+				padding-top: 18px;
+				position: relative;
+			}
+			
+			.footer {
+				/*position:absolute;*/
+				/*bottom:0;background:red;*/
+			}
+			/*重置按钮*/
+			
+			#clearset-btn {
+				position: absolute;
+				left: 0;display: inline-block;
+				bottom: 0;
+				/*width: 126px;*/
+				height: 40px;line-height:40px;text-align:center;
+				background: #FFF600;
+				border: none;
+				width: 50%;
+			}
+			/*完成*/
+			
+			#close-btn {
+				position: absolute;
+				bottom: 0;display: inline-block;
+				right: 0;
+				/*width: 126px;*/
+				width: 50%;
+				height: 40px;line-height:40px;text-align:center;
+				background: #FBBD00;
+				border: none;
+			}
+			/*筛选内容区域*/
+			
+			.mainMenu {
+				padding: 0 20px;
+				color: #898989;
+				font-size: 12px;
+			}
+			
+			.mainMenu span {
+				color: #898989;
+				padding: 0 9px;
+			}
+			/*菜单区间*/
+			
+			.mainMenu input {
+				text-align: center;
+				font-size: 12px;
+				border: none;
+				width: 90px;
+				height: 25px;
+				background: #EFEFEF;
+				border-radius: 25px;
+				line-height: 25px;
+				-webkit-text-size-adjust: none;
+			}
+			
+			.priceScope,
+			.profitScope,
+			.sallScope {
+				margin-bottom: 20px;
+			}
+			
+			.productType input {
+				border-radius: 5px;
+			}
+			
+			.bandProduct {
+				margin-right: 25px;
+			}
+			
+			.mainMenu .choosedType {
+				background: #FBBD00;
+				color: #fff;
+			}
+			
+			.mui-backdrop {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 99999999;
+				background-color: rgba(0, 0, 0, .3);
+			}

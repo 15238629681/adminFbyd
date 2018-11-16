@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+#save{margin-top: 12px;color: #595757;display: none;}
+a{color: #999;}
+b{font-weight: normal;}
+.mui-content>.mui-table-view:first-child{margin-top: 0;}
+.mui-table-view-cell>a:not(.mui-btn){color: #3E3A39;}
+.mui-content li a{font-size: 16px;}
+.mui-content li span{font-size: 12px;color: #9FA0A0;float: right;margin-right: 20px;}
+
+#head-icon{position: relative;}
+#head-icon span{display: inline-block;width: 30px;height: 30px;background: #eee;position: absolute;right: 20px;top: 6px;}
+#head-icon span img{width: 100%;height: 100%;border: 0;}
+#change{width: 100%;height: 100%;position: absolute;top: 60px;background: #eee;display: none;}
+#change input{border: none;}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">店铺设置</h1>
+    <a class="mui-pull-right" id="save">保存</a>
+</header>
+<div class="mui-content">
+    <ul class="mui-table-view">
+		<li class="mui-table-view-cell">
+    		<a id="head-icon" class="mui-navigate-right">云店LOGO<span><img src="" /></span></a>
+		</li>
+		<li class="mui-table-view-cell">
+    		<a id="name" class="mui-navigate-right">店名修改<span>功能暂未开放</span></a>
+		</li>
+		<li class="mui-table-view-cell">
+    		<a id="notice" class="mui-navigate-right">店长公告<span>功能暂未开放</span></a>
+		</li>
+		<li class="mui-table-view-cell">
+    		<a id="decorate" class="mui-navigate-right">店铺装修<span>功能暂未开放</span></a>
+		</li>
+	</ul>
+</div>
+<div id="change">
+	<input id="input1" type="text" />
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/my.app.php",
+			data:{
+				uid:user_id,
+				token:user_token,
+				timestamp:time
+			},
+			success:function(data){
+				if(data.state==1){
+					doc.querySelector("#head-icon img").src = data.userinfo.headimgurl;
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					plus.nativeUI.toast("请求超时，请检查网络");
+				}
+				plus.nativeUI.toast(errorThrown);
+			}
+		});
+	$.plusReady(function(){
+		doc.getElementById("head-icon").getElementsByTagName("img")[0].src = localStorage.getItem("headimgurl");
+		window.addEventListener("headimg",function(e){
+			doc.getElementById("head-icon").getElementsByTagName("img")[0].src = e.detail.str;
+			$.ajax({
+				type:"post",
+				url:"https://app.fanbaoyundian.com/appapi/setting.app.php",
+				data:{
+					token:user_token,
+					timestamp:time,
+					uid:user_id,
+					userinfo:{
+						headimgurl:e.detail.str
+					}
+				},
+				success:function(data){
+					//alert(JSON.stringify(data))				
+					if(data.state == 1){
+						localStorage.setItem("headimgurl",e.detail.str);
+					}else{
+						plus.nativeUI.toast(data.message);
+					}
+				},
+				error:function(xhr,type,errorThrown){
+					if(type=="timeout"){
+						plus.nativeUI.toast("请求超时，请检查网络");
+					}
+				}
+			});
+		})
+		//更换头像
+		doc.getElementById("head-icon").addEventListener("tap",function(){
+			//弹出选择图片操作
+			if(mui.os.plus){
+				var a = [{
+					title: "拍照"
+				}, {
+					title: "从手机相册选择"
+				}];
+				plus.nativeUI.actionSheet({
+					title: "修改头像",
+					cancel: "取消",
+					buttons: a
+				}, function(b) {
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							getImage();
+							break;
+						case 2:
+							galleryImg();
+							break;
+						default:
+							break
+					}
+				})	
+			}
+		});
+		//拍照获取本地图片
+		//var Path = null;
+		function getImage(){
+			var c = plus.camera.getCamera();
+			c.captureImage(function(path){
+					plus.io.resolveLocalFileSystemURL(path,function(entry){
+//						var s = entry.toLocalURL()+ "?version=" + new Date().getTime();//增加一个时间随机数
+//						doc.getElementById("head-img").src = s;
+						$.openWindow({
+							url: '../my/clipimg.html',
+							id: 'clipimg.html',
+							extras: {
+								path: entry.toLocalURL()
+							}
+						});
+					})
+					//alert(path);
+				},
+				function( error ) {
+					$.toast(error.message);
+				}
+			)
+		};
+		//获取本地相册文件
+		function galleryImg(){
+			plus.gallery.pick(function(path){
+//					Path = path;
+//					doc.getElementById("head-img").src = path;
+					$.openWindow({
+						url: '../my/clipimg.html',
+						id: 'clipimg.html',
+						extras: {
+							path: path
+						}
+					});
+				},
+				function(e){
+					$.toast("打开相册失败");
+				},
+				{filter:"image"}
+			)
+		};
+//		var Input = doc.getElementById("input1");
+//		var changestate = 0;
+//		$(".mui-table-view").on("tap","a",function(){
+//			var type = this.getAttribute("id");
+//			switch (type){
+//				case "logo":
+//					//Input.value = doc.getElementById("logo").getElementsByTagName("span")[0].innerHTML;
+//					break;
+//				case "name":
+//					doc.getElementById("change").style.display = "block";
+//					doc.getElementById("save").style.display = "block";
+//					//Input.value = doc.getElementById("name").getElementsByTagName("span")[0].innerHTML;
+//					break;
+//				case "notice":
+//					doc.getElementById("change").style.display = "block";
+//					doc.getElementById("save").style.display = "block";
+//					//Input.value = doc.getElementById("notice").getElementsByTagName("span")[0].innerHTML;
+//					break;
+//				case "decorate":
+//					//Input.value = doc.getElementById("decorate").getElementsByTagName("span")[0].innerHTML;
+//					break;
+//			};
+//			//changestate = 1;
+//		});
+		
+		//重新定义后退函数(监听安卓后退键事件)
+//		var backButtonPress = 0;
+//		$.back = function(event) {
+//			backButtonPress++;
+//			if (backButtonPress==1&&changestate==0) {
+//				plus.webview.close(plus.webview.currentWebview());
+//			}else if(changestate==1){
+//				doc.getElementById("save").style.display = "none";
+//				doc.getElementById("change").style.display = "none";
+//				changestate = 0;
+//			}else{
+//				//plus.nativeUI.toast('再按一次退出应用');
+//			}
+//			setTimeout(function() {
+//				backButtonPress = 0;
+//				}, 800);
+//			return false;
+//		};
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;background: #fff;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;background: #fff;}
+a{color: #999;}
+b{font-weight: normal;}
+
+#loading{width: 100%;height: 100%;position: fixed;top: 0;background: url(../images/icons/loading.gif) no-repeat center #fff;
+z-index: 9999;background-size: 70%;}
+
+#title{margin: 15px;}
+#visited{margin: 0;}
+
+#head-icon-wrap{width:100%;position: relative;padding-left: 15px;}
+#head-icon{width: 40px;height: 40px;border-radius: 50%;float: left;margin-right: 10px;}
+#name{font-size: 14px;color: #333;}
+#time{font-size: 12px;color: #898989;}
+#usercode{position: absolute;right: 20px;top: 0;background: url(../images/my/visited.png) no-repeat 0 0;background-size: 16px;
+padding-left: 20px;}
+
+#content{margin: 15px;}
+#content p{text-indent: 28px;margin: 0;}
+
+#tag{border-top: 1px #ddd solid;margin: 0 15px;padding: 10px 0;}
+.tags{display: inline-block;padding: 2px 12px;background: #eee;border-radius: 20px;font-size: 14px;color: #4F4F4F;margin-right: 8px;
+margin-bottom: 8px;}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">消息详情</h1>
+</header>
+<div id="loading"></div>
+<div class="mui-content">
+    <div id="title">标题</div>
+    <div id="head-icon-wrap" class="clean">
+		<img id="head-icon" src="../images/my/group.png" />
+		<div id="name">作者</div>
+		<div id="time">时间</div>
+		<div id="usercode">
+			<p id="visited">0</p>
+		</div>
+	</div>
+    <div id="content"></div>
+    <div id="tag">
+    	<p>相关标签</p>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$.plusReady(function(){
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var self = plus.webview.currentWebview();
+		var id = self.artical;
+		//alert(id)
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/service.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				count:5,
+				start:0
+			},
+			success:function(data){
+				//alert(JSON.stringify(data))
+				var artical
+				if(data.state == 1){
+					for(var i=0;i<5;i++){
+						if(data.servicelist[i].id==id){
+							artical = data.servicelist[i];
+						}
+					};
+					//alert(JSON.stringify(artical));
+					doc.getElementById("title").innerHTML = artical.title;
+					doc.getElementById("name").innerHTML = artical.username;
+					doc.getElementById("head-icon").src = artical.headimgurl;
+					var T =  new Date(artical.createtime*1000);
+					var time = T.getFullYear() + '-' + (T.getMonth()+1) + '-' + T.getDate();
+					doc.getElementById("time").innerHTML = time;
+					doc.getElementById("visited").innerHTML = artical.views;
+					doc.getElementById("content").innerHTML = artical.content;
+					var tagsArr = artical.tags.split(" ");
+					for(var i=0;i<tagsArr.length;i++){
+						if(tagsArr[i]){							
+							var Span = doc.createElement("span");
+							Span.className = "tags";
+							Span.innerHTML = tagsArr[i];
+							doc.getElementById("tag").appendChild(Span);
+						}
+					}
+					//alert(tagsArr);
+					doc.getElementById("loading").style.display = "none";
+				}else{
+					$.toast(data.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					$.toast("请求超时，请检查网络");
+				}
+				$.toast(errorThrown);
+			}
+		});
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

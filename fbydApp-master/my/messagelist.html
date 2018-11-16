@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #fff;}
+a{color: #999;}
+b{font-weight: normal;}
+
+.list{padding: 10px;height: 66px;}
+.img-wrap{float: left;width: 50px;height: 50px;margin-right:10px;}
+.img-wrap img{width: 100%;}
+.msg-wrap{border-bottom: 1px #ddd solid;float: left;width: calc(100% - 60px);padding-bottom: 6px;}
+.title{font-size: 16px;line-height: 26px;}
+.title b{float: right;font-size: 14px;color: #666;display: none;}
+.msg{width:65%;font-size: 14px;color: #666;line-height: 26px;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+
+@media screen and (max-width: 340px)  {
+	
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">消息中心</h1>
+</header>
+<div class="mui-content">
+    <div class="topmsg list clean" id="topmsg">
+    	<div class="img-wrap">
+    		<img src="../images/my/msg1.png"/>
+    	</div>
+    	<div class="msg-wrap">
+    		<div class="title">翻宝头条<b>下午</b></div>
+    		<div class="msg">暂无消息</div>
+    	</div>
+    </div>
+    <div class="helpmsg list clean" id="helpmsg">
+    	<div class="img-wrap">
+    		<img src="../images/my/msg2.png"/>
+    	</div>
+    	<div class="msg-wrap">
+    		<div class="title">活动小助手<b>下午</b></div>
+    		<div class="msg">暂无消息</div>
+    	</div>
+    </div>
+    <div class="sysmsg list clean" id="sysmsg">
+    	<div class="img-wrap">
+    		<img src="../images/my/msg3.png"/>
+    	</div>
+    	<div class="msg-wrap">
+    		<div class="title">通知消息<b>下午</b></div>
+    		<div class="msg">暂无消息</div>
+    	</div>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    $.plusReady(function(){
+    	
+    	$(".mui-content").on("tap",".list",function(){
+    		if(this.id == "topmsg"){
+    			var msgtype = "翻宝头条";
+    		}else{
+    			var msgtype = this.id == "helpmsg" ? "活动小助手" : "通知消息";
+    		}
+    		$.openWindow({
+    			"url":"messages.html",
+    			"id":"messagePage",
+    			extras:{
+    				title:msgtype
+    			}
+    		})
+    	})
+    	
+		plus.push.clear(); //清除消息推送红点
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+		};
+   	});
+//	$('.mui-table-view').on("tap",".mui-table-view-cell",function(){
+//		var messagedetailPage = $.preload({
+//			"id": 'messagedetailPage',
+//			"url": 'messagedetail.html'
+//		});
+//		setTimeout(function(){					
+//			$.openWindow({
+//				id: 'messagedetailPage'
+//			});
+//		},20)
+//	})
+})(mui,document)
+</script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-bar{height: 60px;padding-top: 20px;background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FBBE00))}
+			a{color: #999;}
+			#toreg-wrap{width:90%;margin: 70% auto;background: #8dc81b;height: 40px;border-radius: 5px;position: relative;}
+			#toreg-wrap a{width:9rem;display:block;line-height:40px;color: #FFF;margin: 0 auto;background:url(images/login/toreg.png) no-repeat 0 center;
+			background-size: 40px;padding-left: 40px;}
+			#toreg{width:100%;height: 40px;position: absolute;top: 0;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+		    <h1 class="mui-title">注册申请</h1>
+		</header>
+		<div class="mui-content">
+		    <div id="toreg-wrap">
+		    	<a href="#">使用微信注册</a>
+		    </div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript">
+			(function($,doc){
+				$.plusReady(function(){
+					var wxuserinfo = "";
+					function weixinLogin(obj,callback){
+						var auth = auths[obj.authId];
+						var waiting = plus.nativeUI.showWaiting();
+						auth.login(function() {
+							waiting.close();
+							auth.getUserInfo(function() {
+								plus.nativeUI.toast("微信认证成功");
+								//获取信息后跳转到注册页面进行页面传值的回调
+								wxuserinfo = auth.userInfo;
+								//var name = auth.userInfo.nickname;
+								if(typeof callback == "function"){
+									callback();
+								}
+							}, function(e) {
+								plus.nativeUI.toast("获取用户信息失败：" + e.message);
+							});
+						}, function(e) {
+							waiting.close();
+							plus.nativeUI.toast("微信认证失败：" + e.message);
+						});
+					}
+					var regPage = $.preload({
+						"id": 'reg',
+						"url": 'reg.html'
+					});
+					var toReg = function(obj) {
+						weixinLogin(obj,function(){
+							setTimeout(function(){								
+								$.fire(regPage, 'getWeixinUserinfo_2', wxuserinfo);
+								$.openWindow({
+									id: 'reg',
+									show: {
+										aniShow: 'pop-in'
+									},
+									waiting: {
+										autoShow: false
+									}
+								});
+							},0)
+						}); 
+					};
+						//第三方登录
+						var authBtns = ['weixin']; //配置业务支持的第三方登录
+						var auths = {};
+						plus.oauth.getServices(function(services) {
+							for (var i in services) {   //生成微信登录按钮
+								var service = services[i];
+								auths[service.id] = service;
+								if (~authBtns.indexOf(service.id)) {
+									var isInstalled = app.isInstalled(service.id);
+									var btn = document.createElement('div');
+									var weixinlogin = document.getElementById("toreg-wrap");
+									//如果微信未安装，则为不启用状态
+									btn.setAttribute('id', 'toreg' + (!isInstalled && service.id === 'weixin' ? (' disabled') : ''));
+									btn.authId = service.id; 
+									weixinlogin.appendChild(btn);
+								}
+							}
+							$(weixinlogin).on('tap', '#toreg', function() {
+								if (this.classList.contains('disabled')) {
+									plus.nativeUI.toast('您尚未安装微信客户端');
+									return;
+								};
+								toReg(this)
+							});
+						}, function(e) {
+							oauthArea.style.display = 'none';
+							plus.nativeUI.toast("获取登录认证失败：" + e.message);
+						});
+						//重新定义后退函数(监听安卓后退键事件)
+						$.back = function(event) {
+							plus.webview.close(plus.webview.currentWebview());
+							return false;
+						};
+				})
+			}(mui,document))
+		</script>
+	</body>
+
+</html>

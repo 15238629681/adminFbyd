@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>体验产品----详情页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			#goods-info {
+				width: 100%;
+				position: relative;
+			}
+			
+			#back {
+				position: absolute;
+				color: #fff;
+				line-height: 0.9rem;
+				text-align: center;
+				display: inline-block;
+				width: 0.9rem;
+				height: 0.9rem;
+				z-index: 89;
+				background: rgba(0, 0, 0, 0.25);
+				top: 30px;
+				left: 10px;
+				border-radius: 50%;
+			}
+			
+			#slider {
+				min-height: 10.5rem;
+				background: #e7e7e7;
+			}
+			
+			#slider #sliderlist img {
+				width: 100%;
+				height: 100%;
+				/*min-height: 350px;*/
+			}
+			/*#slider0{background: url(../images/goodsdetail/loading.gif) no-repeat center;}*/
+			
+			.mui-slider-indicator .mui-indicator {
+				background: #999;
+				box-shadow: none;
+			}
+			
+			.maskDiv {
+				position: absolute;
+				bottom: 0px;
+				z-index: 2;
+				width: 100%;
+				left: 0;
+				height: 40px;
+				background-color: rgba(0, 0, 0, .3);
+				padding: 0 10px;
+			}
+			
+			.maskDiv .applyNum {
+				color: #FBBD00;
+				font-size: 26px;
+				display: inline-block;
+				height: 40px;
+				line-height: 40px;
+			}
+			
+			.maskDiv .whiteText {
+				color: white;
+				font-size: 11px;
+			}
+			/*倒计时*/
+			.maskDiv .timeBlock {
+				display: inline-block;margin-top:-1px;
+				float: right;
+				text-align: center;
+			}
+			
+			.timeBlock .timeText {
+				color: #FBBD00;margin-top:-3px;display:inline-block;
+				font-size: 10px;
+			}
+			
+			.timeBlock .timeWapper {
+				color: white;
+				font-size: 9px;
+				margin-top: -5px;
+			}
+			
+			.timeBlock .timeWapper span {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				background: #FF3A46;border-radius: 2px;
+				font-size: 9px;
+				text-align: center;
+				line-height: 16px;
+				margin-right: 2px;
+			}
+			
+			.goodsDetail {
+				padding: 8px;
+				margin-bottom: 5px;
+				background: #fff;
+			}
+			
+			.goodsDetail .goodsName {
+				font-size: 14px;
+				color: #333;
+			}
+			
+			.goodsDetail .detail {
+				margin-top:3px;
+				font-size: 11px;
+				color: #666;
+			}
+			
+			.goodsDetail .detail .price {
+				color: #FBBD00;
+			}
+			
+			.goodsDetail .detail .sy {
+				float: right;
+			}
+			
+			.goodsDetail .detail .tyl {
+				padding-left: 24%;
+			}
+			/*试用流程*/
+			
+			.sylc {
+				background: #fff;
+				margin-bottom: 5px;
+			}
+			
+			.sylc .sylcHeader {
+				font-size: 15px;
+				color: #333;
+				padding: 13px 0 13px 10px;
+			}
+			
+			.sylc .sylcHeader .iconColor {
+				display: inline-block;
+				width: 3px;
+				height: 14px;
+				background: #FBBD00;
+				margin-right: 5px;
+				margin-top: 2px;
+			}
+			
+			.sylc .sylcImg {
+				padding: 0 1.2rem 0.45rem 1.2rem;
+			}
+			
+			.sylc img {
+				width: calc(100% - 1px);
+			}
+			/*商品详情  体验报告*/
+			
+			.allDetail {
+				background: #fff;
+			}
+			
+			.allDetail .allDetailHeader .spxq,.allDetail .allDetailHeader .tybg {
+				width:100%;
+				margin:10px 0;
+				display: inline-block;
+				text-align: center;
+				font-size: 15px;
+				color: #999;
+			}
+			.spxq{
+				border-right: 1px solid #E0E0E0;
+				width: calc(50% - 1px);
+				color: #ff3a46;
+			}
+			.spxqWapper,.tybgWapper{
+				display:inline-block;width: calc(50% - 1px);
+				float:left;
+			}
+			.spxqWapper{
+				border-bottom: 2px solid #ff3a46;
+			}
+		</style>
+		<style>
+			.clean:before,
+			.clean:after {
+				content: "";
+				display: table;
+			}
+			
+			.clean:after {
+				clear: both;
+			}
+			
+			.clean {
+				zoom: 1;
+			}
+		</style>
+		<style>
+			.bottomBlock {
+				height: 1.47rem;
+				position: fixed;
+				z-index: 9999;
+				width: 100%;
+				background: #fff;
+				bottom: 0;
+				border-top: 1px solid #e0e0e0;
+			}
+			
+			.bottomBlock .clickLike {
+				color: #999;
+				float: left;
+				display: inline-block;
+				width: 2.13rem;
+				text-align: center;
+				border-right: 1px solid #E0E0E0;
+				height: 100%;
+				font-size: 10px;
+			}
+			
+			.bottomBlock .clickLike img {
+				margin-top: 6px;
+				margin-bottom: 2px;
+				width: 0.54rem;
+				height: 0.54rem;
+			}
+			
+			.bottomBlock .share img {
+				width: 0.54rem;
+				height: 0.54rem;
+			}
+			
+			.bottomBlock .clickLike .likeNum {
+				display: block;
+				margin-top: -5px;
+			}
+			
+			.bottomBlock .xsrm {
+				color: #fff;
+				background: #FBBD00;
+				display: inline-block;
+				width: 3.27rem;
+				height: 1.47rem;
+				float: left;
+				line-height: 1.47rem;
+				text-align: center;
+			}
+			
+			.bottomBlock .sqty {
+				background: #FF3A46;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll">
+				<div class="goods">
+					<!--//轮播图-->
+					<div id="goods-info">
+						<img id="img_1" style="display: none;width:100%;height: 100%;" src="" />
+						<div id="slider" class="mui-slider">
+							<!--回退按钮-->
+							<div id="back" class="mui-icon mui-icon-back mui-action-back"></div>
+							<div class="mui-slider-group mui-slider-loop" id="sliderlist">
+								<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+								<div class="mui-slider-item mui-slider-item-duplicate">
+									<a href="#">
+										<img id="slider6" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+									</a>
+								</div>
+								<!-- 第一张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img id="slider0" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+									</a>
+								</div>
+								<!-- 第二张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img id="slider1" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+									</a>
+								</div>
+								<!-- 第三张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img id="slider2" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+									</a>
+								</div>
+								<!-- 第四张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img id="slider3" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+									</a>
+								</div>
+								<!-- 第五张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img id="slider4" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+									</a>
+								</div>
+								<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+								<div class="mui-slider-item mui-slider-item-duplicate">
+									<a href="#">
+										<img id="slider5" data-preview-src="" data-preview-group="1" src="../images/cloudstore/ishop.png">
+									</a>
+								</div>
+							</div>
+							<div class="mui-slider-indicator">
+								<div class="mui-indicator mui-active"></div>
+								<div class="mui-indicator"></div>
+								<div class="mui-indicator"></div>
+								<div class="mui-indicator"></div>
+								<div class="mui-indicator"></div>
+							</div>
+							<div class="maskDiv">
+								<span class="applyNum">250</span>
+								<span class="whiteText">人已申请</span>
+								<div class="timeBlock">
+									<span class="timeText">距结束仅剩</span>
+									<div class="timeWapper">
+										<span>00</span>天
+										<span>00</span>时
+										<span>00</span>分
+										<span>00</span>秒
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="goodsDetail">
+						<div class="goodsName">换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲</div>
+						<div class="detail">
+							市场价
+							<span class="price">￥99.00</span>
+							<span class="tyl">体验量60份</span>
+							<span class="sy">剩余58份</span>
+						</div>
+					</div>
+					<!--试用流程-->
+					<div class="sylc">
+						<div class="sylcHeader">
+							<span class="iconColor"></span>试用流程
+						</div>
+						<div class="sylcImg">
+							<img src="../images/experience/icons/tylc.png" alt="" />
+						</div>
+					</div>
+
+				</div>
+
+				<!--商品详情   体验报告-->
+				<div class="allDetail">
+					<div class="allDetailHeader clean">
+						<div class="spxqWapper">
+							<span class="spxq">商品详情</span>
+						</div>
+						<div class="tybgWapper">  
+							<span class="tybg">	体验报告(526)</span>
+						</div>
+					</div>
+					<!--商品详情-->
+					<div class="detailContainer">
+						1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />1 <br />
+					</div>
+					<!--体验报告-->
+				</div>
+			</div>
+
+			<div class="bottomBlock clean">
+				<span class="clickLike">  
+					<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+					<span class="likeNum">1314</span>
+				</span>
+				<span class="clickLike share">
+					<img src="../images/experience/icons/experienceproductmaterailshare.png" alt="" />
+					<span class="likeNum">1314</span>
+				</span>
+				<span class="xsrm">新手入门</span>
+				<span class="xsrm sqty">申请体验</span>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			//设置轮播图为自动轮播	
+			var slider = mui("#slider");
+			slider.slider({
+				interval: 4000
+			});
+			//初始化轮播图长度
+			var sliderStyle = window.getComputedStyle(document.querySelector("#slider", null));
+			document.querySelector("#slider").style.height = sliderStyle.width;
+			var aSliderImgs = document.querySelectorAll("#slider img");
+			for(var i = 0; i < aSliderImgs.length; i++) {
+				aSliderImgs[i].style.height = sliderStyle.width;
+			}
+
+			//隐藏滚动条
+			mui.plusReady(function() {
+				plus.webview.currentWebview().setStyle({
+					scrollIndicator: "none"
+				});
+				//					setTimeout(function() {
+				//						plus.webview.close(plus.webview.getLaunchWebview());
+				//					}, 10000)
+			});
+			
+
+//			商品详情
+			document.getElementsByClassName("spxq")[0].addEventListener("tap",function(){
+				this.style.cssText="color:#ff3a46;";
+				this.parentNode.style.cssText="border-bottom:2px solid #ff3a46;";
+				document.getElementsByClassName("tybgWapper")[0].style.cssText="color:#999;border:none;";
+				document.getElementsByClassName("tybg")[0].style.cssText="color:#999;";
+			})
+//			体验报告
+			document.getElementsByClassName("tybg")[0].addEventListener("tap",function(){
+				this.style.cssText="color:#ff3a46;";
+				this.parentNode.style.cssText="border-bottom:2px solid #ff3a46;";
+				document.getElementsByClassName("spxqWapper")[0].style.cssText="color:#999;border:none;";
+				document.getElementsByClassName("spxq")[0].style.cssText="color:#999;";
+			})
+			
+//			点赞clickLike  img   likeNum
+			var like=false;
+			document.getElementsByClassName("clickLike")[0].addEventListener("tap",function(){
+				if(!like){
+					this.getElementsByTagName("img")[0].setAttribute("src","../images/experience/icons/experiencematerialxz.png");
+				}else{
+					this.getElementsByTagName("img")[0].setAttribute("src","../images/experience/icons/experiencematerialwxz.png");
+				}
+				like=!like;
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<script src="../js/mui.min.js"></script>
+<script>	
+function loadStyles(url) {
+	var link = document.createElement("link");
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	link.href = url;
+	document.getElementsByTagName("head")[0].appendChild(link);
+}
+if(mui.os.ios){
+	loadStyles("../css/ios.css");
+}else{
+	loadStyles("../css/android.css");
+}
+</script>
+<style>
+html,body{width: 100%;height: 100%;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: -webkit-gradient(linear, 0 0, 100% 0, from( #FFF85C), to( #FBBE00));}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+a{color: #999;}
+
+#part-1{width: 100%;height: 110px;background: #fff;}
+#head-icon-wrap{width:100%;height: 110px;padding:20px;padding-left: 20px;}
+#head-icon{width: 70px;height: 70px;border-radius: 50%;float: left;margin-right: 15px;}
+#name{font-size: 16px;color: #333;margin-top: 20px;display: inline-block;max-width: 9rem;word-break:keep-all;
+white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+#usercode{float: right;}
+#usercode span{font-size: 18px;color: #898989;margin-top: 22px;}
+#usercode a{font-size: 14px;}
+
+#part-2{margin-top: 10px;}
+#part-2 li a{padding-left: 46px;background-position: 15px center;background-repeat: no-repeat;background-size: 20px;}
+#part-2 li #address{background-image: url(../images/my/mysetting/part2-icon-1.png);}
+#part-2 li #phone{background-image: url(../images/my/mysetting/part2-icon-2.png);}
+#part-2 li #alipay{background-image: url(../images/my/mysetting/part2-icon-3.png);}
+#part-2 li #information{background-image: url(../images/my/mysetting/part2-icon-5.png);}
+#part-2 .mui-table-view-cell>a:not(.mui-btn){font-size: 16px;}
+
+#part-3{margin-top: 10px;}
+#part-3{margin-top: 10px;}
+#part-3 li a{padding-left: 46px;background-position: 15px center;background-repeat: no-repeat;background-size: 20px;font-size: 16px;}
+#part-3 li span{font-size: 12px;color: #9FA0A0;float: right;}
+#part-3 li #about{background-image: url(../images/my/mysetting/part3-icon-1.png);}
+#part-3 li #clear{background-image: url(../images/my/mysetting/part3-icon-2.png);}
+#part-3 li #chat{background-image: url(../images/my/mysetting/part3-icon-3.png);}
+#part-3 .mui-table-view-cell>a:not(.mui-btn){font-size: 16px;}
+
+#part-4{margin-top: 10px;}
+#part-4 li a{padding-left: 46px;font-size: 16px;background: url(../images/my/mysetting/close.png) no-repeat 15px center;background-size: 20px;}
+@media screen and (max-width: 340px)  {
+	#name{font-size: 14px;max-width: 7.5rem;}
+	#usercode span{font-size: 16px;}
+	#usercode a{font-size: 12px;}
+	#part-2 .mui-table-view-cell>a:not(.mui-btn){font-size: 14px;}
+	#part-3 .mui-table-view-cell>a:not(.mui-btn){font-size: 14px;}
+	#part-4 .mui-table-view-cell>a:not(.mui-btn){font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">账户设置</h1>
+</header>
+<div class="mui-content">
+    <div id="part-1">
+    	<div id="head-icon-wrap" class="clean">
+    		<img id="head-icon" src="../images/goods1.png" />
+    		<span id="name">username</span>
+    		<div id="usercode">
+    			<a id="head" href="#">更换头像</a>
+    			<span class="mui-icon mui-icon-arrowright"></span>
+    		</div>
+    	</div>
+    </div>
+    <div id="part-2">
+    	<ul class="mui-table-view">
+   			<li class="mui-table-view-cell">
+        		<a id="address" class="mui-navigate-right">我的收货地址</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="phone" class="mui-navigate-right">修改手机号码</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="alipay" class="mui-navigate-right">提现账户修改</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="information" class="mui-navigate-right">个人资料</a>
+    		</li>
+		</ul>
+    </div>
+    <div id="part-3">
+    	<ul class="mui-table-view">
+   			<li class="mui-table-view-cell">
+        		<a id="about" class="mui-navigate-right">关于翻宝云店</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="clear">清除缓存<span>0.00M</span></a>
+    		</li>
+    		<li class="mui-table-view-cell">
+        		<a id="chat" class="mui-navigate-right">调戏我</a>
+    		</li>
+		</ul>
+    </div>
+    <div id="part-4">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell">
+        		<a id="close" class="mui-navigate-right">退出登录</a>
+    		</li>  		
+    	</ul>
+    </div>
+</div>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	(function(){
+		$.plusReady(function(){			
+			//显示缓存
+			plus.cache.calculate(function(size) {
+				var Cache = parseFloat(size / (1024 * 1024)).toFixed(2);
+				if(Cache<2){
+					doc.getElementById("clear").getElementsByTagName("span")[0].innerHTML = "< 1M";
+				}else{					
+					doc.getElementById("clear").getElementsByTagName("span")[0].innerHTML = Cache+"M";
+				}
+        	});
+		})
+	})();
+	window.addEventListener("userinfo",function(e){
+		doc.getElementById("name").innerHTML = e.detail.nickname;
+		doc.getElementById("head-icon").src = e.detail.url;
+	})
+	window.addEventListener("headimg",function(e){
+		doc.getElementById("head-icon").src = e.detail.str;
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/setting.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				uid:user_id,
+				userinfo:{
+					headimgurl:e.detail.str
+				}
+			},
+			success:function(data){
+				//alert(JSON.stringify(data))
+				if(data.state==0){
+					plus.nativeUI.toast(data.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					plus.nativeUI.toast("请求超时，请检查网络");
+				}
+			}
+		});
+	})
+	document.getElementById("address").addEventListener("tap",function(){
+		var addresslistPage = $.preload({
+			"id": 'addresslistPage',
+			"url": 'addresslist.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'addresslistPage'
+			});
+		},20)
+	});
+	document.getElementById("phone").addEventListener("tap",function(){
+		var changephonePage = $.preload({
+			"id": 'changephonePage',
+			"url": 'changephone.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'changephonePage'
+			});
+		},20)
+	});
+	document.getElementById("alipay").addEventListener("tap",function(){
+		var changealipayPage = $.preload({
+			"id": 'changealipayPage',
+			"url": 'changealipay.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'changealipayPage'
+			});
+		},20)
+	});
+	document.getElementById("information").addEventListener("tap",function(){
+		var informationPage = $.preload({
+			"id": 'informationPage',
+			"url": 'information.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'informationPage'
+			});
+		},20)
+	});
+	document.getElementById("about").addEventListener("tap",function(){
+		var aboutPage = $.preload({
+			"id": 'aboutPage',
+			"url": 'about.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'aboutPage'
+			});
+		},20)
+	});
+	//调戏我，跳转应用商店打分
+	document.getElementById("chat").addEventListener("tap",function(){
+		if($.os.ios){
+			window.location.href = "https://itunes.apple.com/cn/app/id1168878262"; 
+		}else{
+			window.location.href = "http://sj.qq.com/myapp/detail.htm?apkName=com.fbkfanbaoke"; 
+		}
+	});
+	$.plusReady(function(){
+		//更换头像
+		doc.getElementById("head").addEventListener("tap",function(){
+			//弹出选择图片操作
+			if(mui.os.plus){
+				var a = [{
+					title: "拍照"
+				}, {
+					title: "从手机相册选择"
+				}];
+				plus.nativeUI.actionSheet({
+					title: "修改头像",
+					cancel: "取消",
+					buttons: a
+				}, function(b) {
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							getImage();
+							break;
+						case 2:
+							galleryImg();
+							break;
+						default:
+							break
+					}
+				})	
+			}
+		});
+		//拍照获取本地图片
+		//var Path = null;
+		function getImage(){
+			var c = plus.camera.getCamera();
+			c.captureImage(function(path){
+					plus.io.resolveLocalFileSystemURL(path,function(entry){
+//						var s = entry.toLocalURL()+ "?version=" + new Date().getTime();//增加一个时间随机数
+//						doc.getElementById("head-img").src = s;
+						$.openWindow({
+							url: 'clipimg.html',
+							id: 'clipimg.html',
+							extras: {
+								path: entry.toLocalURL()
+							}
+						});
+					})
+					//alert(path);
+				},
+				function( error ) {
+					$.toast(error.message);
+				}
+			)
+		};
+		//获取本地相册文件
+		function galleryImg(){
+			plus.gallery.pick(function(path){
+//					Path = path;
+//					doc.getElementById("head-img").src = path;
+					$.openWindow({
+						url: 'clipimg.html',
+						id: 'clipimg.html',
+						extras: {
+							path: path
+						}
+					});
+				},
+				function(e){
+					$.toast("打开相册失败");
+				},
+				{filter:"image"}
+			)
+		};
+		//清缓存
+		doc.getElementById("clear").addEventListener("tap",function(){
+			plus.cache.calculate(function(size) {
+				$.confirm('清除缓存？','',['取消','确认'],function (e) {
+					if(e.index==1){
+						plus.cache.clear(function() {
+                        	doc.getElementById("clear").getElementsByTagName("span")[0].innerHTML = "< 1M";
+                        	localStorage.clear();
+							localStorage.setItem("login","1");
+							//localStorage.setItem("invite","1");
+					        plus.webview.close(plus.webview.getWebviewById("commont"));
+							$.openWindow({
+					    		id:"login",
+					    		url:"../login.html"
+					    	})
+                    	});
+					}
+				},'div')
+        	});
+		})
+		//退出登录
+		document.getElementById("close").addEventListener("tap",function(){
+			localStorage.clear();
+			localStorage.setItem("login","1");
+			//localStorage.setItem("invite","1");
+	        plus.webview.close(plus.webview.getWebviewById("commont"));
+			$.openWindow({
+	    		id:"login",
+	    		url:"../login.html"
+	    	})
+		});
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

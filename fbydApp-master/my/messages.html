@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;background: #eee;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+a{color: #999;}
+b{font-weight: normal;}
+
+.report-wrap{padding: 10px;border-bottom: 1px #f7f7f7 solid;width: 90%;background: #fff;margin-left: 5%;border-radius: 8px;position: relative;margin-top: 40px;margin-bottom: 60px;}
+.title{font-size: 16px;margin-bottom: 10px;}
+.time{position: absolute;width: 100%;text-align: center;top: -30px;left: 0;}
+.time b{background: #bebebe;padding: 2px 6px;border-radius: 4px;color: #fff;font-size: 14px;}
+.product-cover{width: 100%;position: relative;}
+.product-cover .cover{width: 100%;border-radius: 4px;display: block;}
+
+.product-title{font-size: 14px;margin: 5px 0;color: #666;border-bottom: 1px solid #eee;padding: 6px 0;}
+.nickname{font-size: 14px;color: #333;line-height: 18px;padding: 4px 0;}
+
+.award-num{height: 30px;position: absolute;bottom: 0;background: rgba(0,0,0,0.4);width: 100%;padding:3px 10px;color: #fff;line-height: 24px;font-size: 16px;}
+.name{padding: 8px 0;border-bottom: 1px solid #eee;}
+.name .nickname{font-size: 16px;max-height: 46px;overflow: hidden;line-height: 22px;}
+.name img{width: 46px;float: left;margin-right: 8px;}
+
+.msg-item {
+	width: 90%;
+	margin-left: 5%;
+	position: relative;
+	margin-bottom: 60px;
+	margin-top: 40px;
+}
+.msg-item .msg-user-img{
+	width: 38px;
+	height: 38px;
+	display: inline-block;
+	border-radius: 3px;
+	vertical-align: top;
+	text-align: center;
+	float: left;
+	color: #ddd;
+}
+
+.msg-item .msg-content {
+	display: inline-block;
+	border-radius: 5px;
+	border: solid 1px #d3d3d3;
+	background-color: #FFFFFF;
+	color: #333;
+	padding: 8px;
+	vertical-align: top;
+	font-size: 15px;
+	position: relative;
+	margin: 0px 8px;
+	max-width: 75%;
+	min-width: 35px;
+	float: left;
+}
+.msg-item .msg-content {
+	display: inline-block;
+	border-radius: 5px;
+	border: solid 1px #d3d3d3;
+	background-color: #FFFFFF;
+	color: #333;
+	padding: 8px;
+	vertical-align: top;
+	font-size: 15px;
+	position: relative;
+	margin: 0px 8px;
+	max-width: 75%;
+	min-width: 35px;
+	float: left;
+}
+.msg-item .msg-content .msg-content-inner {
+	overflow-x: hidden;
+}
+.msg-item .msg-content .msg-content-arrow {
+	position: absolute;
+	border: solid 1px #d3d3d3;
+	border-right: none;
+	border-top: none;
+	background-color: #FFFFFF;
+	width: 10px;
+	height: 10px;
+	left: -5px;
+	top: 12px;
+	-webkit-transform: rotateZ(45deg);
+	transform: rotateZ(45deg);
+}
+
+@media screen and (max-width: 340px)  {
+	
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">消息中心</h1>
+</header>
+<div class="mui-content">
+    <div class="report-wrap" data-id="1" data-type="1">
+    	<div class="time"><b>2017年10月12日</b></div>
+    	<div class="title">一周年，文末有福利</div>
+        <div class="product-cover">
+        	<img class="cover" src="../images/experience/experience_report/1.png" />
+        </div>
+        <div class="product-title">换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲</div>
+        <div class="authorinfo">
+        	<div class="nickname">阅读全文</div>
+        </div>
+	</div>
+	<div class="report-wrap" data-id="2" data-type="2">
+		<div class="time"><b>2017年10月12日</b></div>
+        <div class="product-cover">
+        	<img class="cover" src="../images/experience/experience_report/1.png" />
+        	<div class="award-num" class="clean">翻宝云店上市了</div>
+        </div>
+        <div class="authorinfo">
+        	<div class="name clean">
+        		<img src="../images/my/msg1.png" />
+        		<div class="nickname" style="line-height: 40px;">翻宝云店上市了翻宝云店上市</div>
+        	</div>
+        	<div class="name clean">
+        		<img src="../images/my/msg2.png" />
+        		<div class="nickname">翻宝云店上市了翻宝云店上市了翻宝云店上市了翻宝云店上市了</div>
+        	</div>
+        	<div class="name clean">
+        		<img src="../images/my/msg3.png" />
+        		<div class="nickname">翻宝云店上市了翻宝云店上市了翻宝云店上市了翻宝云店上市了</div>
+        	</div>
+        </div>
+	</div>
+	<div class="msg-item clean" data-id="3" data-type="3">
+		<div class="time"><b>2017年10月12日</b></div>
+		<img class="msg-user-img" src="../images/my/msg3.png" alt="" />
+		<div class="msg-content">
+			换季将套装进行到底，轻松get撩汉神技能，秒变气场两米八，瞬间秒杀路人甲
+			<div class="msg-content-arrow"></div>
+		</div>		
+	</div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+    $.plusReady(function(){
+    	
+    	var ws = plus.webview.currentWebview();
+    	doc.querySelector(".mui-title").innerHTML = ws.title;
+    	
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+		};
+   	});
+})(mui,document)
+</script>
+</body>
+
+</html>

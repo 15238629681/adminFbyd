@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<style>
+		
+	html,body{background: #fff;width: 100%;height: 100%;}
+	#loading{width: 100%;height: 100%;position: fixed;top: 0;background: url(../images/icons/loading.gif) no-repeat center #fff;
+	z-index: 90;background-size: 70%;}
+	.mui-bar{position: absolute;top: 0;z-index: 9999;height: 60px;padding-top: 20px;}
+	a{color: #999;}
+	</style>
+</head>
+
+<body>
+<div id="loading"></div>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">购买商品</h1>
+</header>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	setTimeout(function(){
+		doc.getElementById("loading").style.display = "none";
+	},4000)
+	$.plusReady(function(){
+		var self = plus.webview.currentWebview();
+		var height =document.getElementsByTagName("body")[0].clientHeight-document.getElementsByClassName("mui-bar")[0].clientHeight;
+		$.init({
+			subpages:[{
+				url:self.buyUrl,
+				id:self.buyUrl,
+				styles:{
+					top:"60px",
+					height:height
+				}
+			}]
+		});
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

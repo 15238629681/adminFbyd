@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+#save{margin-top: 12px;color: #595757;display: none;}
+a{color: #999;}
+b{font-weight: normal;}
+.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after{background-color:#eee;left: 0;}
+.mui-table-view-cell:after{background-color: #eee;}
+.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell{padding-left: 11px;padding-right: 11px;height: 80px;}
+.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){margin-right: -15px;border-bottom: 1px solid #eee;}
+.mui-table-view-cell.mui-collapse .mui-table-view.mui-table-view-chevron{margin-right: -15px;}
+.mui-table-view-cell.mui-collapse.mui-active{margin-top: 0;}
+.mui-table-view-chevron .mui-table-view-cell{padding-right: 15px;background: #fff;}
+.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell div{height: 30px;line-height: 30px;}
+
+.part-wrap{font-size: 16px;}
+.part-wrap .title{padding: 10px;color: #969696;}
+.part-wrap ul li .first,.part-wrap ul li .second{color: #969696;}
+.part-wrap li div .active{color: #FBBD00;}
+.part-wrap .mui-collapse .mui-table-view-cell > div > div{float: left;width: 33.3%;text-align: center;font-size: 14px;}
+.part-wrap .mui-table-view-cell > div > div{float: left;width: 33.3%;text-align: center;font-size: 14px;}
+.part-wrap .mui-table-view-cell > a > div{float: left;width: 33.3%;text-align: center;font-size: 14px;height: 21px;}
+.part-wrap .mui-table-view-chevron li span{display: inline-block;width: 48%;font-size: 14px;}
+
+.mui-table-view-cell .mui-active{background-color: #fff;}
+
+#null{width: 200px;height: 120px;background: url(../images/my/group.png) no-repeat center 0;padding-top: 100px;
+position: absolute;top: 50%;left: 50%;margin-left: -100px;margin-top: -60px;background-size: 100px;display: none;}
+#null p{width: 100%;margin: 0;text-align: center;}
+
+@media screen and (max-width: 340px)  {
+	.part-wrap{font-size: 14px;}
+	.part-wrap .mui-table-view-chevron li span{font-size: 12px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">分销团队</h1>
+</header>
+<div class="mui-content" id="refreshContainer">
+	<div id="null">
+		<p>暂无分销</p>
+		<p>马上邀请好友开店，赢分享奖金</p>
+	</div>
+    <div id="part-1" class="part-wrap">
+    	<div class="mui-table-view">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell">
+        			<div class="clean">
+						<div style="text-align: left;">姓名</div>
+						<div>粉丝注册数</div>
+						<div style="text-align: right;">微信群 </div>
+					</div>
+    			</li>
+			</ul>
+		</div>
+    </div>
+</div>
+<li class="mui-table-view-cell mui-collapse" style="display: none;">
+	<a class="mui-navigate-right" href="#">
+		<div style="text-align: left;">胡汉三</div>
+		<div>120</div>
+		<div style="text-align: right;padding-right: 20px;">3</div>
+	</a>
+	<ul class="mui-table-view mui-table-view-chevron">
+		<li class="mui-table-view-cell">
+			<div>
+				<span>微信号：<b>157****9624</b></span>
+				<span style="text-align: right;">收益累计：<b style="color: red;">0.00</b></span>
+			</div>
+			<div>
+				<span >注册日期：<b>2017-08-16</b></span>
+				<span style="text-align: right;">奖金累计：<b style="color: red;">0.00</b></span>
+			</div>
+		</li>
+	</ul>
+</li>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	var firstItem = doc.getElementsByClassName("mui-collapse")[0];
+	function getItem(info){
+		var item = firstItem.cloneNode(true);
+		if(info.realname=="") info.realname = "无姓名";
+		item.getElementsByTagName("a")[0].getElementsByTagName("div")[0].innerHTML = info.realname;
+		item.getElementsByTagName("a")[0].getElementsByTagName("div")[1].innerHTML = info.fans;
+		item.getElementsByTagName("a")[0].getElementsByTagName("div")[2].innerHTML = info.groups;
+		item.getElementsByTagName("span")[0].getElementsByTagName("b")[0].innerHTML = info.wechat;
+		item.getElementsByTagName("span")[1].getElementsByTagName("b")[0].innerHTML = info.myallmoney;
+		var time =  new Date(info.createtime*1000);
+		var createtime = time.getFullYear() + '-' + (time.getMonth()+1) + '-' + time.getDate();
+		item.getElementsByTagName("span")[2].getElementsByTagName("b")[0].innerHTML = createtime;
+		info.allbonus = info.allbonus.toFixed(2);
+		item.getElementsByTagName("span")[3].getElementsByTagName("b")[0].innerHTML = info.allbonus;
+		item.style.display = "block";
+		return item;
+	};
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	function getFans(){
+		var time = parseInt(new Date().getTime() / 1000);	
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/distribution.app.php",
+			data:{
+				uid:user_id,
+	    		token:user_token,
+	    		timestamp:time,
+			},
+			success:function(data){
+				if(data.distributors.length==0){
+					doc.getElementById("null").style.display = "block";
+					return;
+				}
+				if(data.state==1){
+					var le = doc.getElementsByClassName("mui-collapse").length;
+					if(le>1){					
+						var lastrealname = doc.getElementsByClassName("mui-collapse")[le-2].getElementsByTagName("a")[0].getElementsByTagName("div")[0].innerHTML;
+					}
+					if(data.distributors[data.distributors.length-1].realname == lastrealname){
+						$.toast("这已经是您全部的粉丝了")
+					}else{
+						var list_wrap = doc.getElementsByClassName("mui-table-view-chevron")[0];
+						list_wrap.innerHTML = '<li class="mui-table-view-cell"><div class="clean"><div style="text-align: left;">姓名</div><div>粉丝注册数</div><div style="text-align: right;">微信群 </div></div></li>';
+						for(var i=0;i<data.distributors.length;i++){
+							var list = getItem(data.distributors[i]);
+							list_wrap.appendChild(list);
+						}
+					}
+				}else{
+					$.toast(data.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					$.toast("请求超时，请检查网络");
+				}
+			}
+		});
+	}
+	getFans();
+	function pullfresh(){
+		getFans();
+		$('#refreshContainer').pullRefresh().endPulldown();
+	}
+	$.init({
+		swipeBack:true,
+		pullRefresh : {
+    		container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+    		down : {
+      			style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+      			color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+      			height:'50px',//可选,默认50px.下拉刷新控件的高度,
+      			range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+      			offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+      			auto: false,//可选,默认false.首次加载自动上拉刷新一次
+      			callback :pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+    		}
+  		}
+	});
+	
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+a{color: #999;}
+b{font-weight: normal;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{padding-top: 60px;background: #eee;}
+
+#null{margin-top: 60%;display: none;}
+#null p{text-align: center;margin: 0;font-size: 16px;}
+
+.month{height: 30px;line-height: 30px;padding-left: 15px;}
+.item{background: #fff;font-size: 14px;padding: 10px 15px 5px;border-bottom: 1px solid #eee;}
+.left{float: left;margin-top: 10px;}
+.account{}
+.send-time{color: #969696;margin-top: 2px;font-size: 12px;}
+.right{float: right;text-align: right;margin-right: 6px;}
+.money-number{font-size: 20px;font-weight: 500;}
+.state{margin-top: 4px;}
+.get-time{font-size: 12px;}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">提现明细</h1>
+</header>
+<div class="mui-content  mui-scroll-wrapper">
+	<div id="null">
+		<p>翻宝不努力，提现徒悲伤</p>
+		<p>暂无提现明细</p>
+	</div>
+    <div class="mui-scroll">
+    	<div class="itemlist">  
+    		<div class="listwrap" style="display: none;">
+    			<div class="month">本月</div>
+    		</div>
+    		<div class="listwrap" style="display: none;">
+    			<div class="month">本月</div>
+    		</div>
+    		<div class="listwrap" style="display: none;">
+    			<div class="month">本月</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+<div class="item clean" style="display: none;">
+	<div class="left">
+		<div class="account">流水号：<b>2345678</b></div>
+		<div class="send-time">7月26日 06:07</div>
+	</div>
+	<div class="right">
+		<div class="money-number">-1300.00</div>
+		<div class="state">提现成功</div>
+		<div class="get-time">7月26日 08:07</div>
+	</div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+   });
+// 	var firstItem = doc.getElementsByClassName("listwrap")[0];
+	//克隆提现明细列表节点
+    var secondItem = doc.getElementsByClassName("item")[0];
+   	function createItem(listinfo){
+   		var list = secondItem.cloneNode(true);
+   		list.getElementsByClassName("account")[0].getElementsByTagName("b")[0].innerHTML = listinfo.mid;
+   		list.getElementsByClassName("send-time")[0].innerHTML = listinfo.createtime;
+   		list.getElementsByClassName("money-number")[0].innerHTML = listinfo.mmoney;
+   		list.getElementsByClassName("state")[0].innerHTML = listinfo.state;
+   		if(listinfo.state=="提现成功"){
+   			list.getElementsByClassName("state")[0].style.color = "#09AB01";
+   		}else{
+   			list.getElementsByClassName("state")[0].style.color = "#FBAB00";
+   		};
+   		list.getElementsByClassName("get-time")[0].innerHTML = listinfo.successtime;
+   		list.style.display = "block";
+   		return list;
+   	};
+   $.plusReady(function(){
+		
+   		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		var listWrap = doc.getElementsByClassName("itemlist")[0];
+		var now = new Date();
+   		var nowMonth = now.getMonth()+1;
+   		var listwrap1 = doc.getElementsByClassName("listwrap")[0];
+   		var listwrap2 = doc.getElementsByClassName("listwrap")[1];
+   		var listwrap3 = doc.getElementsByClassName("listwrap")[2];
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/moneydetail.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				uid:user_id,
+				apply:"1"
+			},
+			success:function(data){
+				if(data.applylist.length==0){
+					doc.getElementById("null").style.display = "block";
+					return;
+				};
+				if(data.state==1&&data.applylist.length>0){
+					for(var i=0;i<data.applylist.length;i++){
+						var month = parseInt(data.applylist[i].createtime.substr(5,6));
+						var list = createItem(data.applylist[i]);
+						if(month==nowMonth){
+							listwrap1.style.display = "block";
+							listwrap1.getElementsByClassName("month")[0].innerHTML = "本月";
+							listwrap1.appendChild(list);
+						}else if(month==(nowMonth-1)){
+							listwrap2.style.display = "block";
+							listwrap2.getElementsByClassName("month")[0].innerHTML = nowMonth-1+"月";
+							listwrap2.appendChild(list);
+						}else if(month==(nowMonth-2)){
+							listwrap3.style.display = "block";
+							listwrap3.getElementsByClassName("month")[0].innerHTML = nowMonth-2+"月";
+							listwrap3.appendChild(list);
+						};
+					};
+				}else{
+					$.toast(data.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					$.toast("请求超时，请检查网络");
+				}
+			}
+		});
+		
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		
+		//重新定义后退函数(监听安卓后退键事件)
+		var backButtonPress = 0;
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+   })
+})(mui,document)
+</script>
+</body>
+
+</html>

@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;background:#78cb3c;}
+a{color: #999;}
+b{font-weight: normal;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~.mui-content{padding-top: 60px;background: #eee;width: 100%;height: 100%;
+background: url(../images/my/openstore.png) no-repeat center 44px;background-size: 100% auto;}
+
+/*.mui-content > div{position: absolute;bottom: 50px;width: 100%;}*/
+#request{padding:0;border:none;width: 90%;margin: 10px 5%;border-radius: 8px;height: 40px;line-height: 40px;text-align: center;
+background: #FBBD00;color: #333;position: absolute;bottom: 50px;}
+#xieyi{text-align: center;margin: 0;position: absolute;bottom: 20px;width: 100%;}
+
+#pay-mask{width: 100%;height: 100%;position: absolute;background: rgba(0,0,0,0.3);top: 0;display: none;}
+#pay-wrap{position: absolute;width: 80%;top: 25%;margin-left: 10%;background: #fff;border-radius: 6px;padding: 10px;}
+.list{font-size: 16px;padding: 0 10px;color: #333;}
+#time{font-size: 14px;text-align: center;line-height: 30px;border-bottom: 1px #ddd solid;margin-bottom: 6px;}
+#time b{margin-left: 4px;color: red;}
+#info{height: 80px;border-bottom: 1px #ddd solid;padding: 6px 0;}
+#choose{font-size: 18px;line-height: 40px;}
+#pay-way{background: url(../images/my/zhifubao.png) no-repeat 10px center;background-size: 24px;padding-left: 40px;line-height: 40px;}
+#pay-way2{background: url(../images/my/wx.png) no-repeat 10px center;background-size: 24px;padding-left: 40px;line-height: 40px;display: none;}
+#pay-way b,#pay-way2 b{background: url(../images/my/chosen.png) no-repeat;display: inline-block;float: right;margin-right: 5px;width: 20px;
+height: 20px;background-size: cover;border-radius: 50%;margin-top: 10px;}
+#more-way{line-height: 20px;text-align: center;font-size: 12px;}
+#pay{margin: 20px auto;width: 90%;text-align: center;height: 40px;line-height: 40px;background: #FBBD00;color: #fff;border-radius: 20px;}
+@media screen and (max-width: 340px)  {
+	/*.mui-content > div{position: absolute;bottom: 6px;width: 100%;}*/
+	#pay-wrap{padding: 0;width: 90%;margin-left: 5%;}
+	#time{font-size: 12px;}
+	#info img{width: 40px;}
+	#choose{font-size: 16px;}
+	#pay{width: 80%;}
+	#request{height: 34px;line-height: 34px;font-size: 16px;}
+	#xieyi{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">我要开店</h1>
+</header>
+<div class="mui-content">
+    <div class="oauth-area">
+    	<div id="request">支付299元/年，成为云店店主</div>
+    	<p id="xieyi">申请即视为同意《翻宝云店店主服务协议》</p>
+    </div>
+</div>
+<div id="pay-mask">	
+	<div id="pay-wrap">
+		<div class="list" id="time">支付剩余时间<b>15:00</b></div>
+		<div class="list" id="info">
+			<div style="float: left;margin:15px 10px 0 0;">
+				<img src="../images/my/vip.png" />
+			</div>
+			<div>￥299</div>
+			<div id="alltime" style="font-size: 12px;">软件服务开店年费 (尊享云店店主：2017年9月28日至2018年9月23日)</div>
+		</div>
+		<div class="list" id="choose">请选择支付方式</div>
+		<div class="list" id="pay-way">支付宝支付<b></b></div>
+		<div class="list" id="pay-way2">微信支付<b style="display: none;"></b></div>
+		<div id="more-way">查看更多</div>
+		<div id="pay" data-way="alipay">确认支付</div>
+	</div>
+</div>
+<script src="../js/mui.min.js"></script>
+<!--<script src="../js/beecloud.js" ></script>-->
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	//开店一年时间间隔
+	var nowtime = new Date(parseInt(new Date().getTime()));
+	var endtime = new Date(parseInt(new Date().getTime()+365*24*3600*1000));
+	nowtime = nowtime.getFullYear() + '年' + (nowtime.getMonth()+1) + '月' + nowtime.getDate()+'日';
+	endtime = endtime.getFullYear() + '年' + (endtime.getMonth()+1) + '月' + endtime.getDate()+'日';
+	doc.querySelector("#alltime").innerHTML = "软件服务开店年费 (尊享云店店主："+nowtime+"至"+endtime+")"
+	document.getElementById("xieyi").addEventListener("tap",function(){
+		mui.openWindow({
+			id: 'agreementPage',
+			url: '../agreement.html'
+		});
+	});
+	doc.querySelector("#pay-mask").addEventListener("tap",function(){
+		this.style.display = "none";
+		var payWay = doc.querySelector("#pay").getAttribute("data-way");
+		if(payWay == "alipay"){
+			doc.querySelector("#pay-way2").style.display = "none";
+			doc.querySelector("#more-way").style.display = "block";
+		}else{
+			doc.querySelector("#pay-way2").style.display = "block";
+		}
+	})
+	doc.querySelector("#pay-wrap").addEventListener("tap",function(e){
+		e.stopPropagation();
+	})
+	doc.querySelector("#more-way").addEventListener("tap",function(e){
+		doc.querySelector("#pay-way2").style.display = "block";
+		this.style.display = "none";
+	})
+	doc.querySelector("#pay-way").addEventListener("tap",function(e){
+		doc.querySelector("#pay").setAttribute("data-way","alipay");
+		this.getElementsByTagName("b")[0].style.display = "block";
+		doc.querySelector("#pay-way2 b ").style.display = "none";
+	})
+	doc.querySelector("#pay-way2").addEventListener("tap",function(e){
+		doc.querySelector("#pay").setAttribute("data-way","wxpay");
+		this.getElementsByTagName("b")[0].style.display = "block";
+		doc.querySelector("#pay-way b ").style.display = "none";
+	})
+	function back(){
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/setting.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				uid:user_id,
+				userinfo:{				
+					isshop:2
+				}
+			},
+			success:function(res){
+				if(res.state == 1){
+					var userinfo = JSON.parse(localStorage.getItem("userinfo")).userinfo;
+					var userinfo1 = JSON.parse(localStorage.getItem("userinfo"));
+					userinfo.isshop = 2;
+					userinfo1.userinfo = userinfo;
+					localStorage.setItem("userinfo",JSON.stringify(userinfo1));
+					doc.querySelector("#pay-mask").style.display = "none";
+					$.openWindow({
+						"id": 'openstoreinfoPage',
+						"url": 'openstoreinfo.html'
+					})
+//					setTimeout(function(){
+//						plus.webview.close(plus.webview.currentWebview());
+//					},50)
+				}else{
+					plus.nativeUI.toast(res.message);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				plus.nativeUI.toast("请求超时，请检查网络");
+			}
+		});
+	}
+	$.plusReady(function(){
+		
+		var wxChannel = null; // 微信支付 
+        var aliChannel = null; // 支付宝支付 
+        var channel = null;  
+ 
+		// 获取支付通道 
+		plus.payment.getChannels(function(channels){ 
+		    aliChannel=channels[0]; 
+			wxChannel=channels[1]; 
+		},function(e){ 
+			plus.nativeUI.alert("未检测到手机支付宝"); 
+		}); 
+ 
+//      document.getElementById('weixin').addEventListener('tap',function() { 
+//          console.log("微信"); 
+//          pay('wxpay'); 
+//      })
+		var timeNum = 1;
+		function backTime(){
+			timeNum = 0;
+			var time = 900;
+			var timer = setInterval(function(){
+				time--;
+				var min = parseInt(time/60);
+				if(min>0){
+					var sec = time-min*60;
+					if(sec<10) sec = "0"+sec;
+					doc.querySelector("#time b").innerHTML = min+":"+sec;
+				}else{
+					if(time<10) time = "0"+time;
+					doc.querySelector("#time b").innerHTML = "00:"+time;				
+				}
+				if(time <= 0){
+					doc.querySelector("#pay-mask").style.display = "none";
+					var payWay = doc.querySelector("#pay").getAttribute("data-way");
+					if(payWay == "alipay"){
+						doc.querySelector("#pay-way2").style.display = "none";
+					}else{
+						doc.querySelector("#pay-way2").style.display = "block";
+					}
+					doc.querySelector("#time b").innerHTML = "15:00";
+					timeNum = 1;
+					clearInterval(timer);
+				}
+			},1000)
+		}
+        document.getElementById('request').addEventListener('tap',function() {
+        	var user_type = JSON.parse(localStorage.getItem("userinfo")).userinfo.isshop;
+        	if(user_type == "0" || user_type == null || user_type == undefined){
+        		//支付操作
+        		//弹窗选择支付方式
+        		doc.querySelector("#pay-mask").style.display = "block";
+        		if(timeNum == 1){
+        			backTime();
+        		}
+        	}else if(user_type == "2"){
+        		//已经支付未提交开店信息
+        		$.openWindow({
+					"id": 'openstoreinfoPage',
+					"url": 'openstoreinfo.html'
+				});
+        	}
+            //pay('alipay');  
+        }) 
+ 
+        var ALIPAYSERVER = 'https://app.fanbaoyundian.com/appapi/payment/alipayrsa2/index.php?total=0.01';
+        var WXPAYSERVER = 'https://app.fanbaoyundian.com/appapi/payment/wxpayv3/index.php?total=0.01';
+        // 2. 发起支付请求 
+        function pay(id){ 
+            // 从服务器请求支付订单 
+            var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+            var PAYSERVER=''; 
+            if(id=='alipay'){ 
+           		PAYSERVER=ALIPAYSERVER; 
+            	channel = aliChannel; 
+            }else if(id=='wxpay'){
+            	PAYSERVER=WXPAYSERVER; 
+            	channel = wxChannel; 
+            }else{
+                plus.nativeUI.alert("不支持此支付通道！"); 
+                return; 
+            }
+            console.log(JSON.stringify(channel));
+            console.log(PAYSERVER);
+            //return;
+            $.ajax({
+            	type:"post",
+            	url:PAYSERVER,
+            	data:{
+            		subject:"开店软件服务年费",
+            		body:"开店软件服务年费299元/年",
+            		uid:user_id,
+            		total:0.01
+            	},
+            	success:function(data){
+            		plus.payment.request(channel,data,function(result){
+            			plus.nativeUI.toast("支付成功！");
+                        back();
+                   },function(error){
+                        plus.nativeUI.alert("支付失败"); 
+                    });
+            	},
+            	error:function(){
+            		plus.nativeUI.alert("支付失败"); 
+            	}
+            }); 
+    	}
+        doc.querySelector("#pay").addEventListener("tap",function(){
+        	var payway = this.getAttribute("data-way");
+			pay(payway);
+		})
+
+		
+//		$('.oauth-area').on('tap', '.pay', function() {
+//			var channel_id = null;
+//			switch (this.id) { 
+//				case 'alipay':
+//					channel_id = 'ALI_APP';
+//					break;
+////				case 'wxpay':
+////					channel_id = 'WX_APP';
+////					break;
+////				case 'UN_WEB':
+////					channel_id = 'UN_WEB';
+////					break;
+//				default:
+//					break;
+//			}
+//			beecloudPay(channel_id);
+//		});
+//		function beecloudPay(bcChannel) {
+//			//因DCloud尚未申请银联账号，故支付宝、微信使用的是DCloud的appid，银联暂时使用BeeCloud的appid，开发者这里无需判断，直接写一个appid即可；
+//			
+//			var _appid = bcChannel == "UN_WEB" ? "c37d661d-7e61-49ea-96a5-68c34e83db3b":"44f01a13-965f-4b27-ba9f-da678b47f3f5"
+//			//var _appid = bcChannel == "44f01a13-965f-4b27-ba9f-da678b47f3f5";
+//			/*
+//			 * 构建支付参数
+//			 * 
+//			 * app_id: BeeCloud控制台上创建的APP的appid，必填 
+//			 * title: 订单标题，32个字节，最长支持16个汉字；必填
+//			 * total_fee: 支付金额，以分为单位，大于0的整数，必填
+//			 * bill_no: 订单号，8~32位数字和/或字母组合,确保在商户系统中唯一，必填
+//			 * optional: 扩展参数,可以传入任意数量的key/value对来补充对业务逻辑的需求;此参数会在webhook回调中返回; 选填
+//			 * bill_timeout: 订单失效时间,必须为非零正整数，单位为秒，必须大于360。选填 
+//			 */
+//			var payData = {
+//				app_id: _appid,
+//				channel: bcChannel,
+//				title: "翻宝云店App开店费用",
+//				total_fee: 1,
+//				bill_no: beecloud.genBillNo(),
+//				optional: {
+//					'uerId': 'beecloud',
+//					'phone': '4006280728'
+//				},
+//				bill_timeout: 360,
+//				return_url: "" //wap支付成功后的回跳地址
+//			};
+//			beecloud.payReq(payData, function(result) {
+//				plus.nativeUI.toast('支付成功');
+//				var openstoreinfoPage = $.preload({
+//					"id": 'openstoreinfoPage',
+//					"url": 'openstoreinfo.html'
+//				});
+//				setTimeout(function(){					
+//					$.openWindow({
+//						id: 'openstoreinfoPage'
+//					});
+//				},20)
+//			}, function(e) {
+//				plus.nativeUI.toast('支付失败');
+//			});
+//		}
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+		};
+	})
+
+})(mui,document)
+	
+</script>
+</body>
+
+</html>

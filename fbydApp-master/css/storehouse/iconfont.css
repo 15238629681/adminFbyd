@@ -1,0 +1,15 @@
+
+@font-face {font-family: "iconfont";
+  url('../../front/iconfont.ttf?t=1503591788319') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-selected:before { content: "\e6ad"; }
+

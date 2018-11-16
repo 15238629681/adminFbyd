@@ -1,0 +1,410 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/experience/experiencecategory.css" />
+		<link rel="stylesheet" href="../css/experience/order.css" />
+		<link rel="stylesheet" href="../css/experience/goodsList.css" />
+		<style>
+			/*banner图*/
+			
+			.banner {
+				width: 100%;
+				height: 113px;
+			}
+			
+			.banner img {
+				width: 100%;
+				height: 113px;
+			}
+			
+			.orderDiv {
+				/*padding-left: 20px;*/
+			}
+			
+			.showBlock {
+				width: 100%;
+				height: 30px;
+				display: none;
+			}
+			/*页面内部的排序导航*/
+			
+			.orderBlock {
+				display: block;
+			}
+			
+			.publicOrder {
+				top: none;
+				/*position:relative;*/
+			}
+			
+			.kOrderBlock .sxText {
+				margin-left: 0.1rem;
+			}
+			/*筛选弹出层*/
+			
+			.popDiv {
+				top: 158px;
+			}
+			
+			.popDiv .upArrow {
+				border-bottom:
+			}
+			
+			.clean:before,
+			.clean:after {
+				content: "";
+				display: table;
+			}
+			
+			.clean:after {
+				clear: both;
+			}
+			
+			.clean {
+				zoom: 1;
+			}
+			
+			.mui-scroll-wrapper {
+				position: static;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="loading" style="display:none;"></div>
+		<!--遮罩层    透明的遮罩层     点击筛选的时候-->
+		<div class="maskDiv" id="backdrop"></div>
+		<!--公共的排序-->
+		<div class="publicOrder publicOrderFixed" style="display: none;position:fixed;top:-5px;width: 100%;">
+			<!--排序方式-->
+			<div class="kOrderBlock  mui-clearfix" id="orderBlock">
+				<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+					<div class=" mui-inline">
+						<span class="zhpxSpan">综合排序</span>
+						<span class="upArrow"></span>
+					</div>
+				</div>
+				<div class="mui-inline orderDiv xlText" data-order="2">
+					<span class="allOrder">人气</span>
+				</div>
+				<div class="mui-inline orderDiv yhldText" data-order="6">
+					<span class="allOrder">剩余份数最多</span>
+				</div>
+				<div class="mui-inline orderDiv sxText">
+					<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+				</div>
+			</div>
+			<!--//综合排序提示框-->
+			<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0" id="zhpxListFixed">
+				<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+					<a class="">综合排序</a>
+					<span class="mui-icon iconfont icon-selected mui-inline  selectIcon"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="2" data-order="7">
+					<a class="">最新</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="2" data-order="7">
+					<a class="">申请人数低到高</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="1" data-order="5">
+					<a class="">售价由高到低</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="2" data-order="7">
+					<a class="">售价由低到高</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+				</li>
+			</ul>
+
+		</div>
+
+		<!--筛选的弹出框-->
+		<div class="popDiv popDivFixed">
+			<span class="upArrow"></span>
+			<ul class="selectList">
+				<li class="allType">所有</li>
+				<li class="playingType">体验申请中</li>
+			</ul>
+		</div>
+
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer" style="">
+			<div class="mui-scroll">
+				<div class="banner">
+					<a href="">
+						<img src="../images/cloudstore/ishop.png" alt="" />
+					</a>
+				</div>
+
+				<div class="publicOrder orderBlock" style="">
+					<!--筛选框-->
+					<div class="kOrderBlock kOrderBlockFixed  mui-clearfix" id="orderBlock">
+						<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+							<div class=" mui-inline">
+								<span class="zhpxSpan">综合排序</span>
+								<span class="upArrow"></span>
+							</div>
+						</div>
+						<div class="mui-inline orderDiv xlText" data-order="2">
+							<span class="allOrder">人气</span>
+						</div>
+						<div class="mui-inline orderDiv yhldText" data-order="6">
+							<span class="allOrder">剩余份数最多</span>
+						</div>
+						<div class="mui-inline orderDiv sxText">
+							<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+						</div>
+					</div>
+
+					<!--//综合排序提示框-->
+					<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0">
+						<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+							<a class="">综合排序</a>
+							<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+						</li>
+						<li class="mui-table-view-cell" data-index="2" data-order="7">
+							<a class="">最新</a>
+							<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+						</li>
+						<li class="mui-table-view-cell" data-index="2" data-order="7">
+							<a class="">申请人数低到高</a>
+							<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+						</li>
+						<li class="mui-table-view-cell" data-index="1" data-order="5">
+							<a class="">售价由高到低</a>
+							<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+						</li>
+						<li class="mui-table-view-cell" data-index="2" data-order="7">
+							<a class="">售价由低到高</a>
+							<span class="mui-icon iconfont icon-selected mui-inline selectIcon"></span>
+						</li>
+					</ul>
+
+					<!--<div class="popDiv">
+						<span class="upArrow"></span>
+						<ul class="selectList">
+							<li class="allType">所有</li>
+							<li class="playingType">体验申请中</li>
+						</ul>
+					</div>-->
+
+				</div>
+
+				<!--<div class="storeGoodsList"></div>-->
+				<!--商品列表   storeGoodsList-->
+				<div class="goodsList clean storeGoodsList" style="">
+					<div class="boxLeft">
+						<div class="goodsBlock">
+							<img src="../images/experience/goods2.png" alt="">
+							<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+							<div class="goodDetail">
+								<span class="tbPrice tyl">体验量：200份</span>
+								<span class="sellNum yxty">
+							有新体验
+						</span>
+
+							</div>
+							<div class="goodsDetail2">
+								<span class="status">状态：
+							<span class="statusText">申请中</span>
+								</span>
+								<span class="clickAgree">
+							<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+							520
+						</span>
+							</div>
+							<div class="clearBlock"></div>
+						</div>
+						<div class="goodsBlock">
+							<img src="../images/experience/goods1.png" alt="">
+							<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+							<div class="goodDetail">
+								<span class="tbPrice tyl">体验量：200份</span>
+								<span class="sellNum yxty">
+							有新体验
+						</span>
+
+							</div>
+							<div class="goodsDetail2">
+								<span class="status">状态：
+							<span class="statusText">申请中</span>
+								</span>
+								<span class="clickAgree">
+							<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+							520
+						</span>
+							</div>
+							<div class="clearBlock"></div>
+						</div>
+						<div class="goodsBlock">
+							<img src="../images/experience/goods2.png" alt="">
+							<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+							<div class="goodDetail">
+								<span class="tbPrice tyl">体验量：200份</span>
+								<span class="sellNum yxty">
+							有新体验
+						</span>
+
+							</div>
+							<div class="goodsDetail2">
+								<span class="status">状态：
+							<span class="statusText">申请中</span>
+								</span>
+								<span class="clickAgree">
+							<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+							520
+						</span>
+							</div>
+							<div class="clearBlock"></div>
+						</div>
+						<div class="goodsBlock">
+							<img src="../images/experience/goods2.png" alt="">
+							<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+							<div class="goodDetail">
+								<span class="tbPrice tyl">体验量：200份</span>
+								<span class="sellNum yxty">
+							有新体验
+						</span>
+
+							</div>
+							<div class="goodsDetail2">
+								<span class="status">状态：
+							<span class="statusText">申请中</span>
+								</span>
+								<span class="clickAgree">
+							<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+							520
+						</span>
+							</div>
+							<div class="clearBlock"></div>
+						</div>
+
+					</div>
+					<div class="boxRight">
+						<div class="goodsBlock">
+							<img src="../images/experience/goods1.png" alt="">
+							<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+							<div class="goodDetail">
+								<span class="tbPrice tyl">体验量：200份</span>
+								<span class="sellNum yxty">
+							有新体验
+						</span>
+
+							</div>
+							<div class="goodsDetail2">
+								<span class="status">状态：
+							<span class="statusText">申请中</span>
+								</span>
+								<span class="clickAgree">
+							<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+							520
+						</span>
+							</div>
+							<div class="clearBlock"></div>
+						</div>
+						<div class="goodsBlock">
+							<img src="../images/experience/goods1.png" alt="">
+							<div class="goodsName">单肩包女2017新款手工复古文艺学院风邮差包</div>
+							<div class="goodDetail">
+								<span class="tbPrice tyl">体验量：200份</span>
+								<span class="sellNum yxty">
+							有新体验
+						</span>
+							</div>
+							<div class="goodsDetail2">
+								<span class="status">状态：
+							<span class="statusText">申请中</span>
+								</span>
+								<span class="clickAgree">
+							<img src="../images/experience/icons/experiencematerialwxz.png" alt="" />
+							520
+						</span>
+							</div>
+							<div class="clearBlock"></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/experience/category/category.js"></script>
+
+		<script>
+			var a = "cloudstorecategorydragleftmenu2.html";
+			var menu10 = "";
+
+			var zhpxFlag = false;
+			localStorage.removeItem("cloudstorecategoryOrder");
+			localStorage.removeItem("cloudstorecategorySxCondition");
+			mui.plusReady(function() {
+				main = plus.webview.currentWebview();
+				setTimeout(function() {
+					//进行预加载
+					menu10 = mui.preload({
+						//			id: 'cloudstoredragleftmenu2.html',
+						//			url: 'cloudstorecategorydragleftmenu2.html',
+						id: 'menu11Html',
+						url: 'cloudstorecategorydragleftmenu1.html',
+						styles: {
+							left: "30%",
+							width: '70%',
+							zindex: 9999
+						}
+					});
+					//					chooseFn(menu10, a);
+
+				}, 300);
+
+				var self = plus.webview.currentWebview();
+				fqcat = parseInt(self.fqcat);
+				localStorage.setItem("nowFqcat", fqcat);
+
+			});
+
+			var getcategory = new Getcategory("1", "1", mui);
+			getcategory.banner_request();
+			getcategory.list_request();
+			getcategory.Init2();
+			
+			
+			mui('.mui-content').on('tap', '.goodsBlock', function(e) {
+				//alert("详情页");
+				e.stopPropagation();
+				var goodsdetail = mui.preload({
+					"id": 'experienceproduct',
+					"url": 'experienceproduct.html'
+				});
+				var id = this.getAttribute("id");
+				//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+				var gid = this.getAttribute("data-id");
+				var num_iid = this.getAttribute("data-numiid");
+				var cid = this.getAttribute("data-cid");
+				//打开详情页面
+				setTimeout(function() {
+					mui.fire(goodsdetail, 'transTodetail', {
+						gid: gid,
+						num_iid: num_iid,
+						cid: cid
+					});
+					mui.openWindow({
+						id: "experienceproduct"
+					});
+				}, 250)
+			});
+		</script>
+		<!--//固定排序导航-->
+		<script src="../js/experience/category/publicOrder.js"></script>
+		<script src="../js/experience/category/sliderOrder2.js"></script>
+		<script src="../js/experience/category/angle.js"></script>
+	</body>
+
+</html>

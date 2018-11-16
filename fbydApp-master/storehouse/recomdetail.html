@@ -1,0 +1,796 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<script src="../js/mui.min.js"></script>
+<link href="../css/imageviewer.css" rel="stylesheet" />
+<script>
+function loadStyles(url) {
+	var link = document.createElement("link");
+	link.type = "text/css";
+	link.rel = "stylesheet";
+	link.href = url;
+	document.getElementsByTagName("head")[0].appendChild(link);
+}
+if(mui.os.ios){
+	loadStyles("../css/ios.css");
+}else{
+	loadStyles("../css/android.css");
+}
+</script>
+<style>
+html,body{
+	width: 100%;
+	min-height: 100%;
+	background: #fff;
+	font-size: 14px;
+	line-height: 20px;
+}
+body{padding-bottom: 50px;}
+span{display: inline-block;}
+b{font-weight: normal;}
+p{margin-bottom: 0;}
+/* clear float */
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+#head{height: 60px;background: #fff;padding-top: 20px;opacity: 0;padding-left: 0;padding-right: 0;}
+#header b{font-size: 16px;}
+#error{width: 100%;height: 100%;position: fixed;top: 0;background: #fff;z-index: 100;display: none;}
+#loading{width: 100%;height: 100%;position: fixed;top: 0;background: url(../images/icons/loading.gif) no-repeat center #fff;
+z-index: 90;background-size: 70%;}
+/*#goods-title{height: 60px;position:fixed;top: 0;width: 100%;background: #e7e7e7;text-align: center;line-height: 40px;z-index: 999;padding-top: 20px;}*/
+.mui-bar-nav~ .mui-content{background: #fff;height: 100%;padding-top: 0;}
+#back{position: absolute;display: inline-block;width: 30px;height: 30px;z-index: 89;background: rgba(0,0,0,0.25);top: 30px;left: 10px;border-radius: 50%;}
+.mui-icon-back:before, .mui-icon-left-nav:before{color: #fff;width: 30px;height: 30px;display: inline-block;text-align: center;line-height: 30px;}
+.mui-bar .mui-icon-back:before, .mui-bar .mui-icon-left-nav:before{color: #333;}
+
+#goods-info{width: 100%;}
+#slider{min-height: 350px;}
+#slider #sliderlist img{max-width: 100%;max-height: 100%;}
+/*#slider0{background: url(../images/goodsdetail/loading.gif) no-repeat center;}*/
+.mui-slider-indicator .mui-indicator{background: #999;box-shadow: none;}
+@media screen and (max-width: 340px)  {
+	html,body{font-size: 12px;}
+	#slider{min-height: 320px;}
+}
+#goods-blurb{padding: 10px;position: relative;}
+#fb-price{margin: 4px 0;}
+#fb{display:inline-block;background: #FBBD00;color: #231815;font-size: 1rem;text-align: center;padding: 2px 3px;border-radius: 4px;}
+#price{color: #FBBD00;font-size: 1.1rem;}
+#tb-price{color: #898989;text-decoration: line-through;}
+#jh-price{margin-left: 1.5rem;font-size: 1rem;}
+#countdown{margin: 2px 0;}
+#time{color: #595757;}
+#over{color: #E60012;margin-left: 6px;}
+
+#describe{min-height: 40px;background: rgb(239,239,239);padding: 10px 0;}
+#describe-wrap{background: #fff;padding: 10px 10px;font-size: 1.1rem;}
+#describe p{text-indent: 1rem;color: #3E3A39;min-height: 2rem;padding-left: 12px;}
+
+#goods-recommend{padding: 10px 10px;}
+.hasaddSend{position: absolute;top: 0;width:100%;height: 100%;text-align: center;background: url(../images/goodsdetail/yijiar.png) rgba(0, 0, 0, 0.4) no-repeat center 25px;
+color: #fff;line-height: 100px;display: none;background-size: 30px;padding-top: 20px;}
+.left img{width:100%;}
+
+.middle{float: left;}
+.fbPrice{color: #FBBD00;}
+
+.right div{text-align: center;font-size: 12px;}
+.profitText{color: #E60012;}
+.addSend{background: #fffa66;margin-bottom: 4px;}
+.spread{background: #fcd14d;}
+@media screen and (max-width: 340px)  {
+	#header b{font-size: 14px;}
+	.left{width: 80px;height: 80px;margin-right: 6px;}
+	.hasaddSend{line-height: 80px;background: url(../images/goodsdetail/yijiar.png) rgba(0, 0, 0, 0.4) no-repeat center 20px;
+	background-size: 24px;padding-top: 16px;}
+	.middle .goodsName{margin-bottom: 2px;font-size: 12px;}
+	.costPrice{margin-top:2px;}
+	.tbPrice{font-size: 10px;}
+	.sellNum{font-size: 8px;}
+	.right .addSend,.right .spread{font-size: 10px;padding: 0 4px;}
+}
+
+#video{min-height: 40px;background: #e7e7e7;padding: 10px 0;display: none;}
+#video-wrap{background: #fff;padding: 6px 10px;font-size: 1.1rem;position: relative;}
+#video-wrap h4{font-weight: normal;border-left: 2px solid #FBBD00;padding-left: 10px;color: #3E3A39;}
+#pause{position: absolute;color: #fff;width: 40px;height: 40px;top: 50%;left: 50%;margin-left: -20px;margin-top: -20px;
+background:url(../images/icons/pause.png) no-repeat;background-size:cover;border-radius: 50%;z-index: 999;}
+#detail-video{margin: 0 auto;display: block;width: 100%;padding: 4px;}
+
+#detail{background: rgb(239,239,239);}
+#detail-wrap{background: #fff;padding: 0 10px;}
+/*#detail-wrap h4{font-weight: normal;border-left: 2px solid #FBBD00;padding-left: 10px;color: #3E3A39;}*/
+#more-detal{text-align: center;font-size: 14px;}
+#detal-container{width: 100%;}
+#detal-container div{width: 100% !important;}
+#detal-container table{width: 100% !important;}
+#detal-container img{max-width: 100% !important;}
+#detal-container span,#detal-container a{display: inline-block;width: 100%;text-align: center;}
+.mui-pull{display: none;}
+
+#foot-toorbar{position: fixed;bottom: 0;width: 100%;border-top: 1px solid #eee;z-index: 80;}
+#foot-toorbar button{display: inline-block;width: 33.3%;text-align: center;height: 50px;line-height: 50px;padding: 0;border: none;border-radius: 0;}
+#foot-toorbar #like{color: #9FA0A0;background-color: #fff;}
+#foot-toorbar #like b{display: inline-block;background: url(../images/goodsdetail/like.png) no-repeat 0 13px;background-size: 24px;
+padding-left: 26px;}
+#buy{background: #fffa66;}
+#to-spread{background: #fcd14d;}
+#detalPage{border:none;padding: 10px 4px;display: none;min-height: 1000px;width:100%;}
+</style>
+</head>
+
+<body>
+<div id="error"></div>
+<div id="loading"></div>
+<div class="mui-bar mui-bar-nav" id="head" style="width: 100%;">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft" style="color: #333;"></a>
+	<div style="font-size: 10px;width: 100%;position: absolute;text-align: center;">距离优惠结束</div>
+	<h1 class="mui-title" id="header" style="font-weight: normal;font-size: 12px;margin-top: 4px;"></h1>
+</div>	
+<div id="back" class="mui-icon mui-icon-back mui-action-back"></div>
+<div id="goods-title"></div>
+<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+<div class="mui-scroll">
+    <div id="goods-info">
+    	<img id="img_1" style="display: none;width:100%;height: 100%;" src="" />
+    	<div id="slider" class="mui-slider" >
+    	  <div class="mui-slider-group mui-slider-loop" id="sliderlist">
+    	    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+    	    <div class="mui-slider-item mui-slider-item-duplicate">
+    	      <a href="#">
+    	        <img id="slider6" data-preview-src="" data-preview-group="1">
+    	      </a>
+    	    </div>
+    	    <!-- 第一张 -->
+    	    <div class="mui-slider-item">
+    	      <a href="#">
+    	        <img id="slider0" src="" data-preview-src="" data-preview-group="1">
+    	      </a>
+    	    </div>
+    	    <!-- 第二张 -->
+    	    <div class="mui-slider-item">
+    	      <a href="#">
+    	        <img id="slider1" data-preview-src="" data-preview-group="1">
+    	      </a>
+    	    </div>
+    	    <!-- 第三张 -->
+    	    <div class="mui-slider-item">
+    	      <a href="#">
+    	        <img id="slider2" data-preview-src="" data-preview-group="1">
+    	      </a>
+    	    </div>
+    	    <!-- 第四张 -->
+    	    <div class="mui-slider-item">
+    	      <a href="#">
+    	        <img id="slider3" data-preview-src="" data-preview-group="1">
+    	      </a>
+    	    </div>
+    	    <!-- 第五张 -->
+    	    <div class="mui-slider-item">
+    	      <a href="#">
+    	        <img id="slider4" data-preview-src="" data-preview-group="1">
+    	      </a>
+    	    </div>
+    	    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+    	    <div class="mui-slider-item mui-slider-item-duplicate">
+    	      <a href="#">
+    	        <img id="slider5" data-preview-src="" data-preview-group="1">
+    	      </a>
+    	    </div>
+    	  </div>
+    	  <div class="mui-slider-indicator">
+    	    <div class="mui-indicator mui-active"></div>
+    	    <div class="mui-indicator"></div>
+    	    <div class="mui-indicator"></div>
+    	    <div class="mui-indicator"></div>
+    	    <div class="mui-indicator"></div>
+    	  </div>
+    	</div>
+    </div>
+    <div id="goods-blurb">
+    	<div id="title"></div>
+    	<div id="fb-price">
+    		<span id="fb">翻宝券后价</span><span id="price"></span>
+    	</div>
+    	<div id="orther-price">
+    		<span id="tb-price">淘宝价￥<b id="tbpric"></b></span><span id="jh-price">进货价￥<b id="jhprice"></b></span>
+    	</div>
+    	<div id="countdown">
+    		<span id="time">还剩-天-小时-分-秒</span><span id="over">结束优惠</span>
+    	</div>
+    	<span id="profit">
+    		利润 <b id="profitnum"></b>元
+    	</span>
+    </div>
+    <div id="describe">
+    	<div id="describe-wrap">
+    		<h4>小编说</h4>
+    		<p></p>
+    	</div>
+    </div>
+    <div id="goods-recommend">
+    	<h4>相关产品推荐</h4>
+		<div class="goodsBlock clean" data-gid="1" data-num_iid="1" data-cid="1"> 
+			<div class="left">
+				<div class="hasaddSend">已加入</div>
+				<img class="goodsmig" src="" alt="">
+			</div>
+			<div class="middle">
+				<p class="goodsName"></p>
+				<div class="goodDetail">
+					<span class="tbPrice">淘宝价￥<b></b></span>
+					<span class="sellNum">销售量：<b></b></span>
+				</div>
+				<p class="costPrice">进货价￥<b></b></p>
+				<p class="fbPrice">翻宝价￥<b></b></p>
+			</div>
+			<div class="right">
+				<div class="profitText">利润</div>
+				<div class="profit profitText">￥<b></b>元</div>
+				<div class="addSend" data-gid="1" data-num_iid="1" data-cid="1" data-choose="">加入发送</div>
+				<div class="spread" data-gid="1" data-num_iid="1" data-cid="1">马上推广</div>
+			</div>
+		</div>
+		<div class="goodsBlock clean" data-gid="1" data-num_iid="1" data-cid="1">
+			<div class="left">
+				<div class="hasaddSend">已加入</div>
+				<img class="goodsmig" src="" alt="">
+			</div>
+			<div class="middle">
+				<p class="goodsName"></p>
+				<div class="goodDetail">
+					<span class="tbPrice">淘宝价￥<b></b></span>
+					<span class="sellNum">销售量：<b></b></span>
+				</div>
+				<p class="costPrice">进货价￥<b></b></p>
+				<p class="fbPrice">翻宝价￥<b></b></p>
+			</div>
+			<div class="right">
+				<div class="profitText">利润</div>
+				<div class="profit profitText">￥<b></b>元</div>
+				<div class="addSend" data-gid="" data-num_iid="1" data-cid="1" data-choose="">加入发送</div>
+				<div class="spread" data-gid="1" data-num_iid="1" data-cid="1">马上推广</div>
+			</div>
+		</div>
+		<div class="goodsBlock clean" data-gid="1" data-num_iid="1" data-cid="1">
+			<div class="left">
+				<div class="hasaddSend">已加入</div>
+				<img class="goodsmig" src="" alt="">
+			</div>
+			<div class="middle">
+				<p class="goodsName"></p>
+				<div class="goodDetail">
+					<span class="tbPrice">淘宝价￥<b></b></span>
+					<span class="sellNum">销售量：<b></b></span>
+				</div>
+				
+				<p class="costPrice">进货价￥<b></b></p>
+				<p class="fbPrice">翻宝价￥<b>0.00</b></p>
+			</div>
+			<div class="right">
+				<div class="profitText">利润</div>
+				<div class="profit profitText">￥<b></b>元</div>
+				<div class="addSend" data-gid="1" data-num_iid="1" data-cid="1" data-choose="">加入发送</div>
+				<div class="spread" data-gid="1" data-num_iid="1" data-cid="1">马上推广</div>
+			</div>
+		</div>
+    </div>
+    <div id="video">    	
+    	<div id="video-wrap">
+    		<h4>短视频</h4>
+    		<div id="pause"></div>
+    		<video src="http://cloud.video.taobao.com/play/u/3069918219/p/2/e/6/t/1/50011038249.mp4?appKey=38824" id="detail-video" poster=""></video>
+    	</div>
+    </div>
+    <div id="detail">
+    	<div id="detail-wrap">
+    		<h4>宝贝详情</h4>
+    		<div id="more-detal">查看商品详情</div>
+    		<div id="detal-container">
+    		</div>
+    	</div>
+    </div>
+</div>
+    <div id="foot-toorbar">
+    	<button id="like" class=""><b>赞·0</b></button><button id="buy">进货价购买</button><button id="to-spread">马上推广</button>
+    </div>
+</div>
+<script src="../js/mui.zoom.js"></script>
+<script src="../js/mui.previewimage.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	
+	//初始化轮播图长度
+	var sliderStyle = document.defaultView.getComputedStyle(doc.querySelector("#slider"), null);
+	doc.querySelector("#slider").style.height = sliderStyle.width
+	
+	//透明导航栏
+	function barAction(){
+		var head = doc.querySelector("#head");
+		window.addEventListener("touchmove",function(e){
+			e.stopPropagation();
+			var scrollTop = window.scrollY;
+			if($.os.ios){
+				//head.style.opacity = 1;
+				//console.log(scrollTop);
+			}else{				
+				if(scrollTop==0){
+					head.style.opacity = 1;
+				}
+				if(60 < scrollTop&&260 > scrollTop){
+					var speed = ((scrollTop-60)/200).toFixed(2);
+					head.style.opacity = speed;				
+				}else if(60 > scrollTop){
+					head.style.opacity = 0;
+				}else if(260 < scrollTop){
+					head.style.opacity = 1;
+				}
+			}
+		})
+		window.addEventListener("scroll",function(e){
+			e.stopPropagation();
+			var scrollTop =window.scrollY;
+			if($.os.ios){
+				scrollTop = -e.detail.y;
+				if(60 < scrollTop&&260 > scrollTop){
+					var speed = ((scrollTop-60)/200).toFixed(2);
+					head.style.opacity = speed;
+					doc.querySelector("#back").style.display = "none";
+				}else if(60 > scrollTop){
+					head.style.opacity = 0;
+					doc.querySelector("#back").style.display = "block";
+				}else if(260 < scrollTop){
+					head.style.opacity = 1;
+				}
+			}else{				
+				if(scrollTop==0){
+					head.style.opacity = 1;
+				}
+				if(60 > scrollTop){
+					head.style.opacity = 0;
+				}else if(260 < scrollTop){
+					head.style.opacity = 1;
+				}
+			}
+		})
+	}
+	barAction();
+	
+	//视频点击播放控制
+	var video = document.querySelector("#detail-video");
+	document.querySelector("#pause").addEventListener("tap",function(){
+		this.style.display = "none";
+		if(video.paused){
+        	video.play();
+    	}else{
+        	video.pause();
+    	}
+	})
+	video.addEventListener("tap",function(){
+		if(!video.paused) video.pause();
+		document.querySelector("#pause").style.display = "block";
+	})
+	
+//	$.init({
+//		swipeBack:true
+//	});
+	$.previewImage();
+	//设置商品优惠倒计时
+	//时间戳转日期格式
+	function getLocalTime(nS) {
+		var T = new Date(parseInt(nS) * 1000);
+		T = T.getFullYear() + '/' + (T.getMonth() + 1) + '/' + T.getDate() + ' ' + T.getHours() + ':' + T.getMinutes() + ':' + T.getSeconds();
+		return T;
+	}
+	function GetRTime(time){
+		var timer = setInterval(function(){			
+    		var EndTime= new Date(time);
+    		var NowTime = new Date();
+   			var t =EndTime.getTime() - NowTime.getTime();
+    		var d=0;
+    		var h=0;
+    		var m=0;
+    		var s=0;
+    		if(t>=0){
+      			d=Math.floor(t/1000/60/60/24);
+    			h=Math.floor(t/1000/60/60%24);
+      			m=Math.floor(t/1000/60%60);
+      			s=Math.floor(t/1000%60);
+      			document.querySelector("#time").innerHTML = "还剩"+d + "天"+h + "小时"+m + "分"+s + "秒";
+      			document.querySelector("#header").innerHTML = "<b>"+d+"</b> 天 <b>"+h+"</b> 小时 <b>"+m+"</b> 分 <b>"+s+"</b> 秒";
+    		}else{
+    			document.querySelector("#time").innerHTML = "";
+    			document.querySelector("#header").innerHTML = "<b>结束优惠</b>";
+    			document.querySelector("#over").innerHTML = "已结束优惠";
+    			clearInterval(timer)
+    		}
+		},0);
+	}
+	var productinfo = {
+		gid:"",
+		num_iid:"",
+		cid:""
+	}
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		//判断数据请求是否成功
+		var loadingStyle = document.defaultView.getComputedStyle(doc.querySelector("#loading"), null);
+		setTimeout(function(){
+			if(loadingStyle.display == "block"){
+				doc.querySelector("#error").style.display = "block";
+				$.confirm('页面暂时去了火星','',['返回列表'],function (e) {
+					if(e.index==0){
+						plus.webview.close(plus.webview.currentWebview());
+					}
+				},'div')
+			}
+		},7000)
+		//plus.webview.close(plus.webview.getWebviewById("recomdetail"));
+	})
+	window.addEventListener("recomdetailinfo",function(e){
+		productinfo.gid= e.detail.gid;
+		productinfo.num_iid= e.detail.num_iid;
+		productinfo.cid= e.detail.cid;
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		var starttime = new Date();
+		//点击本页面的推广
+		document.querySelector("#to-spread").addEventListener("tap",function(){
+			var sharePage = $.preload({
+				"id": 'sharePage',
+				"url": 'share.html'
+			});
+			setTimeout(function(){								
+				$.fire(sharePage,'shareinfo',{
+					gid:productinfo.gid,
+					num_iid:productinfo.num_iid
+				});
+				$.openWindow({
+					id:"sharePage"
+				});
+			},250)
+		})
+		//上拉加载宝贝详情
+		$.init({
+			swipeBack:true,
+			pullRefresh: {
+				container: '#pullrefresh',
+				up: {
+					height:'50px',
+					range:'100px',
+					contentrefresh:"",
+					contentnomore:"",
+					callback: pullupRefresh
+				}
+			}
+		});
+		function pullupRefresh(){
+			document.querySelector("#more-detal").innerHTML = "正在加载宝贝详情..."
+			$.ajax({
+				type:"post",
+				url:"https://app.fanbaoyundian.com/appapi/productdetaildesc.app.php",
+				data:{
+					num_iid:productinfo.num_iid,
+					token:user_token,
+					timestamp:time
+				},
+				success:function(data){
+					//alert(JSON.stringify(data));
+					if(data.descdata_video){
+						document.querySelector("#detail-video").src = data.descdata_video; 
+						document.querySelector("#detail-video").poster = data.descdata_videoimg;
+						document.querySelector("#video").style.display = "block";
+					}
+					document.querySelector("#more-detal").style.display = "none";
+					var imgStr = JSON.stringify(data.descdata_imgs);
+					var Img = imgStr.substring(1,imgStr.length-1);
+					Img = Img.replace(/[\\]/g,"");
+					document.querySelector("#detal-container").innerHTML = Img;
+				},
+				error:function(xhr,type,errorThrown){
+					document.querySelector("#more-detal").innerHTML = "查看商品详情";
+					if(type=="timeout"){
+						plus.nativeUI.toast("请求超时，请检查网络");
+					}
+					plus.nativeUI.toast(errorThrown);
+				}
+			});
+			this.endPullupToRefresh(true);
+		}
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/productdetail.app.php",
+			data:{
+				gid:productinfo.gid,
+				num_iid:productinfo.num_iid,
+				cid:productinfo.cid,
+				uid:user_id,
+				token:user_token,
+				timestamp:time
+			},
+			success:function(data){
+				//alert(new Date()-starttime);
+				//alert(JSON.stringify(data.recommendproduct));
+				//判断轮播图数量并显示
+				var imgNum = data.productinfo.itemimages.length;
+				if(imgNum == 1){
+					document.querySelector("#slider").style.display = "none";
+					document.querySelector("#img_1").src = data.productinfo.itemimages[0];
+					document.querySelector("#img_1").style.display = "block";
+				}else{
+					document.querySelector("#slider6").src = data.productinfo.itemimages[imgNum-1]+"_500x500.jpg";
+					document.querySelector("#slider5").src = data.productinfo.itemimages[0]+"_500x500.jpg";
+					for(var j=0;j<imgNum;j++){
+						document.getElementsByClassName("mui-slider-item")[j+1].getElementsByTagName("img")[0].src = data.productinfo.itemimages[j]+"_500x500.jpg";
+					}
+					for(var i=imgNum;i<5;i++){
+						document.querySelector("#sliderlist").removeChild(document.getElementsByClassName("mui-slider-item")[i+1]);
+						document.getElementsByClassName("mui-indicator")[i].style.display = "none";
+					}
+				}
+				document.querySelector("#title").innerHTML = data.productinfo.title;
+				document.querySelector("#price").innerHTML = "&nbsp;￥&nbsp;"+data.productinfo.quanhou_price;
+				document.querySelector("#tbpric").innerHTML = data.productinfo.coupon_price;
+				document.querySelector("#jhprice").innerHTML = data.productinfo.cgprice;
+				//倒计时
+				var Time = getLocalTime(data.productinfo.coupon_end_time);
+				GetRTime(Time);
+				document.querySelector("#profitnum").innerHTML = data.productinfo.lirun;
+				document.querySelector("#describe-wrap p").innerHTML = data.productinfo.intro;
+				//取消load图
+				setTimeout(function(){					
+					document.querySelector("#loading").style.display = "none";
+				},0)
+				//点赞状态
+				if(data.productinfo.likes){
+					document.querySelector("#like b").innerHTML = "赞·"+data.productinfo.likesnumber;
+					document.querySelector("#like b").style.backgroundImage = "url(../images/goodsdetail/liked.png)";
+					
+				}else{
+					document.querySelector("#like b").style.backgroundImage = "url(../images/goodsdetail/like.png)";
+				}
+				//点赞
+				var action = data.productinfo.likes ? 0 : 1;
+				document.querySelector("#like").addEventListener("tap",function(){
+					$.ajax({
+						type:"post",
+						url:"https://app.fanbaoyundian.com/appapi/likes.app.php",
+						data:{
+							type:"1",
+							action:action,
+							gid:productinfo.gid,
+							uid:user_id,
+							token:user_token,
+							timestamp:time
+						},
+						success:function(data){
+							//alert(JSON.stringify(data));
+							if(data.message=="点赞成功"){
+								document.querySelector("#like b").style.backgroundImage = "url(../images/goodsdetail/liked.png)";
+								action = 0;
+							}else{
+								action = 1;
+								document.querySelector("#like b").style.backgroundImage = "url(../images/goodsdetail/like.png)";
+							}
+							document.querySelector("#like b").innerHTML = "赞·"+data.likesnumber;
+						},
+						error:function(xhr,type,errorThrown){
+							plus.nativeUI.toast("点赞失败,请检查网络");
+						}
+					});
+				})
+				//点击跳转购买链接
+//				document.getElementById("buy").addEventListener("tap",function(){
+//					//window.location.href = data.productinfo.buyurl;
+//					if(data.productinfo.isopen&&$.os.ios){						
+//						$.plusReady(function(){
+//							plus.runtime.openURL(data.productinfo.buyurl,function(e){
+//								$.toast("打开淘宝失败，请检查网络")
+//							});
+//						})
+//					}else{
+//						$.openWindow({
+//							url:'buy.html', 
+//	    					id:'buy',
+//	    					extras:{buyUrl:data.productinfo.buyurl}
+//						})
+//					}
+//
+//				})
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					plus.nativeUI.toast("请求超时，请检查网络");
+				}
+				plus.nativeUI.toast(errorThrown);
+			}
+		});
+		setTimeout(function(){	
+			//alert(new Date()-starttime);
+			$.ajax({
+				type:"post",
+				url:"https://app.fanbaoyundian.com/appapi/recommendproduct.app.php",
+				data:{
+					cid:productinfo.cid,
+					uid:user_id,
+					token:user_token,
+					timestamp:time
+				},
+				success:function(data){
+					for(var i=0;i<3;i++){
+						document.getElementsByClassName("goodsmig")[i].src = data.recommendproduct[i].pic_url+"_160x160.jpg";
+						document.getElementsByClassName("goodsName")[i].innerHTML = data.recommendproduct[i].oldtitle;
+						document.getElementsByClassName("tbPrice")[i].getElementsByTagName("b")[0].innerHTML = data.recommendproduct[i].coupon_price;
+						document.getElementsByClassName("sellNum")[i].getElementsByTagName("b")[0].innerHTML = data.recommendproduct[i].volume;
+						document.getElementsByClassName("costPrice")[i].getElementsByTagName("b")[0].innerHTML = data.recommendproduct[i].cgprice;
+						document.getElementsByClassName("fbPrice")[i].getElementsByTagName("b")[0].innerHTML = data.recommendproduct[i].quanhou_price;
+						document.getElementsByClassName("profit")[i].getElementsByTagName("b")[0].innerHTML = data.recommendproduct[i].lirun;
+						//推荐商品发送状态
+						if(data.recommendproduct[i].choose){
+							document.getElementsByClassName("hasaddSend")[i].style.display = "block";
+							document.getElementsByClassName("addSend")[i].innerHTML = "取消发送";
+						}
+						document.getElementsByClassName("addSend")[i].setAttribute("data-gid",data.recommendproduct[i].id);
+						document.getElementsByClassName("addSend")[i].setAttribute("data-num_iid",data.recommendproduct[i].num_iid);
+						document.getElementsByClassName("addSend")[i].setAttribute("data-cid",data.recommendproduct[i].cid );
+						document.getElementsByClassName("addSend")[i].setAttribute("data-choose",data.recommendproduct[i].choose );
+						document.getElementsByClassName("spread")[i].setAttribute("data-gid",data.recommendproduct[i].id);
+						document.getElementsByClassName("spread")[i].setAttribute("data-num_iid",data.recommendproduct[i].num_iid);
+						//document.getElementsByClassName("spread")[i].setAttribute("data-cid",data.recommendproduct[i].cid );
+						document.getElementsByClassName("goodsBlock")[i].setAttribute("data-gid",data.recommendproduct[i].id);
+						document.getElementsByClassName("goodsBlock")[i].setAttribute("data-num_iid",data.recommendproduct[i].num_iid);
+						document.getElementsByClassName("goodsBlock")[i].setAttribute("data-cid",data.recommendproduct[i].cid );
+					};
+					
+					//点击进入另一个详情页
+					$(".mui-content").on("tap",".goodsBlock",function(e){
+						e.stopPropagation();
+						var goodsdetail =$.preload({
+							"id":"goodsdetail",
+							"url":"goodsdetail.html"
+						})
+						var gid=this.getAttribute("data-gid");
+						var num_iid=this.getAttribute("data-num_iid");
+						var cid=this.getAttribute("data-cid");
+						setTimeout(function(){
+							$.fire(goodsdetail,'transTodetail',{
+								gid:gid,
+								num_iid:num_iid,
+								cid:cid
+							});
+							$.openWindow({
+								id:"goodsdetail"
+							});
+							plus.webview.close(plus.webview.currentWebview(),"slide-out-left");
+						},250)
+					})
+					//点击加入发送
+					var action_choose = "";
+					$(".goodsBlock").on("tap",".addSend",function(e){						
+						e.stopPropagation();
+						var gid = this.getAttribute("data-gid");
+						action_choose = this.getAttribute("data-choose")=="0" ? 1 : 0;
+						var this_ = this;
+						$.ajax({
+							type:"post",
+							url:"https://app.fanbaoyundian.com/appapi/choose.app.php",
+							data:{
+								action:action_choose,
+								gid:gid,
+								uid:user_id,
+								token:user_token,
+								timestamp:time
+							},
+							success:function(data){
+								if(data.state=="0"){
+									plus.nativeUI.toast(data.message);
+								}else{								
+									if(data.message=="加入发送成功"){
+										plus.nativeUI.toast("加入发送成功");
+										this_.innerHTML = "取消发送";
+										this_.parentNode.parentNode.getElementsByClassName("hasaddSend")[0].style.display = "block";
+										this_.setAttribute("data-choose","1");
+									}else{
+										plus.nativeUI.toast("取消发送成功");
+										this_.innerHTML = "加入发送";
+										this_.parentNode.parentNode.getElementsByClassName("hasaddSend")[0].style.display = "none";
+										this_.setAttribute("data-choose","0");
+									}
+								}
+							},
+							error:function(xhr,type,errorThrown){
+								plus.nativeUI.toast("点赞失败,请检查网络");
+							}
+						});
+					})
+					//点击推广
+					$(".goodsBlock").on("tap",".spread",function(e){
+						e.stopPropagation();
+						var sharePage = $.preload({
+							"id": 'sharePage',
+							"url": 'share.html'
+						});
+						var gid=this.getAttribute("data-gid");
+						var num_iid=this.getAttribute("data-num_iid");
+						setTimeout(function(){								
+							$.fire(sharePage,'shareinfo',{
+								gid:gid,
+								num_iid:num_iid
+							});
+							$.openWindow({
+								id:"sharePage"
+							});
+						},250)
+					})
+				},
+				error:function(xhr,type,errorThrown){
+					if(type=="timeout"){
+						plus.nativeUI.toast("请求超时，请检查网络");
+					}
+					plus.nativeUI.toast(errorThrown);
+				}
+			});
+		},500);
+		
+		//点击跳转购买链接
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/gobuy.app.php",
+			data:{
+				gid:productinfo.gid,
+				num_iid:productinfo.num_iid,
+				cid:productinfo.cid,
+				uid:user_id,
+				token:user_token,
+				timestamp:time
+			},
+			success:function(data){
+				console.log(JSON.stringify(data));
+				document.querySelector("#buy").addEventListener("tap",function(){
+					if(data.state == 1){						
+						$.getJSON("../manifest.json",null,function(res){
+							if(data.productinfo.isopen&&$.os.ios&&res.version.code == data.productinfo.code){
+								$.plusReady(function(){
+									plus.runtime.openURL(data.productinfo.buyurl,function(e){
+										$.toast("打开淘宝失败，请检查网络");
+									});
+								})
+							}else{
+								$.openWindow({
+									url:'buy.html', 
+									id:'buy',
+									extras:{buyUrl:data.productinfo.buyurl}
+								})
+							}
+						})
+					}else{
+						$.toast(data.message);
+					}
+				})
+			},
+			error:function(xhr,type,errorThrown){
+				//$.toast("购买无响应，请稍后重试！")
+			}
+		});			
+		
+	});
+	//重新定义后退函数(监听安卓后退键事件)
+	$.back = function(event) {
+		if(!video.paused){
+			video.pause();
+		}
+		plus.webview.close(plus.webview.currentWebview());
+		return false;
+	};
+}(mui,document))
+</script>
+</body>
+</html>

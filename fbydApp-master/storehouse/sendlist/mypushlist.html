@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width:100%;background: rgb(239,239,239);font-size: 14px;min-height: 100%;}
+@media screen and (max-width: 340px)  {
+	html,body{font-size: 12px;}
+}
+
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+ul,li{list-style:none;padding: 0;margin: 0;background: #fff;}
+b{font-weight: normal;}
+#loading{width: 100%;height: 100%;position: fixed;top: 0;background: url(../../images/icons/loading.gif) no-repeat center #fff;
+z-index: 9999;background-size: 70%;}
+/*.mui-content{background: url(../../images/goodsdetail/nulllist.png) no-repeat center 30%;}*/
+/*#null{position: absolute;top: 45%;width: 100%;display: none;}
+#null p{text-align: center;margin-bottom: 0;}*/
+#null{width: 200px;height: 120px;background: url(../../images/goodsdetail/nulllist.png) no-repeat center 0;padding-top: 110px;
+position: absolute;top: 40%;left: 50%;margin-left: -100px;margin-top: -60px;background-size: 100px;display: none;}
+#null p{width: 100%;margin: 0;text-align: center;}
+.goodsBlock{padding: 6px 10px;border-bottom: 1px solid #eee;position:relative;}
+.left{width: 70px;height: 70px;float: left;margin-right: 8px;position: relative;}
+.left img{width:100%;}
+
+.middle{float: left;}
+.middle p{font-size: 14px;}
+.middle .goodsName{color: #666;margin-bottom: 8px;margin-top:2px;font-size: 14px;word-break:keep-all;white-space:nowrap;
+text-overflow:ellipsis;overflow:hidden;width: 15rem;min-height: 1rem;}
+.fbPrice{font-size: 14px;color: #FBBD00;}
+.sellNum{font-size: 12px;color: #898989;}
+
+.right{position: absolute;right: 6px;margin-top: 4px;}
+.delete{text-align: center;padding: 2px 10px;border-radius:14px;font-size: 12px;background: #fcd14d;}
+.profitText{color: #E60012;font-size: 14px;text-align: center;}
+
+</style>
+</head>
+
+<body>
+<!--<div id="loading"></div>-->
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+	<div id="null">
+		<p>暂无自选产品</p>
+		<p>马上去仓库选择产品推送</p>			
+	</div>
+	<div class="mui-scroll">
+		<ul id="list-wrap" >
+			<li class="goodsBlock clean" style="display: none;"> 
+				<div class="left">
+					<img class="goodsmig" src="../../images/goods1.png" alt="">
+				</div>
+				<div class="middle">
+					<p class="goodsName">销售量销售量销售量销售量销</p>
+					<div class="goodDetail">
+						<div class="fbPrice">翻宝价￥<b class="fb-price">15.25</b></div>
+						<div class="sellNum">销售量&nbsp;<b class="sell-num">1245</b></div>
+					</div>
+				</div>
+				<div class="right">
+					<div class="profitText">利润</div>
+					<div class="profit profitText">￥<b>23.65</b>元</div>
+					<div class="delete" data-gid="1">删除发送</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		//克隆节点
+		var firstList = document.getElementsByClassName('goodsBlock')[0];
+		function createList(listinfo){
+			var listitem = firstList.cloneNode(true);
+			//listitem.style.display = "block";
+			var Left = listitem.getElementsByClassName("left")[0];
+			var Middle = listitem.getElementsByClassName("middle")[0];
+			var right = listitem.getElementsByClassName("right")[0];
+			Left.getElementsByClassName("goodsmig")[0].src = listinfo.pic_url+"_100x100.jpg";
+			Middle.getElementsByClassName("goodsName")[0].innerHTML = listinfo.title;
+			Middle.getElementsByClassName("fb-price")[0].innerHTML = listinfo.quanhou_price;
+			Middle.getElementsByClassName("sell-num")[0].innerHTML = listinfo.volume;
+			right.getElementsByClassName("profit")[0].getElementsByTagName("b")[0].innerHTML = listinfo.lirun;
+			right.getElementsByClassName("delete")[0].setAttribute("data-gid",listinfo.id);
+			listitem.style.display = "block";
+			return listitem;
+		}
+		var listWrap = document.getElementById("list-wrap");
+		//获取自选推送列表信息
+		var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+		var time = parseInt(new Date().getTime() / 1000);
+		var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/sendlist.app.php",
+			data:{
+				token:user_token,
+				timestamp:time,
+				uid:user_id,
+				choosetype:"2"
+			},
+			success:function(data){
+				//alert(JSON.stringify(data.sendlist[0]));
+				if(data.sendlist.length==0){
+					document.getElementById("null").style.display = "block";
+				}
+				listWrap.innerHTML = "";
+//				document.getElementById("loading").style.display = "none";
+				for(var i=0;i<data.sendlist.length;i++){
+					var list = createList(data.sendlist[i]);		
+					listWrap.appendChild(list);
+				};
+				$(".goodsBlock").on("tap",".delete",function(){
+					var gid = this.getAttribute("data-gid");
+					var this_ = this;
+					$.ajax({
+						type:"post",
+						url:"https://app.fanbaoyundian.com/appapi/choose.app.php",
+						data:{
+							action:"0",
+							uid:user_id,
+							gid:gid,
+							token:user_token,
+							timestamp:time,
+						},
+						success:function(data){
+							//alert(JSON.stringify(data));
+							if(data.state=="0"){
+								plus.nativeUI.toast(data.message);
+							}else{								
+								if(data.message=="取消成功"){
+									plus.nativeUI.toast("删除成功");
+									this_.parentNode.parentNode.style.display = "none";
+								}
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							if(type=="timeout"){
+								plus.nativeUI.toast("取消失败，请检查网络");
+							}
+							plus.nativeUI.toast(errorThrown);
+						}
+					});
+				})
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					plus.nativeUI.toast("获取列表超时，请检查网络");
+				}
+				plus.nativeUI.toast(errorThrown);
+			}
+		});
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

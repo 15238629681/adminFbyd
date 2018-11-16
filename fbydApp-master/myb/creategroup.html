@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #eee;}
+#save{margin-top: 12px;color: #595757;display: none;}
+a{color: #999;}
+b{font-weight: normal;}
+
+.part{background: #fff;padding: 10px;margin-bottom: 10px;font-size: 16px;}
+.title{font-size: 16px;}
+.input-wrap{margin: 10px 0;}
+.input-wrap input{margin: 0;}
+.btn{text-align: center;background: #FBBD00;border-radius: 6px;height: 40px;line-height: 40px;opacity: 0.6;}
+.part p{margin: 0;color: #E60012;}
+.input-wrap input::-webkit-input-placeholder{font-size: 14px;}
+
+#part-3{margin-bottom: 10px;font-size: 16px;}
+#part-3 li span{display: inline-block;width: 50%;overflow: hidden;float: left;color: #727171;font-size: 14px;}
+#part-3 li span b{color: #E60012;}
+
+#table{position: absolute;font-size: 14px;background: #fff;width: 90%;left: 5%;top: 20%;border: 1px solid #ddd;border-radius: 6px;
+max-height: 340px;padding-bottom: 40px;padding-top: 40px;display: none;}
+#table #td{width: 100%;height: 40px;position: absolute;top: 0;border-bottom: 1px solid #ddd;}
+#table #td span{display: inline-block;width: 33.3%;height: 40px;line-height: 40px;text-align: center;font-size: 16px;}
+#table #action{width: 100%;height: 40px;position: absolute;bottom: 0;background: #fff;border-top: 1px solid #ddd;border-bottom-right-radius: 6px;border-bottom-left-radius: 6px;}
+#table #action span{display: inline-block;width: 50%;height: 40px;line-height: 40px;text-align: center;font-size: 16px;}
+#table table{width: 100%;height: 260px;overflow: auto;display: block;}
+#table tr{width: 100%;}
+#table table tr td{padding: 8px;display:inline-block;text-align: center;width: 33.3%;word-break:keep-all;
+white-space:nowrap;text-overflow:ellipsis;overflow:hidden;border-bottom: 1px solid #ddd;color:#727171;}
+
+@media screen and (max-width: 340px)  {
+	.title{font-size: 14px;}
+	#part-3 li{font-size: 14px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">建群并绑定</h1>
+</header>
+<div class="mui-content">
+    <div id="part-1" class="part">
+    	<div class="title">复制机器人微信号加好友并建群</div>
+    	<div class="input-wrap">
+    		<input id="copyid" type="text" readonly="readonly" />
+    	</div>
+    	<div class="btn">复制微信</div>
+    </div>
+    <div id="part-2" class="part">
+    	<div class="title">填写群信息并绑定群ID</div>
+    	<div class="input-wrap">
+    		<input class="groupinfo" type="text" placeholder="请如实的填写群名称" />
+    	</div>
+    	<div class="input-wrap">
+    		<input class="groupinfo" type="text" placeholder="请如实填写群成员人数" />
+    	</div>
+    	<div class="btn">生成群ID并绑定</div>
+    	<div class="input-wrap">
+    		<input readonly="readonly" class="groupid" type="text" placeholder="复制群ID并在群名称后添加ID" />
+    	</div>
+    	<p>注意：微信建群一定要把机器人拉进群。</p>
+    	<p>且群ID必须要加到微信群名称后面！如：某某群30196</p>
+    </div>
+    <div id="part-3">
+    	<ul class="mui-table-view">
+    		<li class="mui-table-view-cell">
+        		<a id="mygroup" class="mui-navigate-right">已有社群信息</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+       			<a>最新绑定群信息</a>
+    		</li>
+    		<li class="mui-table-view-cell">
+				<div>
+					<span>社群ID：<b></b></span>
+					<span>群名称：<b></b></span>
+				</div>
+				<div>
+					<span>机器人：<b></b></span>
+					<span>群人数：<b></b></span>
+				</div>
+				<div>
+					<span>审核状态：<b></b></span>
+				</div>
+			</li>
+		</ul>
+    </div>
+    <div id="table">
+    	<div id="td">
+    		<span>绑定手机</span><span>微信号</span><span>当前负载量</span>
+    	</div>
+    	<table>
+    		<tr class="Tr" style="display: none;" data-robotid="">
+				<td></td><td></td><td></td>
+			</tr>
+    	</table>
+    	<div id="action">
+    		<span style="color:#727171;">取消</span><span style="color:#009A3E;">确定</span>
+    	</div>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	var firstitem = doc.getElementsByClassName("Tr")[0];
+	var robot = "";
+	var robotid = "";
+	function getItem(robotinfo){
+		var item = 	firstitem.cloneNode(true);
+		item.getElementsByTagName("td")[0].innerHTML = robotinfo.rphone;
+		item.getElementsByTagName("td")[1].innerHTML = robotinfo.rwechat;
+		item.getElementsByTagName("td")[2].innerHTML = robotinfo.rnum;
+		item.setAttribute("data-robotid",robotinfo.robotid);
+		item.style.display = "block";
+		return item;
+	}
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	var user_id = JSON.parse(localStorage.getItem("userinfo")).userinfo.uid;
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		$.ajax({
+			type:"post",
+			url:"https://app.fanbaoyundian.com/appapi/addgroup.app.php",
+			data:{
+				uid:user_id,
+				token:user_token,
+				timestamp:time
+			},
+			success:function(data){
+				if(data.state==0){
+					$.toast(data.message);
+				}else{
+					//alert(JSON.stringify(data))
+					var Table = doc.getElementById("table").getElementsByTagName("table")[0];
+					for(var i=0;i<data.robotlist.length;i++){
+						var item = getItem(data.robotlist[i]);
+						Table.appendChild(item);
+					}
+					doc.getElementById("copyid").addEventListener("tap",function(){					
+						doc.getElementById("table").style.display = "block";					
+					})
+					$("#table").on("tap",".Tr",function(){
+						robot = this.getElementsByTagName("td")[0].innerHTML;
+						robotid = this.getAttribute("data-robotid");
+						for(var i=0;i<data.robotlist.length;i++){
+							doc.getElementsByClassName("Tr")[i].style.background = "#fff";
+						}
+						this.style.background = "#FBBD00";
+					})
+					doc.getElementById("action").getElementsByTagName("span")[1].addEventListener("tap",function(e){
+						//e.stopPropagation();
+						if(robot ==""){
+							$.toast("请选择机器人")
+						}else{
+							//$.toast("已选择"+robot)
+							doc.getElementById("table").style.display = "none";
+							doc.getElementById("copyid").value = robot;
+							doc.getElementsByClassName("btn")[0].style.opacity = 1;
+						}
+					})
+					doc.getElementsByClassName("btn")[0].addEventListener("tap",function(){
+						if(robot == ""){
+							$.toast("请选择机器人微信号")
+						}else{						
+							if($.os.ios){
+								var UIPasteboard  = plus.ios.importClass("UIPasteboard");
+								var generalPasteboard = UIPasteboard.generalPasteboard();
+								// 设置/获取文本内容:
+								generalPasteboard.setValueforPasteboardType(robot, "public.utf8-plain-text");
+								//var value = generalPasteboard.valueForPasteboardType("public.utf8-plain-text");
+								$.toast("已复制"+robot+" 请去微信添加");
+							}else{
+								var Context = plus.android.importClass("android.content.Context");
+								var main = plus.android.runtimeMainActivity();
+								var clip = main.getSystemService(Context.CLIPBOARD_SERVICE);
+								plus.android.invoke(clip,"setText",robot);
+								$.toast("已复制"+robot+" 请去微信添加");
+							}
+						}
+					})
+					doc.getElementById("action").getElementsByTagName("span")[0].addEventListener("tap",function(){
+						robot = "";
+						doc.getElementById("table").style.display = "none";
+					})
+					var value1;
+					var value2;
+					$("#part-2").on("input",".groupinfo",function(){
+						value1 = doc.getElementsByClassName("groupinfo")[0].value;
+						value2 = doc.getElementsByClassName("groupinfo")[1].value;
+						if(value1&&value2){
+							doc.getElementsByClassName("btn")[1].style.opacity = 1;
+						}else{
+							doc.getElementsByClassName("btn")[1].style.opacity = 0.6;
+						}
+					});
+					doc.getElementsByClassName("btn")[1].addEventListener("tap",function(){
+						if(value1&&value2){						
+							$.ajax({
+								type:"post",
+								url:"https://app.fanbaoyundian.com/appapi/addgroup.app.php",
+								data:{
+									uid:user_id,
+									token:user_token,
+									timestamp:time,
+									robotid:robotid,
+									groupname:value1,
+									people:value2
+								},
+								success:function(data){
+									//alert(JSON.stringify(data));
+									if(data.state==1){
+										doc.getElementsByClassName("groupid")[0].value = data.grouplist[0].gid;
+										doc.getElementById("part-3").getElementsByTagName("b")[0].innerHTML = data.grouplist[0].gid;
+										doc.getElementById("part-3").getElementsByTagName("b")[1].innerHTML = data.grouplist[0].groupname;
+										doc.getElementById("part-3").getElementsByTagName("b")[2].innerHTML = data.grouplist[0].robotid;
+										doc.getElementById("part-3").getElementsByTagName("b")[3].innerHTML = data.grouplist[0].people;
+										if(data.grouplist[0].gstate==1){
+											doc.getElementById("part-3").getElementsByTagName("b")[4].innerHTML = "正常";
+										}else{
+											doc.getElementById("part-3").getElementsByTagName("b")[4].innerHTML = "待审核";
+										}
+										doc.getElementsByClassName("groupid")[0].addEventListener("tap",function(){
+											if(data.grouplist[0].gid){											
+												if($.os.ios){
+													var UIPasteboard  = plus.ios.importClass("UIPasteboard");
+													var generalPasteboard = UIPasteboard.generalPasteboard();
+													// 设置/获取文本内容:
+													generalPasteboard.setValueforPasteboardType(data.grouplist[0].gid, "public.utf8-plain-text");
+													//var value = generalPasteboard.valueForPasteboardType("public.utf8-plain-text");
+													$.toast("已复制"+data.grouplist[0].gid+" 请去微信群名称后添加");
+												}else{
+													var Context = plus.android.importClass("android.content.Context");
+													var main = plus.android.runtimeMainActivity();
+													var clip = main.getSystemService(Context.CLIPBOARD_SERVICE);
+													plus.android.invoke(clip,"setText",data.grouplist[0].gid);
+													$.toast("已复制"+data.grouplist[0].gid+" 请去微信群名称后添加");
+												}
+											}
+										})
+									}else{
+										plus.nativeUI.toast(data.message);
+									}
+								},
+								error:function(xhr,type,errorThrown){
+									if(type=="timeout"){
+										plus.nativeUI.toast("请求超时，请检查网络");
+									}
+								}
+							});
+						}else{
+							plus.nativeUI.toast("请填写完整群信息");
+						}
+					})
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				if(type=="timeout"){
+					plus.nativeUI.toast("请求超时，请检查网络");
+				}
+			}
+		});
+	})
+	document.getElementById("mygroup").addEventListener("tap",function(){
+		var mygroupPage = $.preload({
+			"id": 'mygroupPage',
+			"url": 'mygroup.html'
+		});
+		setTimeout(function(){					
+			$.openWindow({
+				id: 'mygroupPage'
+			});
+		},20)
+	});
+})(mui,document)
+</script>
+</body>
+
+</html>

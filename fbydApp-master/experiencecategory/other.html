@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/cloudstore/cloudstorecategory.css" />
+		<style>
+			/*遮罩层*/
+			
+			.maskDiv {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				display: none;
+				z-index: 9999;
+				background-color: rgba(0, 0, 0, 0);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="loading"></div>
+		<!--公共的排序-->
+		<div class="publicOrder" style="display: none;position:fixed;top:-5px;width: 100%;">
+			<!--排序方式-->
+			<div class="kOrderBlock  mui-clearfix" id="orderBlock">
+				<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+					<div class=" mui-inline">
+						<span class="zhpxSpan">综合排序</span>
+						<span class="upArrow"></span>
+					</div>
+				</div>
+				<div class="mui-inline orderDiv xlText" data-order="2">
+					<span class="allOrder">销量优先</span>
+				</div>
+				<div class="mui-inline orderDiv yhldText" data-order="6">
+					<span class="allOrder">优惠力度</span>
+				</div>
+				<div class="mui-inline orderDiv sxText">
+					<span class="allOrder" id="filterSpan">筛选</span>
+					<span class="sxIcon">
+						<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+					</span>
+					<span class="sxIconColor">
+						<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+					</span>
+				</div>
+			</div>
+			<!--//综合排序提示框-->
+			<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0" id="zhpxListFixed">
+				<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+					<a class="">综合排序</a>
+					<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="1" data-order="5">
+					<a class="">价格由高到低</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="2" data-order="7">
+					<a class="">价格由低到高</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+				<div class="banner">
+					<a href="">
+						<img src="" alt="" />
+					</a>
+				</div>
+
+				<!--筛选框-->
+				<div class="kOrderBlock kOrderBlockFixed  mui-clearfix">
+					<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+						<div class=" mui-inline">
+							<span class="zhpxSpan">综合排序</span>
+							<span class="upArrow"></span>
+						</div>
+					</div>
+					<div class="mui-inline orderDiv xlText" data-order="2">
+						<span class="allOrder">销量优先</span>
+					</div>
+					<div class="mui-inline orderDiv yhldText" data-order="6">
+						<span class="allOrder">优惠力度</span>
+					</div>
+					<div class="mui-inline orderDiv sxText">
+						<span class="allOrder" id="filterSpan">筛选</span>
+						<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+						<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+					</div>
+				</div>
+
+				<!--//综合排序提示框-->
+				<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0">
+					<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+						<a class="">综合排序</a>
+						<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="1" data-order="5">
+						<a class="">价格由高到低</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+					</li>
+					<li class="mui-table-view-cell" data-index="2" data-order="7">
+						<a class="">价格由低到高</a>
+						<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+					</li>
+
+				</ul>
+
+				<div class="storeGoodsList"></div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/cloudstore/category/category.js"></script>
+
+		<!--//筛选-->
+		<script src="../js/cloudstore/category/choose.js"></script>
+		<script src="../js/storehous/category/angle.js"></script>
+		<script>
+			var a = "cloudstorecategorydragleftmenu2.html";
+			var menu10 = "";
+			
+			
+			var zhpxFlag = false;
+			localStorage.removeItem("cloudstorecategoryOrder");
+			localStorage.removeItem("cloudstorecategorySxCondition");
+//			alert(localStorage.getItem("cloudstorecategorySxCondition"))
+			mui.plusReady(function() {
+				main = plus.webview.currentWebview();
+				setTimeout(function() {
+					//进行预加载
+					menu10 = mui.preload({
+						//			id: 'cloudstoredragleftmenu2.html',
+						//			url: 'cloudstorecategorydragleftmenu2.html',
+						id: 'menu22Html',
+						url: 'cloudstorecategorydragleftmenu12.html',
+						styles: {
+							left: "30%",
+							width: '70%',
+							zindex: 9999
+						}
+					});
+					chooseFn(menu10, a);
+			
+				}, 300);
+
+				var self = plus.webview.currentWebview();
+				fqcat = parseInt(self.fqcat);
+				localStorage.setItem("nowFqcat", fqcat);
+
+				var getcategory = new Getcategory(fqcat, fqcat, mui);
+				getcategory.banner_request();
+				getcategory.list_request();
+				getcategory.Init2();
+			});
+			
+		</script>
+		<!--//固定排序导航-->
+		<script src="../js/cloudstore/category/publicOrder.js"></script>
+		<script src="../js/cloudstore/category/sliderOrder2.js"></script>
+	</body>
+
+</html>

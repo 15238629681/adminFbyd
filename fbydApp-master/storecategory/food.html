@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>仓库分类----女装</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+
+		<link rel="stylesheet" href="../css/all.css" />
+		<link rel="stylesheet" href="../css/storehouse/public.css" />
+		<link rel="stylesheet" href="../css/storehouse/iconfont.css" />
+		<link rel="stylesheet" href="../css/storehouse/zhpx.css" />
+		<link rel="stylesheet" href="../css/storehouse/searchblock.css" />
+		<!--<link rel="stylesheet" href="../css/cloudstore/cloudstorecategory.css" />-->
+		<style>
+			#loading {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				z-index: 9998;
+				background-size: 70%;
+				/*display: none;*/
+			}
+			#waitingLoading {
+				width: 100%;
+				height: 95%;
+				position: fixed;
+				top: 35px;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				z-index: 9998;
+				background-size: 70%;
+				/*display: none;*/
+			}
+			/*遮罩层*/
+			
+			.maskDiv {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				display: none;
+				z-index: 9999;
+				background-color: rgba(0, 0, 0, 0);
+			}
+			
+			.mui-content {
+				margin-top: 0;
+			}
+			
+			.sxText img {
+				vertical-align: middle;
+				width: 0.2rem;
+				height: 0.24rem;
+				margin-left: 0.1rem;
+			}
+			
+			.sxText img:nth-child(3) {
+				display: none;
+			}
+			
+			.kOrderBlock {
+				height: 35px;
+				line-height: 35px;
+			}
+			.comprehensiveRank{
+				top:35px;
+			}
+			.mui-active{
+				border-bottom:none;
+			}
+			.zhpxList  .selectIcon{
+				position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="loading"></div>
+		<div class="publicOrder" style="position:fixed;width:100%;background:#fff;z-index:999;">
+			<div class="kOrderBlock mui-clearfix" style="">
+				<div class="mui-inline mui-pull-right sxText">
+					<span class="allOrder" id="filterSpan">筛选</span> 
+						<img src="../images/cloudstore/icons/choose.jpg" alt=""  class="sxIcon" />
+						<img src="../images/cloudstore/icons/choosecolor.jpg" alt=""  class="sxIconColor" />
+				</div>
+				<div class="mui-inline mui-pull-right comprehensiveRankText zhpxText">
+					<span class="allOrder ">综合排序</span>   
+					<span class="downArrow"></span>
+					<span class="upArrow"></span>
+				</div>
+			</div>
+			<ul class="mui-table-view comprehensiveRank zhpxList" style="">
+				<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+					<a class="">综合排序</a>
+					<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style=""></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="1" data-order="3">
+					<a class="">利润优先</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style=""></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="2" data-order="6">
+					<a class="">优惠力度</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style=""></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="3" data-order="2">
+					<a class="">销量优先</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style=""></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="4" data-order="5">
+					<a class="">价格由高到低</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style=""></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="5" data-order="7">
+					<a class="">价格由低到高</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style=""></span>
+				</li>
+			</ul>
+
+		</div>
+		
+		<!--公共的排序-->
+	
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer" style="height:auto;">
+			<div class="goodsList" style="display:block;margin-top:35px;">
+			</div>
+			</div>
+		</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/storehous/category/category.js"></script>
+		<script src="../js/storehous/category/choose.js"></script>
+		<script src="../js/storehous/category/angle.js"></script>
+		<script>
+			var storeGoodsList = document.getElementsByClassName("goodsList")[0];
+			storeGoodsList.style.height = "auto";
+			
+			var a = "cloudstorecategorydragleftmenu2.html";
+			var menu10 = "";
+
+			var zhpxFlag = false;
+			var partRefresh = false;
+			var oneceLoad = true;
+//			var zhpxFlag = false;
+			var noGoods=false;
+			localStorage.removeItem("nowOrderStoreCategory");
+			localStorage.removeItem("storehousecategorySxCondition");
+			mui.plusReady(function() {
+				main = plus.webview.currentWebview();
+				setTimeout(function() {
+					menu10 = mui.preload({
+						id: 'Menu9',
+						url: 'cloudstorecategorydragleftmenu9.html',
+						styles: {
+							left: "30%",
+							width: '70%',
+							zindex: 9999
+						}
+					});
+					chooseFn(menu10, a);
+
+				}, 300);
+
+				var self = plus.webview.currentWebview();
+				fqcat = parseInt(self.fqcat);
+				localStorage.setItem("nowStoreHouseFqcat", fqcat);
+
+				var getcategory = new Getcategory(mui);
+				getcategory.Init2();
+				getcategory.list_request();
+			});
+		</script>
+		<script src="../js/storehous/category/publicOrder.js"></script>
+	</body>
+
+</html>
+

@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
+span{display: inline-block;}
+b{font-weight: normal;}
+p{margin-bottom: 0;}
+a{color: #999;}
+/* clear float */
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+
+.mui-bar-nav~.mui-content{padding-top: 60px;}
+.mui-content .mui-scroll{padding: 0 10px;background: #fff;}
+
+.author-info{background: #fff;position: relative;border-bottom: 1px solid #ddd;padding: 10px 0;}
+.author-info img{float: left;width: 60px;margin-right: 10px;margin-top: 8px;}
+.author-name{margin-left: 70px;font-size: 14px;margin-bottom: 10px;}
+.author-name span{font-size: 12px;background: #ff3a46;border-radius: 8px;color: #fff;display: block;width:50px;text-align: center;}
+.info{font-size: 12px;color: #999;}
+.foucs{position: absolute;right: 10px;top: 30px;display: inline-block;border: 1px #FBBD00 solid;border-radius: 4px;font-size: 14px;height: 30px;line-height: 30px;
+background: url(../../images/experience/experience_report/foucs.png) no-repeat 6px center;background-size: 20px;padding-left: 32px;padding-right: 10px;color: #FBBD00;letter-spacing: 2px;}
+.foucsed{position: absolute;right: 10px;top: 30px;display: inline-block;border: 1px #999 solid;border-radius: 4px;font-size: 14px;height: 30px;line-height: 30px;
+background: url(../../images/experience/experience_report/focused.png) no-repeat 6px center;background-size: 20px;padding-left: 30px;padding-right: 2px;color: #999;}
+</style>
+</head>
+
+<body>
+<div class="mui-content mui-scroll-wrapper" id="refreshContainer" >
+    <div class="mui-scroll" style="margin-top: 10px;">
+    	<div class="author-info" data-id="1">
+			<img src="../../images/cloudstore/icons/usericon.png" />
+			<div class="author-name">七七七七<span>合伙人</span></div>
+			<div class="info">
+				<span>粉丝:26</span><span>关注:26</span>
+			</div>
+			<span class="foucs">关注</span>
+		</div>
+		<div class="author-info" data-id="1">
+			<img src="../../images/cloudstore/icons/usericon.png" />
+			<div class="author-name">七七七七<span>合伙人</span></div>
+			<div class="info">
+				<span>粉丝:26</span><span>关注:26</span>
+			</div>
+			<span class="foucsed">已关注</span>
+		</div>
+		<div class="author-info" data-id="1">
+			<img src="../../images/cloudstore/icons/usericon.png" />
+			<div class="author-name">七七七七<span>合伙人</span></div>
+			<div class="info">
+				<span>粉丝:26</span><span>关注:26</span>
+			</div>
+			<span class="foucs">关注</span>
+		</div>
+		<div class="author-info" data-id="1">
+			<img src="../../images/cloudstore/icons/usericon.png" />
+			<div class="author-name">七七七七<span>合伙人</span></div>
+			<div class="info">
+				<span>粉丝:26</span><span>关注:26</span>
+			</div>
+			<span class="foucsed">已关注</span>
+		</div>
+		<div class="author-info" data-id="1">
+			<img src="../../images/cloudstore/icons/usericon.png" />
+			<div class="author-name">七七七七<span>合伙人</span></div>
+			<div class="info">
+				<span>粉丝:26</span><span>关注:26</span>
+			</div>
+			<span class="foucs">关注</span>
+		</div>
+		<div class="author-info" data-id="1">
+			<img src="../../images/cloudstore/icons/usericon.png" />
+			<div class="author-name">七七七七<span>合伙人</span></div>
+			<div class="info">
+				<span>粉丝:26</span><span>关注:26</span>
+			</div>
+			<span class="foucs">关注</span>
+		</div>
+		<div class="author-info" data-id="1">
+			<img src="../../images/cloudstore/icons/usericon.png" />
+			<div class="author-name">七七七七<span>合伙人</span></div>
+			<div class="info">
+				<span>粉丝:26</span><span>关注:26</span>
+			</div>
+			<span class="foucs">关注</span>
+		</div>
+    </div>
+</div>
+
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init({
+		pullRefresh : {
+		    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    down : {
+		     	style:'circle',//必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+      			color:'#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+      			height:'50px',//可选,默认50px.下拉刷新控件的高度,
+      			range:'100px', //可选 默认100px,控件可下拉拖拽的范围
+      			offset:'0px', //可选 默认0px,下拉刷新控件的起始位置
+      			auto: true,//可选,默认false.首次加载自动上拉刷新一次
+		      	callback :downflash //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    },
+		    up : {
+		      height:50,//可选.默认50.触发上拉加载拖动距离
+		      auto:false,//可选,默认false.自动上拉加载一次
+		      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      callback :upflash //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+		 }
+	});
+//	var deceleration = mui.os.ios ? 0.003 : 0.0005;
+//	$('.mui-scroll-wrapper').scroll({
+//		indicators: false, //是否显示滚动条
+//		deceleration: deceleration
+//	});
+	function downflash(){
+		$.toast("下拉加载没有最新数据");
+		$('#refreshContainer').pullRefresh().endPulldownToRefresh(true);
+	}
+	function upflash(){
+		$.toast("上拉加载没有更多数据");
+		 this.endPullupToRefresh(true);
+	}
+	$.plusReady(function(){
+		plus.webview.currentWebview().setStyle({
+			scrollIndicator:"none"
+		});
+		$.back = function(event){
+			plus.webview.close(plus.webview.currentWebview());
+		}
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

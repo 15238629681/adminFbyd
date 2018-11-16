@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+<style>
+html,body{width: 100%;height: 100%;}
+.clean:before, .clean:after{content:"";display:table;}
+.clean:after{clear:both;}
+.clean{zoom:1;}
+.mui-table-view:before{background: none;}
+.mui-table-view:after{background: none;}
+.mui-bar{height: 60px;padding-top: 20px;background: #fff;}
+.mui-bar-nav~ .mui-content{padding-top: 60px;width: 100%;height: 100%;background: #fff;}
+a{color: #999;}
+b{font-weight: normal;}
+
+/*.mui-control-content {padding-bottom: 40px;}*/
+/*.mui-control-content .mui-loading {margin-top: 50px;}*/
+.mui-control-item{background: #fff;position: relative;}
+.mui-slider{height: 100%;}
+.mui-slider-group{height: 100%;}
+.mui-slider-item{height: 100%;}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item{border: none;}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{color:#FBBD00;}
+
+#sliderProgressBar{background-color:#FBBD00;}
+/*.mui-table-view{border-bottom: 1px solid #ddd;}*/
+.mui-table-view li a{font-size: 16px;}
+.mui-table-view li div{float: left;}
+.mui-table-view li span{font-size: 14px;color: #9FA0A0;float: right;margin-right: 20px;}
+.mui-table-view li p{word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width: 100%;}
+
+@media screen and (max-width: 340px)  {
+	#red-circle{right: 15px;}
+	.mui-table-view li a{font-size: 14px;}
+	.mui-table-view li span{font-size: 12px;}
+	.mui-table-view li p{font-size: 12px;}
+}
+</style>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+    <h1 class="mui-title">帮助中心</h1>
+</header>
+<div class="mui-content">
+    <div id="slider" class="mui-slider">
+		<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+			<a class="mui-control-item mui-active" href="#item1mobile">平台规则</a>
+			<a class="mui-control-item" href="#item2mobile">账号问题</a>
+			<a class="mui-control-item" href="#item3mobile">提现问题</a>
+			<a class="mui-control-item" href="#item4mobile">其他问题</a>
+		</div>
+		<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>
+		<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<div id="scroll1" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" data-id="" style="display: none;">
+								<a class="mui-navigate-right"><div>夏日白富美怎么防晒</div><span>08-15</span></a>
+								<!--<p>但是碰到发泡剂更怕交大是大家平时就打破打水漂的健康扫地机泼洒</p>-->
+							</li>  						
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="item2mobile" class="mui-slider-item mui-control-content">
+				<div id="scroll2" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<!--<div class="mui-loading">
+							<div class="mui-spinner">
+							</div>
+						</div>-->
+						<ul class="mui-table-view">
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<div id="item3mobile" class="mui-slider-item mui-control-content">
+				<div id="scroll3" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<!--<div class="mui-loading">
+							<div class="mui-spinner">
+							</div>
+						</div>-->
+						<ul class="mui-table-view">
+						</ul>
+					</div>
+				</div>
+
+			</div>
+			<div id="item4mobile" class="mui-slider-item mui-control-content">
+				<div id="scroll4" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<!--<div class="mui-loading">
+							<div class="mui-spinner">
+							</div>
+						</div>-->
+						<ul class="mui-table-view">
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+(function($,doc){
+	$.init();
+	$('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    });
+	//var html2 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第二个选项卡子项-1</li><li class="mui-table-view-cell">第二个选项卡子项-2</li><li class="mui-table-view-cell">第二个选项卡子项-3</li><li class="mui-table-view-cell">第二个选项卡子项-4</li><li class="mui-table-view-cell">第二个选项卡子项-5</li></ul>';
+	//var html3 = '<ul class="mui-table-view"><li class="mui-table-view-cell">第三个选项卡子项-1</li><li class="mui-table-view-cell">第三个选项卡子项-2</li><li class="mui-table-view-cell">第三个选项卡子项-3</li><li class="mui-table-view-cell">第三个选项卡子项-4</li><li class="mui-table-view-cell">第三个选项卡子项-5</li></ul>';
+	//var item2 = document.getElementById('item2mobile');
+	//var item3 = document.getElementById('item3mobile');
+//	document.getElementById('slider').addEventListener('slide', function(e) {
+//		if (e.detail.slideNumber === 1) {
+//			if (item2.querySelector('.mui-loading')) {
+//				setTimeout(function() {
+//					item2.querySelector('.mui-scroll').innerHTML = html2;
+//				}, 500);
+//			}
+//		} else if (e.detail.slideNumber === 2) {
+//			if (item3.querySelector('.mui-loading')) {
+//				setTimeout(function() {
+//					item3.querySelector('.mui-scroll').innerHTML = html3;
+//				}, 500);
+//			}
+//		}
+//	});
+	function createItme(msginfo){
+		var item = doc.getElementsByClassName("mui-table-view-cell")[0].cloneNode(true);
+		item.setAttribute("data-id",msginfo.id);
+		item.getElementsByTagName("div")[0].innerHTML = msginfo.title;
+		var T =  new Date(msginfo.createtime*1000);
+		var time = T.getFullYear() + '-' + (T.getMonth()+1) + '-' + T.getDate();
+		item.getElementsByTagName("span")[0].innerHTML = time;
+//		item.getElementsByTagName("p")[0].innerHTML = msginfo.content;
+		item.style.display = "block";
+		return item;
+	}
+	var user_token = JSON.parse(localStorage.getItem("userinfo")).token;
+	var time = parseInt(new Date().getTime() / 1000);
+	$.ajax({
+		type:"post",
+		url:"https://app.fanbaoyundian.com/appapi/service.app.php",
+		data:{
+			token:user_token,
+			timestamp:time,
+			count:4,
+			start:0
+		},
+		success:function(data){
+			//alert(JSON.stringify(data))
+			if(data.state == 1){
+				for(var i=0;i<data.servicelist.length;i++){
+					var listitem = createItme(data.servicelist[i]);
+					doc.getElementsByClassName("mui-table-view")[0].appendChild(listitem);
+				}
+			}else{
+				$.toast(data.message);
+			}
+		},
+		error:function(xhr,type,errorThrown){
+			if(type=="timeout"){
+				$.toast("请求超时，请检查网络");
+			}
+			$.toast(errorThrown);
+		}
+	});
+	$('.mui-table-view').on("tap",".mui-table-view-cell",function(){
+		var id = this.getAttribute("data-id");
+		if(id){
+			setTimeout(function(){
+				$.openWindow({
+					"id": 'helpdetailPage',
+					"url": 'helpdetail.html',
+					"extras":{artical:id}
+				});
+			},20)
+		}
+	})
+	$.plusReady(function(){
+		//重新定义后退函数(监听安卓后退键事件)
+		$.back = function(event) {
+			plus.webview.close(plus.webview.currentWebview());
+			return false;
+		};
+	})
+})(mui,document)
+</script>
+</body>
+
+</html>

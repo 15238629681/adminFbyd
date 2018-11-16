@@ -1,0 +1,1861 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>仓库分类页面----div实现的选项卡</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/cloudstore/searchblock.css" />
+		<link rel="stylesheet" href="../css/cloudstore/cloudstorecategory.css" />
+		
+		<style>
+			.mui-active {
+	/*border-bottom: 1px solid #FBBD00;*/
+	/*color: #FBBD00;*/
+}
+			/*顶部导航条*/
+			
+			.mui-action-back {
+				color: #898989;
+			}
+			
+			.allList {
+				background: #fff;
+			}
+			
+			.ui-box {
+				padding-bottom: 0.45rem;
+			}
+		</style>
+		<style>
+			.mui-bar-nav~.mui-content {
+				background: #eee;
+				padding-top: 60px;
+			}
+			
+			.goodsBlock .right .addSend,
+			.goodsBlock .right .spread {
+				color: #000;
+			}
+			
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+			
+			#loading {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top: 0;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat center #fff;
+				/*background:url(../images/storehouse/icons/loading.gif)*/
+				z-index: 9999;
+				background-size: 70%;
+			}
+			
+			#waitingLoading {
+				width: 100%;
+				height: calc(100%);
+				position: fixed;
+				top: 130px;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat 50% 20% #fff;
+				z-index: 99999;
+				background-size: 70%;
+				display: none;
+			}
+		</style>
+
+		<style>
+			/*商品列表*/
+			/*商品列表*/
+			
+			.storeGoodsList {
+				background: #eee;
+			}
+			
+			.storeGoodsList div {
+				display: inline-block;
+			}
+			/*商品块*/
+			
+			.storeGoodsList .storeGoodsBlock {
+				width: calc(50% - 3px);
+				/*margin-top: 3px;*/
+				margin-bottom: 6px;
+				margin-right: 6px;
+				display: inline-block;
+				float: left;
+				background: #fff;
+			}
+			
+			.storeGoodsBlock:nth-child(even) {
+				margin-right: 0;
+			}
+			
+			.storeGoodsList .goodsImg {
+				/*width: 5.34rem;*/
+				height: 5.34rem;
+				width: 100%;
+			}
+			
+			.storeGoodsList .goodsImg img {
+				width: 100%;
+				height: 5.34rem;
+			}
+			
+			.storeGoodsDetail {
+				padding: 0 8px;
+				font-size: 12px;
+			}
+			
+			.goodsDetailT,
+			.goodsDetailB {
+				font-size: 10px;width:100%;
+			}
+			
+			p {
+				margin-bottom: 0;
+			}
+			
+			.goodsName {
+				font-size: 0.35rem;
+				color: #000;
+				overflow: hidden;
+				height:20px;
+				width:100%;
+			}
+			/*淘宝整块*/
+			
+			.taoBaoBlock {
+				/*width: 2.5rem;*/
+				text-align: left;
+			}
+			
+			.tbPrice {
+				/*margin-right: 0.7rem;*/
+				color: #898989;
+				text-decoration: line-through;
+			}
+			/*翻宝整块*/
+			
+			.fbPrice {
+				display: inline-block;
+				text-align: left;
+				/*width:2.5rem;*/
+				/*margin-right:0.4rem;*/
+			}
+			.sellNum,.costPrice{
+				float:right;color: #898989;
+			}
+			.fbPrice {
+				display: inline-block;
+				text-align: left;
+				/*width: 2.5rem;*/
+			}
+			
+			.fanbaoPrice {
+				font-size: 14px;
+				color: #FBBD00;
+			}
+			.goodsDetailB{
+				padding-bottom:3px;
+			}
+			
+			
+			#waitingLoading {
+				width: 100%;
+				height: calc(100%);
+				position: fixed;
+				top: 98px;
+				background: url(../images/storehouse/icons/loading.gif) no-repeat 50% 20% #fff;
+				z-index: 9999;
+				background-size: 70%;
+				display: none;
+			}
+			
+			img {
+				border: none;
+			}
+			
+			#message {
+				background: url(../images/my/message.png) no-repeat center;
+				background-size: cover;
+				width: 25px;
+				height: 25px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="loading"></div>
+		<div id="waitingLoading"></div>
+		<!--公共的排序-->
+		<div class="publicOrder">
+			<!--排序方式-->
+			<div class="kOrderBlock  mui-clearfix" id="orderBlock">
+				<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+					<div class=" mui-inline">
+						<span class="zhpxSpan">综合排序</span>
+						<span class="upArrow"></span>
+					</div>
+				</div>
+				<div class="mui-inline orderDiv xlText" data-order="2">
+					<span class="allOrder">销量优先</span>
+				</div>
+				<div class="mui-inline orderDiv yhldText" data-order="6">
+					<span class="allOrder">优惠力度</span>
+				</div>
+				<div class="mui-inline orderDiv sxText">
+					<span class="allOrder" id="filterSpan">筛选</span>
+					<span class="sxIcon">
+						<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+					</span>
+					<span class="sxIconColor">
+						<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+					</span>
+				</div>
+			</div>
+			<!--//综合排序提示框-->
+			<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0" id="zhpxListFixed">
+				<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+					<a class="">综合排序</a>
+					<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="1" data-order="5">
+					<a class="">价格由高到低</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+				</li>
+				<li class="mui-table-view-cell" data-index="2" data-order="7">
+					<a class="">价格由低到高</a>
+					<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+				</li>
+			</ul>
+		</div>
+
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left mui-icon-arrowleft"></a>
+			<span class="mui-icon mui-icon-search"></span>
+			<input readonly="readonly" id="searchInput" placeholder="搜索商品" />
+			<!--<span class="message">
+				<img src="../images/cloudstore/icons/message.png" alt="" />
+			</span>-->
+			<span id="message"></span>
+		</header>
+
+		<div class="mui-content" id="refreshContainer">
+
+			<div id="slider" class="mui-slider">
+				<!--顶部固定栏-->
+				<!--导航栏-->
+				<div class="floatDiv">
+					<!--云店分类-->
+					<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<div class="mui-scroll kindChooseList storeCategory" id="storeCategory">
+							<!--<a class="mui-control-item mui-active" href="#item0">首页</a>-->
+							<a class="mui-control-item mui-active" href="#item1">女装</a>
+							<a class="mui-control-item" href="#item2">男装</a>
+							<a class="mui-control-item" href="#item3">内衣</a>
+							<a class="mui-control-item" href="#item4">母婴</a>
+							<a class="mui-control-item" href="#item5">包包</a>
+							<a class="mui-control-item" href="#item7">居家</a>
+							<a class="mui-control-item" href="#item8">鞋品</a>
+							<a class="mui-control-item" href="#item9">美食</a>
+							<a class="mui-control-item" href="#item10">文体</a>
+							<a class="mui-control-item" href="#item11">家电</a>
+							<a class="mui-control-item" href="#item12">其他</a>
+							<a class="mui-control-item" href="#item13">配饰</a>
+							<a class="mui-control-item" href="#item14">数码</a>
+						</div>
+					</div>
+				</div>
+
+				<!--//选项卡-->
+				<div class="mui-slider-group sliderCard" id="sliderCard" style="height:1000px;">
+
+					<div id="item1" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="0">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+									<div id="waitingLoading"></div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div id="item2" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--//综合排序提示框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="1">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item3" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll3" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="2">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item4" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll4" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="3">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item5" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll5" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="4">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item7" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll7" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="5">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item8" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll8" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="6">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item9" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scrol9" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="7">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item10" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll10" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="8">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item11" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll11" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="9">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item12" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll12" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="10">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item13" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll13" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="11">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="item14" class="mui-slider-item mui-control-content slideContent ">
+						<div id="scroll14" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--banner图-->
+								<div class="banner">
+									<a href="">
+										<img src="" alt="" />
+									</a>
+								</div>
+								<!--筛选框-->
+								<!--筛选框-->
+								<div class="kOrderBlock  mui-clearfix">
+									<div class="mui-inline zhpx orderDiv zhpxText" data-order="1">
+										<div class=" mui-inline">
+											<span class="zhpxSpan">综合排序</span>
+											<span class="upArrow"></span>
+										</div>
+									</div>
+									<div class="mui-inline orderDiv xlText" data-order="2">
+										<span class="allOrder">销量优先</span>
+									</div>
+									<div class="mui-inline orderDiv yhldText" data-order="6">
+										<span class="allOrder">优惠力度</span>
+									</div>
+									<div class="mui-inline orderDiv sxText">
+										<span class="allOrder" id="filterSpan">筛选</span>
+										<span class="sxIcon">
+											<img src="../images/cloudstore/icons/choose.jpg" alt="" />
+										</span>
+										<span class="sxIconColor">
+											<img src="../images/cloudstore/icons/choosecolor.jpg" alt="" />
+										</span>
+									</div>
+								</div>
+								<!--//综合排序提示框-->
+								<ul class="mui-table-view comprehensiveRank zhpxList" data-index="12">
+									<li class="mui-table-view-cell defaultOrder" data-index="0" data-order="1">
+										<a class="">综合排序</a>
+										<span class="mui-icon iconfont icon-selected mui-inline  selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<!--<li class="mui-table-view-cell" data-index="1" data-order="3">
+										<a class="">利润优先</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>-->
+									<li class="mui-table-view-cell" data-index="1" data-order="5">
+										<a class="">价格由高到低</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+									<li class="mui-table-view-cell" data-index="2" data-order="7">
+										<a class="">价格由低到高</a>
+										<span class="mui-icon iconfont icon-selected mui-inline selectIcon" style="position:absolute;top:0;bottom:0;line-height:40px;height:40px;right:10px;color:#FBBD00;"></span>
+									</li>
+
+								</ul>
+
+								<!--商品列表-->
+								<div class="storeGoodsList">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.pullToRefresh.js"></script>
+		<script src="../js/mui.pullToRefresh.material.js"></script>
+
+		<script type="text/javascript">
+			localStorage.removeItem("sxCondition2");
+			
+			
+			
+			mui.init();
+			mui.plusReady(function() {
+				//判断数据请求是否成功
+				//`var loadingStyle = document.defaultView.getComputedStyle(document.getElementById("loading"), null);
+				//				setTimeout(function() {
+				//					if(loadingStyle.display == "block") {
+				//						mui.confirm('页面暂时去了火星', '', ['返回列表'], function(e) {
+				//							if(e.index == 0) {
+				//								plus.webview.close(plus.webview.currentWebview());
+				//							}
+				//						}, 'div')
+				//					}
+				//				}, 4000)
+				document.getElementById("searchInput").addEventListener("tap", function() {
+					mui.openWindow({
+						url: "../cloudstore/search.html",
+						id: "search"
+					})
+				})
+				mui("body").on("tap", "#message", function(e) {
+					e.stopPropagation();
+					var helpPage = mui.preload({
+						"id": 'helpPage',
+						"url": '../my/help.html'
+					});
+					setTimeout(function() {
+						mui.openWindow({
+							id: 'helpPage'
+						});
+					}, 20)
+				})
+			})
+
+			//云店分类数据请求
+			var dataId = ""; //仓库种类标识
+			var userinfo = JSON.parse(localStorage.getItem("userinfo"));
+			var listArr = [];
+			var nowPageNum = 0;
+			var oneceLoad = true; //第一次载入的背景图
+			var partRefresh = false;
+			var zhpxFlag = false;
+			var noGoods = false;
+			var noChoose = false;
+			//首页  请求参数
+			var goodsList = {
+				count: 10,
+				start: 0,
+				order: 1, //商品默认的排序方式  最新
+				keyword: "all", //搜索的关键字
+				fqcat: 0, //商品分类编号
+				token: userinfo.token,
+				uid: userinfo.userinfo.uid,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				price: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				lirun: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				volume: {
+					state: "0",
+					range: {
+						start: "",
+						end: ""
+					}
+				},
+				brand: 0,
+				sea: 0
+			};
+			//
+
+			//首页的数据请求
+			function list_request(index) {
+				console.log("云店分类页面---传递的数据---" + JSON.stringify(goodsList));
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/storehousesearch.app.php", {
+						data: {
+							count: goodsList.count,
+							start: goodsList.start,
+							order: goodsList.order,
+							keyword: goodsList.keyword,
+							fqcat: goodsList.fqcat,
+							token: goodsList.token,
+							timestamp: goodsList.timestamp,
+							uid: goodsList.uid,
+							price: {
+								state: goodsList.price.state,
+								range: {
+									start: goodsList.price.range.start,
+									end: goodsList.price.range.end
+								}
+							},
+							lirun: {
+								state: goodsList.lirun.state,
+								range: {
+									start: goodsList.lirun.range.start,
+									end: goodsList.lirun.range.end
+								}
+							},
+							volume: {
+								state: goodsList.volume.state,
+								range: {
+									start: goodsList.volume.range.start,
+									end: goodsList.volume.range.end
+								}
+							},
+							brand: goodsList.brand,
+							sea: goodsList.sea
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							if(data.error == "0") {
+								if(oneceLoad) {
+									setTimeout(function() {
+										document.getElementById("loading").style.display = "none";
+									}, 0);
+								}
+								oneceLoad = false;
+								if(partRefresh) {
+									document.getElementById("waitingLoading").style.display = "none";
+									partRefresh != partRefresh;
+								}
+								var goodsList = data.goodslist;
+								console.log("商品列表" + JSON.stringify(goodsList));
+								if(goodsList.length == 0) {
+									if(listArr.length == 0) {
+										noGoods = true;
+										if(index <= 5) { //获取dom元素
+											var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 1];
+										} else {
+											var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 2];
+										}
+										//										var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+										storeGoodsList.style.height = (document.documentElement.clientHeight - 140) + "px";
+										//没有搜索到相应商品  或者  某个筛选条件下没有商品
+										storeGoodsList.innerHTML = '<div class="storeGoodsBlock" style="background:red;"><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-3.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">非常抱歉</div><div style="color:#959595;">没有找到相关宝贝</div></div></div>';
+										document.getElementsByClassName("mui-content")[0].setAttribute("id", "");
+										document.addEventListener('touchmove', function() {}, false); //阻止默认滑动事件
+
+									} else {
+										mui.toast('暂时没有更多商品！', {
+											duration: 'long',
+											type: 'div'
+										});
+									}
+								} else {
+									console.log("goodsList.length-----"+goodsList.length);
+									var goodsListHtml = "";
+									for(var i = 0; i < goodsList.length; i++) {
+										goodsListHtml += '<div class="storeGoodsBlock mui-clearfix"  data-id=' + goodsList[i].id + '  data-numiid=' + goodsList[i].num_iid + '  data-cid=' + goodsList[i].cid + '><div class="goodsImg"><img src="' + goodsList[i].pic_url + '_300x300.jpg" alt=""></div><div class="storeGoodsDetail"><p class="goodsName">' + goodsList[i].title + '</p><div class="goodsDetailT"><div class="taoBaoBlock"><span class="tbPrice">淘宝价￥' + goodsList[i].coupon_price + '</span></div><span class="sellNum">优惠劵' + goodsList[i].quan + '元</span></div><div class="goodsDetailB"><span class="fbPrice">翻宝价<span class="fanbaoPrice">￥' + goodsList[i].quanhou_price + '</span></span><span class="costPrice">销量' + goodsList[i].volume + '</span></div></div></div>';
+									}
+									goodsListHtml += "";
+									if(index <= 5) { //获取dom元素
+										var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 1];
+										if(storeGoodsList) storeGoodsList.style.height="auto";
+									} else {
+										var storeGoodsList = document.getElementsByClassName("storeGoodsList")[index - 2];
+										if(storeGoodsList) storeGoodsList.style.height="auto";
+									}
+									if(listArr.length == 0) {
+										//storeGoodsList.innerHTML = "";
+										//mainDiv.innerHTML=goodsListHtml;
+										if(storeGoodsList) storeGoodsList.innerHTML = goodsListHtml;
+									} else {
+										var mainDiv = document.createElement("div");
+										mainDiv.innerHTML = goodsListHtml;
+										if(data.start > 1) {
+											mainDiv.style.cssText = "margin-top:-6px;";
+										}
+										storeGoodsList.appendChild(mainDiv);
+									}
+									listArr = "1";
+								}
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								//document.getElementsByClassName("mui-content")[0].innerHTML = "请求超时，请检查网络";
+								noGoods = true;
+								var storeGoodsList = document.getElementsByClassName("storeGoodsList")[0];
+								storeGoodsList.style.height = (document.documentElement.clientHeight - 100) + "px";
+								storeGoodsList.innerHTML = '<div class="storeGoodsBlock" style=""><div class="noGoodsDiv" style="font-size:14px;width:3.54rem;height:5.535rem;position:absolute;top:50%;left:50%;margin:-2.7675rem 0 0  -1.77rem ;text-align: center;;"><img src="../images/cloudstore/icons/cloudstoresearchlistCantfindthepage.png" alt="" style="width:3.9rem;height:4.35rem;"/><div style="color:#000;">网络请求超时</div><div style="color:#959595;">请检查网络！</div></div></div>';
+								mui('#refreshContainer').pullRefresh().setStopped(true);
+								document.getElementsByClassName("mui-content")[0].setAttribute("id", "");
+								document.addEventListener('touchmove', function() {}, false); //阻止默认滑动事件
+								//plus.nativeUI.toast("请求超时，请检查网络");
+							}
+							//取消load图
+							if(oneceLoad) {
+								setTimeout(function() {
+									document.getElementById("loading").style.display = "none";
+								}, 0)
+							}
+							oneceLoad = false;
+							console.log(type);
+						}
+					})
+			};
+			
+			//下拉刷新
+			function downRefresh(index) {
+				//				alert("我进行下拉刷新")
+				listArr = [];
+				goodsList.time = parseInt(new Date().getTime() / 1000);
+				goodsList.orderId = localStorage.getItem("order");
+				//				alert("当前请求的页数--" + activityList.start)
+				goodsList.start = 0;
+				list_request(index);
+				setTimeout(function() {
+					mui.toast('已经是最新数据！', {
+						duration: 'short',
+						type: 'div'
+					})
+					//					mui('#refreshContainer').pullRefresh().endPulldown();
+				}, 100)
+			}
+			
+			var banner = {
+				token: userinfo.token,
+				timestamp: parseInt(new Date().getTime() / 1000), //获取时间戳
+				position: "cloudstorecategory",
+				marks: "1" //首页
+			};
+
+			//banner图数据请求
+			function banner_request(marks) { //marks就是fqcat
+				//				console.log("云店分类  图片   数据请求--" + JSON.stringify(banner));
+				mui.ajax(
+					"https://app.fanbaoyundian.com/appapi/cloudstorebanner.app.php", {
+						data: {
+							token: banner.token,
+							timestamp: banner.timestamp,
+							position: banner.position,
+							marks: marks
+						},
+						dataType: 'json',
+						type: "post",
+						success: function(data) {
+							//							console.log("云店分类页   图片" + JSON.stringify(data));	
+							if(data.error == "0") {
+								var slide = data.slide;
+								if(marks <= 5) {
+									var banner = document.getElementsByClassName("banner")[marks - 1];
+								} else { //7开始
+									var banner = document.getElementsByClassName("banner")[marks - 2];
+								}
+								if(marks) {
+									banner.getElementsByTagName("a")[0].setAttribute("href", slide[0].url);
+									banner.getElementsByTagName("img")[0].setAttribute("src", "https://app.fanbaoyundian.com/" + slide[0].img);
+								}
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							if(type == "timeout") {
+								plus.nativeUI.toast("请求超时，请检查网络");
+							}
+							console.log(type);
+							//							plus.nativeUI.toast(errorThrown);
+						}
+					})
+			}
+			//初始化选项卡
+			(function($) {
+				//初始化第一块
+				mui.plusReady(function() {
+//					var self = plus.webview.currentWebview();
+//					var page = self.dataFqcat;
+					var page = 1;
+					goodsList.fqcat = page;
+					localStorage.setItem("nowFqcat", goodsList.fqcat);
+					list_request(page); //女装开始
+					banner_request(page);
+					nowpage = document.getElementById("item" + page);
+					var index;
+					page <= 5 ? index = page - 1 : index = page - 2;
+					mui('#slider').slider().gotoItem(index);
+					setTimeout(function() {
+						//						document.getElementById("loading").style.display = "none";
+					}, 1500)
+				})
+				document.getElementById("slider").addEventListener('slide', function(e) {
+
+					//将筛选页面的数据重置
+					mui.fire(menu2, "clearSet"); //切换slider就重置筛选的所有值
+					//					sliderCard.getElementsByClassName("sxText")[e.detail.slideNumber].getElementsByTagName("span")[0].style.color="#727171";
+					//					sliderCard.getElementsByClassName("sxText")[e.detail.slideNumber].getElementsByTagName("span")[0].style.color="#727171";
+					//重置当前的 的排序方式为综合排序
+					var sliderCard = document.getElementsByClassName("sliderCard")[0];
+					sliderCard.getElementsByClassName("zhpxText")[e.detail.slideNumber].getElementsByTagName("span")[0].style.color = "#FBBF00";
+					sliderCard.getElementsByClassName("zhpxText")[e.detail.slideNumber].getElementsByTagName("span")[1].style.cssText = "border-top: 6px solid #FBBF00;";
+					sliderCard.getElementsByClassName("zhpxList")[e.detail.slideNumber].getElementsByTagName("li")[0].getElementsByClassName("selectIcon")[0].style.display = "inline-block";
+					sliderCard.getElementsByClassName("zhpxList")[e.detail.slideNumber].getElementsByTagName("li")[0].getElementsByTagName("a")[0].style.cssText = "color:#FBBF00";
+
+					sliderCard.getElementsByClassName("xlText")[e.detail.slideNumber].getElementsByTagName("span")[0].style.color = "#727171";
+					sliderCard.getElementsByClassName("yhldText")[e.detail.slideNumber].getElementsByTagName("span")[0].style.color = "#727171";
+
+					var goodListParam = {
+						price: {
+							state: "0",
+							range: {
+								start: "",
+								end: ""
+							}
+						},
+						lirun: {
+							state: "0",
+							range: {
+								start: "",
+								end: ""
+							}
+						},
+						volume: {
+							state: "0",
+							range: {
+								start: "",
+								end: ""
+							}
+						},
+						sea: "0",
+						brand: "0"
+					};
+					var str = JSON.stringify(goodListParam);
+					localStorage.setItem("sxCondition2", str);
+
+					//滑动的时候,默认将综合排序的方式为最新排序,且筛选条件为空
+					localStorage.setItem("nowOrder", "1"); //默认条件下，排序方式是最新排序
+					goodsList.order = "1";
+					listArr = [];
+					goodsList.start = 0;
+					goodsList.price = {
+							state: "0",
+							range: {
+								start: "",
+								end: ""
+							}
+						},
+						goodsList.lirun = {
+							state: "0",
+							range: {
+								start: "",
+								end: ""
+							}
+						},
+						goodsList.volume = {
+							state: "0",
+							range: {
+								start: "",
+								end: ""
+							}
+						},
+						goodsList.brand = 0;
+					goodsList.sea = 0;
+
+					//关闭综合排序的列表框   重置综合排序
+					document.getElementsByClassName("zhpxText")[0].style.color = "#FBBD00";
+					//重置  筛选的样式
+					document.getElementsByClassName("sxText")[0].style.color = "#727171";
+					//隐藏下个排序框
+					//					document.getElementsByClassName("kOrderBlock")[e.detail.slideNumber + 1].style.display = "none";
+					//显示当前的排序框
+					//					document.getElementsByClassName("kOrderBlock")[e.detail.slideNumber].style.display = "none";
+					zhpxFlag = false;
+
+					function changeSlider(index, facat) {
+						if(document.getElementsByClassName("storeGoodsList")[index].innerHTML == false) {
+							partRefresh = true; //要进行局部刷新
+							document.getElementById("waitingLoading").style.display = "block";
+						}
+						goodsList.fqcat = parseInt(e.detail.slideNumber) + facat;
+						localStorage.setItem("nowFqcat", goodsList.fqcat);
+						list_request(goodsList.fqcat);
+						banner_request(goodsList.fqcat);
+					}
+					if(e.detail.slideNumber === 0) {
+						//第一次加载
+						goodsList.fqcat = parseInt(e.detail.slideNumber) + 1;
+						localStorage.setItem("nowFqcat", goodsList.fqcat);
+						list_request(goodsList.fqcat);
+						banner_request(goodsList.fqcat);
+					} else if(5 > e.detail.slideNumber > 0) {
+						changeSlider(e.detail.slideNumber, 1)
+					} else if(e.detail.slideNumber >= 5) {
+						changeSlider(e.detail.slideNumber, 2)
+					}
+				})
+
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0005;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: false, //是否显示滚动条
+					deceleration: deceleration
+				});
+
+				//循环初始化所有下拉刷新，上拉加载。
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							down: {
+								//								offset:"0px",
+								//								range:"10px",
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										downRefresh(index);
+										//var ul = self.element.querySelector('.mui-table-view');
+										//ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
+										//										goodsList.start=0;
+										//										list_request(index);
+										self.endPullDownToRefresh();
+									}, 1000);
+								}
+							},
+							up: {
+								callback: function() {
+									var self = this;
+										goodsList.start++;
+										if(index <= 4) { //fqcat 1  5
+											list_request(index + 1);
+										} else { //6...
+											list_request(index + 2);
+										}
+
+									setTimeout(function() {
+										self.endPullUpToRefresh();
+									}, 1000);
+								}
+							}
+						});
+					});
+				});
+
+			})(mui);
+
+			//商品详情页
+			mui('.mui-content').on('tap', '.storeGoodsBlock', function(e) {
+				e.stopPropagation();
+				var goodsdetail = mui.preload({
+					"id": 'goodsdetail',
+					"url": '../cloudstore/goodsdetail.html'
+				});
+				//var id = this.getAttribute("id");
+				//触发详情页的newsId事件         预加载页面/自定义事件名/传递的参数
+				var gid = this.getAttribute("data-id");
+				var num_iid = this.getAttribute("data-numiid");
+				var cid = this.getAttribute("data-cid");
+				//打开详情页面
+				setTimeout(function() {
+					mui.fire(goodsdetail, 'transTodetail', {
+						gid: gid,
+						num_iid: num_iid,
+						cid: cid
+					});
+					mui.openWindow({
+						id: "goodsdetail"
+					});
+				}, 250)
+			});
+
+			//筛选
+			var main, menu2, mask = mui.createMask(_closeMenu);
+			var showMenu = false,
+				mode = 'menu-move';
+
+			//			判断处理左划  菜单是否显示
+			//			页面返回之前处理的函数
+			function back() {
+				if(showMenu) {
+					closeMenu();
+					return false;
+				} else {
+					//					菜单隐藏的时候,执行返回的时,先close菜单页面,然后执行mui.back逻辑关闭主窗口
+				}
+			}
+
+			/*
+			 * 显示菜单菜单
+			 */
+			function openMenu() {
+				if(!showMenu) {
+					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					if(mui.os.android && parseFloat(mui.os.version) < 4.4) {
+						document.querySelector("header.mui-bar").style.position = "static";
+						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "0px";
+					}
+
+					//侧滑菜单处于隐藏状态，则立即显示出来；
+					//显示完毕后，根据不同动画效果移动窗体；
+					menu2.show('none', 0, function() {
+						switch(mode) {
+							case 'menu-move':
+								menu2.setStyle({
+									left: '30%',
+									transition: {
+										duration: 150
+									}
+								});
+								break;
+						}
+					});
+					//显示主窗体遮罩
+					mask.show();
+					showMenu = true;
+				}
+			};
+
+			//			关闭侧滑菜单
+			function closeMenu() {
+				_closeMenu();
+				//关闭遮罩层
+				mask.close();
+			}
+
+			/**
+			 * 关闭侧滑菜单(业务部分)
+			 */
+			function _closeMenu() {
+				showMenu = true;
+				if(showMenu) {
+					//解决android 4.4以下版本webview移动时，导致fixed定位元素错乱的bug;
+					if(mui.os.android && parseFloat(mui.os.version) < 4.4) {
+						//						document.querySelector("header.mui-bar").style.position = "fixed";
+						//同时需要修改以下.mui-contnt的padding-top，否则会多出空白；
+						document.querySelector(".mui-bar-nav~.mui-content").style.paddingTop = "44px";
+					}
+
+					switch(mode) {
+						case 'main-move':
+							//主窗体开始侧滑；
+							main.setStyle({
+								left: '0',
+								transition: {
+									duration: 150
+								}
+							});
+							break;
+						case 'menu-move':
+							//主窗体开始侧滑；
+							menu2.setStyle({
+								left: '100%',
+								transition: {
+									duration: 150
+								}
+							});
+							break;
+						case 'all-move':
+							//主窗体开始侧滑；
+							main.setStyle({
+								left: '0',
+								transition: {
+									duration: 150
+								}
+							});
+							//menu页面同时移动
+							menu2.setStyle({
+								left: '100%',
+								transition: {
+									duration: 150
+								}
+							});
+
+							break;
+					}
+					//等窗体动画结束后，隐藏菜单webview，节省资源；
+					setTimeout(function() {
+						menu2.hide();
+					}, 300);
+					showMenu = false;
+				}
+			}
+
+			//在android4.4中的swipe事件，需要preventDefault一下，否则触发不正常
+			//故，在dragleft，dragright中preventDefault
+			window.addEventListener('dragright', function(e) {
+				e.detail.gesture.preventDefault();
+			});
+			window.addEventListener('dragleft', function(e) {
+				e.detail.gesture.preventDefault();
+			});
+			//主界面向左滑动，若菜单未显示，则显示菜单；否则不做任何操作；
+			//window.addEventListener("swipeleft", openMenu);
+			//主界面向右滑动，若菜单已显示，则关闭菜单；否则，不做任何操作；
+			//window.addEventListener("swiperight", closeMenu);
+			//menu页面向右滑动，关闭菜单；
+			window.addEventListener("menu2:swiperight", closeMenu);
+			//重写mui.menu方法，Android版本menu按键按下可自动打开、关闭侧滑菜单；
+			mui.menu2 = function() {
+				if(showMenu) {
+					closeMenu();
+				} else {
+					openMenu();
+				}
+			}
+
+			//			筛选条件下,进行的数据请求,局部刷新;筛选条件下，初始排序方式是综合排序即order为1
+			window.addEventListener("reRequest", function(event) {
+				var nowFqcat = localStorage.getItem("nowFqcat");
+
+				var sliderCard = document.getElementsByClassName("sliderCard")[0];
+				var publicorder = document.getElementsByClassName("publicOrder")[0];
+				if(event.detail.noChoose == false) { //当前条件下  筛选条件不为空    有筛选条件
+					if(nowFqcat <= 5) {
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByTagName("span")[0].style.color = "#FBBD00";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByClassName("sxIcon")[0].style.cssText = "display:none;";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByClassName("sxIconColor")[0].style.cssText = "display:inline-block;";
+					} else {
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByTagName("span")[0].style.color = "#FBBD00";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByClassName("sxIcon")[0].style.cssText = "display:none;";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByClassName("sxIconColor")[0].style.cssText = "display:inline-block;";
+					}
+					publicOrder.getElementsByClassName("sxText")[0].getElementsByTagName("span")[0].style.color = "#FBBD00";
+					publicOrder.getElementsByClassName("sxText")[0].getElementsByClassName("sxIcon")[0].style.cssText = "display:none;";
+					publicOrder.getElementsByClassName("sxText")[0].getElementsByClassName("sxIconColor")[0].style.cssText = "display:inline-block;";
+				} else { //没有筛选条件
+					if(nowFqcat <= 5) {
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByTagName("span")[0].style.color = "#727171";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByClassName("sxIcon")[0].style.cssText = "display:inline-block;";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByClassName("sxIconColor")[0].style.cssText = "display:none;";
+					} else {
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByTagName("span")[0].style.color = "#727171";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByClassName("sxIcon")[0].style.cssText = "display:inline-block;";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByClassName("sxIconColor")[0].style.cssText = "display:none;";
+					}
+					publicOrder.getElementsByClassName("sxText")[0].getElementsByTagName("span")[0].style.color = "#727171";
+					publicOrder.getElementsByClassName("sxText")[0].getElementsByClassName("sxIcon")[0].style.cssText = "display:inline-block;";
+					publicOrder.getElementsByClassName("sxText")[0].getElementsByClassName("sxIconColor")[0].style.cssText = "display:none;";
+				}
+
+				chooseCondition = true; //筛选条件下
+				partRefresh = true; //要进行局部刷新
+				//	document.getElementById("waitingLoading").style.display = "block";
+				listArr = [];
+				goodsList.order = localStorage.getItem("nowOrder");
+				localStorage.setItem("zhpxOrder", goodsList.order);
+				goodsList.start = "0";
+				
+				var param = JSON.parse(localStorage.getItem("sxCondition2"));
+				goodsList.price = param.price;
+				goodsList.lirun = param.price;
+				goodsList.volume = param.volume;
+				goodsList.brand = param.brand;
+				goodsList.sea = param.sea;
+
+				if(!event.detail.noChoose) { //当前条件下  筛选条件不为空
+					if(nowFqcat <= 5) {
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByTagName("span")[0].style.color = "#FBBD00";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByClassName("sxIcon")[0].style.cssText = "display:none;";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 1].getElementsByClassName("sxIconColor")[0].style.cssText = "display:inline-block;";
+
+					} else {
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByTagName("span")[0].style.color = "#FBBD00";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByClassName("sxIcon")[0].style.cssText = "display:none;";
+						sliderCard.getElementsByClassName("sxText")[nowFqcat - 2].getElementsByClassName("sxIconColor")[0].style.cssText = "display:inline-block;";
+					}
+					document.getElementsByClassName("publicOrder")[0].getElementsByClassName("sxText")[0].getElementsByTagName("span")[0].style.color = "#FBBD00";
+					document.getElementsByClassName("publicOrder")[0].getElementsByClassName("sxText")[0].getElementsByClassName("sxIcon")[0].style.cssText = "display:none;";
+					document.getElementsByClassName("publicOrder")[0].getElementsByClassName("sxText")[0].getElementsByClassName("sxIconColor")[0].style.cssText = "display:inline-block;";
+				}
+
+				console.log("云店分类页    接收的参数----" + JSON.stringify(goodsList));
+				var nowFqcat = localStorage.getItem("nowFqcat");
+				if(nowFqcat <= 5) {
+					document.getElementsByClassName("storeGoodsList")[nowFqcat - 1].innerHTML = "";
+				} else {
+					document.getElementsByClassName("storeGoodsList")[nowFqcat - 2].innerHTML = "";
+				}
+
+				var nowFqcat = localStorage.getItem("nowFqcat");
+				goodsList.fqcat = nowFqcat;
+				console.log("自定义函数----请求的参数--" + JSON.stringify(goodsList));
+				list_request(nowFqcat);
+				//				closeMenu();
+
+			});
+
+			mui.plusReady(function() {
+				main = plus.webview.currentWebview();
+				setTimeout(function() {
+					//进行预加载
+					menu2 = mui.preload({
+						id: 'cloudstoredragleftmenu2.html',
+						url: 'cloudstorecategorydragleftmenu2.html',
+						styles: {
+							left: "30%",
+							width: '70%',
+							zindex: 9997
+						}
+					});
+
+				}, 300);
+			});
+		</script>
+		<script>
+			//滚动窗口   关闭zhpxList
+			//用户进行上下滑动,如果综合排序的列表出现的话,就关闭
+			var mybody = document.getElementsByTagName('body')[0];
+			var startX, startY, moveEndX, moveEndY, X, Y;
+			mybody.addEventListener('touchstart', function(e) {
+				// e.preventDefault(); 
+				startX = e.touches[0].pageX;
+				startY = e.touches[0].pageY;
+			}, false);
+			mybody.addEventListener('touchmove', function(e) {
+				// e.preventDefault();
+				moveEndX = e.changedTouches[0].pageX;
+				moveEndY = e.changedTouches[0].pageY;
+				X = moveEndX - startX;
+				Y = moveEndY - startY;
+				if(Math.abs(X) > Math.abs(Y) && X > 0) {
+					// right alert('向右'); 
+
+				} else if(Math.abs(X) > Math.abs(Y) && X < 0) {
+					// left alert('向左');
+
+				} else if(Math.abs(Y) > Math.abs(X) && Y > 0) {
+					var nowFqcat = localStorage.getItem("nowFqcat");
+					zhpxFlag = false;
+					if(nowFqcat <= 5) {
+						//			隐藏每个选项卡的排序方式
+						document.getElementById("sliderCard").getElementsByClassName("zhpxList")[nowFqcat - 1].style.display = "none";
+
+						//						document.getElementById("sliderCard").getElementsByClassName("zhpxList")[nowFqcat - 1].getElementsByClassName("upArrow")[0].style.cssText="border-bottom: 6px solid #FBBF00;border-top:none;";
+
+					} else {
+						document.getElementById("sliderCard").getElementsByClassName("zhpxList")[nowFqcat - 2].style.display = "none";
+					}
+					//隐藏公共部分的排序方式
+					document.getElementsByClassName("publicOrder")[0].getElementsByClassName("zhpxList")[0].style.cssText = "display:none";
+				} else if(Math.abs(Y) > Math.abs(X) && Y < 0) {
+					var nowFqcat = localStorage.getItem("nowFqcat");
+					zhpxFlag = false;
+					if(nowFqcat <= 5) {
+						document.getElementById("sliderCard").getElementsByClassName("zhpxList")[nowFqcat - 1].style.display = "none";
+					} else {
+						document.getElementById("sliderCard").getElementsByClassName("zhpxList")[nowFqcat - 2].style.display = "none";
+					}
+					//隐藏公共部分的排序方式
+					document.getElementsByClassName("publicOrder")[0].getElementsByClassName("zhpxList")[0].style.cssText = "display:none";
+				} else {
+					//没有发生滑动 alert('没有发生滑动'); 
+				}
+			});
+		</script>
+		<script src="../js/cloudstore/category/sliderOrder.js"></script>
+		<script src="../js/cloudstore/category/publicOrder.js"></script>
+
+	</body>
+
+</html>
